@@ -1,0 +1,10 @@
+$color1: rgba(57, 62, 65, 1);
+$color2: rgb(230, 230, 230);
+$color4: rgba(68, 187, 164, 1);
+$color5: rgba(211, 208, 203, 1);
+$secondary: $color4;
+
+@import 'bootstrap/scss/bootstrap.scss';
+
+@import '../Loader/loader';
+@import '../Main/main';

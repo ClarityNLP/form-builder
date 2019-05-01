@@ -1,0 +1,11 @@
+.sidebar {
+  height: 100vh;
+  overflow: scroll;
+  background-color: $secondary;
+
+  button {
+    border-radius: 0;
+    border: none;
+    min-height: 4rem;
+  }
+}
