@@ -1,0 +1,13 @@
+.entity {
+  border-bottom: 1px solid black;
+
+  .highlight {
+    padding: 5px;
+    background-color: $color3;
+    color: #fff;
+  }
+}
+
+.modal-dialog {
+  max-width: 80%;
+}

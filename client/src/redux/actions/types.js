@@ -9,3 +9,7 @@ export const SET_PATIENT_FAIL = 'SET_PATIENT_FAIL';
 export const SET_FORM = 'SET_FORM';
 export const SET_FORM_SUCCESS = 'SET_FORM_SUCCESS';
 export const SET_FORM_FAIL = 'SET_FORM_FAIL';
+
+export const SET_EVIDENCE = 'SET_EVIDENCE';
+export const SET_EVIDENCE_SUCCESS = 'SET_EVIDENCE_SUCCESS';
+export const SET_EVIDENCE_FAIL = 'SET_EVIDENCE_FAIL';

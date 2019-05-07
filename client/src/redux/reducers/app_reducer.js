@@ -9,7 +9,10 @@ const initialState = {
   patient_error: '',
   loading_form: false,
   form: null,
-  form_error: ''
+  form_error: '',
+  loading_evidence: false,
+  evidence: {},
+  evidence_error: ''
 };
 
 const reducer = (state = initialState, action) => {
@@ -64,6 +67,23 @@ const reducer = (state = initialState, action) => {
         ...state,
         loading_form: false,
         form_error: action.data
+      };
+    case types.SET_EVIDENCE:
+      return {
+        ...state,
+        loading_evidence: true
+      };
+    case types.SET_EVIDENCE_SUCCESS:
+      return {
+        ...state,
+        loading_evidence: false,
+        evidence: action.data
+      };
+    case types.SET_EVIDENCE_FAIL:
+      return {
+        ...state,
+        loading_evidence: false,
+        evidence_error: action.data
       };
     default:
       return state;

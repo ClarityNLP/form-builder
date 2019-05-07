@@ -22,8 +22,6 @@ export default {
       question_name: 'Name of product (for most recent cell therapy infusion)',
       question_type: 'MULTIPLE_CHOICE',
       question_number: '1',
-      has_cql: true,
-      has_nlpql: false,
       group: 'Product',
       answers: [
         {
@@ -39,26 +37,27 @@ export default {
           value: 'other_product'
         }
       ],
-      nlpql_feature: 'form_4100_question_1'
+      evidence_bundle: {
+        group_1_product: [
+          'question_1_name_of_productfor_most_assertion',
+          'question_1_name_of_productfor_most_coded'
+        ]
+      }
     },
     {
       question_name:
         'Date of actual contact with the recipient to determine medical status for this follow-up report',
       question_type: 'DATE',
       question_number: '2',
-      has_cql: false,
-      has_nlpql: false,
       group: 'Survival',
       answers: [],
-      nlpql_feature: 'form_4100_question_2'
+      evidence_bundle: {}
     },
     {
       question_name:
         "Specify the recipient's survival status at the date of last contact",
       question_type: 'MULTIPLE_CHOICE',
       question_number: '3',
-      has_cql: false,
-      has_nlpql: false,
       group: 'Survival',
       answers: [
         {
@@ -70,15 +69,13 @@ export default {
           value: 'dead'
         }
       ],
-      nlpql_feature: 'form_4100_question_3'
+      evidence_bundle: {}
     },
     {
       question_name:
         'Has the recipient received a new course of cellular therapy (unplanned) since the date of last report?',
       question_type: 'MULTIPLE_CHOICE',
       question_number: '4',
-      has_cql: true,
-      has_nlpql: false,
       group: 'Subsequent Cellular Infusions',
       answers: [
         {
@@ -90,14 +87,12 @@ export default {
           value: 'no'
         }
       ],
-      nlpql_feature: 'form_4100_question_4'
+      evidence_bundle: {}
     },
     {
       question_name: 'Specify the reason for which cellular therapy was given',
       question_type: 'MULTIPLE_CHOICE',
       question_number: '5',
-      has_cql: true,
-      has_nlpql: true,
       group: 'Subsequent Cellular Infusions',
       answers: [
         {
@@ -109,25 +104,21 @@ export default {
           value: 'new_indication'
         }
       ],
-      nlpql_feature: 'form_4100_question_5'
+      evidence_bundle: {}
     },
     {
       question_name: 'Date of cellular therapy:',
       question_type: 'DATE',
       question_number: '6',
-      has_cql: true,
-      has_nlpql: false,
       group: 'Subsequent Cellular Infusions',
       answers: [],
-      nlpql_feature: 'form_4100_question_6'
+      evidence_bundle: {}
     },
     {
       question_name:
         'Did the recipient receive an HCT since the date of last report?',
       question_type: 'MULTIPLE_CHOICE',
       question_number: '7',
-      has_cql: true,
-      has_nlpql: false,
       group: 'Subsequent Cellular Infusions',
       answers: [
         {
@@ -139,24 +130,20 @@ export default {
           value: 'no'
         }
       ],
-      nlpql_feature: 'form_4100_question_7'
+      evidence_bundle: {}
     },
     {
       question_name: 'Date of HCT:',
       question_type: 'DATE',
       question_number: '8',
-      has_cql: true,
-      has_nlpql: false,
       group: 'Subsequent Cellular Infusions',
       answers: [],
-      nlpql_feature: 'form_4100_question_8'
+      evidence_bundle: {}
     },
     {
       question_name: 'What was the best response to the cellular therapy?',
       question_type: 'MULTIPLE_CHOICE',
       question_number: '9',
-      has_cql: false,
-      has_nlpql: true,
       group: 'Best Response to Cellular Therapy',
       answers: [
         {
@@ -192,14 +179,12 @@ export default {
           value: 'unknown'
         }
       ],
-      nlpql_feature: 'form_4100_question_9'
+      evidence_bundle: {}
     },
     {
       question_name: 'Was the date of best response previously reported?',
       question_type: 'MULTIPLE_CHOICE',
       question_number: '10',
-      has_cql: false,
-      has_nlpql: false,
       group: 'Best Response to Cellular Therapy',
       answers: [
         {
@@ -211,25 +196,21 @@ export default {
           value: 'no'
         }
       ],
-      nlpql_feature: 'form_4100_question_10'
+      evidence_bundle: {}
     },
     {
       question_name: 'Date response established',
       question_type: 'DATE',
       question_number: '11',
-      has_cql: false,
-      has_nlpql: false,
       group: 'Best Response to Cellular Therapy',
       answers: [],
-      nlpql_feature: 'form_4100_question_11'
+      evidence_bundle: {}
     },
     {
       question_name:
         'Was a disease relapse or progression detected since the date of last report?',
       question_type: 'MULTIPLE_CHOICE',
       question_number: '12',
-      has_cql: false,
-      has_nlpql: true,
       group: 'Disease Relapse or Progression',
       answers: [
         {
@@ -241,24 +222,20 @@ export default {
           value: 'no'
         }
       ],
-      nlpql_feature: 'form_4100_question_12'
+      evidence_bundle: {}
     },
     {
       question_name: 'Date documented:',
       question_type: 'DATE',
       question_number: '13',
-      has_cql: false,
-      has_nlpql: true,
       group: 'Disease Relapse or Progression',
       answers: [],
-      nlpql_feature: 'form_4100_question_13'
+      evidence_bundle: {}
     },
     {
       question_name: 'Was there evidence of initial recovery?',
       question_type: 'MULTIPLE_CHOICE',
       question_number: '14',
-      has_cql: true,
-      has_nlpql: true,
       group: 'Peripheral Blood Count Recovery',
       answers: [
         {
@@ -278,24 +255,20 @@ export default {
           value: 'previously_reported'
         }
       ],
-      nlpql_feature: 'form_4100_question_14'
+      evidence_bundle: {}
     },
     {
       question_name: 'Date ANC >= 500/mm3 (first of 3 lab values)',
       question_type: 'DATE',
       question_number: '15',
-      has_cql: false,
-      has_nlpql: true,
       group: 'Peripheral Blood Count Recovery',
       answers: [],
-      nlpql_feature: 'form_4100_question_15'
+      evidence_bundle: {}
     },
     {
       question_name: 'Was an initial platelet count >= 20 x 109/L achieved?',
       question_type: 'MULTIPLE_CHOICE',
       question_number: '16',
-      has_cql: false,
-      has_nlpql: true,
       group: 'Peripheral Blood Count Recovery',
       answers: [
         {
@@ -315,34 +288,42 @@ export default {
           value: 'previously_reported'
         }
       ],
-      nlpql_feature: 'form_4100_question_16'
+      evidence_bundle: {
+        group_6_peripheral_blood_count_recovery: [
+          'question_16_was_an_initial_platelet_assertion',
+          'question_16_was_an_initial_platelet_coded'
+        ]
+      }
     },
     {
       question_name: 'Date platelets >= 20 x 109/L',
       question_type: 'DATE',
       question_number: '17',
-      has_cql: true,
-      has_nlpql: true,
       group: 'Peripheral Blood Count Recovery',
       answers: [],
-      nlpql_feature: 'form_4100_question_17'
+      evidence_bundle: {
+        group_6_peripheral_blood_count_recovery: [
+          'question_17_date_platelets20_x_109l_assertion'
+        ]
+      }
     },
     {
       question_name: 'Date of most recent complete blood count',
       question_type: 'DATE',
       question_number: '18',
-      has_cql: true,
-      has_nlpql: true,
       group: 'Current Hematologic Findings',
       answers: [],
-      nlpql_feature: 'form_4100_question_18'
+      evidence_bundle: {
+        group_6_peripheral_blood_count_recovery: [
+          'question_18_date_of_most_recent_assertion',
+          'question_18_date_of_most_recent_coded'
+        ]
+      }
     },
     {
       question_name: 'WBC',
       question_type: 'MULTIPLE_CHOICE',
       question_number: '19',
-      has_cql: true,
-      has_nlpql: true,
       group: 'Current Hematologic Findings',
       answers: [
         {
@@ -354,14 +335,17 @@ export default {
           value: 'unknown'
         }
       ],
-      nlpql_feature: 'form_4100_question_19'
+      evidence_bundle: {
+        group_7_current_hematologic_findings: [
+          'question_19_wbc_assertion',
+          'question_19_wbc_coded'
+        ]
+      }
     },
     {
       question_name: 'WBC',
       question_type: 'TEXT_WITH_MULTIPLE_CHOICE',
       question_number: '20',
-      has_cql: true,
-      has_nlpql: true,
       group: 'Current Hematologic Findings',
       answers: [
         {
@@ -369,14 +353,17 @@ export default {
           value: ''
         }
       ],
-      nlpql_feature: 'form_4100_question_20'
+      evidence_bundle: {
+        group_7_current_hematologic_findings: [
+          'question_20_wbc_assertion',
+          'question_20_wbc_coded'
+        ]
+      }
     },
     {
       question_name: 'Neutrophils',
       question_type: 'MULTIPLE_CHOICE',
       question_number: '21',
-      has_cql: true,
-      has_nlpql: true,
       group: 'Current Hematologic Findings',
       answers: [
         {
@@ -388,24 +375,30 @@ export default {
           value: 'unknown'
         }
       ],
-      nlpql_feature: 'form_4100_question_21'
+      evidence_bundle: {
+        group_7_current_hematologic_findings: [
+          'question_21_neutrophils_assertion',
+          'question_21_neutrophils_coded'
+        ]
+      }
     },
     {
       question_name: 'Neutrophils',
       question_type: 'TEXT',
       question_number: '22',
-      has_cql: true,
-      has_nlpql: true,
       group: 'Current Hematologic Findings',
       answers: [],
-      nlpql_feature: 'form_4100_question_22'
+      evidence_bundle: {
+        group_7_current_hematologic_findings: [
+          'question_22_neutrophils_assertion',
+          'question_22_neutrophils_coded'
+        ]
+      }
     },
     {
       question_name: 'Lymphocytes',
       question_type: 'MULTIPLE_CHOICE',
       question_number: '23',
-      has_cql: true,
-      has_nlpql: true,
       group: 'Current Hematologic Findings',
       answers: [
         {
@@ -417,24 +410,30 @@ export default {
           value: 'unknown'
         }
       ],
-      nlpql_feature: 'form_4100_question_23'
+      evidence_bundle: {
+        group_7_current_hematologic_findings: [
+          'question_23_lymphocytes_assertion',
+          'question_23_lymphocytes_coded'
+        ]
+      }
     },
     {
       question_name: 'Lymphocytes',
       question_type: 'TEXT',
       question_number: '24',
-      has_cql: true,
-      has_nlpql: true,
       group: 'Current Hematologic Findings',
       answers: [],
-      nlpql_feature: 'form_4100_question_24'
+      evidence_bundle: {
+        group_7_current_hematologic_findings: [
+          'question_24_lymphocytes_assertion',
+          'question_24_lymphocytes_coded'
+        ]
+      }
     },
     {
       question_name: 'Hemoglobin',
       question_type: 'MULTIPLE_CHOICE',
       question_number: '25',
-      has_cql: true,
-      has_nlpql: true,
       group: 'Current Hematologic Findings',
       answers: [
         {
@@ -446,14 +445,17 @@ export default {
           value: 'unknown'
         }
       ],
-      nlpql_feature: 'form_4100_question_25'
+      evidence_bundle: {
+        group_7_current_hematologic_findings: [
+          'question_25_hemoglobin_assertion',
+          'question_25_hemoglobin_coded'
+        ]
+      }
     },
     {
       question_name: 'Hemoglobin',
       question_type: 'TEXT_WITH_MULTIPLE_CHOICE',
       question_number: '26',
-      has_cql: true,
-      has_nlpql: true,
       group: 'Current Hematologic Findings',
       answers: [
         {
@@ -461,14 +463,17 @@ export default {
           value: ''
         }
       ],
-      nlpql_feature: 'form_4100_question_26'
+      evidence_bundle: {
+        group_7_current_hematologic_findings: [
+          'question_26_hemoglobin_assertion',
+          'question_26_hemoglobin_coded'
+        ]
+      }
     },
     {
       question_name: 'Hematocrit',
       question_type: 'MULTIPLE_CHOICE',
       question_number: '27',
-      has_cql: true,
-      has_nlpql: true,
       group: 'Current Hematologic Findings',
       answers: [
         {
@@ -480,24 +485,30 @@ export default {
           value: 'unknown'
         }
       ],
-      nlpql_feature: 'form_4100_question_27'
+      evidence_bundle: {
+        group_7_current_hematologic_findings: [
+          'question_27_hematocrit_assertion',
+          'question_27_hematocrit_coded'
+        ]
+      }
     },
     {
       question_name: 'Hematocrit',
       question_type: 'TEXT',
       question_number: '28',
-      has_cql: true,
-      has_nlpql: true,
       group: 'Current Hematologic Findings',
       answers: [],
-      nlpql_feature: 'form_4100_question_28'
+      evidence_bundle: {
+        group_7_current_hematologic_findings: [
+          'question_28_hematocrit_assertion',
+          'question_28_hematocrit_coded'
+        ]
+      }
     },
     {
       question_name: 'Was RBC transfused <= 30 days before date of test?',
       question_type: 'MULTIPLE_CHOICE',
       question_number: '29',
-      has_cql: true,
-      has_nlpql: true,
       group: 'Current Hematologic Findings',
       answers: [
         {
@@ -509,14 +520,17 @@ export default {
           value: 'no'
         }
       ],
-      nlpql_feature: 'form_4100_question_29'
+      evidence_bundle: {
+        group_7_current_hematologic_findings: [
+          'question_29_was_rbc_transfused30_days_assertion',
+          'question_29_was_rbc_transfused30_days_coded'
+        ]
+      }
     },
     {
       question_name: 'Platelets',
       question_type: 'MULTIPLE_CHOICE',
       question_number: '30',
-      has_cql: true,
-      has_nlpql: true,
       group: 'Current Hematologic Findings',
       answers: [
         {
@@ -528,14 +542,17 @@ export default {
           value: 'unknown'
         }
       ],
-      nlpql_feature: 'form_4100_question_30'
+      evidence_bundle: {
+        group_7_current_hematologic_findings: [
+          'question_30_platelets_assertion',
+          'question_30_platelets_coded'
+        ]
+      }
     },
     {
       question_name: 'Platelets',
       question_type: 'TEXT_WITH_MULTIPLE_CHOICE',
       question_number: '31',
-      has_cql: true,
-      has_nlpql: true,
       group: 'Current Hematologic Findings',
       answers: [
         {
@@ -543,14 +560,17 @@ export default {
           value: ''
         }
       ],
-      nlpql_feature: 'form_4100_question_31'
+      evidence_bundle: {
+        group_7_current_hematologic_findings: [
+          'question_31_platelets_assertion',
+          'question_31_platelets_coded'
+        ]
+      }
     },
     {
       question_name: 'Were platelets transfused <= 7 days before date of test?',
       question_type: 'MULTIPLE_CHOICE',
       question_number: '32',
-      has_cql: true,
-      has_nlpql: true,
       group: 'Current Hematologic Findings',
       answers: [
         {
@@ -562,15 +582,17 @@ export default {
           value: 'no'
         }
       ],
-      nlpql_feature: 'form_4100_question_32'
+      evidence_bundle: {
+        group_7_current_hematologic_findings: [
+          'question_32_were_platelets_transfused7_days_assertion'
+        ]
+      }
     },
     {
       question_name:
         'Did a new malignancy, myelodysplastic, myeloproliferative, or lymphoproliferative disease / disorder occur that is different from the disease / disorder for which the HCT or cellular therapy was performed? (include clonal cytogenetic abnormalities, and post-transplant lymphoproliferative disorders)',
       question_type: 'MULTIPLE_CHOICE',
       question_number: '33',
-      has_cql: true,
-      has_nlpql: true,
       group:
         'New Malignancy, Lymphoproliferative or Myeloproliferative Disease / Disorder',
       answers: [
@@ -587,15 +609,13 @@ export default {
           value: 'previously_reported'
         }
       ],
-      nlpql_feature: 'form_4100_question_33'
+      evidence_bundle: {}
     },
     {
       question_name:
         'Were tests performed to detect persistence of the cellular product since the date of last report?',
       question_type: 'MULTIPLE_CHOICE',
       question_number: '34',
-      has_cql: true,
-      has_nlpql: true,
       group: 'Persistence of Cells',
       answers: [
         {
@@ -607,14 +627,12 @@ export default {
           value: 'no'
         }
       ],
-      nlpql_feature: 'form_4100_question_34'
+      evidence_bundle: {}
     },
     {
       question_name: 'Was persistence evaluated by molecular assay? (e.g. PCR)',
       question_type: 'MULTIPLE_CHOICE',
       question_number: '35',
-      has_cql: true,
-      has_nlpql: false,
       group: 'Persistence of Cells',
       answers: [
         {
@@ -626,24 +644,24 @@ export default {
           value: 'no'
         }
       ],
-      nlpql_feature: 'form_4100_question_35'
+      evidence_bundle: {
+        group_9_persistence_of_cells: [
+          'question_35_was_persistence_evaluated_by_assertion'
+        ]
+      }
     },
     {
       question_name: 'Date sample collected',
       question_type: 'DATE',
       question_number: '36',
-      has_cql: true,
-      has_nlpql: false,
       group: 'Persistence of Cells',
       answers: [],
-      nlpql_feature: 'form_4100_question_36'
+      evidence_bundle: {}
     },
     {
       question_name: 'Specify the cell source',
       question_type: 'MULTIPLE_CHOICE',
       question_number: '37',
-      has_cql: true,
-      has_nlpql: true,
       group: 'Persistence of Cells',
       answers: [
         {
@@ -663,24 +681,20 @@ export default {
           value: 'other_source'
         }
       ],
-      nlpql_feature: 'form_4100_question_37'
+      evidence_bundle: {}
     },
     {
       question_name: 'Specify other cell source',
       question_type: 'TEXT',
       question_number: '38',
-      has_cql: false,
-      has_nlpql: false,
       group: 'Persistence of Cells',
       answers: [],
-      nlpql_feature: 'form_4100_question_38'
+      evidence_bundle: {}
     },
     {
       question_name: 'Were the infused cells detected?',
       question_type: 'MULTIPLE_CHOICE',
       question_number: '39',
-      has_cql: true,
-      has_nlpql: false,
       group: 'Persistence of Cells',
       answers: [
         {
@@ -692,15 +706,13 @@ export default {
           value: 'no'
         }
       ],
-      nlpql_feature: 'form_4100_question_39'
+      evidence_bundle: {}
     },
     {
       question_name:
         'Was persistence evaluated by flow cytometry testing? (immunophenotyping)',
       question_type: 'MULTIPLE_CHOICE',
       question_number: '40',
-      has_cql: true,
-      has_nlpql: false,
       group: 'Persistence of Cells',
       answers: [
         {
@@ -712,24 +724,20 @@ export default {
           value: 'no'
         }
       ],
-      nlpql_feature: 'form_4100_question_40'
+      evidence_bundle: {}
     },
     {
       question_name: 'Date sample collected',
       question_type: 'DATE',
       question_number: '41',
-      has_cql: false,
-      has_nlpql: false,
       group: 'Persistence of Cells',
       answers: [],
-      nlpql_feature: 'form_4100_question_41'
+      evidence_bundle: {}
     },
     {
       question_name: 'Specify the cell source',
       question_type: 'MULTIPLE_CHOICE',
       question_number: '42',
-      has_cql: false,
-      has_nlpql: false,
       group: 'Persistence of Cells',
       answers: [
         {
@@ -749,24 +757,20 @@ export default {
           value: 'other_source'
         }
       ],
-      nlpql_feature: 'form_4100_question_42'
+      evidence_bundle: {}
     },
     {
       question_name: 'Specify other cell source',
       question_type: 'TEXT',
       question_number: '43',
-      has_cql: false,
-      has_nlpql: false,
       group: 'Persistence of Cells',
       answers: [],
-      nlpql_feature: 'form_4100_question_43'
+      evidence_bundle: {}
     },
     {
       question_name: 'Were the infused cells detected?',
       question_type: 'MULTIPLE_CHOICE',
       question_number: '44',
-      has_cql: false,
-      has_nlpql: false,
       group: 'Persistence of Cells',
       answers: [
         {
@@ -778,14 +782,12 @@ export default {
           value: 'no'
         }
       ],
-      nlpql_feature: 'form_4100_question_44'
+      evidence_bundle: {}
     },
     {
       question_name: 'Was persistence evaluated by immunohistochemistry?',
       question_type: 'MULTIPLE_CHOICE',
       question_number: '45',
-      has_cql: true,
-      has_nlpql: false,
       group: 'Persistence of Cells',
       answers: [
         {
@@ -797,24 +799,20 @@ export default {
           value: 'no'
         }
       ],
-      nlpql_feature: 'form_4100_question_45'
+      evidence_bundle: {}
     },
     {
       question_name: 'Date sample collected',
       question_type: 'DATE',
       question_number: '46',
-      has_cql: true,
-      has_nlpql: false,
       group: 'Persistence of Cells',
       answers: [],
-      nlpql_feature: 'form_4100_question_46'
+      evidence_bundle: {}
     },
     {
       question_name: 'Specify the cell source',
       question_type: 'MULTIPLE_CHOICE',
       question_number: '47',
-      has_cql: true,
-      has_nlpql: false,
       group: 'Persistence of Cells',
       answers: [
         {
@@ -834,24 +832,20 @@ export default {
           value: 'other_source'
         }
       ],
-      nlpql_feature: 'form_4100_question_47'
+      evidence_bundle: {}
     },
     {
       question_name: 'Specify other cell source',
       question_type: 'TEXT',
       question_number: '48',
-      has_cql: true,
-      has_nlpql: false,
       group: 'Persistence of Cells',
       answers: [],
-      nlpql_feature: 'form_4100_question_48'
+      evidence_bundle: {}
     },
     {
       question_name: 'Were the infused cells detected?',
       question_type: 'MULTIPLE_CHOICE',
       question_number: '49',
-      has_cql: false,
-      has_nlpql: false,
       group: 'Persistence of Cells',
       answers: [
         {
@@ -863,14 +857,12 @@ export default {
           value: 'no'
         }
       ],
-      nlpql_feature: 'form_4100_question_49'
+      evidence_bundle: {}
     },
     {
       question_name: 'Was persistence evaluated by other method?',
       question_type: 'MULTIPLE_CHOICE',
       question_number: '50',
-      has_cql: false,
-      has_nlpql: false,
       group: 'Persistence of Cells',
       answers: [
         {
@@ -882,34 +874,28 @@ export default {
           value: 'no'
         }
       ],
-      nlpql_feature: 'form_4100_question_50'
+      evidence_bundle: {}
     },
     {
       question_name: 'Specify other method',
       question_type: 'TEXT',
       question_number: '51',
-      has_cql: false,
-      has_nlpql: false,
       group: 'Persistence of Cells',
       answers: [],
-      nlpql_feature: 'form_4100_question_51'
+      evidence_bundle: {}
     },
     {
       question_name: 'Date sample collected',
       question_type: 'DATE',
       question_number: '52',
-      has_cql: false,
-      has_nlpql: false,
       group: 'Persistence of Cells',
       answers: [],
-      nlpql_feature: 'form_4100_question_52'
+      evidence_bundle: {}
     },
     {
       question_name: 'Specify the cell source',
       question_type: 'MULTIPLE_CHOICE',
       question_number: '53',
-      has_cql: false,
-      has_nlpql: false,
       group: 'Persistence of Cells',
       answers: [
         {
@@ -929,24 +915,20 @@ export default {
           value: 'other_source'
         }
       ],
-      nlpql_feature: 'form_4100_question_53'
+      evidence_bundle: {}
     },
     {
       question_name: 'Specify other cell source',
       question_type: 'TEXT',
       question_number: '54',
-      has_cql: false,
-      has_nlpql: false,
       group: 'Persistence of Cells',
       answers: [],
-      nlpql_feature: 'form_4100_question_54'
+      evidence_bundle: {}
     },
     {
       question_name: 'Were the infused cells detected?',
       question_type: 'MULTIPLE_CHOICE',
       question_number: '55',
-      has_cql: false,
-      has_nlpql: false,
       group: 'Persistence of Cells',
       answers: [
         {
@@ -958,14 +940,12 @@ export default {
           value: 'no'
         }
       ],
-      nlpql_feature: 'form_4100_question_55'
+      evidence_bundle: {}
     },
     {
       question_name: 'Did acute GVHD develop since the date of last report?',
       question_type: 'MULTIPLE_CHOICE',
       question_number: '56',
-      has_cql: true,
-      has_nlpql: true,
       group: 'Graft vs. Host Disease',
       answers: [
         {
@@ -981,24 +961,30 @@ export default {
           value: 'unknown'
         }
       ],
-      nlpql_feature: 'form_4100_question_56'
+      evidence_bundle: {
+        group_9_persistence_of_cells: [
+          'question_56_did_acute_gvhd_develop_assertion',
+          'question_56_did_acute_gvhd_develop_coded'
+        ]
+      }
     },
     {
       question_name: 'Date of acute GVHD diagnosis',
       question_type: 'DATE',
       question_number: '57',
-      has_cql: true,
-      has_nlpql: true,
       group: 'Graft vs. Host Disease',
       answers: [],
-      nlpql_feature: 'form_4100_question_57'
+      evidence_bundle: {
+        'group_10_graft_vs._host_disease': [
+          'question_57_date_of_acute_gvhd_diagnosis_assertion',
+          'question_57_date_of_acute_gvhd_diagnosis_coded'
+        ]
+      }
     },
     {
       question_name: 'Did acute GVHD persist since the date of last report?',
       question_type: 'MULTIPLE_CHOICE',
       question_number: '58',
-      has_cql: false,
-      has_nlpql: false,
       group: 'Graft vs. Host Disease',
       answers: [
         {
@@ -1014,14 +1000,17 @@ export default {
           value: 'unknown'
         }
       ],
-      nlpql_feature: 'form_4100_question_58'
+      evidence_bundle: {
+        'group_10_graft_vs._host_disease': [
+          'question_58_did_acute_gvhd_persist_assertion',
+          'question_58_did_acute_gvhd_persist_coded'
+        ]
+      }
     },
     {
       question_name: 'Overall grade of acute GVHD at diagnosis',
       question_type: 'MULTIPLE_CHOICE',
       question_number: '59',
-      has_cql: true,
-      has_nlpql: true,
       group: 'Graft vs. Host Disease',
       answers: [
         {
@@ -1045,14 +1034,16 @@ export default {
           value: 'not_applicable'
         }
       ],
-      nlpql_feature: 'form_4100_question_59'
+      evidence_bundle: {
+        'group_10_graft_vs._host_disease': [
+          'question_59_overall_grade_of_acute_assertion'
+        ]
+      }
     },
     {
       question_name: 'Skin',
       question_type: 'MULTIPLE_CHOICE',
       question_number: '60',
-      has_cql: true,
-      has_nlpql: true,
       group: 'Graft vs. Host Disease',
       answers: [
         {
@@ -1076,15 +1067,15 @@ export default {
           value: 'stage_4'
         }
       ],
-      nlpql_feature: 'form_4100_question_60'
+      evidence_bundle: {
+        'group_10_graft_vs._host_disease': ['question_60_skin_assertion']
+      }
     },
     {
       question_name:
         'Lower intestinal tract (use mL/day for adult recipients and mL/kg/day for pediatric recipients)',
       question_type: 'MULTIPLE_CHOICE',
       question_number: '61',
-      has_cql: true,
-      has_nlpql: true,
       group: 'Graft vs. Host Disease',
       answers: [
         {
@@ -1108,14 +1099,16 @@ export default {
           value: 'stage_4'
         }
       ],
-      nlpql_feature: 'form_4100_question_61'
+      evidence_bundle: {
+        'group_10_graft_vs._host_disease': [
+          'question_61_lower_intestinal_tractuse_mlday_assertion'
+        ]
+      }
     },
     {
       question_name: 'Upper intestinal tract',
       question_type: 'MULTIPLE_CHOICE',
       question_number: '62',
-      has_cql: true,
-      has_nlpql: true,
       group: 'Graft vs. Host Disease',
       answers: [
         {
@@ -1127,14 +1120,16 @@ export default {
           value: 'stage_1'
         }
       ],
-      nlpql_feature: 'form_4100_question_62'
+      evidence_bundle: {
+        'group_10_graft_vs._host_disease': [
+          'question_62_upper_intestinal_tract_assertion'
+        ]
+      }
     },
     {
       question_name: 'Liver',
       question_type: 'MULTIPLE_CHOICE',
       question_number: '63',
-      has_cql: true,
-      has_nlpql: true,
       group: 'Graft vs. Host Disease',
       answers: [
         {
@@ -1162,14 +1157,14 @@ export default {
           value: 'other_site'
         }
       ],
-      nlpql_feature: 'form_4100_question_63'
+      evidence_bundle: {
+        'group_10_graft_vs._host_disease': ['question_63_liver_assertion']
+      }
     },
     {
       question_name: 'Other site(s) involved with acute GVHD',
       question_type: 'MULTIPLE_CHOICE',
       question_number: '64',
-      has_cql: true,
-      has_nlpql: true,
       group: 'Graft vs. Host Disease',
       answers: [
         {
@@ -1181,24 +1176,20 @@ export default {
           value: 'no'
         }
       ],
-      nlpql_feature: 'form_4100_question_64'
+      evidence_bundle: {}
     },
     {
       question_name: 'Specify other site(s)',
       question_type: 'TEXT',
       question_number: '65',
-      has_cql: false,
-      has_nlpql: false,
       group: 'Graft vs. Host Disease',
       answers: [],
-      nlpql_feature: 'form_4100_question_65'
+      evidence_bundle: {}
     },
     {
       question_name: 'Maximum overall grade of acute GVHD',
       question_type: 'MULTIPLE_CHOICE',
       question_number: '66',
-      has_cql: true,
-      has_nlpql: true,
       group: 'Graft vs. Host Disease',
       answers: [
         {
@@ -1222,24 +1213,20 @@ export default {
           value: 'not_applicable'
         }
       ],
-      nlpql_feature: 'form_4100_question_66'
+      evidence_bundle: {}
     },
     {
       question_name: 'Date maximum overall grade of acute GVHD:',
       question_type: 'TEXT',
       question_number: '67',
-      has_cql: true,
-      has_nlpql: true,
       group: 'Graft vs. Host Disease',
       answers: [],
-      nlpql_feature: 'form_4100_question_67'
+      evidence_bundle: {}
     },
     {
       question_name: 'Did chronic GVHD develop since the date of last report?',
       question_type: 'MULTIPLE_CHOICE',
       question_number: '68',
-      has_cql: true,
-      has_nlpql: false,
       group: 'Graft vs. Host Disease',
       answers: [
         {
@@ -1255,24 +1242,20 @@ export default {
           value: 'unknown'
         }
       ],
-      nlpql_feature: 'form_4100_question_68'
+      evidence_bundle: {}
     },
     {
       question_name: 'Date of chronic GVHD diagnosis',
       question_type: 'DATE',
       question_number: '69',
-      has_cql: true,
-      has_nlpql: false,
       group: 'Graft vs. Host Disease',
       answers: [],
-      nlpql_feature: 'form_4100_question_69'
+      evidence_bundle: {}
     },
     {
       question_name: 'Did chronic GVHD persist since the date of last report?',
       question_type: 'MULTIPLE_CHOICE',
       question_number: '70',
-      has_cql: false,
-      has_nlpql: false,
       group: 'Graft vs. Host Disease',
       answers: [
         {
@@ -1288,15 +1271,13 @@ export default {
           value: 'unknown'
         }
       ],
-      nlpql_feature: 'form_4100_question_70'
+      evidence_bundle: {}
     },
     {
       question_name:
         'Maximum grade of chronic GVHD (according to best clinical judgment)',
       question_type: 'MULTIPLE_CHOICE',
       question_number: '71',
-      has_cql: false,
-      has_nlpql: true,
       group: 'Graft vs. Host Disease',
       answers: [
         {
@@ -1316,14 +1297,12 @@ export default {
           value: 'unknown'
         }
       ],
-      nlpql_feature: 'form_4100_question_71'
+      evidence_bundle: {}
     },
     {
       question_name: 'Specify if chronic GVHD was limited or extensive',
       question_type: 'MULTIPLE_CHOICE',
       question_number: '72',
-      has_cql: false,
-      has_nlpql: true,
       group: 'Graft vs. Host Disease',
       answers: [
         {
@@ -1335,25 +1314,21 @@ export default {
           value: 'extensive'
         }
       ],
-      nlpql_feature: 'form_4100_question_72'
+      evidence_bundle: {}
     },
     {
       question_name: 'Date of maximum grade of chronic GVHD',
       question_type: 'DATE',
       question_number: '73',
-      has_cql: false,
-      has_nlpql: false,
       group: 'Graft vs. Host Disease',
       answers: [],
-      nlpql_feature: 'form_4100_question_73'
+      evidence_bundle: {}
     },
     {
       question_name:
         'Is the recipient still taking systemic steroids? (Do not report steroids for adrenal insufficiency, <= 10 mg/day for adults, < 0.1 mg/kg/day for children)',
       question_type: 'MULTIPLE_CHOICE',
       question_number: '74',
-      has_cql: true,
-      has_nlpql: false,
       group: 'Graft vs. Host Disease',
       answers: [
         {
@@ -1373,15 +1348,13 @@ export default {
           value: 'unknown'
         }
       ],
-      nlpql_feature: 'form_4100_question_74'
+      evidence_bundle: {}
     },
     {
       question_name:
         'Is the recipient still taking (non-steroid) immunosuppressive agents (including PUVA) for GVHD?',
       question_type: 'MULTIPLE_CHOICE',
       question_number: '75',
-      has_cql: true,
-      has_nlpql: false,
       group: 'Graft vs. Host Disease',
       answers: [
         {
@@ -1401,15 +1374,13 @@ export default {
           value: 'unknown'
         }
       ],
-      nlpql_feature: 'form_4100_question_75'
+      evidence_bundle: {}
     },
     {
       question_name:
         'Did the recipient develop Cytokine Release Syndrome (CRS) since the date of last report?',
       question_type: 'MULTIPLE_CHOICE',
       question_number: '76',
-      has_cql: true,
-      has_nlpql: false,
       group: 'Toxicities',
       answers: [
         {
@@ -1421,24 +1392,25 @@ export default {
           value: 'no'
         }
       ],
-      nlpql_feature: 'form_4100_question_76'
+      evidence_bundle: {
+        'group_10_graft_vs._host_disease': [
+          'question_76_did_the_recipient_develop_assertion',
+          'question_76_did_the_recipient_develop_coded'
+        ]
+      }
     },
     {
       question_name: 'Date of diagnosis:',
       question_type: 'DATE',
       question_number: '77',
-      has_cql: true,
-      has_nlpql: false,
       group: 'Toxicities',
       answers: [],
-      nlpql_feature: 'form_4100_question_77'
+      evidence_bundle: {}
     },
     {
       question_name: 'Was therapy given? (for CRS)',
       question_type: 'MULTIPLE_CHOICE',
       question_number: '78',
-      has_cql: true,
-      has_nlpql: false,
       group: 'Toxicities',
       answers: [
         {
@@ -1450,34 +1422,28 @@ export default {
           value: 'no'
         }
       ],
-      nlpql_feature: 'form_4100_question_78'
+      evidence_bundle: {}
     },
     {
       question_name: 'Specify therapy given for CRS (check all that apply)',
       question_type: 'TEXT',
       question_number: '79',
-      has_cql: true,
-      has_nlpql: false,
       group: 'Toxicities',
       answers: [],
-      nlpql_feature: 'form_4100_question_79'
+      evidence_bundle: {}
     },
     {
       question_name: 'Specify other therapy:',
       question_type: 'TEXT',
       question_number: '80',
-      has_cql: false,
-      has_nlpql: false,
       group: 'Toxicities',
       answers: [],
-      nlpql_feature: 'form_4100_question_80'
+      evidence_bundle: {}
     },
     {
       question_name: 'Fevers (>= 100.4 degrees F or >= 38 degrees C)',
       question_type: 'MULTIPLE_CHOICE',
       question_number: '81',
-      has_cql: true,
-      has_nlpql: true,
       group: 'Toxicities',
       answers: [
         {
@@ -1493,24 +1459,25 @@ export default {
           value: 'unknown'
         }
       ],
-      nlpql_feature: 'form_4100_question_81'
+      evidence_bundle: {
+        group_11_toxicities: [
+          'question_81_fevers100.4_degrees_f_or38_assertion',
+          'question_81_fevers100.4_degrees_f_or38_coded'
+        ]
+      }
     },
     {
       question_name: 'Date of onset:',
       question_type: 'DATE',
       question_number: '82',
-      has_cql: true,
-      has_nlpql: true,
       group: 'Toxicities',
       answers: [],
-      nlpql_feature: 'form_4100_question_82'
+      evidence_bundle: {}
     },
     {
       question_name: 'Hypotension requiring therapy',
       question_type: 'MULTIPLE_CHOICE',
       question_number: '83',
-      has_cql: true,
-      has_nlpql: true,
       group: 'Toxicities',
       answers: [
         {
@@ -1526,24 +1493,25 @@ export default {
           value: 'unknown'
         }
       ],
-      nlpql_feature: 'form_4100_question_83'
+      evidence_bundle: {
+        group_11_toxicities: [
+          'question_83_hypotension_requiring_therapy_assertion',
+          'question_83_hypotension_requiring_therapy_coded'
+        ]
+      }
     },
     {
       question_name: 'Date of onset:',
       question_type: 'DATE',
       question_number: '84',
-      has_cql: true,
-      has_nlpql: true,
       group: 'Toxicities',
       answers: [],
-      nlpql_feature: 'form_4100_question_84'
+      evidence_bundle: {}
     },
     {
       question_name: 'Intravenous fluids',
       question_type: 'MULTIPLE_CHOICE',
       question_number: '85',
-      has_cql: true,
-      has_nlpql: true,
       group: 'Toxicities',
       answers: [
         {
@@ -1559,14 +1527,14 @@ export default {
           value: 'unknown'
         }
       ],
-      nlpql_feature: 'form_4100_question_85'
+      evidence_bundle: {
+        group_11_toxicities: ['question_85_intravenous_fluids_assertion']
+      }
     },
     {
       question_name: 'Vasopressor(s)',
       question_type: 'MULTIPLE_CHOICE',
       question_number: '86',
-      has_cql: true,
-      has_nlpql: true,
       group: 'Toxicities',
       answers: [
         {
@@ -1582,14 +1550,14 @@ export default {
           value: 'unknown'
         }
       ],
-      nlpql_feature: 'form_4100_question_86'
+      evidence_bundle: {
+        group_11_toxicities: ['question_86_vasopressor(s)_assertion']
+      }
     },
     {
       question_name: 'Specify the number of vasopressors used for therapy',
       question_type: 'MULTIPLE_CHOICE',
       question_number: '87',
-      has_cql: true,
-      has_nlpql: true,
       group: 'Toxicities',
       answers: [
         {
@@ -1605,14 +1573,12 @@ export default {
           value: 'unknown'
         }
       ],
-      nlpql_feature: 'form_4100_question_87'
+      evidence_bundle: {}
     },
     {
       question_name: 'Other therapy',
       question_type: 'MULTIPLE_CHOICE',
       question_number: '88',
-      has_cql: false,
-      has_nlpql: false,
       group: 'Toxicities',
       answers: [
         {
@@ -1628,24 +1594,20 @@ export default {
           value: 'unknown'
         }
       ],
-      nlpql_feature: 'form_4100_question_88'
+      evidence_bundle: {}
     },
     {
       question_name: 'Specify other therapy:',
       question_type: 'TEXT',
       question_number: '89',
-      has_cql: false,
-      has_nlpql: false,
       group: 'Toxicities',
       answers: [],
-      nlpql_feature: 'form_4100_question_89'
+      evidence_bundle: {}
     },
     {
       question_name: 'Was hypotension controlled with therapy?',
       question_type: 'MULTIPLE_CHOICE',
       question_number: '90',
-      has_cql: false,
-      has_nlpql: true,
       group: 'Toxicities',
       answers: [
         {
@@ -1661,15 +1623,13 @@ export default {
           value: 'unknown'
         }
       ],
-      nlpql_feature: 'form_4100_question_90'
+      evidence_bundle: {}
     },
     {
       question_name:
         'Hypoxia requiring minimal supplemental oxygen (FiO2 <40%)',
       question_type: 'MULTIPLE_CHOICE',
       question_number: '91',
-      has_cql: false,
-      has_nlpql: true,
       group: 'Toxicities',
       answers: [
         {
@@ -1685,25 +1645,28 @@ export default {
           value: 'unknown'
         }
       ],
-      nlpql_feature: 'form_4100_question_91'
+      evidence_bundle: {
+        group_11_toxicities: [
+          'question_91_hypoxia_requiring_minimal_supplemental_oxygenfio240%)_assertion',
+          'question_91_hypoxia_requiring_minimal_supplemental_oxygenfio240%)_coded'
+        ]
+      }
     },
     {
       question_name: 'Date of onset:',
       question_type: 'DATE',
       question_number: '92',
-      has_cql: false,
-      has_nlpql: true,
       group: 'Toxicities',
       answers: [],
-      nlpql_feature: 'form_4100_question_92'
+      evidence_bundle: {
+        group_11_toxicities: ['question_92_date_of_onset:_assertion']
+      }
     },
     {
       question_name:
         'Hypoxia requiring more than minimal supplemental oxygen (FiO2 >=40%)',
       question_type: 'MULTIPLE_CHOICE',
       question_number: '93',
-      has_cql: false,
-      has_nlpql: true,
       group: 'Toxicities',
       answers: [
         {
@@ -1719,25 +1682,25 @@ export default {
           value: 'unknown'
         }
       ],
-      nlpql_feature: 'form_4100_question_93'
+      evidence_bundle: {
+        group_11_toxicities: ['question_93_hypoxia_requiring_more_than_coded']
+      }
     },
     {
       question_name: 'Date of onset:',
       question_type: 'DATE',
       question_number: '94',
-      has_cql: false,
-      has_nlpql: true,
       group: 'Toxicities',
       answers: [],
-      nlpql_feature: 'form_4100_question_94'
+      evidence_bundle: {
+        group_11_toxicities: ['question_94_date_of_onset:_assertion']
+      }
     },
     {
       question_name:
         'Was positive pressure ventilatory support required? (CPAP, BiPAP, intubation and mechanical ventilation)',
       question_type: 'MULTIPLE_CHOICE',
       question_number: '95',
-      has_cql: false,
-      has_nlpql: true,
       group: 'Toxicities',
       answers: [
         {
@@ -1753,24 +1716,22 @@ export default {
           value: 'unknown'
         }
       ],
-      nlpql_feature: 'form_4100_question_95'
+      evidence_bundle: {}
     },
     {
       question_name: 'Date started:',
       question_type: 'DATE',
       question_number: '96',
-      has_cql: false,
-      has_nlpql: true,
       group: 'Toxicities',
       answers: [],
-      nlpql_feature: 'form_4100_question_96'
+      evidence_bundle: {
+        group_11_toxicities: ['question_96_date_started:_assertion']
+      }
     },
     {
       question_name: 'Did cytokine release syndrome resolve?',
       question_type: 'MULTIPLE_CHOICE',
       question_number: '97',
-      has_cql: true,
-      has_nlpql: true,
       group: 'Toxicities',
       answers: [
         {
@@ -1782,24 +1743,20 @@ export default {
           value: 'no'
         }
       ],
-      nlpql_feature: 'form_4100_question_97'
+      evidence_bundle: {}
     },
     {
       question_name: 'Date resolved:',
       question_type: 'DATE',
       question_number: '98',
-      has_cql: true,
-      has_nlpql: true,
       group: 'Toxicities',
       answers: [],
-      nlpql_feature: 'form_4100_question_98'
+      evidence_bundle: {}
     },
     {
       question_name: 'Neurotoxicity',
       question_type: 'MULTIPLE_CHOICE',
       question_number: '99',
-      has_cql: true,
-      has_nlpql: false,
       group: 'Toxicities',
       answers: [
         {
@@ -1815,24 +1772,25 @@ export default {
           value: 'unknown'
         }
       ],
-      nlpql_feature: 'form_4100_question_99'
+      evidence_bundle: {
+        group_11_toxicities: [
+          'question_99_neurotoxicity_assertion',
+          'question_99_neurotoxicity_coded'
+        ]
+      }
     },
     {
       question_name: 'Date of onset:',
       question_type: 'DATE',
       question_number: '100',
-      has_cql: true,
-      has_nlpql: false,
       group: 'Toxicities',
       answers: [],
-      nlpql_feature: 'form_4100_question_100'
+      evidence_bundle: {}
     },
     {
       question_name: 'Was a CARTOX-10 neurologic assessment performed?',
       question_type: 'MULTIPLE_CHOICE',
       question_number: '101',
-      has_cql: false,
-      has_nlpql: true,
       group: 'Toxicities',
       answers: [
         {
@@ -1848,14 +1806,16 @@ export default {
           value: 'unknown'
         }
       ],
-      nlpql_feature: 'form_4100_question_101'
+      evidence_bundle: {
+        group_11_toxicities: [
+          'question_101_was_a_cartox-10_neurologic_assertion'
+        ]
+      }
     },
     {
       question_name: 'What was the lowest CARTOX score?',
       question_type: 'MULTIPLE_CHOICE',
       question_number: '102',
-      has_cql: false,
-      has_nlpql: true,
       group: 'Toxicities',
       answers: [
         {
@@ -1879,14 +1839,14 @@ export default {
           value: '_unable_to_be_assessed'
         }
       ],
-      nlpql_feature: 'form_4100_question_102'
+      evidence_bundle: {
+        group_11_toxicities: ['question_102_what_was_the_lowest_assertion']
+      }
     },
     {
       question_name: 'Depressed level of consciousness',
       question_type: 'MULTIPLE_CHOICE',
       question_number: '103',
-      has_cql: false,
-      has_nlpql: true,
       group: 'Toxicities',
       answers: [
         {
@@ -1902,14 +1862,16 @@ export default {
           value: 'unknown'
         }
       ],
-      nlpql_feature: 'form_4100_question_103'
+      evidence_bundle: {
+        group_11_toxicities: [
+          'question_103_depressed_level_of_consciousness_assertion'
+        ]
+      }
     },
     {
       question_name: 'Dysphasia / aphasia',
       question_type: 'MULTIPLE_CHOICE',
       question_number: '104',
-      has_cql: true,
-      has_nlpql: true,
       group: 'Toxicities',
       answers: [
         {
@@ -1925,14 +1887,17 @@ export default {
           value: 'unknown'
         }
       ],
-      nlpql_feature: 'form_4100_question_104'
+      evidence_bundle: {
+        group_11_toxicities: [
+          'question_104_dysphasiaaphasia_assertion',
+          'question_104_dysphasiaaphasia_coded'
+        ]
+      }
     },
     {
       question_name: 'Grade',
       question_type: 'MULTIPLE_CHOICE',
       question_number: '105',
-      has_cql: true,
-      has_nlpql: true,
       group: 'Toxicities',
       answers: [
         {
@@ -1948,14 +1913,12 @@ export default {
           value: '3_aphasia'
         }
       ],
-      nlpql_feature: 'form_4100_question_105'
+      evidence_bundle: {}
     },
     {
       question_name: 'Seizure',
       question_type: 'MULTIPLE_CHOICE',
       question_number: '106',
-      has_cql: true,
-      has_nlpql: true,
       group: 'Toxicities',
       answers: [
         {
@@ -1971,14 +1934,17 @@ export default {
           value: 'unknown'
         }
       ],
-      nlpql_feature: 'form_4100_question_106'
+      evidence_bundle: {
+        group_11_toxicities: [
+          'question_106_seizure_assertion',
+          'question_106_seizure_coded'
+        ]
+      }
     },
     {
       question_name: 'Type',
       question_type: 'MULTIPLE_CHOICE',
       question_number: '107',
-      has_cql: true,
-      has_nlpql: true,
       group: 'Toxicities',
       answers: [
         {
@@ -2010,24 +1976,20 @@ export default {
           value: 'unknown'
         }
       ],
-      nlpql_feature: 'form_4100_question_107'
+      evidence_bundle: {}
     },
     {
       question_name: 'Specify other type:',
       question_type: 'TEXT',
       question_number: '108',
-      has_cql: false,
-      has_nlpql: false,
       group: 'Toxicities',
       answers: [],
-      nlpql_feature: 'form_4100_question_108'
+      evidence_bundle: {}
     },
     {
       question_name: 'Severity',
       question_type: 'MULTIPLE_CHOICE',
       question_number: '109',
-      has_cql: true,
-      has_nlpql: true,
       group: 'Toxicities',
       answers: [
         {
@@ -2039,14 +2001,12 @@ export default {
           value: 'grade_4'
         }
       ],
-      nlpql_feature: 'form_4100_question_109'
+      evidence_bundle: {}
     },
     {
       question_name: 'Hemiparesis / paraparesis / other motor deficit',
       question_type: 'MULTIPLE_CHOICE',
       question_number: '110',
-      has_cql: true,
-      has_nlpql: true,
       group: 'Toxicities',
       answers: [
         {
@@ -2062,14 +2022,17 @@ export default {
           value: 'unknown'
         }
       ],
-      nlpql_feature: 'form_4100_question_110'
+      evidence_bundle: {
+        group_11_toxicities: [
+          'question_110_hemiparesisparaparesisother_motor_deficit_assertion',
+          'question_110_hemiparesisparaparesisother_motor_deficit_coded'
+        ]
+      }
     },
     {
       question_name: 'Cerebral edema',
       question_type: 'MULTIPLE_CHOICE',
       question_number: '111',
-      has_cql: true,
-      has_nlpql: true,
       group: 'Toxicities',
       answers: [
         {
@@ -2085,14 +2048,17 @@ export default {
           value: 'unknown'
         }
       ],
-      nlpql_feature: 'form_4100_question_111'
+      evidence_bundle: {
+        group_11_toxicities: [
+          'question_111_cerebral_edema_assertion',
+          'question_111_cerebral_edema_coded'
+        ]
+      }
     },
     {
       question_name: 'Grade',
       question_type: 'MULTIPLE_CHOICE',
       question_number: '112',
-      has_cql: true,
-      has_nlpql: true,
       group: 'Toxicities',
       answers: [
         {
@@ -2104,14 +2070,12 @@ export default {
           value: '4'
         }
       ],
-      nlpql_feature: 'form_4100_question_112'
+      evidence_bundle: {}
     },
     {
       question_name: 'Hallucinations',
       question_type: 'MULTIPLE_CHOICE',
       question_number: '113',
-      has_cql: true,
-      has_nlpql: true,
       group: 'Toxicities',
       answers: [
         {
@@ -2127,14 +2091,17 @@ export default {
           value: 'unknown'
         }
       ],
-      nlpql_feature: 'form_4100_question_113'
+      evidence_bundle: {
+        group_11_toxicities: [
+          'question_113_hallucinations_assertion',
+          'question_113_hallucinations_coded'
+        ]
+      }
     },
     {
       question_name: 'Tremors',
       question_type: 'MULTIPLE_CHOICE',
       question_number: '114',
-      has_cql: true,
-      has_nlpql: true,
       group: 'Toxicities',
       answers: [
         {
@@ -2150,14 +2117,17 @@ export default {
           value: 'unknown'
         }
       ],
-      nlpql_feature: 'form_4100_question_114'
+      evidence_bundle: {
+        group_11_toxicities: [
+          'question_114_tremors_assertion',
+          'question_114_tremors_coded'
+        ]
+      }
     },
     {
       question_name: 'Cerebral vascular accident (stroke)',
       question_type: 'MULTIPLE_CHOICE',
       question_number: '115',
-      has_cql: true,
-      has_nlpql: true,
       group: 'Toxicities',
       answers: [
         {
@@ -2173,24 +2143,25 @@ export default {
           value: 'unknown'
         }
       ],
-      nlpql_feature: 'form_4100_question_115'
+      evidence_bundle: {
+        group_11_toxicities: [
+          'question_115_cerebral_vascular_accidentstroke)_assertion',
+          'question_115_cerebral_vascular_accidentstroke)_coded'
+        ]
+      }
     },
     {
       question_name: 'Date of onset:',
       question_type: 'DATE',
       question_number: '116',
-      has_cql: true,
-      has_nlpql: true,
       group: 'Toxicities',
       answers: [],
-      nlpql_feature: 'form_4100_question_116'
+      evidence_bundle: {}
     },
     {
       question_name: 'Type',
       question_type: 'MULTIPLE_CHOICE',
       question_number: '117',
-      has_cql: true,
-      has_nlpql: true,
       group: 'Toxicities',
       answers: [
         {
@@ -2202,14 +2173,12 @@ export default {
           value: 'ischemic'
         }
       ],
-      nlpql_feature: 'form_4100_question_117'
+      evidence_bundle: {}
     },
     {
       question_name: 'Leukoencephalopathy',
       question_type: 'MULTIPLE_CHOICE',
       question_number: '118',
-      has_cql: true,
-      has_nlpql: true,
       group: 'Toxicities',
       answers: [
         {
@@ -2225,14 +2194,17 @@ export default {
           value: 'unknown'
         }
       ],
-      nlpql_feature: 'form_4100_question_118'
+      evidence_bundle: {
+        group_11_toxicities: [
+          'question_118_leukoencephalopathy_assertion',
+          'question_118_leukoencephalopathy_coded'
+        ]
+      }
     },
     {
       question_name: 'Other symptom',
       question_type: 'MULTIPLE_CHOICE',
       question_number: '119',
-      has_cql: true,
-      has_nlpql: false,
       group: 'Toxicities',
       answers: [
         {
@@ -2248,24 +2220,20 @@ export default {
           value: 'unknown'
         }
       ],
-      nlpql_feature: 'form_4100_question_119'
+      evidence_bundle: {}
     },
     {
       question_name: 'Specify other symptom:',
       question_type: 'DATE',
       question_number: '120',
-      has_cql: true,
-      has_nlpql: false,
       group: 'Toxicities',
       answers: [],
-      nlpql_feature: 'form_4100_question_120'
+      evidence_bundle: {}
     },
     {
       question_name: 'Did neurotoxicity resolve?',
       question_type: 'MULTIPLE_CHOICE',
       question_number: '121',
-      has_cql: true,
-      has_nlpql: false,
       group: 'Toxicities',
       answers: [
         {
@@ -2277,25 +2245,21 @@ export default {
           value: 'no'
         }
       ],
-      nlpql_feature: 'form_4100_question_121'
+      evidence_bundle: {}
     },
     {
       question_name: 'Date resolved:',
       question_type: 'DATE',
       question_number: '122',
-      has_cql: true,
-      has_nlpql: false,
       group: 'Toxicities',
       answers: [],
-      nlpql_feature: 'form_4100_question_122'
+      evidence_bundle: {}
     },
     {
       question_name:
         'Specify therapy given for neurotoxicity (check all that apply)',
       question_type: 'MULTIPLE_SELECT',
       question_number: '123',
-      has_cql: true,
-      has_nlpql: false,
       group: 'Toxicities',
       answers: [
         {
@@ -2311,24 +2275,20 @@ export default {
           value: 'other_therapy'
         }
       ],
-      nlpql_feature: 'form_4100_question_123'
+      evidence_bundle: {}
     },
     {
       question_name: 'Specify other therapy:',
       question_type: 'TEXT',
       question_number: '124',
-      has_cql: false,
-      has_nlpql: false,
       group: 'Toxicities',
       answers: [],
-      nlpql_feature: 'form_4100_question_124'
+      evidence_bundle: {}
     },
     {
       question_name: 'Hypogammaglobulinemia',
       question_type: 'MULTIPLE_CHOICE',
       question_number: '125',
-      has_cql: true,
-      has_nlpql: true,
       group: 'Toxicities',
       answers: [
         {
@@ -2344,24 +2304,25 @@ export default {
           value: 'unknown'
         }
       ],
-      nlpql_feature: 'form_4100_question_125'
+      evidence_bundle: {
+        group_11_toxicities: [
+          'question_125_hypogammaglobulinemia_assertion',
+          'question_125_hypogammaglobulinemia_coded'
+        ]
+      }
     },
     {
       question_name: 'Date of onset:',
       question_type: 'DATE',
       question_number: '126',
-      has_cql: true,
-      has_nlpql: true,
       group: 'Toxicities',
       answers: [],
-      nlpql_feature: 'form_4100_question_126'
+      evidence_bundle: {}
     },
     {
       question_name: 'Did hypogammaglobulinema resolve?',
       question_type: 'MULTIPLE_CHOICE',
       question_number: '127',
-      has_cql: true,
-      has_nlpql: true,
       group: 'Toxicities',
       answers: [
         {
@@ -2373,25 +2334,21 @@ export default {
           value: 'no'
         }
       ],
-      nlpql_feature: 'form_4100_question_127'
+      evidence_bundle: {}
     },
     {
       question_name: 'Date resolved:',
       question_type: 'DATE',
       question_number: '128',
-      has_cql: true,
-      has_nlpql: true,
       group: 'Toxicities',
       answers: [],
-      nlpql_feature: 'form_4100_question_128'
+      evidence_bundle: {}
     },
     {
       question_name:
         'Did recipient require immunoglobulin replacement therapy?',
       question_type: 'MULTIPLE_CHOICE',
       question_number: '129',
-      has_cql: true,
-      has_nlpql: true,
       group: 'Toxicities',
       answers: [
         {
@@ -2403,14 +2360,12 @@ export default {
           value: 'no'
         }
       ],
-      nlpql_feature: 'form_4100_question_129'
+      evidence_bundle: {}
     },
     {
       question_name: 'Is the recipient still requiring replacement therapy?',
       question_type: 'MULTIPLE_CHOICE',
       question_number: '130',
-      has_cql: true,
-      has_nlpql: true,
       group: 'Toxicities',
       answers: [
         {
@@ -2422,14 +2377,12 @@ export default {
           value: 'no'
         }
       ],
-      nlpql_feature: 'form_4100_question_130'
+      evidence_bundle: {}
     },
     {
       question_name: 'Tumor lysis syndrome',
       question_type: 'MULTIPLE_CHOICE',
       question_number: '131',
-      has_cql: true,
-      has_nlpql: true,
       group: 'Toxicities',
       answers: [
         {
@@ -2445,24 +2398,25 @@ export default {
           value: 'unknown'
         }
       ],
-      nlpql_feature: 'form_4100_question_131'
+      evidence_bundle: {
+        group_11_toxicities: [
+          'question_131_tumor_lysis_syndrome_assertion',
+          'question_131_tumor_lysis_syndrome_coded'
+        ]
+      }
     },
     {
       question_name: 'Date of onset:',
       question_type: 'DATE',
       question_number: '132',
-      has_cql: true,
-      has_nlpql: true,
       group: 'Toxicities',
       answers: [],
-      nlpql_feature: 'form_4100_question_132'
+      evidence_bundle: {}
     },
     {
       question_name: 'Grade',
       question_type: 'MULTIPLE_CHOICE',
       question_number: '133',
-      has_cql: true,
-      has_nlpql: true,
       group: 'Toxicities',
       answers: [
         {
@@ -2478,14 +2432,12 @@ export default {
           value: '5'
         }
       ],
-      nlpql_feature: 'form_4100_question_133'
+      evidence_bundle: {}
     },
     {
       question_name: 'Other toxicity',
       question_type: 'MULTIPLE_CHOICE',
       question_number: '134',
-      has_cql: true,
-      has_nlpql: true,
       group: 'Toxicities',
       answers: [
         {
@@ -2501,34 +2453,28 @@ export default {
           value: 'unknown'
         }
       ],
-      nlpql_feature: 'form_4100_question_134'
+      evidence_bundle: {}
     },
     {
       question_name: 'Specify other toxicity:',
       question_type: 'TEXT',
       question_number: '135',
-      has_cql: false,
-      has_nlpql: false,
       group: 'Toxicities',
       answers: [],
-      nlpql_feature: 'form_4100_question_135'
+      evidence_bundle: {}
     },
     {
       question_name: 'Date of onset:',
       question_type: 'DATE',
       question_number: '136',
-      has_cql: true,
-      has_nlpql: true,
       group: 'Toxicities',
       answers: [],
-      nlpql_feature: 'form_4100_question_136'
+      evidence_bundle: {}
     },
     {
       question_name: 'Has the recipient developed any grade 3 organ toxicity?',
       question_type: 'MULTIPLE_CHOICE',
       question_number: '137',
-      has_cql: true,
-      has_nlpql: true,
       group: 'Toxicities',
       answers: [
         {
@@ -2544,14 +2490,12 @@ export default {
           value: 'unknown'
         }
       ],
-      nlpql_feature: 'form_4100_question_137'
+      evidence_bundle: {}
     },
     {
       question_name: 'Gastrointestinal (GI)',
       question_type: 'MULTIPLE_CHOICE',
       question_number: '138',
-      has_cql: true,
-      has_nlpql: true,
       group: 'Toxicities',
       answers: [
         {
@@ -2567,24 +2511,22 @@ export default {
           value: 'unknown'
         }
       ],
-      nlpql_feature: 'form_4100_question_138'
+      evidence_bundle: {
+        group_11_toxicities: ['question_138_gastrointestinalgi)_coded']
+      }
     },
     {
       question_name: 'Date of onset:',
       question_type: 'DATE',
       question_number: '139',
-      has_cql: true,
-      has_nlpql: true,
       group: 'Toxicities',
       answers: [],
-      nlpql_feature: 'form_4100_question_139'
+      evidence_bundle: {}
     },
     {
       question_name: 'Heart',
       question_type: 'MULTIPLE_CHOICE',
       question_number: '140',
-      has_cql: true,
-      has_nlpql: true,
       group: 'Toxicities',
       answers: [
         {
@@ -2600,24 +2542,20 @@ export default {
           value: 'unknown'
         }
       ],
-      nlpql_feature: 'form_4100_question_140'
+      evidence_bundle: {}
     },
     {
       question_name: 'Date of onset:',
       question_type: 'DATE',
       question_number: '141',
-      has_cql: true,
-      has_nlpql: true,
       group: 'Toxicities',
       answers: [],
-      nlpql_feature: 'form_4100_question_141'
+      evidence_bundle: {}
     },
     {
       question_name: 'Kidneys',
       question_type: 'MULTIPLE_CHOICE',
       question_number: '142',
-      has_cql: true,
-      has_nlpql: true,
       group: 'Toxicities',
       answers: [
         {
@@ -2633,24 +2571,20 @@ export default {
           value: 'unknown'
         }
       ],
-      nlpql_feature: 'form_4100_question_142'
+      evidence_bundle: {}
     },
     {
       question_name: 'Date of onset:',
       question_type: 'DATE',
       question_number: '143',
-      has_cql: true,
-      has_nlpql: true,
       group: 'Toxicities',
       answers: [],
-      nlpql_feature: 'form_4100_question_143'
+      evidence_bundle: {}
     },
     {
       question_name: 'Liver',
       question_type: 'MULTIPLE_CHOICE',
       question_number: '144',
-      has_cql: true,
-      has_nlpql: true,
       group: 'Toxicities',
       answers: [
         {
@@ -2666,24 +2600,22 @@ export default {
           value: 'unknown'
         }
       ],
-      nlpql_feature: 'form_4100_question_144'
+      evidence_bundle: {
+        group_11_toxicities: ['question_144_liver_coded']
+      }
     },
     {
       question_name: 'Date of onset:',
       question_type: 'DATE',
       question_number: '145',
-      has_cql: true,
-      has_nlpql: true,
       group: 'Toxicities',
       answers: [],
-      nlpql_feature: 'form_4100_question_145'
+      evidence_bundle: {}
     },
     {
       question_name: 'Lungs',
       question_type: 'MULTIPLE_CHOICE',
       question_number: '146',
-      has_cql: true,
-      has_nlpql: true,
       group: 'Toxicities',
       answers: [
         {
@@ -2699,24 +2631,20 @@ export default {
           value: 'unknown'
         }
       ],
-      nlpql_feature: 'form_4100_question_146'
+      evidence_bundle: {}
     },
     {
       question_name: 'Date of onset:',
       question_type: 'DATE',
       question_number: '147',
-      has_cql: true,
-      has_nlpql: true,
       group: 'Toxicities',
       answers: [],
-      nlpql_feature: 'form_4100_question_147'
+      evidence_bundle: {}
     },
     {
       question_name: 'Musculoskeletal',
       question_type: 'MULTIPLE_CHOICE',
       question_number: '148',
-      has_cql: true,
-      has_nlpql: true,
       group: 'Toxicities',
       answers: [
         {
@@ -2732,24 +2660,20 @@ export default {
           value: 'unknown'
         }
       ],
-      nlpql_feature: 'form_4100_question_148'
+      evidence_bundle: {}
     },
     {
       question_name: 'Date of onset:',
       question_type: 'DATE',
       question_number: '149',
-      has_cql: true,
-      has_nlpql: true,
       group: 'Toxicities',
       answers: [],
-      nlpql_feature: 'form_4100_question_149'
+      evidence_bundle: {}
     },
     {
       question_name: 'Neurologic',
       question_type: 'MULTIPLE_CHOICE',
       question_number: '150',
-      has_cql: true,
-      has_nlpql: true,
       group: 'Toxicities',
       answers: [
         {
@@ -2765,24 +2689,20 @@ export default {
           value: 'unknown'
         }
       ],
-      nlpql_feature: 'form_4100_question_150'
+      evidence_bundle: {}
     },
     {
       question_name: 'Date of onset:',
       question_type: 'DATE',
       question_number: '151',
-      has_cql: true,
-      has_nlpql: true,
       group: 'Toxicities',
       answers: [],
-      nlpql_feature: 'form_4100_question_151'
+      evidence_bundle: {}
     },
     {
       question_name: 'Other organ',
       question_type: 'MULTIPLE_CHOICE',
       question_number: '152',
-      has_cql: true,
-      has_nlpql: true,
       group: 'Toxicities',
       answers: [
         {
@@ -2798,34 +2718,28 @@ export default {
           value: 'unknown'
         }
       ],
-      nlpql_feature: 'form_4100_question_152'
+      evidence_bundle: {}
     },
     {
       question_name: 'Date of onset:',
       question_type: 'DATE',
       question_number: '153',
-      has_cql: true,
-      has_nlpql: true,
       group: 'Toxicities',
       answers: [],
-      nlpql_feature: 'form_4100_question_153'
+      evidence_bundle: {}
     },
     {
       question_name: 'Specify other organ:',
       question_type: 'TEXT',
       question_number: '154',
-      has_cql: true,
-      has_nlpql: true,
       group: 'Toxicities',
       answers: [],
-      nlpql_feature: 'form_4100_question_154'
+      evidence_bundle: {}
     },
     {
       question_name: 'Has the recipient developed any grade 4 organ toxicity?',
       question_type: 'MULTIPLE_CHOICE',
       question_number: '155',
-      has_cql: true,
-      has_nlpql: true,
       group: 'Toxicities',
       answers: [
         {
@@ -2841,14 +2755,12 @@ export default {
           value: 'unknown'
         }
       ],
-      nlpql_feature: 'form_4100_question_155'
+      evidence_bundle: {}
     },
     {
       question_name: 'Gastrointestinal (GI)',
       question_type: 'MULTIPLE_CHOICE',
       question_number: '156',
-      has_cql: true,
-      has_nlpql: true,
       group: 'Toxicities',
       answers: [
         {
@@ -2864,24 +2776,20 @@ export default {
           value: 'unknown'
         }
       ],
-      nlpql_feature: 'form_4100_question_156'
+      evidence_bundle: {}
     },
     {
       question_name: 'Date of onset:',
       question_type: 'DATE',
       question_number: '157',
-      has_cql: true,
-      has_nlpql: true,
       group: 'Toxicities',
       answers: [],
-      nlpql_feature: 'form_4100_question_157'
+      evidence_bundle: {}
     },
     {
       question_name: 'Heart',
       question_type: 'MULTIPLE_CHOICE',
       question_number: '158',
-      has_cql: true,
-      has_nlpql: true,
       group: 'Toxicities',
       answers: [
         {
@@ -2897,24 +2805,20 @@ export default {
           value: 'unknown'
         }
       ],
-      nlpql_feature: 'form_4100_question_158'
+      evidence_bundle: {}
     },
     {
       question_name: 'Date of onset:',
       question_type: 'DATE',
       question_number: '159',
-      has_cql: true,
-      has_nlpql: true,
       group: 'Toxicities',
       answers: [],
-      nlpql_feature: 'form_4100_question_159'
+      evidence_bundle: {}
     },
     {
       question_name: 'Kidneys',
       question_type: 'MULTIPLE_CHOICE',
       question_number: '160',
-      has_cql: true,
-      has_nlpql: true,
       group: 'Toxicities',
       answers: [
         {
@@ -2930,24 +2834,20 @@ export default {
           value: 'unknown'
         }
       ],
-      nlpql_feature: 'form_4100_question_160'
+      evidence_bundle: {}
     },
     {
       question_name: 'Date of onset:',
       question_type: 'DATE',
       question_number: '161',
-      has_cql: true,
-      has_nlpql: true,
       group: 'Toxicities',
       answers: [],
-      nlpql_feature: 'form_4100_question_161'
+      evidence_bundle: {}
     },
     {
       question_name: 'Liver',
       question_type: 'MULTIPLE_CHOICE',
       question_number: '162',
-      has_cql: true,
-      has_nlpql: true,
       group: 'Toxicities',
       answers: [
         {
@@ -2963,24 +2863,20 @@ export default {
           value: 'unknown'
         }
       ],
-      nlpql_feature: 'form_4100_question_162'
+      evidence_bundle: {}
     },
     {
       question_name: 'Date of onset:',
       question_type: 'DATE',
       question_number: '163',
-      has_cql: true,
-      has_nlpql: true,
       group: 'Toxicities',
       answers: [],
-      nlpql_feature: 'form_4100_question_163'
+      evidence_bundle: {}
     },
     {
       question_name: 'Lungs',
       question_type: 'MULTIPLE_CHOICE',
       question_number: '164',
-      has_cql: true,
-      has_nlpql: true,
       group: 'Toxicities',
       answers: [
         {
@@ -2996,24 +2892,20 @@ export default {
           value: 'unknown'
         }
       ],
-      nlpql_feature: 'form_4100_question_164'
+      evidence_bundle: {}
     },
     {
       question_name: 'Date of onset:',
       question_type: 'DATE',
       question_number: '165',
-      has_cql: true,
-      has_nlpql: true,
       group: 'Toxicities',
       answers: [],
-      nlpql_feature: 'form_4100_question_165'
+      evidence_bundle: {}
     },
     {
       question_name: 'Musculoskeletal',
       question_type: 'MULTIPLE_CHOICE',
       question_number: '166',
-      has_cql: true,
-      has_nlpql: true,
       group: 'Toxicities',
       answers: [
         {
@@ -3029,24 +2921,20 @@ export default {
           value: 'unknown'
         }
       ],
-      nlpql_feature: 'form_4100_question_166'
+      evidence_bundle: {}
     },
     {
       question_name: 'Date of onset:',
       question_type: 'DATE',
       question_number: '167',
-      has_cql: true,
-      has_nlpql: true,
       group: 'Toxicities',
       answers: [],
-      nlpql_feature: 'form_4100_question_167'
+      evidence_bundle: {}
     },
     {
       question_name: 'Neurologic',
       question_type: 'MULTIPLE_CHOICE',
       question_number: '168',
-      has_cql: true,
-      has_nlpql: true,
       group: 'Toxicities',
       answers: [
         {
@@ -3062,24 +2950,20 @@ export default {
           value: 'unknown'
         }
       ],
-      nlpql_feature: 'form_4100_question_168'
+      evidence_bundle: {}
     },
     {
       question_name: 'Date of onset:',
       question_type: 'DATE',
       question_number: '169',
-      has_cql: true,
-      has_nlpql: true,
       group: 'Toxicities',
       answers: [],
-      nlpql_feature: 'form_4100_question_169'
+      evidence_bundle: {}
     },
     {
       question_name: 'Other organ',
       question_type: 'MULTIPLE_CHOICE',
       question_number: '170',
-      has_cql: true,
-      has_nlpql: true,
       group: 'Toxicities',
       answers: [
         {
@@ -3095,34 +2979,28 @@ export default {
           value: 'unknown'
         }
       ],
-      nlpql_feature: 'form_4100_question_170'
+      evidence_bundle: {}
     },
     {
       question_name: 'Date of onset:',
       question_type: 'DATE',
       question_number: '171',
-      has_cql: true,
-      has_nlpql: true,
       group: 'Toxicities',
       answers: [],
-      nlpql_feature: 'form_4100_question_171'
+      evidence_bundle: {}
     },
     {
       question_name: 'Specify other organ:',
       question_type: 'TEXT',
       question_number: '172',
-      has_cql: true,
-      has_nlpql: true,
       group: 'Toxicities',
       answers: [],
-      nlpql_feature: 'form_4100_question_172'
+      evidence_bundle: {}
     },
     {
       question_name: 'Interleukin-6',
       question_type: 'MULTIPLE_CHOICE',
       question_number: '173',
-      has_cql: false,
-      has_nlpql: false,
       group: 'Toxicities',
       answers: [
         {
@@ -3134,34 +3012,28 @@ export default {
           value: 'unknown'
         }
       ],
-      nlpql_feature: 'form_4100_question_173'
+      evidence_bundle: {}
     },
     {
       question_name: 'pg/mL',
       question_type: 'TEXT',
       question_number: '174',
-      has_cql: true,
-      has_nlpql: true,
       group: 'Toxicities',
       answers: [],
-      nlpql_feature: 'form_4100_question_174'
+      evidence_bundle: {}
     },
     {
       question_name: 'Date sample collected:',
       question_type: 'DATE',
       question_number: '175',
-      has_cql: true,
-      has_nlpql: true,
       group: 'Toxicities',
       answers: [],
-      nlpql_feature: 'form_4100_question_175'
+      evidence_bundle: {}
     },
     {
       question_name: 'Interferon gamma IFN gamma',
       question_type: 'MULTIPLE_CHOICE',
       question_number: '176',
-      has_cql: true,
-      has_nlpql: false,
       group: 'Toxicities',
       answers: [
         {
@@ -3173,35 +3045,29 @@ export default {
           value: 'unknown'
         }
       ],
-      nlpql_feature: 'form_4100_question_176'
+      evidence_bundle: {}
     },
     {
       question_name: 'IU/mL',
       question_type: 'TEXT',
       question_number: '177',
-      has_cql: true,
-      has_nlpql: false,
       group: 'Toxicities',
       answers: [],
-      nlpql_feature: 'form_4100_question_177'
+      evidence_bundle: {}
     },
     {
       question_name: 'Date sample collected:',
       question_type: 'DATE',
       question_number: '178',
-      has_cql: true,
-      has_nlpql: false,
       group: 'Toxicities',
       answers: [],
-      nlpql_feature: 'form_4100_question_178'
+      evidence_bundle: {}
     },
     {
       question_name:
         'Soluble interleukin-2 receptor alpha (sIL2RA or soluble CD25)',
       question_type: 'MULTIPLE_CHOICE',
       question_number: '179',
-      has_cql: true,
-      has_nlpql: false,
       group: 'Toxicities',
       answers: [
         {
@@ -3213,34 +3079,28 @@ export default {
           value: 'unknown'
         }
       ],
-      nlpql_feature: 'form_4100_question_179'
+      evidence_bundle: {}
     },
     {
       question_name: 'U/mL',
       question_type: 'TEXT',
       question_number: '180',
-      has_cql: true,
-      has_nlpql: false,
       group: 'Toxicities',
       answers: [],
-      nlpql_feature: 'form_4100_question_180'
+      evidence_bundle: {}
     },
     {
       question_name: 'Date sample collected:',
       question_type: 'DATE',
       question_number: '181',
-      has_cql: true,
-      has_nlpql: false,
       group: 'Toxicities',
       answers: [],
-      nlpql_feature: 'form_4100_question_181'
+      evidence_bundle: {}
     },
     {
       question_name: 'Total serum ferritin',
       question_type: 'MULTIPLE_CHOICE',
       question_number: '182',
-      has_cql: true,
-      has_nlpql: false,
       group: 'Toxicities',
       answers: [
         {
@@ -3252,34 +3112,28 @@ export default {
           value: 'unknown'
         }
       ],
-      nlpql_feature: 'form_4100_question_182'
+      evidence_bundle: {}
     },
     {
       question_name: 'ng/mL(ug/L)',
       question_type: 'TEXT',
       question_number: '183',
-      has_cql: true,
-      has_nlpql: false,
       group: 'Toxicities',
       answers: [],
-      nlpql_feature: 'form_4100_question_183'
+      evidence_bundle: {}
     },
     {
       question_name: 'Date sample collected:',
       question_type: 'DATE',
       question_number: '184',
-      has_cql: true,
-      has_nlpql: false,
       group: 'Toxicities',
       answers: [],
-      nlpql_feature: 'form_4100_question_184'
+      evidence_bundle: {}
     },
     {
       question_name: 'C-reactive protein',
       question_type: 'MULTIPLE_CHOICE',
       question_number: '185',
-      has_cql: true,
-      has_nlpql: false,
       group: 'Toxicities',
       answers: [
         {
@@ -3291,65 +3145,53 @@ export default {
           value: 'unknown'
         }
       ],
-      nlpql_feature: 'form_4100_question_185'
+      evidence_bundle: {}
     },
     {
       question_name: 'mg/dL',
       question_type: 'TEXT',
       question_number: '186',
-      has_cql: true,
-      has_nlpql: false,
       group: 'Toxicities',
       answers: [],
-      nlpql_feature: 'form_4100_question_186'
+      evidence_bundle: {}
     },
     {
       question_name: 'Date sample collected:',
       question_type: 'DATE',
       question_number: '187',
-      has_cql: true,
-      has_nlpql: false,
       group: 'Toxicities',
       answers: [],
-      nlpql_feature: 'form_4100_question_187'
+      evidence_bundle: {}
     },
     {
       question_name:
         'Did the recipient develop a clinically significant infection since the date of last report?',
       question_type: 'TEXT',
       question_number: '188',
-      has_cql: true,
-      has_nlpql: true,
       group: 'Infection',
       answers: [],
-      nlpql_feature: 'form_4100_question_188'
+      evidence_bundle: {}
     },
     {
       question_name: 'Organism',
       question_type: 'TEXT',
       question_number: '189',
-      has_cql: false,
-      has_nlpql: true,
       group: 'Infection',
       answers: [],
-      nlpql_feature: 'form_4100_question_189'
+      evidence_bundle: {}
     },
     {
       question_name: 'Specify other organism:',
       question_type: 'TEXT',
       question_number: '190',
-      has_cql: false,
-      has_nlpql: true,
       group: 'Infection',
       answers: [],
-      nlpql_feature: 'form_4100_question_190'
+      evidence_bundle: {}
     },
     {
       question_name: 'Site (check all that apply)',
       question_type: 'MULTIPLE_SELECT',
       question_number: '191',
-      has_cql: false,
-      has_nlpql: true,
       group: 'Infection',
       answers: [
         {
@@ -3413,25 +3255,21 @@ export default {
           value: 'urinary_tract-upper'
         }
       ],
-      nlpql_feature: 'form_4100_question_191'
+      evidence_bundle: {}
     },
     {
       question_name: 'Date of diagnosis:',
       question_type: 'DATE',
       question_number: '192',
-      has_cql: false,
-      has_nlpql: true,
       group: 'Infection',
       answers: [],
-      nlpql_feature: 'form_4100_question_192'
+      evidence_bundle: {}
     },
     {
       question_name:
         'Was the recipient pregnant at any time in this reporting period? (Female only)',
       question_type: 'MULTIPLE_CHOICE',
       question_number: '193',
-      has_cql: false,
-      has_nlpql: true,
       group: 'Functional Status',
       answers: [
         {
@@ -3451,15 +3289,17 @@ export default {
           value: 'previously_reported'
         }
       ],
-      nlpql_feature: 'form_4100_question_193'
+      evidence_bundle: {
+        group_12_infection: [
+          'question_193_was_the_recipient_pregnant_assertion'
+        ]
+      }
     },
     {
       question_name:
         "Was the recipient's female partner pregnant at any time in this reporting period? (Male only)",
       question_type: 'MULTIPLE_CHOICE',
       question_number: '194',
-      has_cql: false,
-      has_nlpql: true,
       group: 'Functional Status',
       answers: [
         {
@@ -3479,7 +3319,12 @@ export default {
           value: 'previously_reported'
         }
       ],
-      nlpql_feature: 'form_4100_question_194'
+      evidence_bundle: {
+        group_13_functional_status: [
+          "question_194_was_the_recipient's_female_assertion"
+        ]
+      }
     }
-  ]
+  ],
+  questions_with_evidence_count: 55
 };

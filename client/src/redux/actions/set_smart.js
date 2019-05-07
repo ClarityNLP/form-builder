@@ -5,7 +5,7 @@ export const setSmart = () => dispatch => {
     //DEVELOPMENT CODE
     const tmp_smart = window.FHIR.client({
       serviceUrl: process.env.REACT_APP_DEFAULT_FHIR_URL,
-      patientId: '14628'
+      patientId: '23907'
     });
 
     dispatch({

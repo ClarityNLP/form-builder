@@ -15,6 +15,14 @@ export default class Form extends Component {
     };
   }
 
+  componentDidMount() {
+    const { patient, form } = this.props.app;
+
+    if (patient.documents) {
+      this.props.getEvidence(patient, form);
+    }
+  }
+
   handleGroupChange = group => {
     const { form } = this.props.app;
     let tmpQuestions = [];
@@ -41,7 +49,7 @@ export default class Form extends Component {
   };
 
   render() {
-    const { form } = this.props.app;
+    const { form, evidence, loading_evidence } = this.props.app;
     const { selectedGroup, selectedQuestion, displayQuestions } = this.state;
 
     return (
@@ -70,6 +78,8 @@ export default class Form extends Component {
                 selectedQuestion={
                   selectedQuestion ? selectedQuestion : form.questions[0]
                 }
+                evidence={evidence}
+                loading={loading_evidence}
               />
             </Col>
           </Row>
