@@ -1,21 +1,22 @@
-import { Base64 } from 'js-base64';
 import axios from 'axios';
 
 import { SET_EVIDENCE, SET_EVIDENCE_SUCCESS, SET_EVIDENCE_FAIL } from './types';
 
-const generatePromises = (patient, fhir, docs, nlpql) => {
+const generatePromises = (patient, fhir, nlpql) => {
   let promises = [];
+
+  const postData = {
+    reports: patient.documents,
+    patient_id: patient.id,
+    fhir: fhir
+  };
 
   for (let query of nlpql) {
     const url = process.env.REACT_APP_CLARITY_NLPAAS_URL + query;
 
     promises.push(
       axios
-        .post(url, {
-          reports: docs,
-          patient_id: patient.id,
-          fhir: fhir
-        })
+        .post(url, postData)
         .then(response => {
           const data = {
             [query]: response.data.filter(result => {
@@ -42,39 +43,21 @@ export const getEvidence = (patient, fhir, form) => dispatch => {
     type: SET_EVIDENCE
   });
 
-  let nlpql = ['group_9_persistence_of_cells'];
+  let nlpql = [];
 
-  // if (form) {
-  //   for (let question of form.questions) {
-  //     const queries = Object.keys(question.evidence_bundle);
+  if (form) {
+    for (let question of form.questions) {
+      const queries = Object.keys(question.evidence_bundle);
 
-  //     for (let query of queries) {
-  //       if (!nlpql.includes(query) && query.trim() !== '') {
-  //         nlpql.push(query);
-  //       }
-  //     }
-  //   }
-  // }
-
-  let docs = patient.documents.map(data => {
-    if (data.content && data.content.length > 0) {
-      let txt = '';
-
-      for (let i in data.content) {
-        if (data.content.hasOwnProperty(i)) {
-          if (data.content[i].hasOwnProperty('attachment')) {
-            let att = data.content[i]['attachment'];
-            txt = txt + Base64.decode(att['data']) + '\n';
-          }
+      for (let query of queries) {
+        if (!nlpql.includes(query) && query.trim() !== '') {
+          nlpql.push(query);
         }
       }
-
-      return txt;
     }
-    return '';
-  });
+  }
 
-  Promise.all(generatePromises(patient, fhir, docs, nlpql))
+  Promise.all(generatePromises(patient, fhir, nlpql))
     .then(results => {
       let tmpData = {};
 

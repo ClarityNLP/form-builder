@@ -1,10 +1,20 @@
 .entity {
-  border-bottom: 1px solid black;
+  height: 100%;
 
   .highlight {
     padding: 5px;
     background-color: $color3;
     color: #fff;
+  }
+}
+
+.btn {
+  &.active,
+  &:hover {
+    .highlight {
+      background-color: #fff;
+      color: $color3;
+    }
   }
 }
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Loader from '../../../Loader';
+import { Row, Col } from 'reactstrap';
 import Entity from './Entity';
 
 export default class Evidence extends Component {
@@ -16,14 +16,14 @@ export default class Evidence extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.selectedQuestion !== this.props.selectedQuestion) {
+    if (prevProps.evidence_bundle !== this.props.evidence_bundle) {
       this.filterEvidenceByQuestion();
     }
   }
 
   filterEvidenceByQuestion = () => {
-    const { selectedQuestion, evidence } = this.props;
-    const { evidence_bundle } = selectedQuestion;
+    const { evidence } = this.props.app;
+    const { evidence_bundle } = this.props;
     const allQueries = Object.keys(evidence);
     const questionQueries = Object.keys(evidence_bundle);
     let data = [];
@@ -44,24 +44,24 @@ export default class Evidence extends Component {
   };
 
   render() {
-    const { loading } = this.props;
     const { displayEvidence } = this.state;
 
     return (
-      <div className='evidence'>
-        {loading ? (
-          <Loader />
+      <Row>
+        {displayEvidence.length > 0 ? (
+          displayEvidence.map((evidence, i) => {
+            return (
+              <Col xs='4' className='mb-2'>
+                <Entity key={'evidence' + i} result={evidence} />
+              </Col>
+            );
+          })
         ) : (
-          <div>
-            <div className='text-center'>
-              <h3 className='mb-3'>{displayEvidence.length} Results Found</h3>
-            </div>
-            {displayEvidence.map((evidence, i) => {
-              return <Entity key={'evidence' + i} result={evidence} />;
-            })}
-          </div>
+          <Col className='align-self-center text-center'>
+            <h3>No recommendations.</h3>
+          </Col>
         )}
-      </div>
+      </Row>
     );
   }
 }

@@ -1,3 +1,17 @@
+.form {
+  .container {
+    height: 100%;
+  }
+
+  .question_container {
+    height: 80%;
+    overflow: scroll;
+  }
+
+  .navigation_btns {
+    height: 20%;
+  }
+}
+
 @import './Sidebar/sidebar';
-@import './Questions/questions';
-@import './Evidence/evidence';
+@import './Question/question';

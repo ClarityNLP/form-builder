@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Modal, ModalBody } from 'reactstrap';
+import { Button } from 'reactstrap';
 
 export default class Entity extends Component {
   constructor(props) {
@@ -32,27 +32,26 @@ export default class Entity extends Component {
     );
 
     return (
-      <p>
+      <span>
         {first}
         <span className='highlight'>{keyword}</span>
         {last}
-      </p>
+      </span>
     );
   };
 
   render() {
-    const { report_text } = this.props.result;
     const { displayText, toggle } = this.state;
 
     return (
-      <div className='entity mb-3' onClick={this.toggle}>
+      <Button
+        outline
+        block
+        className={toggle ? 'entity active' : 'entity'}
+        onClick={this.toggle}
+      >
         <div>{displayText}</div>
-        <Modal isOpen={toggle} toggle={this.toggle}>
-          <ModalBody>
-            <pre>{report_text}</pre>
-          </ModalBody>
-        </Modal>
-      </div>
+      </Button>
     );
   }
 }

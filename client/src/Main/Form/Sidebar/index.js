@@ -3,27 +3,18 @@ import { ButtonGroup, Button } from 'reactstrap';
 
 export default class SideBar extends Component {
   render() {
-    const { groups, selectedGroup, handleGroupChange } = this.props;
+    const { groups, selectedGroup } = this.props;
 
     return (
       <div className='sidebar'>
         <ButtonGroup vertical>
-          <Button
-            className={selectedGroup === null ? 'active' : ''}
-            onClick={() => {
-              handleGroupChange(null);
-            }}
-          >
-            All Questions
-          </Button>
           {groups.map(g => {
             return (
               <Button
-                className={g === selectedGroup ? 'active' : ''}
+                className={
+                  g === selectedGroup ? 'active text-left' : 'text-left'
+                }
                 key={g}
-                onClick={() => {
-                  handleGroupChange(g);
-                }}
               >
                 {g}
               </Button>

@@ -3,19 +3,19 @@ export default {
   owner: 'gatech',
   allocated_users: ['admin'],
   groups: [
-    'Product',
     'Survival',
-    'Subsequent Cellular Infusions',
-    'Best Response to Cellular Therapy',
-    'Disease Relapse or Progression',
-    'Peripheral Blood Count Recovery',
     'Current Hematologic Findings',
+    'Peripheral Blood Count Recovery',
+    'Subsequent Cellular Infusions',
     'New Malignancy, Lymphoproliferative or Myeloproliferative Disease / Disorder',
-    'Persistence of Cells',
+    'Functional Status',
     'Graft vs. Host Disease',
-    'Toxicities',
     'Infection',
-    'Functional Status'
+    'Persistence of Cells',
+    'Toxicities',
+    'Product',
+    'Disease Relapse or Progression',
+    'Best Response to Cellular Therapy'
   ],
   questions: [
     {
@@ -39,8 +39,8 @@ export default {
       ],
       evidence_bundle: {
         group_1_product: [
-          'question_1_name_of_productfor_most_assertion',
-          'question_1_name_of_productfor_most_coded'
+          'question_1_name_of_product_for_assertion',
+          'question_1_name_of_product_for_coded'
         ]
       }
     },
@@ -303,7 +303,7 @@ export default {
       answers: [],
       evidence_bundle: {
         group_6_peripheral_blood_count_recovery: [
-          'question_17_date_platelets20_x_109l_assertion'
+          'question_17_date_platelets_20_assertion'
         ]
       }
     },
@@ -522,8 +522,8 @@ export default {
       ],
       evidence_bundle: {
         group_7_current_hematologic_findings: [
-          'question_29_was_rbc_transfused30_days_assertion',
-          'question_29_was_rbc_transfused30_days_coded'
+          'question_29_was_rbc_transfused__assertion',
+          'question_29_was_rbc_transfused__coded'
         ]
       }
     },
@@ -584,7 +584,7 @@ export default {
       ],
       evidence_bundle: {
         group_7_current_hematologic_findings: [
-          'question_32_were_platelets_transfused7_days_assertion'
+          'question_32_were_platelets_transfused__assertion'
         ]
       }
     },
@@ -609,7 +609,11 @@ export default {
           value: 'previously_reported'
         }
       ],
-      evidence_bundle: {}
+      evidence_bundle: {
+        group_7_current_hematologic_findings: [
+          'question_33_did_a_new_malignancy_assertion'
+        ]
+      }
     },
     {
       question_name:
@@ -724,7 +728,11 @@ export default {
           value: 'no'
         }
       ],
-      evidence_bundle: {}
+      evidence_bundle: {
+        group_9_persistence_of_cells: [
+          'question_40_was_persistence_evaluated_by_assertion'
+        ]
+      }
     },
     {
       question_name: 'Date sample collected',
@@ -799,7 +807,11 @@ export default {
           value: 'no'
         }
       ],
-      evidence_bundle: {}
+      evidence_bundle: {
+        group_9_persistence_of_cells: [
+          'question_45_was_persistence_evaluated_by_immunohistochemistry_assertion'
+        ]
+      }
     },
     {
       question_name: 'Date sample collected',
@@ -1101,7 +1113,7 @@ export default {
       ],
       evidence_bundle: {
         'group_10_graft_vs._host_disease': [
-          'question_61_lower_intestinal_tractuse_mlday_assertion'
+          'question_61_lower_intestinal_tract_use_assertion'
         ]
       }
     },
@@ -1461,8 +1473,8 @@ export default {
       ],
       evidence_bundle: {
         group_11_toxicities: [
-          'question_81_fevers100.4_degrees_f_or38_assertion',
-          'question_81_fevers100.4_degrees_f_or38_coded'
+          'question_81_fevers_1004_degrees_assertion',
+          'question_81_fevers_1004_degrees_coded'
         ]
       }
     },
@@ -1551,7 +1563,7 @@ export default {
         }
       ],
       evidence_bundle: {
-        group_11_toxicities: ['question_86_vasopressor(s)_assertion']
+        group_11_toxicities: ['question_86_vasopressors_assertion']
       }
     },
     {
@@ -1647,8 +1659,8 @@ export default {
       ],
       evidence_bundle: {
         group_11_toxicities: [
-          'question_91_hypoxia_requiring_minimal_supplemental_oxygenfio240%)_assertion',
-          'question_91_hypoxia_requiring_minimal_supplemental_oxygenfio240%)_coded'
+          'question_91_hypoxia_requiring_minimal_supplemental_assertion',
+          'question_91_hypoxia_requiring_minimal_supplemental_coded'
         ]
       }
     },
@@ -1659,7 +1671,7 @@ export default {
       group: 'Toxicities',
       answers: [],
       evidence_bundle: {
-        group_11_toxicities: ['question_92_date_of_onset:_assertion']
+        group_11_toxicities: ['question_92_date_of_onset_assertion']
       }
     },
     {
@@ -1693,7 +1705,7 @@ export default {
       group: 'Toxicities',
       answers: [],
       evidence_bundle: {
-        group_11_toxicities: ['question_94_date_of_onset:_assertion']
+        group_11_toxicities: ['question_94_date_of_onset_assertion']
       }
     },
     {
@@ -1725,7 +1737,7 @@ export default {
       group: 'Toxicities',
       answers: [],
       evidence_bundle: {
-        group_11_toxicities: ['question_96_date_started:_assertion']
+        group_11_toxicities: ['question_96_date_started_assertion']
       }
     },
     {
@@ -1808,7 +1820,7 @@ export default {
       ],
       evidence_bundle: {
         group_11_toxicities: [
-          'question_101_was_a_cartox-10_neurologic_assertion'
+          'question_101_was_a_cartox10_neurologic_assertion'
         ]
       }
     },
@@ -1889,8 +1901,8 @@ export default {
       ],
       evidence_bundle: {
         group_11_toxicities: [
-          'question_104_dysphasiaaphasia_assertion',
-          'question_104_dysphasiaaphasia_coded'
+          'question_104_dysphasia_aphasia_assertion',
+          'question_104_dysphasia_aphasia_coded'
         ]
       }
     },
@@ -2024,8 +2036,8 @@ export default {
       ],
       evidence_bundle: {
         group_11_toxicities: [
-          'question_110_hemiparesisparaparesisother_motor_deficit_assertion',
-          'question_110_hemiparesisparaparesisother_motor_deficit_coded'
+          'question_110_hemiparesis_paraparesis__assertion',
+          'question_110_hemiparesis_paraparesis__coded'
         ]
       }
     },
@@ -2145,8 +2157,8 @@ export default {
       ],
       evidence_bundle: {
         group_11_toxicities: [
-          'question_115_cerebral_vascular_accidentstroke)_assertion',
-          'question_115_cerebral_vascular_accidentstroke)_coded'
+          'question_115_cerebral_vascular_accident_stroke_assertion',
+          'question_115_cerebral_vascular_accident_stroke_coded'
         ]
       }
     },
@@ -2245,7 +2257,11 @@ export default {
           value: 'no'
         }
       ],
-      evidence_bundle: {}
+      evidence_bundle: {
+        group_11_toxicities: [
+          'question_121_did_neurotoxicity_resolve_assertion'
+        ]
+      }
     },
     {
       question_name: 'Date resolved:',
@@ -2334,7 +2350,11 @@ export default {
           value: 'no'
         }
       ],
-      evidence_bundle: {}
+      evidence_bundle: {
+        group_11_toxicities: [
+          'question_127_did_hypogammaglobulinema_resolve_assertion'
+        ]
+      }
     },
     {
       question_name: 'Date resolved:',
@@ -2512,7 +2532,10 @@ export default {
         }
       ],
       evidence_bundle: {
-        group_11_toxicities: ['question_138_gastrointestinalgi)_coded']
+        group_11_toxicities: [
+          'question_138_gastrointestinal_gi_assertion',
+          'question_138_gastrointestinal_gi_coded'
+        ]
       }
     },
     {
@@ -2542,7 +2565,9 @@ export default {
           value: 'unknown'
         }
       ],
-      evidence_bundle: {}
+      evidence_bundle: {
+        group_11_toxicities: ['question_140_heart_assertion']
+      }
     },
     {
       question_name: 'Date of onset:',
@@ -2571,7 +2596,9 @@ export default {
           value: 'unknown'
         }
       ],
-      evidence_bundle: {}
+      evidence_bundle: {
+        group_11_toxicities: ['question_142_kidneys_assertion']
+      }
     },
     {
       question_name: 'Date of onset:',
@@ -2601,7 +2628,10 @@ export default {
         }
       ],
       evidence_bundle: {
-        group_11_toxicities: ['question_144_liver_coded']
+        group_11_toxicities: [
+          'question_144_liver_assertion',
+          'question_144_liver_coded'
+        ]
       }
     },
     {
@@ -2631,7 +2661,9 @@ export default {
           value: 'unknown'
         }
       ],
-      evidence_bundle: {}
+      evidence_bundle: {
+        group_11_toxicities: ['question_146_lungs_assertion']
+      }
     },
     {
       question_name: 'Date of onset:',
@@ -2660,7 +2692,9 @@ export default {
           value: 'unknown'
         }
       ],
-      evidence_bundle: {}
+      evidence_bundle: {
+        group_11_toxicities: ['question_148_musculoskeletal_assertion']
+      }
     },
     {
       question_name: 'Date of onset:',
@@ -2689,7 +2723,9 @@ export default {
           value: 'unknown'
         }
       ],
-      evidence_bundle: {}
+      evidence_bundle: {
+        group_11_toxicities: ['question_150_neurologic_assertion']
+      }
     },
     {
       question_name: 'Date of onset:',
@@ -2755,7 +2791,11 @@ export default {
           value: 'unknown'
         }
       ],
-      evidence_bundle: {}
+      evidence_bundle: {
+        group_11_toxicities: [
+          'question_155_has_the_recipient_developed_assertion'
+        ]
+      }
     },
     {
       question_name: 'Gastrointestinal (GI)',
@@ -2776,7 +2816,9 @@ export default {
           value: 'unknown'
         }
       ],
-      evidence_bundle: {}
+      evidence_bundle: {
+        group_11_toxicities: ['question_156_gastrointestinal_gi_assertion']
+      }
     },
     {
       question_name: 'Date of onset:',
@@ -2805,7 +2847,9 @@ export default {
           value: 'unknown'
         }
       ],
-      evidence_bundle: {}
+      evidence_bundle: {
+        group_11_toxicities: ['question_158_heart_assertion']
+      }
     },
     {
       question_name: 'Date of onset:',
@@ -2834,7 +2878,9 @@ export default {
           value: 'unknown'
         }
       ],
-      evidence_bundle: {}
+      evidence_bundle: {
+        group_11_toxicities: ['question_160_kidneys_assertion']
+      }
     },
     {
       question_name: 'Date of onset:',
@@ -2863,7 +2909,9 @@ export default {
           value: 'unknown'
         }
       ],
-      evidence_bundle: {}
+      evidence_bundle: {
+        group_11_toxicities: ['question_162_liver_assertion']
+      }
     },
     {
       question_name: 'Date of onset:',
@@ -2892,7 +2940,9 @@ export default {
           value: 'unknown'
         }
       ],
-      evidence_bundle: {}
+      evidence_bundle: {
+        group_11_toxicities: ['question_164_lungs_assertion']
+      }
     },
     {
       question_name: 'Date of onset:',
@@ -2921,7 +2971,9 @@ export default {
           value: 'unknown'
         }
       ],
-      evidence_bundle: {}
+      evidence_bundle: {
+        group_11_toxicities: ['question_166_musculoskeletal_assertion']
+      }
     },
     {
       question_name: 'Date of onset:',
@@ -2950,7 +3002,9 @@ export default {
           value: 'unknown'
         }
       ],
-      evidence_bundle: {}
+      evidence_bundle: {
+        group_11_toxicities: ['question_168_neurologic_assertion']
+      }
     },
     {
       question_name: 'Date of onset:',
@@ -3012,7 +3066,9 @@ export default {
           value: 'unknown'
         }
       ],
-      evidence_bundle: {}
+      evidence_bundle: {
+        group_11_toxicities: ['question_173_interleukin6_assertion']
+      }
     },
     {
       question_name: 'pg/mL',
@@ -3045,7 +3101,11 @@ export default {
           value: 'unknown'
         }
       ],
-      evidence_bundle: {}
+      evidence_bundle: {
+        group_11_toxicities: [
+          'question_176_interferon_gamma_ifn_gamma_assertion'
+        ]
+      }
     },
     {
       question_name: 'IU/mL',
@@ -3079,7 +3139,11 @@ export default {
           value: 'unknown'
         }
       ],
-      evidence_bundle: {}
+      evidence_bundle: {
+        group_11_toxicities: [
+          'question_179_soluble_interleukin2_receptor_alpha_assertion'
+        ]
+      }
     },
     {
       question_name: 'U/mL',
@@ -3112,7 +3176,9 @@ export default {
           value: 'unknown'
         }
       ],
-      evidence_bundle: {}
+      evidence_bundle: {
+        group_11_toxicities: ['question_182_total_serum_ferritin_assertion']
+      }
     },
     {
       question_name: 'ng/mL(ug/L)',
@@ -3145,7 +3211,9 @@ export default {
           value: 'unknown'
         }
       ],
-      evidence_bundle: {}
+      evidence_bundle: {
+        group_11_toxicities: ['question_185_creactive_protein_assertion']
+      }
     },
     {
       question_name: 'mg/dL',
@@ -3170,7 +3238,11 @@ export default {
       question_number: '188',
       group: 'Infection',
       answers: [],
-      evidence_bundle: {}
+      evidence_bundle: {
+        group_11_toxicities: [
+          'question_188_did_the_recipient_develop_assertion'
+        ]
+      }
     },
     {
       question_name: 'Organism',
@@ -3321,10 +3393,10 @@ export default {
       ],
       evidence_bundle: {
         group_13_functional_status: [
-          "question_194_was_the_recipient's_female_assertion"
+          'question_194_was_the_recipients_female_assertion'
         ]
       }
     }
   ],
-  questions_with_evidence_count: 55
+  questions_with_evidence_count: 79
 };

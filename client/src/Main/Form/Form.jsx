@@ -1,90 +1,121 @@
 import React, { Component } from 'react';
-import { Row, Col } from 'reactstrap';
+import { Container, Row, Col, Button } from 'reactstrap';
 import SideBar from './Sidebar';
-import Questions from './Questions';
-import Evidence from './Evidence';
+import Question from './Question';
 
 export default class Form extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      selectedGroup: null,
-      selectedQuestion: null,
-      displayQuestions: props.app.form.questions
+      currentGroup: null,
+      currentQuestion: 55
     };
   }
 
   componentDidMount() {
-    const { patient, form } = this.props.app;
+    const { patient, form, smart } = this.props.app;
+    this.changeGroup();
 
     if (patient.documents) {
-      this.props.getEvidence(patient, form);
+      this.props.getEvidence(patient, smart.server, form);
     }
   }
 
-  handleGroupChange = group => {
-    const { form } = this.props.app;
-    let tmpQuestions = [];
-
-    if (group) {
-      tmpQuestions = form.questions.filter(
-        question => group === question.group
-      );
-    } else {
-      tmpQuestions = form.questions;
-    }
+  changeGroup = () => {
+    const { questions } = this.props.app.form;
+    const { currentQuestion } = this.state;
+    const { group } = questions[currentQuestion];
 
     this.setState({
-      selectedGroup: group,
-      displayQuestions: tmpQuestions,
-      selectedQuestion: tmpQuestions[0]
+      currentGroup: group
     });
   };
 
-  handleQuestionChange = question => {
-    this.setState({
-      selectedQuestion: question
-    });
+  nextQuestion = () => {
+    const { questions } = this.props.app.form;
+    const { currentQuestion } = this.state;
+    const next = currentQuestion + 1;
+
+    if (next > questions.length) return;
+
+    this.setState(
+      {
+        currentQuestion: next
+      },
+      this.changeGroup
+    );
+  };
+
+  prevQuestion = () => {
+    const { currentQuestion } = this.state;
+    const prev = currentQuestion - 1;
+
+    if (prev < 0) return;
+
+    this.setState(
+      {
+        currentQuestion: prev
+      },
+      this.changeGroup
+    );
   };
 
   render() {
-    const { form, evidence, loading_evidence } = this.props.app;
-    const { selectedGroup, selectedQuestion, displayQuestions } = this.state;
+    const { form, loading_evidence } = this.props.app;
+    const { groups, questions } = form;
+    const { currentGroup, currentQuestion } = this.state;
 
     return (
-      <Row className='no-gutters'>
-        <Col xs='2' className='p-0'>
-          <SideBar
-            groups={form.groups}
-            selectedGroup={selectedGroup}
-            handleGroupChange={this.handleGroupChange}
-          />
-        </Col>
-        <Col>
-          <Row className='main-container no-gutters'>
-            <Col xs='8'>
-              <Questions
-                questions={displayQuestions}
-                group={selectedGroup}
-                selectedQuestion={
-                  selectedQuestion ? selectedQuestion : form.questions[0]
-                }
-                handleQuestionChange={this.handleQuestionChange}
-              />
-            </Col>
-            <Col>
-              <Evidence
-                selectedQuestion={
-                  selectedQuestion ? selectedQuestion : form.questions[0]
-                }
-                evidence={evidence}
-                loading={loading_evidence}
-              />
-            </Col>
-          </Row>
-        </Col>
-      </Row>
+      <div className='form'>
+        <Row className='no-gutters'>
+          <Col xs='2'>
+            <SideBar
+              groups={groups}
+              selectedGroup={currentGroup}
+              handleGroupChange={this.handleGroupChange}
+            />
+          </Col>
+          <Col className='page-height'>
+            <Container>
+              <Row>
+                <Col xs='12' className='question_container'>
+                  <Question
+                    question={questions[currentQuestion]}
+                    loading={loading_evidence}
+                  />
+                </Col>
+                <Col xs='12' className='navigation_btns pt-4'>
+                  <Row className='justify-content-between'>
+                    <Col xs='3'>
+                      <Button
+                        color='secondary'
+                        size='lg'
+                        block
+                        outline
+                        onClick={this.prevQuestion}
+                      >
+                        Back
+                      </Button>
+                    </Col>
+                    <Col xs='3'>
+                      <Button
+                        color='secondary'
+                        size='lg'
+                        block
+                        outline
+                        onClick={this.nextQuestion}
+                      >
+                        Continue
+                      </Button>
+                    </Col>
+                  </Row>
+                </Col>
+              </Row>
+            </Container>
+          </Col>
+        </Row>
+      </div>
     );
   }
 }
