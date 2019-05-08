@@ -42,19 +42,19 @@ export const getEvidence = (patient, fhir, form) => dispatch => {
     type: SET_EVIDENCE
   });
 
-  let nlpql = ['group_9_persistence_of_cells'];
+  let nlpql = [];
 
-  // if (form) {
-  //   for (let question of form.questions) {
-  //     const queries = Object.keys(question.evidence_bundle);
+  if (form) {
+    for (let question of form.questions) {
+      const queries = Object.keys(question.evidence_bundle);
 
-  //     for (let query of queries) {
-  //       if (!nlpql.includes(query) && query.trim() !== '') {
-  //         nlpql.push(query);
-  //       }
-  //     }
-  //   }
-  // }
+      for (let query of queries) {
+        if (!nlpql.includes(query) && query.trim() !== '') {
+          nlpql.push(query);
+        }
+      }
+    }
+  }
 
   let docs = patient.documents.map(data => {
     if (data.content && data.content.length > 0) {
