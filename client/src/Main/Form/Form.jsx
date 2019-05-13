@@ -16,10 +16,10 @@ export default class Form extends Component {
   }
 
   componentDidMount() {
-    const { patient, form } = this.props.app;
+    const { patient, form, smart } = this.props.app;
 
     if (patient.documents) {
-      this.props.getEvidence(patient, form);
+      this.props.getEvidence(patient, smart.server, form);
     }
   }
 
