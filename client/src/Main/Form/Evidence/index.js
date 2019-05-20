@@ -32,9 +32,16 @@ export default class Evidence extends Component {
       const features = evidence_bundle[query];
 
       if (allQueries.includes(query)) {
-        data = evidence[query].filter(result => {
-          return features.includes(result.nlpql_feature);
-        });
+        data = evidence[query]
+          .filter(result => {
+            return features.includes(result.nlpql_feature);
+          })
+          .sort((a, b) => {
+            const dateA = new Date(a.report_date);
+            const dateB = new Date(b.report_date);
+
+            return dateA - dateB;
+          });
       }
     }
 
@@ -44,8 +51,19 @@ export default class Evidence extends Component {
   };
 
   render() {
-    const { loading } = this.props;
-    const { displayEvidence } = this.state;
+    const { loading, evidence } = this.props;
+    // const { displayEvidence } = this.state;
+
+    const displayEvidence = evidence
+      .filter(e => {
+        return e.nlpql_feature !== 'null';
+      })
+      .sort((a, b) => {
+        const dateA = new Date(a.report_date);
+        const dateB = new Date(b.report_date);
+
+        return dateA - dateB;
+      });
 
     return (
       <div className='evidence'>
@@ -53,11 +71,11 @@ export default class Evidence extends Component {
           <Loader />
         ) : (
           <div>
-            <div className='text-center'>
+            <div className='text-center mb-5'>
               <h3 className='mb-3'>{displayEvidence.length} Results Found</h3>
             </div>
-            {displayEvidence.map((evidence, i) => {
-              return <Entity key={'evidence' + i} result={evidence} />;
+            {displayEvidence.map((e, i) => {
+              return <Entity key={'evidence' + i} result={e} />;
             })}
           </div>
         )}

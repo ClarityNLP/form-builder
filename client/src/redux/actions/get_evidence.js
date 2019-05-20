@@ -43,21 +43,7 @@ export const getEvidence = (patient, fhir, form) => dispatch => {
     type: SET_EVIDENCE
   });
 
-  let nlpql = [];
-
-  if (form) {
-    for (let question of form.questions) {
-      const queries = Object.keys(question.evidence_bundle);
-
-      for (let query of queries) {
-        if (!nlpql.includes(query) && query.trim() !== '') {
-          nlpql.push(query);
-        }
-      }
-    }
-  }
-
-  Promise.all(generatePromises(patient, fhir, nlpql))
+  Promise.all(generatePromises(patient, fhir, form.evidence_bundles))
     .then(results => {
       let tmpData = {};
 

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Modal, ModalBody } from 'reactstrap';
+import { Modal, ModalBody, Row, Col } from 'reactstrap';
+import Moment from 'react-moment';
 
 export default class Entity extends Component {
   constructor(props) {
@@ -41,12 +42,18 @@ export default class Entity extends Component {
   };
 
   render() {
-    const { report_text } = this.props.result;
+    const { report_text, report_date } = this.props.result;
     const { displayText, toggle } = this.state;
 
     return (
       <div className='entity mb-3' onClick={this.toggle}>
-        <div>{displayText}</div>
+        <Row>
+          <Col>
+            <Moment format='MMM DD, YYYY HH:MM'>{report_date}</Moment>
+          </Col>
+          <Col>{displayText}</Col>
+        </Row>
+
         <Modal isOpen={toggle} toggle={this.toggle}>
           <ModalBody>
             <pre>{report_text}</pre>

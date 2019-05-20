@@ -18,9 +18,9 @@ export default class Form extends Component {
   componentDidMount() {
     const { patient, form, smart } = this.props.app;
 
-    if (patient.documents) {
-      this.props.getEvidence(patient, smart.server, form);
-    }
+    // if (patient.documents) {
+    //   this.props.getEvidence(patient, smart.server, form);
+    // }
   }
 
   handleGroupChange = group => {
@@ -63,7 +63,7 @@ export default class Form extends Component {
         </Col>
         <Col>
           <Row className='main-container no-gutters'>
-            <Col xs='8'>
+            <Col xs='6'>
               <Questions
                 questions={displayQuestions}
                 group={selectedGroup}
