@@ -63,7 +63,7 @@ export default class Form extends Component {
         </Col>
         <Col>
           <Row className='main-container no-gutters'>
-            <Col xs='6'>
+            <Col xs='7'>
               <Questions
                 questions={displayQuestions}
                 group={selectedGroup}
