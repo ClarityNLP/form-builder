@@ -9,7 +9,9 @@ export default class SideBar extends Component {
       <div className='sidebar'>
         <ButtonGroup vertical>
           <Button
-            className={selectedGroup === null ? 'active' : ''}
+            className={
+              selectedGroup === null ? 'active text-left' : 'text-left'
+            }
             onClick={() => {
               handleGroupChange(null);
             }}
@@ -19,7 +21,9 @@ export default class SideBar extends Component {
           {groups.map(g => {
             return (
               <Button
-                className={g === selectedGroup ? 'active' : ''}
+                className={
+                  g === selectedGroup ? 'active text-left' : 'text-left'
+                }
                 key={g}
                 onClick={() => {
                   handleGroupChange(g);

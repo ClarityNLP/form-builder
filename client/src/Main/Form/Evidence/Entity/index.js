@@ -43,15 +43,13 @@ export default class Entity extends Component {
   };
 
   getMainText = () => {
-    const { report_text } = this.props.result;
+    const { start, end, sentence } = this.props.result;
 
     const keyword = this.getKeyword();
-    const start = report_text.indexOf(keyword);
-    const end = start + keyword.length;
-    const first = report_text.substr(0, start);
-    const last = report_text.substr(
+    const first = sentence.substr(0, start);
+    const last = sentence.substr(
       end,
-      report_text.length - first.length - keyword.length
+      sentence.length - first.length - keyword.length
     );
 
     return (
@@ -90,7 +88,7 @@ export default class Entity extends Component {
   };
 
   render() {
-    const { report_date } = this.props.result;
+    const { report_date, report_text, report_type } = this.props.result;
     const {
       keyword,
       mainText,
@@ -111,7 +109,7 @@ export default class Entity extends Component {
                 </h6>
               </Col>
               <Col className='text-center'>
-                <h6>{keyword}</h6>
+                <h6>{report_type}</h6>
               </Col>
               <Col className='text-right'>
                 <ButtonGroup className='pr-1'>
@@ -151,6 +149,9 @@ export default class Entity extends Component {
               </Col>
             </Row>
           </Col>
+          <Col xs='12' className='pt-1'>
+            {mainText}
+          </Col>
           <Col xs='12' className='text-center'>
             <Button
               color='link'
@@ -183,7 +184,7 @@ export default class Entity extends Component {
           className='report_text_box'
         >
           <ModalBody>
-            <pre className='report_text'>{mainText}</pre>
+            <pre className='report_text'>{report_text}</pre>
           </ModalBody>
         </Modal>
       </div>

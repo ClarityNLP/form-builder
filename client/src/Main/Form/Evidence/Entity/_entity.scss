@@ -19,17 +19,17 @@
 
 .report_text {
   white-space: pre-wrap;
-
-  .highlight {
-    padding: 3px;
-    border-radius: 5px;
-    background-color: #44bba4;
-    color: #fff;
-  }
 }
 
 .report_text_box {
   max-height: calc(100% - 3.5rem);
   max-width: 80vw;
   overflow: scroll;
+}
+
+.highlight {
+  padding: 3px;
+  border-radius: 5px;
+  background-color: #44bba4;
+  color: #fff;
 }
