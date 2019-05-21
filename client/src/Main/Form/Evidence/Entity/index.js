@@ -9,7 +9,7 @@ import {
   ButtonGroup
 } from 'reactstrap';
 import Moment from 'react-moment';
-import { FaThumbsUp, FaThumbsDown, FaTag } from 'react-icons/fa';
+import { FaThumbsUp, FaThumbsDown, FaTag, FaChevronDown } from 'react-icons/fa';
 
 export default class Entity extends Component {
   constructor(props) {
@@ -43,21 +43,23 @@ export default class Entity extends Component {
   };
 
   getMainText = () => {
-    const { start, end, sentence } = this.props.result;
+    const { report_text } = this.props.result;
 
     const keyword = this.getKeyword();
-    const first = sentence.substr(0, start);
-    const last = sentence.substr(
+    const start = report_text.indexOf(keyword);
+    const end = start + keyword.length;
+    const first = report_text.substr(0, start);
+    const last = report_text.substr(
       end,
-      sentence.length - first.length - keyword.length
+      report_text.length - first.length - keyword.length
     );
 
     return (
-      <p onClick={this.toggleReportText}>
+      <React.Fragment>
         {first}
         <span className='highlight'>{keyword}</span>
         {last}
-      </p>
+      </React.Fragment>
     );
   };
 
@@ -83,10 +85,12 @@ export default class Entity extends Component {
     });
   };
 
-  handleSubmitComment = () => {};
+  handleSubmitComment = () => {
+    this.toggleComment();
+  };
 
   render() {
-    const { report_text, report_date } = this.props.result;
+    const { report_date } = this.props.result;
     const {
       keyword,
       mainText,
@@ -97,16 +101,20 @@ export default class Entity extends Component {
     } = this.state;
 
     return (
-      <div className='entity mb-3'>
+      <div className='entity'>
         <Row>
-          <Col xs='12' className='mb-3'>
+          <Col xs='12'>
             <Row>
               <Col>
-                <Moment format='MMM DD, YYYY HH:MM'>{report_date}</Moment>
+                <h6>
+                  <Moment format='MMM DD, YYYY HH:MM'>{report_date}</Moment>
+                </h6>
               </Col>
-              <Col>{keyword}</Col>
+              <Col className='text-center'>
+                <h6>{keyword}</h6>
+              </Col>
               <Col className='text-right'>
-                <ButtonGroup>
+                <ButtonGroup className='pr-1'>
                   <Button
                     onClick={() => {
                       this.setFeedback(1);
@@ -131,24 +139,27 @@ export default class Entity extends Component {
                   >
                     <FaThumbsDown />
                   </Button>
-                  <Button
-                    onClick={() => {
-                      this.toggleComment();
-                      this.setFeedback(3);
-                    }}
-                    className={
-                      feedback === 3 ? 'entity_icon active' : 'entity_icon'
-                    }
-                    size='sm'
-                    outline
-                  >
-                    <FaTag />
-                  </Button>
                 </ButtonGroup>
+                <Button
+                  onClick={this.toggleComment}
+                  className='entity_icon'
+                  size='sm'
+                  outline
+                >
+                  <FaTag />
+                </Button>
               </Col>
             </Row>
           </Col>
-          <Col xs='12'>{mainText}</Col>
+          <Col xs='12' className='text-center'>
+            <Button
+              color='link'
+              className='chevron'
+              onClick={this.toggleReportText}
+            >
+              <FaChevronDown />
+            </Button>
+          </Col>
         </Row>
 
         <Modal isOpen={commentModalToggle} toggle={this.toggleComment}>
@@ -166,9 +177,13 @@ export default class Entity extends Component {
           </ModalFooter>
         </Modal>
 
-        <Modal isOpen={reportTextToggle} toggle={this.toggleReportText}>
+        <Modal
+          isOpen={reportTextToggle}
+          toggle={this.toggleReportText}
+          className='report_text_box'
+        >
           <ModalBody>
-            <pre className='report_text'>{report_text}</pre>
+            <pre className='report_text'>{mainText}</pre>
           </ModalBody>
         </Modal>
       </div>

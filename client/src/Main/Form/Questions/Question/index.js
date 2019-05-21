@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Badge, Row, Col, Input } from 'reactstrap';
+import { Row, Col, Input } from 'reactstrap';
 import Select from 'react-select';
 
 export default class Question extends Component {
@@ -35,7 +35,7 @@ export default class Question extends Component {
 
     switch (question_type) {
       case 'MULTIPLE_CHOICE':
-        tmpInput = <Select options={options} />;
+        tmpInput = <Select options={options} isClearable />;
         break;
       case 'DATE':
         tmpInput = <Input type='date' />;
@@ -62,7 +62,7 @@ export default class Question extends Component {
     }
 
     this.setState({
-      input: <Col xs='6'>{tmpInput}</Col>
+      input: <Col xs='8'>{tmpInput}</Col>
     });
   };
 
@@ -79,9 +79,9 @@ export default class Question extends Component {
         className={active ? 'question active p-5' : 'question p-5'}
       >
         <Col xs='12'>
-          <h6 className='pb-3'>
+          <h5>
             <span>{question_number}.</span> {question_name}
-          </h6>
+          </h5>
         </Col>
         {input}
       </Row>

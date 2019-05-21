@@ -1,13 +1,13 @@
 .entity {
+  padding: 10px;
   border-radius: 5px;
   border: 1px solid $color3;
-  padding: 10px;
   background-color: $color5;
+  // border-bottom: 1px solid $color3;
+  margin-bottom: 10px;
 
-  .highlight {
-    padding: 5px;
-    background-color: $color3;
-    color: #fff;
+  .chevron {
+    color: $color3;
   }
 }
 
@@ -19,4 +19,17 @@
 
 .report_text {
   white-space: pre-wrap;
+
+  .highlight {
+    padding: 3px;
+    border-radius: 5px;
+    background-color: #44bba4;
+    color: #fff;
+  }
+}
+
+.report_text_box {
+  max-height: calc(100% - 3.5rem);
+  max-width: 80vw;
+  overflow: scroll;
 }

@@ -71,8 +71,8 @@ export default class Evidence extends Component {
           <Loader />
         ) : (
           <div>
-            <div className='text-center mb-5'>
-              <h3 className='mb-3'>{displayEvidence.length} Results Found</h3>
+            <div className='text-center mb-2'>
+              <h3>{displayEvidence.length} results found</h3>
             </div>
             {displayEvidence.map((e, i) => {
               return <Entity key={'evidence' + i} result={e} />;
