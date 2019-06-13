@@ -3,18 +3,18 @@ export default {
   owner: 'gatech',
   allocated_users: ['admin'],
   groups: [
+    'Toxicities',
+    'Infection',
+    'Disease Relapse or Progression',
+    'Functional Status',
+    'New Malignancy, Lymphoproliferative or Myeloproliferative Disease / Disorder',
+    'Persistence of Cells',
+    'Product',
+    'Subsequent Cellular Infusions',
+    'Peripheral Blood Count Recovery',
+    'Graft vs. Host Disease',
     'Survival',
     'Current Hematologic Findings',
-    'Peripheral Blood Count Recovery',
-    'Subsequent Cellular Infusions',
-    'New Malignancy, Lymphoproliferative or Myeloproliferative Disease / Disorder',
-    'Functional Status',
-    'Graft vs. Host Disease',
-    'Infection',
-    'Persistence of Cells',
-    'Toxicities',
-    'Product',
-    'Disease Relapse or Progression',
     'Best Response to Cellular Therapy'
   ],
   questions: [
@@ -38,11 +38,16 @@ export default {
         }
       ],
       evidence_bundle: {
-        group_1_product: [
-          'question_1_name_of_product_for_assertion',
-          'question_1_name_of_product_for_coded'
+        cellular_therapy_infusion: [
+          'yescarta_terms',
+          'yescarta_codes',
+          'kymriah_terms',
+          'kymriah_codes',
+          'cart_cell_terms',
+          'bb2121_terms'
         ]
-      }
+      },
+      nlpql_grouping: 'cellular_therapy_infusion'
     },
     {
       question_name:
@@ -51,7 +56,8 @@ export default {
       question_number: '2',
       group: 'Survival',
       answers: [],
-      evidence_bundle: {}
+      evidence_bundle: {},
+      nlpql_grouping: ''
     },
     {
       question_name:
@@ -69,7 +75,8 @@ export default {
           value: 'dead'
         }
       ],
-      evidence_bundle: {}
+      evidence_bundle: {},
+      nlpql_grouping: ''
     },
     {
       question_name:
@@ -87,7 +94,8 @@ export default {
           value: 'no'
         }
       ],
-      evidence_bundle: {}
+      evidence_bundle: {},
+      nlpql_grouping: ''
     },
     {
       question_name: 'Specify the reason for which cellular therapy was given',
@@ -104,7 +112,8 @@ export default {
           value: 'new_indication'
         }
       ],
-      evidence_bundle: {}
+      evidence_bundle: {},
+      nlpql_grouping: ''
     },
     {
       question_name: 'Date of cellular therapy:',
@@ -112,7 +121,8 @@ export default {
       question_number: '6',
       group: 'Subsequent Cellular Infusions',
       answers: [],
-      evidence_bundle: {}
+      evidence_bundle: {},
+      nlpql_grouping: ''
     },
     {
       question_name:
@@ -130,7 +140,8 @@ export default {
           value: 'no'
         }
       ],
-      evidence_bundle: {}
+      evidence_bundle: {},
+      nlpql_grouping: ''
     },
     {
       question_name: 'Date of HCT:',
@@ -138,7 +149,8 @@ export default {
       question_number: '8',
       group: 'Subsequent Cellular Infusions',
       answers: [],
-      evidence_bundle: {}
+      evidence_bundle: {},
+      nlpql_grouping: ''
     },
     {
       question_name: 'What was the best response to the cellular therapy?',
@@ -179,7 +191,8 @@ export default {
           value: 'unknown'
         }
       ],
-      evidence_bundle: {}
+      evidence_bundle: {},
+      nlpql_grouping: ''
     },
     {
       question_name: 'Was the date of best response previously reported?',
@@ -196,7 +209,8 @@ export default {
           value: 'no'
         }
       ],
-      evidence_bundle: {}
+      evidence_bundle: {},
+      nlpql_grouping: ''
     },
     {
       question_name: 'Date response established',
@@ -204,7 +218,8 @@ export default {
       question_number: '11',
       group: 'Best Response to Cellular Therapy',
       answers: [],
-      evidence_bundle: {}
+      evidence_bundle: {},
+      nlpql_grouping: ''
     },
     {
       question_name:
@@ -222,7 +237,8 @@ export default {
           value: 'no'
         }
       ],
-      evidence_bundle: {}
+      evidence_bundle: {},
+      nlpql_grouping: ''
     },
     {
       question_name: 'Date documented:',
@@ -230,7 +246,8 @@ export default {
       question_number: '13',
       group: 'Disease Relapse or Progression',
       answers: [],
-      evidence_bundle: {}
+      evidence_bundle: {},
+      nlpql_grouping: ''
     },
     {
       question_name: 'Was there evidence of initial recovery?',
@@ -255,7 +272,8 @@ export default {
           value: 'previously_reported'
         }
       ],
-      evidence_bundle: {}
+      evidence_bundle: {},
+      nlpql_grouping: 'anc_recovery'
     },
     {
       question_name: 'Date ANC >= 500/mm3 (first of 3 lab values)',
@@ -263,7 +281,8 @@ export default {
       question_number: '15',
       group: 'Peripheral Blood Count Recovery',
       answers: [],
-      evidence_bundle: {}
+      evidence_bundle: {},
+      nlpql_grouping: 'anc_recovery'
     },
     {
       question_name: 'Was an initial platelet count >= 20 x 109/L achieved?',
@@ -289,11 +308,9 @@ export default {
         }
       ],
       evidence_bundle: {
-        group_6_peripheral_blood_count_recovery: [
-          'question_16_was_an_initial_platelet_assertion',
-          'question_16_was_an_initial_platelet_coded'
-        ]
-      }
+        initial_platelet_count: ['platelet_count_unstructured']
+      },
+      nlpql_grouping: 'initial_platelet_count'
     },
     {
       question_name: 'Date platelets >= 20 x 109/L',
@@ -302,10 +319,9 @@ export default {
       group: 'Peripheral Blood Count Recovery',
       answers: [],
       evidence_bundle: {
-        group_6_peripheral_blood_count_recovery: [
-          'question_17_date_platelets_20_assertion'
-        ]
-      }
+        initial_platelet_count: ['platelet_count_unstructured']
+      },
+      nlpql_grouping: ''
     },
     {
       question_name: 'Date of most recent complete blood count',
@@ -313,12 +329,8 @@ export default {
       question_number: '18',
       group: 'Current Hematologic Findings',
       answers: [],
-      evidence_bundle: {
-        group_6_peripheral_blood_count_recovery: [
-          'question_18_date_of_most_recent_assertion',
-          'question_18_date_of_most_recent_coded'
-        ]
-      }
+      evidence_bundle: {},
+      nlpql_grouping: ''
     },
     {
       question_name: 'WBC',
@@ -336,11 +348,9 @@ export default {
         }
       ],
       evidence_bundle: {
-        group_7_current_hematologic_findings: [
-          'question_19_wbc_assertion',
-          'question_19_wbc_coded'
-        ]
-      }
+        wbc_hematologic_findings: ['wbc_hematologic_findings_value_extraction']
+      },
+      nlpql_grouping: 'wbc_hematologic_findings'
     },
     {
       question_name: 'WBC',
@@ -354,11 +364,9 @@ export default {
         }
       ],
       evidence_bundle: {
-        group_7_current_hematologic_findings: [
-          'question_20_wbc_assertion',
-          'question_20_wbc_coded'
-        ]
-      }
+        wbc_hematologic_findings: ['wbc_hematologic_findings_value_extraction']
+      },
+      nlpql_grouping: 'wbc_hematologic_findings'
     },
     {
       question_name: 'Neutrophils',
@@ -376,11 +384,11 @@ export default {
         }
       ],
       evidence_bundle: {
-        group_7_current_hematologic_findings: [
-          'question_21_neutrophils_assertion',
-          'question_21_neutrophils_coded'
+        neutrophils_hematologic_findings: [
+          'neutrophils_hematologic_findings_value_extraction'
         ]
-      }
+      },
+      nlpql_grouping: 'neutrophils_hematologic_findings'
     },
     {
       question_name: 'Neutrophils',
@@ -389,11 +397,11 @@ export default {
       group: 'Current Hematologic Findings',
       answers: [],
       evidence_bundle: {
-        group_7_current_hematologic_findings: [
-          'question_22_neutrophils_assertion',
-          'question_22_neutrophils_coded'
+        neutrophils_hematologic_findings: [
+          'neutrophils_hematologic_findings_value_extraction'
         ]
-      }
+      },
+      nlpql_grouping: 'neutrophils_hematologic_findings'
     },
     {
       question_name: 'Lymphocytes',
@@ -411,11 +419,11 @@ export default {
         }
       ],
       evidence_bundle: {
-        group_7_current_hematologic_findings: [
-          'question_23_lymphocytes_assertion',
-          'question_23_lymphocytes_coded'
+        lymphocytes_hematologic_findings: [
+          'lymphocytes_hematologic_findings_value_extraction'
         ]
-      }
+      },
+      nlpql_grouping: 'lymphocytes_hematologic_findings'
     },
     {
       question_name: 'Lymphocytes',
@@ -424,11 +432,11 @@ export default {
       group: 'Current Hematologic Findings',
       answers: [],
       evidence_bundle: {
-        group_7_current_hematologic_findings: [
-          'question_24_lymphocytes_assertion',
-          'question_24_lymphocytes_coded'
+        lymphocytes_hematologic_findings: [
+          'lymphocytes_hematologic_findings_value_extraction'
         ]
-      }
+      },
+      nlpql_grouping: 'lymphocytes_hematologic_findings'
     },
     {
       question_name: 'Hemoglobin',
@@ -446,11 +454,11 @@ export default {
         }
       ],
       evidence_bundle: {
-        group_7_current_hematologic_findings: [
-          'question_25_hemoglobin_assertion',
-          'question_25_hemoglobin_coded'
+        hemoglobin_hematologic_findings: [
+          'hemoglobin_hematologic_findings_value_extraction'
         ]
-      }
+      },
+      nlpql_grouping: 'hemoglobin_hematologic_findings'
     },
     {
       question_name: 'Hemoglobin',
@@ -464,11 +472,11 @@ export default {
         }
       ],
       evidence_bundle: {
-        group_7_current_hematologic_findings: [
-          'question_26_hemoglobin_assertion',
-          'question_26_hemoglobin_coded'
+        hemoglobin_hematologic_findings: [
+          'hemoglobin_hematologic_findings_value_extraction'
         ]
-      }
+      },
+      nlpql_grouping: 'hemoglobin_hematologic_findings'
     },
     {
       question_name: 'Hematocrit',
@@ -486,11 +494,11 @@ export default {
         }
       ],
       evidence_bundle: {
-        group_7_current_hematologic_findings: [
-          'question_27_hematocrit_assertion',
-          'question_27_hematocrit_coded'
+        hematocrit_hematologic_findings: [
+          'hematocrit_hematologic_findings_value_extraction'
         ]
-      }
+      },
+      nlpql_grouping: 'hematocrit_hematologic_findings'
     },
     {
       question_name: 'Hematocrit',
@@ -499,11 +507,11 @@ export default {
       group: 'Current Hematologic Findings',
       answers: [],
       evidence_bundle: {
-        group_7_current_hematologic_findings: [
-          'question_28_hematocrit_assertion',
-          'question_28_hematocrit_coded'
+        hematocrit_hematologic_findings: [
+          'hematocrit_hematologic_findings_value_extraction'
         ]
-      }
+      },
+      nlpql_grouping: 'hematocrit_hematologic_findings'
     },
     {
       question_name: 'Was RBC transfused <= 30 days before date of test?',
@@ -521,11 +529,9 @@ export default {
         }
       ],
       evidence_bundle: {
-        group_7_current_hematologic_findings: [
-          'question_29_was_rbc_transfused__assertion',
-          'question_29_was_rbc_transfused__coded'
-        ]
-      }
+        rbc_transfused_test: ['rbc_transfused_test_unstructured']
+      },
+      nlpql_grouping: 'rbc_transfused_test'
     },
     {
       question_name: 'Platelets',
@@ -543,11 +549,13 @@ export default {
         }
       ],
       evidence_bundle: {
-        group_7_current_hematologic_findings: [
-          'question_30_platelets_assertion',
-          'question_30_platelets_coded'
+        rbc_transfused_test: ['rbc_transfused_test_unstructured'],
+        platelets_hematologic_findings: [
+          'platelets_hematologic_findings_value_extraction',
+          'platelets_hematologic_findings_structured'
         ]
-      }
+      },
+      nlpql_grouping: 'platelets_hematologic_findings'
     },
     {
       question_name: 'Platelets',
@@ -561,11 +569,11 @@ export default {
         }
       ],
       evidence_bundle: {
-        group_7_current_hematologic_findings: [
-          'question_31_platelets_assertion',
-          'question_31_platelets_coded'
+        platelets_hematologic_findings: [
+          'platelets_hematologic_findings_value_extraction'
         ]
-      }
+      },
+      nlpql_grouping: 'platelets_hematologic_findings'
     },
     {
       question_name: 'Were platelets transfused <= 7 days before date of test?',
@@ -583,10 +591,12 @@ export default {
         }
       ],
       evidence_bundle: {
-        group_7_current_hematologic_findings: [
-          'question_32_were_platelets_transfused__assertion'
-        ]
-      }
+        platelets_hematologic_findings: [
+          'platelets_hematologic_findings_value_extraction'
+        ],
+        platelets_transfused_test: ['platelets_transfused_test_unstructured']
+      },
+      nlpql_grouping: 'platelets_transfused_test'
     },
     {
       question_name:
@@ -610,10 +620,12 @@ export default {
         }
       ],
       evidence_bundle: {
-        group_7_current_hematologic_findings: [
-          'question_33_did_a_new_malignancy_assertion'
+        platelets_transfused_test: ['platelets_transfused_test_unstructured'],
+        new_malignancy_myelodysplastic_myeloproliferative: [
+          'new_malignancy_myelodysplastic_myeloproliferative_unstructured'
         ]
-      }
+      },
+      nlpql_grouping: 'new_malignancy_myelodysplastic_myeloproliferative'
     },
     {
       question_name:
@@ -631,7 +643,8 @@ export default {
           value: 'no'
         }
       ],
-      evidence_bundle: {}
+      evidence_bundle: {},
+      nlpql_grouping: 'persistence_evaluated'
     },
     {
       question_name: 'Was persistence evaluated by molecular assay? (e.g. PCR)',
@@ -649,10 +662,11 @@ export default {
         }
       ],
       evidence_bundle: {
-        group_9_persistence_of_cells: [
-          'question_35_was_persistence_evaluated_by_assertion'
+        persistence_evaluated_molecular_assay_pcr: [
+          'persistence_evaluated_molecular_assay_pcr_unstructured'
         ]
-      }
+      },
+      nlpql_grouping: 'persistence_evaluated_molecular_assay_pcr'
     },
     {
       question_name: 'Date sample collected',
@@ -660,7 +674,8 @@ export default {
       question_number: '36',
       group: 'Persistence of Cells',
       answers: [],
-      evidence_bundle: {}
+      evidence_bundle: {},
+      nlpql_grouping: ''
     },
     {
       question_name: 'Specify the cell source',
@@ -685,7 +700,8 @@ export default {
           value: 'other_source'
         }
       ],
-      evidence_bundle: {}
+      evidence_bundle: {},
+      nlpql_grouping: ''
     },
     {
       question_name: 'Specify other cell source',
@@ -693,7 +709,8 @@ export default {
       question_number: '38',
       group: 'Persistence of Cells',
       answers: [],
-      evidence_bundle: {}
+      evidence_bundle: {},
+      nlpql_grouping: ''
     },
     {
       question_name: 'Were the infused cells detected?',
@@ -710,7 +727,8 @@ export default {
           value: 'no'
         }
       ],
-      evidence_bundle: {}
+      evidence_bundle: {},
+      nlpql_grouping: ''
     },
     {
       question_name:
@@ -729,10 +747,11 @@ export default {
         }
       ],
       evidence_bundle: {
-        group_9_persistence_of_cells: [
-          'question_40_was_persistence_evaluated_by_assertion'
+        persistence_evaluated_flow_cytometry: [
+          'persistence_evaluated_flow_cytometry_unstructured'
         ]
-      }
+      },
+      nlpql_grouping: 'persistence_evaluated_flow_cytometry'
     },
     {
       question_name: 'Date sample collected',
@@ -740,7 +759,8 @@ export default {
       question_number: '41',
       group: 'Persistence of Cells',
       answers: [],
-      evidence_bundle: {}
+      evidence_bundle: {},
+      nlpql_grouping: ''
     },
     {
       question_name: 'Specify the cell source',
@@ -765,7 +785,8 @@ export default {
           value: 'other_source'
         }
       ],
-      evidence_bundle: {}
+      evidence_bundle: {},
+      nlpql_grouping: ''
     },
     {
       question_name: 'Specify other cell source',
@@ -773,7 +794,8 @@ export default {
       question_number: '43',
       group: 'Persistence of Cells',
       answers: [],
-      evidence_bundle: {}
+      evidence_bundle: {},
+      nlpql_grouping: ''
     },
     {
       question_name: 'Were the infused cells detected?',
@@ -790,7 +812,8 @@ export default {
           value: 'no'
         }
       ],
-      evidence_bundle: {}
+      evidence_bundle: {},
+      nlpql_grouping: ''
     },
     {
       question_name: 'Was persistence evaluated by immunohistochemistry?',
@@ -808,10 +831,11 @@ export default {
         }
       ],
       evidence_bundle: {
-        group_9_persistence_of_cells: [
-          'question_45_was_persistence_evaluated_by_immunohistochemistry_assertion'
+        persistence_evaluated_immunohistochemistry: [
+          'persistence_evaluated_immunohistochemistry_unstructured'
         ]
-      }
+      },
+      nlpql_grouping: 'persistence_evaluated_immunohistochemistry'
     },
     {
       question_name: 'Date sample collected',
@@ -819,7 +843,8 @@ export default {
       question_number: '46',
       group: 'Persistence of Cells',
       answers: [],
-      evidence_bundle: {}
+      evidence_bundle: {},
+      nlpql_grouping: ''
     },
     {
       question_name: 'Specify the cell source',
@@ -844,7 +869,8 @@ export default {
           value: 'other_source'
         }
       ],
-      evidence_bundle: {}
+      evidence_bundle: {},
+      nlpql_grouping: ''
     },
     {
       question_name: 'Specify other cell source',
@@ -852,7 +878,8 @@ export default {
       question_number: '48',
       group: 'Persistence of Cells',
       answers: [],
-      evidence_bundle: {}
+      evidence_bundle: {},
+      nlpql_grouping: ''
     },
     {
       question_name: 'Were the infused cells detected?',
@@ -869,7 +896,8 @@ export default {
           value: 'no'
         }
       ],
-      evidence_bundle: {}
+      evidence_bundle: {},
+      nlpql_grouping: ''
     },
     {
       question_name: 'Was persistence evaluated by other method?',
@@ -886,7 +914,8 @@ export default {
           value: 'no'
         }
       ],
-      evidence_bundle: {}
+      evidence_bundle: {},
+      nlpql_grouping: ''
     },
     {
       question_name: 'Specify other method',
@@ -894,7 +923,8 @@ export default {
       question_number: '51',
       group: 'Persistence of Cells',
       answers: [],
-      evidence_bundle: {}
+      evidence_bundle: {},
+      nlpql_grouping: ''
     },
     {
       question_name: 'Date sample collected',
@@ -902,7 +932,8 @@ export default {
       question_number: '52',
       group: 'Persistence of Cells',
       answers: [],
-      evidence_bundle: {}
+      evidence_bundle: {},
+      nlpql_grouping: ''
     },
     {
       question_name: 'Specify the cell source',
@@ -927,7 +958,8 @@ export default {
           value: 'other_source'
         }
       ],
-      evidence_bundle: {}
+      evidence_bundle: {},
+      nlpql_grouping: ''
     },
     {
       question_name: 'Specify other cell source',
@@ -935,7 +967,8 @@ export default {
       question_number: '54',
       group: 'Persistence of Cells',
       answers: [],
-      evidence_bundle: {}
+      evidence_bundle: {},
+      nlpql_grouping: ''
     },
     {
       question_name: 'Were the infused cells detected?',
@@ -952,7 +985,8 @@ export default {
           value: 'no'
         }
       ],
-      evidence_bundle: {}
+      evidence_bundle: {},
+      nlpql_grouping: ''
     },
     {
       question_name: 'Did acute GVHD develop since the date of last report?',
@@ -974,11 +1008,11 @@ export default {
         }
       ],
       evidence_bundle: {
-        group_9_persistence_of_cells: [
-          'question_56_did_acute_gvhd_develop_assertion',
-          'question_56_did_acute_gvhd_develop_coded'
+        acute_gvhd_develop_last_report: [
+          'acute_gvhd_develop_last_report_unstructured'
         ]
-      }
+      },
+      nlpql_grouping: 'acute_gvhd_develop_last_report'
     },
     {
       question_name: 'Date of acute GVHD diagnosis',
@@ -986,12 +1020,8 @@ export default {
       question_number: '57',
       group: 'Graft vs. Host Disease',
       answers: [],
-      evidence_bundle: {
-        'group_10_graft_vs._host_disease': [
-          'question_57_date_of_acute_gvhd_diagnosis_assertion',
-          'question_57_date_of_acute_gvhd_diagnosis_coded'
-        ]
-      }
+      evidence_bundle: {},
+      nlpql_grouping: ''
     },
     {
       question_name: 'Did acute GVHD persist since the date of last report?',
@@ -1013,11 +1043,11 @@ export default {
         }
       ],
       evidence_bundle: {
-        'group_10_graft_vs._host_disease': [
-          'question_58_did_acute_gvhd_persist_assertion',
-          'question_58_did_acute_gvhd_persist_coded'
+        acute_gvhd_persist_last_report: [
+          'acute_gvhd_persist_last_report_unstructured'
         ]
-      }
+      },
+      nlpql_grouping: 'acute_gvhd_persist_last_report'
     },
     {
       question_name: 'Overall grade of acute GVHD at diagnosis',
@@ -1047,10 +1077,11 @@ export default {
         }
       ],
       evidence_bundle: {
-        'group_10_graft_vs._host_disease': [
-          'question_59_overall_grade_of_acute_assertion'
+        overall_grade_acute_gvhd_diagnosis: [
+          'overall_grade_acute_gvhd_diagnosis_unstructured'
         ]
-      }
+      },
+      nlpql_grouping: 'overall_grade_acute_gvhd_diagnosis'
     },
     {
       question_name: 'Skin',
@@ -1080,13 +1111,13 @@ export default {
         }
       ],
       evidence_bundle: {
-        'group_10_graft_vs._host_disease': ['question_60_skin_assertion']
-      }
+        skin_graft_vs_host_disease: ['skin_graft_vs_host_disease_unstructured']
+      },
+      nlpql_grouping: 'skin_graft_vs_host_disease'
     },
     {
-      question_name:
-        'Lower intestinal tract (use mL/day for adult recipients and mL/kg/day for pediatric recipients)',
-      question_type: 'MULTIPLE_CHOICE',
+      question_name: '',
+      question_type: 'MC',
       question_number: '61',
       group: 'Graft vs. Host Disease',
       answers: [
@@ -1111,11 +1142,8 @@ export default {
           value: 'stage_4'
         }
       ],
-      evidence_bundle: {
-        'group_10_graft_vs._host_disease': [
-          'question_61_lower_intestinal_tract_use_assertion'
-        ]
-      }
+      evidence_bundle: {},
+      nlpql_grouping: 'lower_intestinal_tract_use'
     },
     {
       question_name: 'Upper intestinal tract',
@@ -1133,10 +1161,9 @@ export default {
         }
       ],
       evidence_bundle: {
-        'group_10_graft_vs._host_disease': [
-          'question_62_upper_intestinal_tract_assertion'
-        ]
-      }
+        upper_intestinal_tract: ['upper_intestinal_tract_unstructured']
+      },
+      nlpql_grouping: 'upper_intestinal_tract'
     },
     {
       question_name: 'Liver',
@@ -1170,8 +1197,9 @@ export default {
         }
       ],
       evidence_bundle: {
-        'group_10_graft_vs._host_disease': ['question_63_liver_assertion']
-      }
+        liver_graft_vs_host_disease: ['billrubin_value']
+      },
+      nlpql_grouping: 'liver_graft_vs_host_disease'
     },
     {
       question_name: 'Other site(s) involved with acute GVHD',
@@ -1188,7 +1216,10 @@ export default {
           value: 'no'
         }
       ],
-      evidence_bundle: {}
+      evidence_bundle: {
+        liver_graft_vs_host_disease: ['billrubin_value']
+      },
+      nlpql_grouping: ''
     },
     {
       question_name: 'Specify other site(s)',
@@ -1196,7 +1227,8 @@ export default {
       question_number: '65',
       group: 'Graft vs. Host Disease',
       answers: [],
-      evidence_bundle: {}
+      evidence_bundle: {},
+      nlpql_grouping: ''
     },
     {
       question_name: 'Maximum overall grade of acute GVHD',
@@ -1225,7 +1257,8 @@ export default {
           value: 'not_applicable'
         }
       ],
-      evidence_bundle: {}
+      evidence_bundle: {},
+      nlpql_grouping: ''
     },
     {
       question_name: 'Date maximum overall grade of acute GVHD:',
@@ -1233,7 +1266,8 @@ export default {
       question_number: '67',
       group: 'Graft vs. Host Disease',
       answers: [],
-      evidence_bundle: {}
+      evidence_bundle: {},
+      nlpql_grouping: ''
     },
     {
       question_name: 'Did chronic GVHD develop since the date of last report?',
@@ -1254,7 +1288,8 @@ export default {
           value: 'unknown'
         }
       ],
-      evidence_bundle: {}
+      evidence_bundle: {},
+      nlpql_grouping: ''
     },
     {
       question_name: 'Date of chronic GVHD diagnosis',
@@ -1262,7 +1297,8 @@ export default {
       question_number: '69',
       group: 'Graft vs. Host Disease',
       answers: [],
-      evidence_bundle: {}
+      evidence_bundle: {},
+      nlpql_grouping: ''
     },
     {
       question_name: 'Did chronic GVHD persist since the date of last report?',
@@ -1283,7 +1319,8 @@ export default {
           value: 'unknown'
         }
       ],
-      evidence_bundle: {}
+      evidence_bundle: {},
+      nlpql_grouping: ''
     },
     {
       question_name:
@@ -1309,7 +1346,8 @@ export default {
           value: 'unknown'
         }
       ],
-      evidence_bundle: {}
+      evidence_bundle: {},
+      nlpql_grouping: ''
     },
     {
       question_name: 'Specify if chronic GVHD was limited or extensive',
@@ -1326,7 +1364,8 @@ export default {
           value: 'extensive'
         }
       ],
-      evidence_bundle: {}
+      evidence_bundle: {},
+      nlpql_grouping: ''
     },
     {
       question_name: 'Date of maximum grade of chronic GVHD',
@@ -1334,7 +1373,8 @@ export default {
       question_number: '73',
       group: 'Graft vs. Host Disease',
       answers: [],
-      evidence_bundle: {}
+      evidence_bundle: {},
+      nlpql_grouping: ''
     },
     {
       question_name:
@@ -1360,7 +1400,8 @@ export default {
           value: 'unknown'
         }
       ],
-      evidence_bundle: {}
+      evidence_bundle: {},
+      nlpql_grouping: ''
     },
     {
       question_name:
@@ -1386,7 +1427,8 @@ export default {
           value: 'unknown'
         }
       ],
-      evidence_bundle: {}
+      evidence_bundle: {},
+      nlpql_grouping: ''
     },
     {
       question_name:
@@ -1405,11 +1447,11 @@ export default {
         }
       ],
       evidence_bundle: {
-        'group_10_graft_vs._host_disease': [
-          'question_76_did_the_recipient_develop_assertion',
-          'question_76_did_the_recipient_develop_coded'
+        recipient_develop_cytokine_release: [
+          'recipient_develop_cytokine_release_unstructured'
         ]
-      }
+      },
+      nlpql_grouping: 'recipient_develop_cytokine_release'
     },
     {
       question_name: 'Date of diagnosis:',
@@ -1417,7 +1459,12 @@ export default {
       question_number: '77',
       group: 'Toxicities',
       answers: [],
-      evidence_bundle: {}
+      evidence_bundle: {
+        recipient_develop_cytokine_release: [
+          'recipient_develop_cytokine_release_unstructured'
+        ]
+      },
+      nlpql_grouping: ''
     },
     {
       question_name: 'Was therapy given? (for CRS)',
@@ -1434,7 +1481,8 @@ export default {
           value: 'no'
         }
       ],
-      evidence_bundle: {}
+      evidence_bundle: {},
+      nlpql_grouping: ''
     },
     {
       question_name: 'Specify therapy given for CRS (check all that apply)',
@@ -1442,7 +1490,8 @@ export default {
       question_number: '79',
       group: 'Toxicities',
       answers: [],
-      evidence_bundle: {}
+      evidence_bundle: {},
+      nlpql_grouping: ''
     },
     {
       question_name: 'Specify other therapy:',
@@ -1450,7 +1499,8 @@ export default {
       question_number: '80',
       group: 'Toxicities',
       answers: [],
-      evidence_bundle: {}
+      evidence_bundle: {},
+      nlpql_grouping: ''
     },
     {
       question_name: 'Fevers (>= 100.4 degrees F or >= 38 degrees C)',
@@ -1472,11 +1522,9 @@ export default {
         }
       ],
       evidence_bundle: {
-        group_11_toxicities: [
-          'question_81_fevers_1004_degrees_assertion',
-          'question_81_fevers_1004_degrees_coded'
-        ]
-      }
+        fevers_degrees_degrees: ['fevers_degrees_degrees_value_extraction']
+      },
+      nlpql_grouping: 'fevers_degrees_degrees'
     },
     {
       question_name: 'Date of onset:',
@@ -1484,7 +1532,10 @@ export default {
       question_number: '82',
       group: 'Toxicities',
       answers: [],
-      evidence_bundle: {}
+      evidence_bundle: {
+        fevers_degrees_degrees: ['fevers_degrees_degrees_value_extraction']
+      },
+      nlpql_grouping: ''
     },
     {
       question_name: 'Hypotension requiring therapy',
@@ -1506,11 +1557,11 @@ export default {
         }
       ],
       evidence_bundle: {
-        group_11_toxicities: [
-          'question_83_hypotension_requiring_therapy_assertion',
-          'question_83_hypotension_requiring_therapy_coded'
+        hypotension_requiring_therapy: [
+          'hypotension_requiring_therapy_unstructured'
         ]
-      }
+      },
+      nlpql_grouping: 'hypotension_requiring_therapy'
     },
     {
       question_name: 'Date of onset:',
@@ -1518,7 +1569,12 @@ export default {
       question_number: '84',
       group: 'Toxicities',
       answers: [],
-      evidence_bundle: {}
+      evidence_bundle: {
+        hypotension_requiring_therapy: [
+          'hypotension_requiring_therapy_unstructured'
+        ]
+      },
+      nlpql_grouping: ''
     },
     {
       question_name: 'Intravenous fluids',
@@ -1540,8 +1596,11 @@ export default {
         }
       ],
       evidence_bundle: {
-        group_11_toxicities: ['question_85_intravenous_fluids_assertion']
-      }
+        intravenous_fluids_toxicities: [
+          'intravenous_fluids_toxicities_unstructured'
+        ]
+      },
+      nlpql_grouping: 'intravenous_fluids_toxicities'
     },
     {
       question_name: 'Vasopressor(s)',
@@ -1563,8 +1622,9 @@ export default {
         }
       ],
       evidence_bundle: {
-        group_11_toxicities: ['question_86_vasopressors_assertion']
-      }
+        vasopressors_toxicities: ['vasopressors_toxicities_unstructured']
+      },
+      nlpql_grouping: 'vasopressors_toxicities'
     },
     {
       question_name: 'Specify the number of vasopressors used for therapy',
@@ -1585,7 +1645,8 @@ export default {
           value: 'unknown'
         }
       ],
-      evidence_bundle: {}
+      evidence_bundle: {},
+      nlpql_grouping: ''
     },
     {
       question_name: 'Other therapy',
@@ -1606,7 +1667,8 @@ export default {
           value: 'unknown'
         }
       ],
-      evidence_bundle: {}
+      evidence_bundle: {},
+      nlpql_grouping: ''
     },
     {
       question_name: 'Specify other therapy:',
@@ -1614,7 +1676,8 @@ export default {
       question_number: '89',
       group: 'Toxicities',
       answers: [],
-      evidence_bundle: {}
+      evidence_bundle: {},
+      nlpql_grouping: ''
     },
     {
       question_name: 'Was hypotension controlled with therapy?',
@@ -1635,7 +1698,8 @@ export default {
           value: 'unknown'
         }
       ],
-      evidence_bundle: {}
+      evidence_bundle: {},
+      nlpql_grouping: ''
     },
     {
       question_name:
@@ -1658,11 +1722,11 @@ export default {
         }
       ],
       evidence_bundle: {
-        group_11_toxicities: [
-          'question_91_hypoxia_requiring_minimal_supplemental_assertion',
-          'question_91_hypoxia_requiring_minimal_supplemental_coded'
+        hypoxia_requiring_minimal_supplemental: [
+          'hypoxia_requiring_minimal_supplemental_value_extraction'
         ]
-      }
+      },
+      nlpql_grouping: 'hypoxia_requiring_minimal_supplemental'
     },
     {
       question_name: 'Date of onset:',
@@ -1671,8 +1735,11 @@ export default {
       group: 'Toxicities',
       answers: [],
       evidence_bundle: {
-        group_11_toxicities: ['question_92_date_of_onset_assertion']
-      }
+        hypoxia_requiring_minimal_supplemental: [
+          'hypoxia_requiring_minimal_supplemental_value_extraction'
+        ]
+      },
+      nlpql_grouping: ''
     },
     {
       question_name:
@@ -1695,8 +1762,11 @@ export default {
         }
       ],
       evidence_bundle: {
-        group_11_toxicities: ['question_93_hypoxia_requiring_more_than_coded']
-      }
+        hypoxia_requiring_minimal_supplemental: [
+          'hypoxia_requiring_minimal_supplemental_value_extraction'
+        ]
+      },
+      nlpql_grouping: 'hypoxia_requiring_minimal_supplemental'
     },
     {
       question_name: 'Date of onset:',
@@ -1705,8 +1775,11 @@ export default {
       group: 'Toxicities',
       answers: [],
       evidence_bundle: {
-        group_11_toxicities: ['question_94_date_of_onset_assertion']
-      }
+        hypoxia_requiring_minimal_supplemental: [
+          'hypoxia_requiring_minimal_supplemental_value_extraction'
+        ]
+      },
+      nlpql_grouping: ''
     },
     {
       question_name:
@@ -1728,7 +1801,12 @@ export default {
           value: 'unknown'
         }
       ],
-      evidence_bundle: {}
+      evidence_bundle: {
+        positive_pressure_ventilatory_support: [
+          'positive_pressure_ventilatory_support_unstructured'
+        ]
+      },
+      nlpql_grouping: 'positive_pressure_ventilatory_support'
     },
     {
       question_name: 'Date started:',
@@ -1736,9 +1814,8 @@ export default {
       question_number: '96',
       group: 'Toxicities',
       answers: [],
-      evidence_bundle: {
-        group_11_toxicities: ['question_96_date_started_assertion']
-      }
+      evidence_bundle: {},
+      nlpql_grouping: ''
     },
     {
       question_name: 'Did cytokine release syndrome resolve?',
@@ -1755,7 +1832,8 @@ export default {
           value: 'no'
         }
       ],
-      evidence_bundle: {}
+      evidence_bundle: {},
+      nlpql_grouping: ''
     },
     {
       question_name: 'Date resolved:',
@@ -1763,7 +1841,8 @@ export default {
       question_number: '98',
       group: 'Toxicities',
       answers: [],
-      evidence_bundle: {}
+      evidence_bundle: {},
+      nlpql_grouping: ''
     },
     {
       question_name: 'Neurotoxicity',
@@ -1785,11 +1864,9 @@ export default {
         }
       ],
       evidence_bundle: {
-        group_11_toxicities: [
-          'question_99_neurotoxicity_assertion',
-          'question_99_neurotoxicity_coded'
-        ]
-      }
+        neurotoxicity_toxicities: ['neurotoxicity_toxicities_unstructured']
+      },
+      nlpql_grouping: 'neurotoxicity_toxicities'
     },
     {
       question_name: 'Date of onset:',
@@ -1797,7 +1874,10 @@ export default {
       question_number: '100',
       group: 'Toxicities',
       answers: [],
-      evidence_bundle: {}
+      evidence_bundle: {
+        neurotoxicity_toxicities: ['neurotoxicity_toxicities_unstructured']
+      },
+      nlpql_grouping: ''
     },
     {
       question_name: 'Was a CARTOX-10 neurologic assessment performed?',
@@ -1819,10 +1899,11 @@ export default {
         }
       ],
       evidence_bundle: {
-        group_11_toxicities: [
-          'question_101_was_a_cartox10_neurologic_assertion'
+        cartox10_neurologic_assessment_performed: [
+          'cartox10_neurologic_assessment_performed_unstructured'
         ]
-      }
+      },
+      nlpql_grouping: 'cartox10_neurologic_assessment_performed'
     },
     {
       question_name: 'What was the lowest CARTOX score?',
@@ -1836,24 +1917,25 @@ export default {
         },
         {
           text: '7-9',
-          value: '_7-9'
+          value: '7-9'
         },
         {
-          text: '3-6',
-          value: '_3-6'
+          text: '3--6',
+          value: '3--6'
         },
         {
-          text: '0-2',
-          value: '_0-2'
+          text: '0--2',
+          value: '0--2'
         },
         {
           text: 'Unable to be assessed',
-          value: '_unable_to_be_assessed'
+          value: 'unable_to_be_assessed'
         }
       ],
       evidence_bundle: {
-        group_11_toxicities: ['question_102_what_was_the_lowest_assertion']
-      }
+        lowest_cartox_score: ['lowest_cartox_score_value_extraction']
+      },
+      nlpql_grouping: 'lowest_cartox_score'
     },
     {
       question_name: 'Depressed level of consciousness',
@@ -1875,10 +1957,11 @@ export default {
         }
       ],
       evidence_bundle: {
-        group_11_toxicities: [
-          'question_103_depressed_level_of_consciousness_assertion'
+        depressed_level_consciousness: [
+          'depressed_level_consciousness_unstructured'
         ]
-      }
+      },
+      nlpql_grouping: 'depressed_level_consciousness'
     },
     {
       question_name: 'Dysphasia / aphasia',
@@ -1900,11 +1983,11 @@ export default {
         }
       ],
       evidence_bundle: {
-        group_11_toxicities: [
-          'question_104_dysphasia_aphasia_assertion',
-          'question_104_dysphasia_aphasia_coded'
+        dysphasia_aphasia_toxicities: [
+          'dysphasia_aphasia_toxicities_unstructured'
         ]
-      }
+      },
+      nlpql_grouping: 'dysphasia_aphasia_toxicities'
     },
     {
       question_name: 'Grade',
@@ -1925,7 +2008,10 @@ export default {
           value: '3_aphasia'
         }
       ],
-      evidence_bundle: {}
+      evidence_bundle: {
+        grade_toxicities: ['grade_toxicities_value_extraction']
+      },
+      nlpql_grouping: 'grade_toxicities'
     },
     {
       question_name: 'Seizure',
@@ -1947,11 +2033,9 @@ export default {
         }
       ],
       evidence_bundle: {
-        group_11_toxicities: [
-          'question_106_seizure_assertion',
-          'question_106_seizure_coded'
-        ]
-      }
+        seizure_toxicities: ['seizure_toxicities_unstructured']
+      },
+      nlpql_grouping: 'seizure_toxicities'
     },
     {
       question_name: 'Type',
@@ -1988,7 +2072,10 @@ export default {
           value: 'unknown'
         }
       ],
-      evidence_bundle: {}
+      evidence_bundle: {
+        seizure_toxicities: ['seizure_toxicities_unstructured']
+      },
+      nlpql_grouping: ''
     },
     {
       question_name: 'Specify other type:',
@@ -1996,7 +2083,8 @@ export default {
       question_number: '108',
       group: 'Toxicities',
       answers: [],
-      evidence_bundle: {}
+      evidence_bundle: {},
+      nlpql_grouping: ''
     },
     {
       question_name: 'Severity',
@@ -2013,7 +2101,10 @@ export default {
           value: 'grade_4'
         }
       ],
-      evidence_bundle: {}
+      evidence_bundle: {
+        severity_toxicities: ['severity_toxicities_value_extraction']
+      },
+      nlpql_grouping: 'severity_toxicities'
     },
     {
       question_name: 'Hemiparesis / paraparesis / other motor deficit',
@@ -2035,11 +2126,11 @@ export default {
         }
       ],
       evidence_bundle: {
-        group_11_toxicities: [
-          'question_110_hemiparesis_paraparesis__assertion',
-          'question_110_hemiparesis_paraparesis__coded'
+        hemiparesis_paraparesis_motor_deficit: [
+          'hemiparesis_paraparesis_motor_deficit_unstructured'
         ]
-      }
+      },
+      nlpql_grouping: 'hemiparesis_paraparesis_motor_deficit'
     },
     {
       question_name: 'Cerebral edema',
@@ -2061,11 +2152,9 @@ export default {
         }
       ],
       evidence_bundle: {
-        group_11_toxicities: [
-          'question_111_cerebral_edema_assertion',
-          'question_111_cerebral_edema_coded'
-        ]
-      }
+        cerebral_edema_toxicities: ['cerebral_edema_toxicities_unstructured']
+      },
+      nlpql_grouping: 'cerebral_edema_toxicities'
     },
     {
       question_name: 'Grade',
@@ -2082,7 +2171,10 @@ export default {
           value: '4'
         }
       ],
-      evidence_bundle: {}
+      evidence_bundle: {
+        cerebral_edema_toxicities: ['cerebral_edema_toxicities_unstructured']
+      },
+      nlpql_grouping: ''
     },
     {
       question_name: 'Hallucinations',
@@ -2104,11 +2196,9 @@ export default {
         }
       ],
       evidence_bundle: {
-        group_11_toxicities: [
-          'question_113_hallucinations_assertion',
-          'question_113_hallucinations_coded'
-        ]
-      }
+        hallucinations_toxicities: ['hallucinations_toxicities_unstructured']
+      },
+      nlpql_grouping: 'hallucinations_toxicities'
     },
     {
       question_name: 'Tremors',
@@ -2130,11 +2220,10 @@ export default {
         }
       ],
       evidence_bundle: {
-        group_11_toxicities: [
-          'question_114_tremors_assertion',
-          'question_114_tremors_coded'
-        ]
-      }
+        hallucinations_toxicities: ['hallucinations_toxicities_unstructured'],
+        tremors_toxicities: ['tremors_toxicities_unstructured']
+      },
+      nlpql_grouping: 'tremors_toxicities'
     },
     {
       question_name: 'Cerebral vascular accident (stroke)',
@@ -2156,11 +2245,12 @@ export default {
         }
       ],
       evidence_bundle: {
-        group_11_toxicities: [
-          'question_115_cerebral_vascular_accident_stroke_assertion',
-          'question_115_cerebral_vascular_accident_stroke_coded'
+        tremors_toxicities: ['tremors_toxicities_unstructured'],
+        cerebral_vascular_accident_stroke: [
+          'cerebral_vascular_accident_stroke_unstructured'
         ]
-      }
+      },
+      nlpql_grouping: 'cerebral_vascular_accident_stroke'
     },
     {
       question_name: 'Date of onset:',
@@ -2168,7 +2258,12 @@ export default {
       question_number: '116',
       group: 'Toxicities',
       answers: [],
-      evidence_bundle: {}
+      evidence_bundle: {
+        cerebral_vascular_accident_stroke: [
+          'cerebral_vascular_accident_stroke_unstructured'
+        ]
+      },
+      nlpql_grouping: ''
     },
     {
       question_name: 'Type',
@@ -2185,7 +2280,8 @@ export default {
           value: 'ischemic'
         }
       ],
-      evidence_bundle: {}
+      evidence_bundle: {},
+      nlpql_grouping: ''
     },
     {
       question_name: 'Leukoencephalopathy',
@@ -2207,11 +2303,11 @@ export default {
         }
       ],
       evidence_bundle: {
-        group_11_toxicities: [
-          'question_118_leukoencephalopathy_assertion',
-          'question_118_leukoencephalopathy_coded'
+        leukoencephalopathy_toxicities: [
+          'leukoencephalopathy_toxicities_unstructured'
         ]
-      }
+      },
+      nlpql_grouping: 'leukoencephalopathy_toxicities'
     },
     {
       question_name: 'Other symptom',
@@ -2232,7 +2328,12 @@ export default {
           value: 'unknown'
         }
       ],
-      evidence_bundle: {}
+      evidence_bundle: {
+        leukoencephalopathy_toxicities: [
+          'leukoencephalopathy_toxicities_unstructured'
+        ]
+      },
+      nlpql_grouping: ''
     },
     {
       question_name: 'Specify other symptom:',
@@ -2240,7 +2341,8 @@ export default {
       question_number: '120',
       group: 'Toxicities',
       answers: [],
-      evidence_bundle: {}
+      evidence_bundle: {},
+      nlpql_grouping: ''
     },
     {
       question_name: 'Did neurotoxicity resolve?',
@@ -2258,10 +2360,11 @@ export default {
         }
       ],
       evidence_bundle: {
-        group_11_toxicities: [
-          'question_121_did_neurotoxicity_resolve_assertion'
+        neurotoxicity_resolve_toxicities: [
+          'neurotoxicity_resolve_toxicities_unstructured'
         ]
-      }
+      },
+      nlpql_grouping: 'neurotoxicity_resolve_toxicities'
     },
     {
       question_name: 'Date resolved:',
@@ -2269,7 +2372,8 @@ export default {
       question_number: '122',
       group: 'Toxicities',
       answers: [],
-      evidence_bundle: {}
+      evidence_bundle: {},
+      nlpql_grouping: ''
     },
     {
       question_name:
@@ -2291,7 +2395,8 @@ export default {
           value: 'other_therapy'
         }
       ],
-      evidence_bundle: {}
+      evidence_bundle: {},
+      nlpql_grouping: ''
     },
     {
       question_name: 'Specify other therapy:',
@@ -2299,7 +2404,8 @@ export default {
       question_number: '124',
       group: 'Toxicities',
       answers: [],
-      evidence_bundle: {}
+      evidence_bundle: {},
+      nlpql_grouping: ''
     },
     {
       question_name: 'Hypogammaglobulinemia',
@@ -2321,11 +2427,11 @@ export default {
         }
       ],
       evidence_bundle: {
-        group_11_toxicities: [
-          'question_125_hypogammaglobulinemia_assertion',
-          'question_125_hypogammaglobulinemia_coded'
+        hypogammaglobulinemia_toxicities: [
+          'hypogammaglobulinemia_toxicities_unstructured'
         ]
-      }
+      },
+      nlpql_grouping: 'hypogammaglobulinemia_toxicities'
     },
     {
       question_name: 'Date of onset:',
@@ -2333,7 +2439,12 @@ export default {
       question_number: '126',
       group: 'Toxicities',
       answers: [],
-      evidence_bundle: {}
+      evidence_bundle: {
+        hypogammaglobulinemia_toxicities: [
+          'hypogammaglobulinemia_toxicities_unstructured'
+        ]
+      },
+      nlpql_grouping: ''
     },
     {
       question_name: 'Did hypogammaglobulinema resolve?',
@@ -2351,10 +2462,11 @@ export default {
         }
       ],
       evidence_bundle: {
-        group_11_toxicities: [
-          'question_127_did_hypogammaglobulinema_resolve_assertion'
+        hypogammaglobulinema_resolve_toxicities: [
+          'hypogammaglobulinema_resolve_toxicities_unstructured'
         ]
-      }
+      },
+      nlpql_grouping: 'hypogammaglobulinema_resolve_toxicities'
     },
     {
       question_name: 'Date resolved:',
@@ -2362,7 +2474,8 @@ export default {
       question_number: '128',
       group: 'Toxicities',
       answers: [],
-      evidence_bundle: {}
+      evidence_bundle: {},
+      nlpql_grouping: ''
     },
     {
       question_name:
@@ -2380,7 +2493,8 @@ export default {
           value: 'no'
         }
       ],
-      evidence_bundle: {}
+      evidence_bundle: {},
+      nlpql_grouping: ''
     },
     {
       question_name: 'Is the recipient still requiring replacement therapy?',
@@ -2397,7 +2511,8 @@ export default {
           value: 'no'
         }
       ],
-      evidence_bundle: {}
+      evidence_bundle: {},
+      nlpql_grouping: ''
     },
     {
       question_name: 'Tumor lysis syndrome',
@@ -2419,11 +2534,9 @@ export default {
         }
       ],
       evidence_bundle: {
-        group_11_toxicities: [
-          'question_131_tumor_lysis_syndrome_assertion',
-          'question_131_tumor_lysis_syndrome_coded'
-        ]
-      }
+        tumor_lysis_syndrome: ['tumor_lysis_syndrome_unstructured']
+      },
+      nlpql_grouping: 'tumor_lysis_syndrome'
     },
     {
       question_name: 'Date of onset:',
@@ -2431,7 +2544,10 @@ export default {
       question_number: '132',
       group: 'Toxicities',
       answers: [],
-      evidence_bundle: {}
+      evidence_bundle: {
+        tumor_lysis_syndrome: ['tumor_lysis_syndrome_unstructured']
+      },
+      nlpql_grouping: ''
     },
     {
       question_name: 'Grade',
@@ -2452,7 +2568,8 @@ export default {
           value: '5'
         }
       ],
-      evidence_bundle: {}
+      evidence_bundle: {},
+      nlpql_grouping: ''
     },
     {
       question_name: 'Other toxicity',
@@ -2473,7 +2590,8 @@ export default {
           value: 'unknown'
         }
       ],
-      evidence_bundle: {}
+      evidence_bundle: {},
+      nlpql_grouping: ''
     },
     {
       question_name: 'Specify other toxicity:',
@@ -2481,7 +2599,8 @@ export default {
       question_number: '135',
       group: 'Toxicities',
       answers: [],
-      evidence_bundle: {}
+      evidence_bundle: {},
+      nlpql_grouping: ''
     },
     {
       question_name: 'Date of onset:',
@@ -2489,7 +2608,8 @@ export default {
       question_number: '136',
       group: 'Toxicities',
       answers: [],
-      evidence_bundle: {}
+      evidence_bundle: {},
+      nlpql_grouping: ''
     },
     {
       question_name: 'Has the recipient developed any grade 3 organ toxicity?',
@@ -2510,7 +2630,8 @@ export default {
           value: 'unknown'
         }
       ],
-      evidence_bundle: {}
+      evidence_bundle: {},
+      nlpql_grouping: ''
     },
     {
       question_name: 'Gastrointestinal (GI)',
@@ -2532,11 +2653,11 @@ export default {
         }
       ],
       evidence_bundle: {
-        group_11_toxicities: [
-          'question_138_gastrointestinal_gi_assertion',
-          'question_138_gastrointestinal_gi_coded'
+        gastrointestinal_gi_toxicities: [
+          'gastrointestinal_gi_toxicities_unstructured'
         ]
-      }
+      },
+      nlpql_grouping: 'gastrointestinal_gi_toxicities'
     },
     {
       question_name: 'Date of onset:',
@@ -2544,7 +2665,12 @@ export default {
       question_number: '139',
       group: 'Toxicities',
       answers: [],
-      evidence_bundle: {}
+      evidence_bundle: {
+        gastrointestinal_gi_toxicities: [
+          'gastrointestinal_gi_toxicities_unstructured'
+        ]
+      },
+      nlpql_grouping: ''
     },
     {
       question_name: 'Heart',
@@ -2566,8 +2692,9 @@ export default {
         }
       ],
       evidence_bundle: {
-        group_11_toxicities: ['question_140_heart_assertion']
-      }
+        heart_toxicities: ['heart_toxicities_unstructured']
+      },
+      nlpql_grouping: 'heart_toxicities'
     },
     {
       question_name: 'Date of onset:',
@@ -2575,7 +2702,8 @@ export default {
       question_number: '141',
       group: 'Toxicities',
       answers: [],
-      evidence_bundle: {}
+      evidence_bundle: {},
+      nlpql_grouping: ''
     },
     {
       question_name: 'Kidneys',
@@ -2597,8 +2725,9 @@ export default {
         }
       ],
       evidence_bundle: {
-        group_11_toxicities: ['question_142_kidneys_assertion']
-      }
+        kidneys_toxicities: ['kidneys_toxicities_unstructured']
+      },
+      nlpql_grouping: 'kidneys_toxicities'
     },
     {
       question_name: 'Date of onset:',
@@ -2606,7 +2735,8 @@ export default {
       question_number: '143',
       group: 'Toxicities',
       answers: [],
-      evidence_bundle: {}
+      evidence_bundle: {},
+      nlpql_grouping: ''
     },
     {
       question_name: 'Liver',
@@ -2628,11 +2758,9 @@ export default {
         }
       ],
       evidence_bundle: {
-        group_11_toxicities: [
-          'question_144_liver_assertion',
-          'question_144_liver_coded'
-        ]
-      }
+        liver_toxicities: ['liver_toxicities_unstructured']
+      },
+      nlpql_grouping: 'liver_toxicities'
     },
     {
       question_name: 'Date of onset:',
@@ -2640,7 +2768,10 @@ export default {
       question_number: '145',
       group: 'Toxicities',
       answers: [],
-      evidence_bundle: {}
+      evidence_bundle: {
+        liver_toxicities: ['liver_toxicities_unstructured']
+      },
+      nlpql_grouping: ''
     },
     {
       question_name: 'Lungs',
@@ -2662,8 +2793,9 @@ export default {
         }
       ],
       evidence_bundle: {
-        group_11_toxicities: ['question_146_lungs_assertion']
-      }
+        lungs_toxicities: ['lungs_toxicities_unstructured']
+      },
+      nlpql_grouping: 'lungs_toxicities'
     },
     {
       question_name: 'Date of onset:',
@@ -2671,7 +2803,8 @@ export default {
       question_number: '147',
       group: 'Toxicities',
       answers: [],
-      evidence_bundle: {}
+      evidence_bundle: {},
+      nlpql_grouping: ''
     },
     {
       question_name: 'Musculoskeletal',
@@ -2693,8 +2826,9 @@ export default {
         }
       ],
       evidence_bundle: {
-        group_11_toxicities: ['question_148_musculoskeletal_assertion']
-      }
+        musculoskeletal_toxicities: ['musculoskeletal_toxicities_unstructured']
+      },
+      nlpql_grouping: 'musculoskeletal_toxicities'
     },
     {
       question_name: 'Date of onset:',
@@ -2702,7 +2836,8 @@ export default {
       question_number: '149',
       group: 'Toxicities',
       answers: [],
-      evidence_bundle: {}
+      evidence_bundle: {},
+      nlpql_grouping: ''
     },
     {
       question_name: 'Neurologic',
@@ -2724,8 +2859,9 @@ export default {
         }
       ],
       evidence_bundle: {
-        group_11_toxicities: ['question_150_neurologic_assertion']
-      }
+        neurologic_toxicities: ['neurologic_toxicities_unstructured']
+      },
+      nlpql_grouping: 'neurologic_toxicities'
     },
     {
       question_name: 'Date of onset:',
@@ -2733,7 +2869,8 @@ export default {
       question_number: '151',
       group: 'Toxicities',
       answers: [],
-      evidence_bundle: {}
+      evidence_bundle: {},
+      nlpql_grouping: ''
     },
     {
       question_name: 'Other organ',
@@ -2754,7 +2891,8 @@ export default {
           value: 'unknown'
         }
       ],
-      evidence_bundle: {}
+      evidence_bundle: {},
+      nlpql_grouping: ''
     },
     {
       question_name: 'Date of onset:',
@@ -2762,7 +2900,8 @@ export default {
       question_number: '153',
       group: 'Toxicities',
       answers: [],
-      evidence_bundle: {}
+      evidence_bundle: {},
+      nlpql_grouping: ''
     },
     {
       question_name: 'Specify other organ:',
@@ -2770,7 +2909,8 @@ export default {
       question_number: '154',
       group: 'Toxicities',
       answers: [],
-      evidence_bundle: {}
+      evidence_bundle: {},
+      nlpql_grouping: ''
     },
     {
       question_name: 'Has the recipient developed any grade 4 organ toxicity?',
@@ -2792,10 +2932,11 @@ export default {
         }
       ],
       evidence_bundle: {
-        group_11_toxicities: [
-          'question_155_has_the_recipient_developed_assertion'
+        recipient_developed_grade_organ_toxicity: [
+          'recipient_developed_grade_organ_toxicity_unstructured'
         ]
-      }
+      },
+      nlpql_grouping: 'recipient_developed_grade_organ_toxicity'
     },
     {
       question_name: 'Gastrointestinal (GI)',
@@ -2817,8 +2958,11 @@ export default {
         }
       ],
       evidence_bundle: {
-        group_11_toxicities: ['question_156_gastrointestinal_gi_assertion']
-      }
+        gastrointestinal_gi_toxicities: [
+          'gastrointestinal_gi_toxicities_unstructured'
+        ]
+      },
+      nlpql_grouping: 'gastrointestinal_gi_toxicities'
     },
     {
       question_name: 'Date of onset:',
@@ -2826,7 +2970,8 @@ export default {
       question_number: '157',
       group: 'Toxicities',
       answers: [],
-      evidence_bundle: {}
+      evidence_bundle: {},
+      nlpql_grouping: ''
     },
     {
       question_name: 'Heart',
@@ -2848,8 +2993,9 @@ export default {
         }
       ],
       evidence_bundle: {
-        group_11_toxicities: ['question_158_heart_assertion']
-      }
+        heart_toxicities: ['heart_toxicities_unstructured']
+      },
+      nlpql_grouping: 'heart_toxicities'
     },
     {
       question_name: 'Date of onset:',
@@ -2857,7 +3003,8 @@ export default {
       question_number: '159',
       group: 'Toxicities',
       answers: [],
-      evidence_bundle: {}
+      evidence_bundle: {},
+      nlpql_grouping: ''
     },
     {
       question_name: 'Kidneys',
@@ -2879,8 +3026,9 @@ export default {
         }
       ],
       evidence_bundle: {
-        group_11_toxicities: ['question_160_kidneys_assertion']
-      }
+        kidneys_toxicities: ['kidneys_toxicities_unstructured']
+      },
+      nlpql_grouping: 'kidneys_toxicities'
     },
     {
       question_name: 'Date of onset:',
@@ -2888,7 +3036,8 @@ export default {
       question_number: '161',
       group: 'Toxicities',
       answers: [],
-      evidence_bundle: {}
+      evidence_bundle: {},
+      nlpql_grouping: ''
     },
     {
       question_name: 'Liver',
@@ -2910,8 +3059,9 @@ export default {
         }
       ],
       evidence_bundle: {
-        group_11_toxicities: ['question_162_liver_assertion']
-      }
+        liver_toxicities: ['liver_toxicities_unstructured']
+      },
+      nlpql_grouping: 'liver_toxicities'
     },
     {
       question_name: 'Date of onset:',
@@ -2919,7 +3069,8 @@ export default {
       question_number: '163',
       group: 'Toxicities',
       answers: [],
-      evidence_bundle: {}
+      evidence_bundle: {},
+      nlpql_grouping: ''
     },
     {
       question_name: 'Lungs',
@@ -2941,8 +3092,9 @@ export default {
         }
       ],
       evidence_bundle: {
-        group_11_toxicities: ['question_164_lungs_assertion']
-      }
+        lungs_toxicities: ['lungs_toxicities_unstructured']
+      },
+      nlpql_grouping: 'lungs_toxicities'
     },
     {
       question_name: 'Date of onset:',
@@ -2950,7 +3102,8 @@ export default {
       question_number: '165',
       group: 'Toxicities',
       answers: [],
-      evidence_bundle: {}
+      evidence_bundle: {},
+      nlpql_grouping: ''
     },
     {
       question_name: 'Musculoskeletal',
@@ -2972,8 +3125,9 @@ export default {
         }
       ],
       evidence_bundle: {
-        group_11_toxicities: ['question_166_musculoskeletal_assertion']
-      }
+        musculoskeletal_toxicities: ['musculoskeletal_toxicities_unstructured']
+      },
+      nlpql_grouping: 'musculoskeletal_toxicities'
     },
     {
       question_name: 'Date of onset:',
@@ -2981,7 +3135,8 @@ export default {
       question_number: '167',
       group: 'Toxicities',
       answers: [],
-      evidence_bundle: {}
+      evidence_bundle: {},
+      nlpql_grouping: ''
     },
     {
       question_name: 'Neurologic',
@@ -3003,8 +3158,9 @@ export default {
         }
       ],
       evidence_bundle: {
-        group_11_toxicities: ['question_168_neurologic_assertion']
-      }
+        neurologic_toxicities: ['neurologic_toxicities_unstructured']
+      },
+      nlpql_grouping: 'neurologic_toxicities'
     },
     {
       question_name: 'Date of onset:',
@@ -3012,7 +3168,8 @@ export default {
       question_number: '169',
       group: 'Toxicities',
       answers: [],
-      evidence_bundle: {}
+      evidence_bundle: {},
+      nlpql_grouping: ''
     },
     {
       question_name: 'Other organ',
@@ -3033,7 +3190,8 @@ export default {
           value: 'unknown'
         }
       ],
-      evidence_bundle: {}
+      evidence_bundle: {},
+      nlpql_grouping: ''
     },
     {
       question_name: 'Date of onset:',
@@ -3041,7 +3199,8 @@ export default {
       question_number: '171',
       group: 'Toxicities',
       answers: [],
-      evidence_bundle: {}
+      evidence_bundle: {},
+      nlpql_grouping: ''
     },
     {
       question_name: 'Specify other organ:',
@@ -3049,7 +3208,8 @@ export default {
       question_number: '172',
       group: 'Toxicities',
       answers: [],
-      evidence_bundle: {}
+      evidence_bundle: {},
+      nlpql_grouping: ''
     },
     {
       question_name: 'Interleukin-6',
@@ -3067,8 +3227,9 @@ export default {
         }
       ],
       evidence_bundle: {
-        group_11_toxicities: ['question_173_interleukin6_assertion']
-      }
+        interleukin6_toxicities: ['interleukin6_toxicities_unstructured']
+      },
+      nlpql_grouping: 'interleukin6_toxicities'
     },
     {
       question_name: 'pg/mL',
@@ -3076,7 +3237,8 @@ export default {
       question_number: '174',
       group: 'Toxicities',
       answers: [],
-      evidence_bundle: {}
+      evidence_bundle: {},
+      nlpql_grouping: ''
     },
     {
       question_name: 'Date sample collected:',
@@ -3084,7 +3246,8 @@ export default {
       question_number: '175',
       group: 'Toxicities',
       answers: [],
-      evidence_bundle: {}
+      evidence_bundle: {},
+      nlpql_grouping: ''
     },
     {
       question_name: 'Interferon gamma IFN gamma',
@@ -3102,10 +3265,9 @@ export default {
         }
       ],
       evidence_bundle: {
-        group_11_toxicities: [
-          'question_176_interferon_gamma_ifn_gamma_assertion'
-        ]
-      }
+        interferon_gamma_ifn_gamma: ['interferon_gamma_ifn_gamma_unstructured']
+      },
+      nlpql_grouping: 'interferon_gamma_ifn_gamma'
     },
     {
       question_name: 'IU/mL',
@@ -3113,7 +3275,8 @@ export default {
       question_number: '177',
       group: 'Toxicities',
       answers: [],
-      evidence_bundle: {}
+      evidence_bundle: {},
+      nlpql_grouping: ''
     },
     {
       question_name: 'Date sample collected:',
@@ -3121,7 +3284,8 @@ export default {
       question_number: '178',
       group: 'Toxicities',
       answers: [],
-      evidence_bundle: {}
+      evidence_bundle: {},
+      nlpql_grouping: ''
     },
     {
       question_name:
@@ -3140,10 +3304,11 @@ export default {
         }
       ],
       evidence_bundle: {
-        group_11_toxicities: [
-          'question_179_soluble_interleukin2_receptor_alpha_assertion'
+        soluble_interleukin2_receptor_alpha: [
+          'soluble_interleukin2_receptor_alpha_unstructured'
         ]
-      }
+      },
+      nlpql_grouping: 'soluble_interleukin2_receptor_alpha'
     },
     {
       question_name: 'U/mL',
@@ -3151,7 +3316,8 @@ export default {
       question_number: '180',
       group: 'Toxicities',
       answers: [],
-      evidence_bundle: {}
+      evidence_bundle: {},
+      nlpql_grouping: ''
     },
     {
       question_name: 'Date sample collected:',
@@ -3159,7 +3325,8 @@ export default {
       question_number: '181',
       group: 'Toxicities',
       answers: [],
-      evidence_bundle: {}
+      evidence_bundle: {},
+      nlpql_grouping: ''
     },
     {
       question_name: 'Total serum ferritin',
@@ -3177,8 +3344,9 @@ export default {
         }
       ],
       evidence_bundle: {
-        group_11_toxicities: ['question_182_total_serum_ferritin_assertion']
-      }
+        total_serum_ferritin: ['total_serum_ferritin_unstructured']
+      },
+      nlpql_grouping: 'total_serum_ferritin'
     },
     {
       question_name: 'ng/mL(ug/L)',
@@ -3186,7 +3354,8 @@ export default {
       question_number: '183',
       group: 'Toxicities',
       answers: [],
-      evidence_bundle: {}
+      evidence_bundle: {},
+      nlpql_grouping: ''
     },
     {
       question_name: 'Date sample collected:',
@@ -3194,7 +3363,8 @@ export default {
       question_number: '184',
       group: 'Toxicities',
       answers: [],
-      evidence_bundle: {}
+      evidence_bundle: {},
+      nlpql_grouping: ''
     },
     {
       question_name: 'C-reactive protein',
@@ -3212,8 +3382,11 @@ export default {
         }
       ],
       evidence_bundle: {
-        group_11_toxicities: ['question_185_creactive_protein_assertion']
-      }
+        creactive_protein_toxicities: [
+          'creactive_protein_toxicities_unstructured'
+        ]
+      },
+      nlpql_grouping: 'creactive_protein_toxicities'
     },
     {
       question_name: 'mg/dL',
@@ -3221,7 +3394,8 @@ export default {
       question_number: '186',
       group: 'Toxicities',
       answers: [],
-      evidence_bundle: {}
+      evidence_bundle: {},
+      nlpql_grouping: ''
     },
     {
       question_name: 'Date sample collected:',
@@ -3229,7 +3403,8 @@ export default {
       question_number: '187',
       group: 'Toxicities',
       answers: [],
-      evidence_bundle: {}
+      evidence_bundle: {},
+      nlpql_grouping: ''
     },
     {
       question_name:
@@ -3239,10 +3414,9 @@ export default {
       group: 'Infection',
       answers: [],
       evidence_bundle: {
-        group_11_toxicities: [
-          'question_188_did_the_recipient_develop_assertion'
-        ]
-      }
+        recent_infection: ['recent_infection_unstructured']
+      },
+      nlpql_grouping: 'recent_infection'
     },
     {
       question_name: 'Organism',
@@ -3250,7 +3424,10 @@ export default {
       question_number: '189',
       group: 'Infection',
       answers: [],
-      evidence_bundle: {}
+      evidence_bundle: {
+        recent_infection: ['infection_organism_from_culture']
+      },
+      nlpql_grouping: 'recent_infection'
     },
     {
       question_name: 'Specify other organism:',
@@ -3258,7 +3435,8 @@ export default {
       question_number: '190',
       group: 'Infection',
       answers: [],
-      evidence_bundle: {}
+      evidence_bundle: {},
+      nlpql_grouping: ''
     },
     {
       question_name: 'Site (check all that apply)',
@@ -3280,7 +3458,7 @@ export default {
         },
         {
           text: 'Eyes',
-          value: '_eyes'
+          value: 'eyes'
         },
         {
           text: 'Genital area',
@@ -3288,7 +3466,7 @@ export default {
         },
         {
           text: 'GI tract-Lower',
-          value: '_gi_tract-lower'
+          value: 'gi_tract-lower'
         },
         {
           text: 'GI tract-Upper',
@@ -3327,7 +3505,10 @@ export default {
           value: 'urinary_tract-upper'
         }
       ],
-      evidence_bundle: {}
+      evidence_bundle: {
+        recent_infection: ['infection_site']
+      },
+      nlpql_grouping: 'recent_infection'
     },
     {
       question_name: 'Date of diagnosis:',
@@ -3335,7 +3516,10 @@ export default {
       question_number: '192',
       group: 'Infection',
       answers: [],
-      evidence_bundle: {}
+      evidence_bundle: {
+        recent_infection: ['recent_infection_unstructured']
+      },
+      nlpql_grouping: 'recent_infection'
     },
     {
       question_name:
@@ -3362,41 +3546,77 @@ export default {
         }
       ],
       evidence_bundle: {
-        group_12_infection: [
-          'question_193_was_the_recipient_pregnant_assertion'
+        recipient_pregnant_time_reporting: [
+          'recipient_pregnant_time_reporting_value_extraction'
         ]
-      }
-    },
-    {
-      question_name:
-        "Was the recipient's female partner pregnant at any time in this reporting period? (Male only)",
-      question_type: 'MULTIPLE_CHOICE',
-      question_number: '194',
-      group: 'Functional Status',
-      answers: [
-        {
-          text: 'Yes',
-          value: 'yes'
-        },
-        {
-          text: 'No',
-          value: 'no'
-        },
-        {
-          text: 'Unknown',
-          value: 'unknown'
-        },
-        {
-          text: 'Previously Reported',
-          value: 'previously_reported'
-        }
-      ],
-      evidence_bundle: {
-        group_13_functional_status: [
-          'question_194_was_the_recipients_female_assertion'
-        ]
-      }
+      },
+      nlpql_grouping: 'recipient_pregnant_time_reporting'
     }
   ],
-  questions_with_evidence_count: 79
+  evidence_bundles: [
+    'neurotoxicity_resolve_toxicities',
+    'interferon_gamma_ifn_gamma',
+    'total_serum_ferritin',
+    'anc_recovery',
+    'hematocrit_hematologic_findings',
+    'neutrophils_hematologic_findings',
+    'lowest_cartox_score',
+    'tremors_toxicities',
+    'intravenous_fluids_toxicities',
+    'gastrointestinal_gi_toxicities',
+    'vasopressors_toxicities',
+    'skin_graft_vs_host_disease',
+    'platelets_hematologic_findings',
+    'persistence_evaluated_flow_cytometry',
+    'seizure_toxicities',
+    'acute_gvhd_develop_last_report',
+    'tumor_lysis_syndrome',
+    'cartox10_neurologic_assessment_performed',
+    'musculoskeletal_toxicities',
+    'interleukin6_toxicities',
+    'hemiparesis_paraparesis_motor_deficit',
+    'acute_gvhd_persist_last_report',
+    'depressed_level_consciousness',
+    'persistence_evaluated_immunohistochemistry',
+    'liver_graft_vs_host_disease',
+    'heart_toxicities',
+    'soluble_interleukin2_receptor_alpha',
+    'upper_intestinal_tract',
+    'liver_toxicities',
+    'recipient_developed_grade_organ_toxicity',
+    'recipients_female_partner_pregnant',
+    'recent_infection',
+    'dysphasia_aphasia_toxicities',
+    'wbc_hematologic_findings',
+    'overall_grade_acute_gvhd_diagnosis',
+    'fevers_degrees_degrees',
+    'neurologic_toxicities',
+    'hypoxia_requiring_minimal_supplemental',
+    'hallucinations_toxicities',
+    'hypogammaglobulinema_resolve_toxicities',
+    'new_malignancy_myelodysplastic_myeloproliferative',
+    'rbc_transfused_test',
+    'persistence_evaluated_molecular_assay_pcr',
+    'cerebral_edema_toxicities',
+    'neurotoxicity_toxicities',
+    'initial_platelet_count',
+    'severity_toxicities',
+    'positive_pressure_ventilatory_support',
+    'leukoencephalopathy_toxicities',
+    'kidneys_toxicities',
+    'lymphocytes_hematologic_findings',
+    'grade_toxicities',
+    'lungs_toxicities',
+    'creactive_protein_toxicities',
+    'recipient_pregnant_time_reporting',
+    'cellular_therapy_infusion',
+    'platelets_transfused_test',
+    'cerebral_vascular_accident_stroke',
+    'hemoglobin_hematologic_findings',
+    'recipient_develop_cytokine_release',
+    'hypogammaglobulinemia_toxicities',
+    'persistence_evaluated',
+    'hypotension_requiring_therapy'
+  ],
+  questions_with_evidence_count: 0
 };

@@ -14,13 +14,17 @@ export default class Form extends Component {
   }
 
   componentDidMount() {
+    this.getResults();
+  }
+
+  getResults = () => {
     const { patient, form, smart } = this.props.app;
     this.changeGroup();
 
     if (patient.documents) {
       this.props.getEvidence(patient, smart.server, form);
     }
-  }
+  };
 
   changeGroup = () => {
     const { questions } = this.props.app.form;

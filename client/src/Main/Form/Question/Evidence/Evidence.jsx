@@ -31,10 +31,21 @@ export default class Evidence extends Component {
     for (let query of questionQueries) {
       const features = evidence_bundle[query];
 
-      if (allQueries.includes(query)) {
-        data = evidence[query].filter(result => {
-          return features.includes(result.nlpql_feature);
-        });
+      if (evidence[query]) {
+        if (evidence[query] !== 'loading') {
+          data = evidence[query]
+            .filter(result => {
+              return features.includes(result.nlpql_feature);
+            })
+            .sort((a, b) => {
+              const dateA = new Date(a.report_date);
+              const dateB = new Date(b.report_date);
+
+              return dateA - dateB;
+            });
+        } else {
+          data = 'loading';
+        }
       }
     }
 

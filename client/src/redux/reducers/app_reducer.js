@@ -1,4 +1,5 @@
 import * as types from '../actions/types';
+import CIBMTR_evidence from '../../tmp_results';
 
 const initialState = {
   loading_smart: false,
@@ -11,7 +12,7 @@ const initialState = {
   form: null,
   form_error: '',
   loading_evidence: false,
-  evidence: {},
+  evidence: CIBMTR_evidence,
   evidence_error: ''
 };
 
@@ -68,22 +69,29 @@ const reducer = (state = initialState, action) => {
         loading_form: false,
         form_error: action.data
       };
-    case types.SET_EVIDENCE:
+    case types.ADD_EVIDENCE:
       return {
         ...state,
-        loading_evidence: true
+        evidence: {
+          ...state.evidence,
+          [action.data.nlpql]: 'loading'
+        }
       };
-    case types.SET_EVIDENCE_SUCCESS:
+    case types.ADD_EVIDENCE_SUCCESS:
       return {
         ...state,
-        loading_evidence: false,
-        evidence: action.data
+        evidence: {
+          ...state.evidence,
+          [action.data.nlpql]: action.data.results
+        }
       };
-    case types.SET_EVIDENCE_FAIL:
+    case types.ADD_EVIDENCE_FAIL:
       return {
         ...state,
-        loading_evidence: false,
-        evidence_error: action.data
+        evidence: {
+          ...state.evidence,
+          [action.data.nlpql]: action.data.results
+        }
       };
     default:
       return state;

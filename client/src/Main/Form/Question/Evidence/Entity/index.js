@@ -6,38 +6,58 @@ export default class Entity extends Component {
     super(props);
 
     this.state = {
-      toggle: false,
-      displayText: this.setHighlightText()
+      reportTextToggle: false,
+      feedback: null,
+      commentModalToggle: false,
+      comment: ''
     };
   }
 
-  toggle = () => {
+  getHighlightedText(text, highlights) {
+    if (!highlights) {
+      return text;
+    }
+
+    if (!text) {
+      return '';
+    }
+
+    const h = highlights[2];
+
+    const splitText = text.split(h);
+    const matches = text.match(h);
+
+    return splitText.reduce(
+      (arr, element, index) =>
+        matches[index]
+          ? [
+              ...arr,
+              element,
+              <span key={'highlight' + index} className='highlight'>
+                {matches[index]}
+              </span>
+            ]
+          : [...arr, element],
+      []
+    );
+  }
+
+  toggleReportText = e => {
     this.setState(prevState => ({
-      toggle: !prevState.toggle
+      reportTextToggle: !prevState.reportTextToggle
     }));
   };
 
-  setHighlightText = () => {
-    const { start, end, sentence } = this.props.result;
+  setFeedback = option => {
+    this.setState({
+      feedback: option
+    });
+  };
 
-    if (start === 0 && end === 0) {
-      return sentence;
-    }
-
-    const keyword = sentence.substr(start, end - start);
-    const first = sentence.substr(0, start);
-    const last = sentence.substr(
-      end,
-      sentence.length - first.length - keyword.length
-    );
-
-    return (
-      <span>
-        {first}
-        <span className='highlight'>{keyword}</span>
-        {last}
-      </span>
-    );
+  toggleComment = () => {
+    this.setState(prevState => ({
+      commentModalToggle: !prevState.commentModalToggle
+    }));
   };
 
   render() {

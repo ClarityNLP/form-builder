@@ -1,0 +1,9 @@
+.question {
+  min-height: 100px;
+  cursor: pointer;
+
+  &.active,
+  &:hover {
+    background-color: $color2;
+  }
+}
