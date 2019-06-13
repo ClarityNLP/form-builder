@@ -17,48 +17,45 @@ export default class Entity extends Component {
 
     this.state = {
       reportTextToggle: false,
-      keyword: this.getKeyword(),
-      mainText: this.getMainText(),
       feedback: null,
       commentModalToggle: false,
       comment: ''
     };
   }
 
+  getHighlightedText(text, highlights) {
+    if (!highlights) {
+      return text;
+    }
+
+    if (!text) {
+      return '';
+    }
+
+    const h = highlights[2];
+
+    const splitText = text.split(h);
+    const matches = text.match(h);
+
+    return splitText.reduce(
+      (arr, element, index) =>
+        matches[index]
+          ? [
+              ...arr,
+              element,
+              <span key={'highlight' + index} className='highlight'>
+                {matches[index]}
+              </span>
+            ]
+          : [...arr, element],
+      []
+    );
+  }
+
   toggleReportText = e => {
     this.setState(prevState => ({
       reportTextToggle: !prevState.reportTextToggle
     }));
-  };
-
-  getKeyword = () => {
-    const { start, end, sentence } = this.props.result;
-
-    if (start === 0 && end === 0) {
-      return sentence;
-    }
-
-    const keyword = sentence.substr(start, end - start);
-    return keyword;
-  };
-
-  getMainText = () => {
-    const { start, end, sentence } = this.props.result;
-
-    const keyword = this.getKeyword();
-    const first = sentence.substr(0, start);
-    const last = sentence.substr(
-      end,
-      sentence.length - first.length - keyword.length
-    );
-
-    return (
-      <React.Fragment>
-        {first}
-        <span className='highlight'>{keyword}</span>
-        {last}
-      </React.Fragment>
-    );
   };
 
   setFeedback = option => {
@@ -88,10 +85,9 @@ export default class Entity extends Component {
   };
 
   render() {
-    const { report_date, report_text, report_type } = this.props.result;
+    const { result_display, report_text, report_type } = this.props.result;
+    const { date, result_content, highlights, sentence } = result_display;
     const {
-      keyword,
-      mainText,
       commentModalToggle,
       reportTextToggle,
       feedback,
@@ -105,7 +101,7 @@ export default class Entity extends Component {
             <Row>
               <Col>
                 <h6>
-                  <Moment format='MMM DD, YYYY HH:MM'>{report_date}</Moment>
+                  <Moment format='MMM DD, YYYY HH:MM'>{date}</Moment>
                 </h6>
               </Col>
               <Col className='text-center'>
@@ -150,16 +146,23 @@ export default class Entity extends Component {
             </Row>
           </Col>
           <Col xs='12' className='pt-1'>
-            {mainText}
+            <p>{this.getHighlightedText(result_content, highlights)}</p>
           </Col>
+          {sentence !== '' ? (
+            <Col xs='12' className='pt-1'>
+              <p>{this.getHighlightedText(sentence, highlights)}</p>
+            </Col>
+          ) : null}
           <Col xs='12' className='text-center'>
-            <Button
-              color='link'
-              className='chevron'
-              onClick={this.toggleReportText}
-            >
-              <FaChevronDown />
-            </Button>
+            {report_text.trim() !== '' ? (
+              <Button
+                color='link'
+                className='chevron'
+                onClick={this.toggleReportText}
+              >
+                <FaChevronDown />
+              </Button>
+            ) : null}
           </Col>
         </Row>
 
@@ -184,7 +187,9 @@ export default class Entity extends Component {
           className='report_text_box'
         >
           <ModalBody>
-            <pre className='report_text'>{report_text}</pre>
+            <pre className='report_text'>
+              {this.getHighlightedText(report_text, highlights)}
+            </pre>
           </ModalBody>
         </Modal>
       </div>

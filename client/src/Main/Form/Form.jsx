@@ -16,12 +16,16 @@ export default class Form extends Component {
   }
 
   componentDidMount() {
+    this.getResults();
+  }
+
+  getResults = () => {
     const { patient, form, smart } = this.props.app;
 
-    // if (patient.documents) {
-    //   this.props.getEvidence(patient, smart.server, form);
-    // }
-  }
+    if (patient.documents) {
+      this.props.getEvidence(patient, smart.server, form);
+    }
+  };
 
   handleGroupChange = group => {
     const { form } = this.props.app;
@@ -73,7 +77,7 @@ export default class Form extends Component {
                 handleQuestionChange={this.handleQuestionChange}
               />
             </Col>
-            <Col>
+            <Col xs='6'>
               <Evidence
                 selectedQuestion={
                   selectedQuestion ? selectedQuestion : form.questions[0]

@@ -16,7 +16,10 @@ export default class Evidence extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.selectedQuestion !== this.props.selectedQuestion) {
+    if (
+      prevProps.selectedQuestion !== this.props.selectedQuestion ||
+      this.props.evidence !== prevProps.evidence
+    ) {
       this.filterEvidenceByQuestion();
     }
   }
@@ -24,24 +27,27 @@ export default class Evidence extends Component {
   filterEvidenceByQuestion = () => {
     const { selectedQuestion, evidence } = this.props;
     const { evidence_bundle } = selectedQuestion;
-    const allQueries = Object.keys(evidence);
     const questionQueries = Object.keys(evidence_bundle);
     let data = [];
 
     for (let query of questionQueries) {
       const features = evidence_bundle[query];
 
-      if (allQueries.includes(query)) {
-        data = evidence[query]
-          .filter(result => {
-            return features.includes(result.nlpql_feature);
-          })
-          .sort((a, b) => {
-            const dateA = new Date(a.report_date);
-            const dateB = new Date(b.report_date);
+      if (evidence[query]) {
+        if (evidence[query] !== 'loading') {
+          data = evidence[query]
+            .filter(result => {
+              return features.includes(result.nlpql_feature);
+            })
+            .sort((a, b) => {
+              const dateA = new Date(a.report_date);
+              const dateB = new Date(b.report_date);
 
-            return dateA - dateB;
-          });
+              return dateA - dateB;
+            });
+        } else {
+          data = 'loading';
+        }
       }
     }
 
@@ -51,23 +57,11 @@ export default class Evidence extends Component {
   };
 
   render() {
-    const { loading, evidence } = this.props;
-    // const { displayEvidence } = this.state;
-
-    const displayEvidence = evidence
-      .filter(e => {
-        return e.nlpql_feature !== 'null';
-      })
-      .sort((a, b) => {
-        const dateA = new Date(a.report_date);
-        const dateB = new Date(b.report_date);
-
-        return dateA - dateB;
-      });
+    const { displayEvidence } = this.state;
 
     return (
       <div className='evidence'>
-        {loading ? (
+        {displayEvidence === 'loading' ? (
           <Loader />
         ) : (
           <div>
