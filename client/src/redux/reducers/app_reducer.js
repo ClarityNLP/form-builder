@@ -1,4 +1,5 @@
 import * as types from '../actions/types';
+import results from './tmp_results';
 
 const initialState = {
   loading_smart: false,
@@ -11,7 +12,7 @@ const initialState = {
   form: null,
   form_error: '',
   loading_evidence: false,
-  evidence: {},
+  evidence: results,
   evidence_error: '',
   index_date: {
     start: null,

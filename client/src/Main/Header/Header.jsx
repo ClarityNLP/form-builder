@@ -52,10 +52,11 @@ export default class Header extends Component {
 
     return (
       <Row className='header'>
-        <Col>
+        <Col xs={2}>
           <h4>{form.name}</h4>
         </Col>
-        <Col xs={6}>
+        <Col xs={5} />
+        <Col xs={5}>
           <FormGroup row>
             <Col xs={5}>
               <Input

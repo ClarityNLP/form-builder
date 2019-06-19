@@ -1,9 +1,12 @@
 .header {
-  padding: 3em;
+  padding: 2em 0;
   background-color: $color3;
   color: white;
 
-  p {
+  p,
+  .form-group,
+  h4,
+  &.row {
     margin: 0;
   }
 }

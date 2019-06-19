@@ -23,33 +23,49 @@ export default class Entity extends Component {
     };
   }
 
+  replacer = index => {
+    return index + ':REPLACETEXT';
+  };
+
   getHighlightedText(text, highlights) {
-    if (!highlights) {
-      return text;
+    if (!highlights) return text;
+
+    if (!text) return '';
+
+    if (text === '' || highlights.length <= 0) return text;
+
+    let s = text;
+    let foundText = /[0-9]\:REPLACETEXT/g;
+
+    for (let h in highlights) {
+      let highlight = highlights[h].toString();
+      if (highlight.trim() === '') break;
+
+      highlight = new RegExp(highlight, 'g');
+
+      s = s.replace(highlight, this.replacer(h));
     }
 
-    if (!text) {
-      return '';
-    }
+    const splitText = s.split(foundText);
+    const matches = s.match(foundText);
 
-    const h = highlights[2];
+    if (!matches) return text;
 
-    const splitText = text.split(h);
-    const matches = text.match(h);
-
-    return splitText.reduce(
+    const highlightedText = splitText.reduce(
       (arr, element, index) =>
         matches[index]
           ? [
               ...arr,
               element,
               <span key={'highlight' + index} className='highlight'>
-                {matches[index]}
+                {highlights[parseInt(matches[index], 10)]}
               </span>
             ]
           : [...arr, element],
       []
     );
+
+    return highlightedText;
   }
 
   toggleReportText = e => {
