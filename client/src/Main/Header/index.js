@@ -1,7 +1,16 @@
-import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { setDate } from '../../redux/actions/set_date';
+import Header from './Header';
 
-export default class Header extends Component {
-  render() {
-    return <div className='header' />;
-  }
+function mapStateToProps(state) {
+  return {
+    app: state.app
+  };
 }
+
+const HeaderContainer = connect(
+  mapStateToProps,
+  { setDate }
+)(Header);
+
+export default HeaderContainer;

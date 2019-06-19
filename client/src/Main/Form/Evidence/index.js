@@ -40,8 +40,8 @@ export default class Evidence extends Component {
               return features.includes(result.nlpql_feature);
             })
             .sort((a, b) => {
-              const dateA = new Date(a.report_date);
-              const dateB = new Date(b.report_date);
+              const dateA = new Date(a.result_display.date);
+              const dateB = new Date(b.result_display.date);
 
               return dateA - dateB;
             });
