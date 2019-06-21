@@ -53,7 +53,7 @@ export default class Form extends Component {
   };
 
   render() {
-    const { form, evidence, loading_evidence } = this.props.app;
+    const { form, evidence, loading_evidence, index_date } = this.props.app;
     const { selectedGroup, selectedQuestion, displayQuestions } = this.state;
 
     return (
@@ -84,6 +84,7 @@ export default class Form extends Component {
                 }
                 evidence={evidence}
                 loading={loading_evidence}
+                index_date={index_date}
               />
             </Col>
           </Row>

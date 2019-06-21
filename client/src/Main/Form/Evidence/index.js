@@ -18,14 +18,39 @@ export default class Evidence extends Component {
   componentDidUpdate(prevProps) {
     if (
       prevProps.selectedQuestion !== this.props.selectedQuestion ||
-      this.props.evidence !== prevProps.evidence
+      this.props.evidence !== prevProps.evidence ||
+      this.props.index_date !== prevProps.index_date
     ) {
       this.filterEvidenceByQuestion();
     }
   }
 
+  filterEvidence = (evidence, features) => {
+    const { start, end } = this.props.index_date;
+
+    return evidence
+      .filter(result => {
+        return features.includes(result.nlpql_feature);
+      })
+      .filter(result => {
+        const result_date = new Date(result.result_display.date);
+
+        if (!start && !end) return true;
+        if (!start && end) return result_date <= end;
+        if (!end && start) return result_date >= start;
+
+        return result_date >= start && result_date <= end;
+      })
+      .sort((a, b) => {
+        const dateA = new Date(a.result_display.date);
+        const dateB = new Date(b.result_display.date);
+
+        return dateA - dateB;
+      });
+  };
+
   filterEvidenceByQuestion = () => {
-    const { selectedQuestion, evidence } = this.props;
+    const { selectedQuestion, evidence, index_date } = this.props;
     const { evidence_bundle } = selectedQuestion;
     const questionQueries = Object.keys(evidence_bundle);
     let data = [];
@@ -35,16 +60,7 @@ export default class Evidence extends Component {
 
       if (evidence[query]) {
         if (evidence[query] !== 'loading') {
-          data = evidence[query]
-            .filter(result => {
-              return features.includes(result.nlpql_feature);
-            })
-            .sort((a, b) => {
-              const dateA = new Date(a.result_display.date);
-              const dateB = new Date(b.result_display.date);
-
-              return dateA - dateB;
-            });
+          data = this.filterEvidence(evidence[query], features);
         } else {
           data = 'loading';
         }

@@ -61,7 +61,7 @@ export default class Header extends Component {
             <Col xs={5}>
               <Input
                 type='date'
-                max={this.convertDateToString(today)}
+                // max={this.convertDateToString(today)}
                 value={this.convertDateToString(start)}
                 onChange={e => {
                   this.handleDateChange(e, 'start');
@@ -74,8 +74,8 @@ export default class Header extends Component {
             <Col xs={5}>
               <Input
                 type='date'
-                min={this.convertDateToString(start)}
-                max={this.convertDateToString(today)}
+                // min={this.convertDateToString(start)}
+                // max={this.convertDateToString(today)}
                 value={this.convertDateToString(end)}
                 onChange={e => {
                   this.handleDateChange(e, 'end');

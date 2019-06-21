@@ -16,7 +16,7 @@ const initialState = {
   evidence_error: '',
   index_date: {
     start: null,
-    end: new Date()
+    end: null
   }
 };
 
