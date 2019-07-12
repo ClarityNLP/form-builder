@@ -48,7 +48,7 @@ export default class Header extends Component {
     const { form } = this.props.app;
     const { start, end } = this.props.app.index_date;
 
-    const today = new Date();
+    // const today = new Date();
 
     return (
       <Row className='header'>

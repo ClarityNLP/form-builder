@@ -50,7 +50,7 @@ export default class Evidence extends Component {
   };
 
   filterEvidenceByQuestion = () => {
-    const { selectedQuestion, evidence, index_date } = this.props;
+    const { selectedQuestion, evidence } = this.props;
     const { evidence_bundle } = selectedQuestion;
     const questionQueries = Object.keys(evidence_bundle);
     let data = [];

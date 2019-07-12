@@ -35,7 +35,7 @@ export default class Entity extends Component {
     if (text === '' || highlights.length <= 0) return text;
 
     let s = text;
-    let foundText = /[0-9]\:REPLACETEXT/g;
+    let foundText = /[0-9]:REPLACETEXT/g;
 
     for (let h in highlights) {
       let highlight = highlights[h].toString();
