@@ -57,9 +57,9 @@ export default class Form extends Component {
     const { selectedGroup, selectedQuestion, displayQuestions } = this.state;
 
     return (
-      <Row className='no-gutters'>
+      <Row className='no-gutters form'>
         <Col xs='8' className='p-0'>
-          <iframe src='https://www.google.com' />
+          <iframe src='https://cibmtr.org' />
           {/* <SideBar
             groups={form.groups}
             selectedGroup={selectedGroup}
