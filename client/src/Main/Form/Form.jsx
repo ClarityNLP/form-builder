@@ -58,36 +58,15 @@ export default class Form extends Component {
 
     return (
       <Row className='no-gutters'>
-        <Col xs='2' className='p-0'>
-          <SideBar
-            groups={form.groups}
-            selectedGroup={selectedGroup}
-            handleGroupChange={this.handleGroupChange}
+        <Col xs='12'>
+          <Evidence
+            selectedQuestion={
+              selectedQuestion ? selectedQuestion : form.questions[0]
+            }
+            evidence={evidence}
+            loading={loading_evidence}
+            index_date={index_date}
           />
-        </Col>
-        <Col>
-          <Row className='main-container no-gutters'>
-            <Col xs='6'>
-              <Questions
-                questions={displayQuestions}
-                group={selectedGroup}
-                selectedQuestion={
-                  selectedQuestion ? selectedQuestion : form.questions[0]
-                }
-                handleQuestionChange={this.handleQuestionChange}
-              />
-            </Col>
-            <Col xs='6'>
-              <Evidence
-                selectedQuestion={
-                  selectedQuestion ? selectedQuestion : form.questions[0]
-                }
-                evidence={evidence}
-                loading={loading_evidence}
-                index_date={index_date}
-              />
-            </Col>
-          </Row>
         </Col>
       </Row>
     );

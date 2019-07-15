@@ -7,6 +7,11 @@ $secondary: $color3;
 $header_height: 100px;
 $full_height: calc(100vh - 100px);
 
+#root {
+  width: 400px;
+  height: 100vh;
+}
+
 @import 'bootstrap/scss/bootstrap.scss';
 
 @import '../Loader/loader';
