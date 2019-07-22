@@ -14,7 +14,7 @@ pipeline{
             steps{
                 script{
                     docker.withRegistry("https://${GTRI_IMAGE_REGISTRY}"){
-                        def formBuilderImage = docker.build("form-builder:1.0", "-f ./Dockerfile .")
+                        def formBuilderImage = docker.build("form-builder:1.0", "-f ./client/Dockerfile ./client")
                         formBuilderImage.push('latest')
                     }
                 }
