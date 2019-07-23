@@ -7,11 +7,11 @@ ENV NODE_PATH=/node_modules
 ENV PATH=$PATH:/node_modules/.bin
 RUN yarn
 
-WORKDIR /app
-ADD . /app
+WORKDIR /form-builder
+ADD . /form-builder
 
 EXPOSE 3000
 EXPOSE 35729
 
-ENTRYPOINT ["/bin/bash", "/app/run.sh"]
+ENTRYPOINT ["/bin/bash", "/form-builder/run.sh"]
 CMD ["start"]
