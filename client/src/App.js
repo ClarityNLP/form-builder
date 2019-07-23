@@ -27,7 +27,7 @@ export default class App extends Component {
       <Loader />
     ) : (
       <React.Fragment>
-        <Router>
+        <Router basename={'/form-builder'}>
           <Switch>
             <Route path='/' component={Main} />
           </Switch>

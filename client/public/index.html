@@ -25,6 +25,13 @@
       Import FHIR client javascript file
     -->
     <script src="javascript/fhir-client.js"></script>
+    <script>
+      FHIR.oauth2.authorize({
+        client_id: '2e755f74-f105-4dbe-8709-6e37422117c6',
+        scope:
+          'patient/Condition.read patient/DiagnosticReport.read patient/DocumentReference.read patient/MedicationAdministration.read patient/MedicationOrder.read patient/MedicationStatement.read patient/Observation.read patient/Patient.read patient/Procedure.read launch profile openid online_access'
+      });
+    </script>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
