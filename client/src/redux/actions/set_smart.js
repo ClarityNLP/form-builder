@@ -16,13 +16,18 @@ export const setSmart = () => dispatch => {
     // resolve(tmp_smart);
 
     // PRODUCTION CODE
-    window.FHIR.oauth2.ready(smart => {
-      dispatch({
-        type: SET_SMART_SUCCESS,
-        data: smart
-      });
+    window.FHIR.oauth2.ready(
+      smart => {
+        dispatch({
+          type: SET_SMART_SUCCESS,
+          data: smart
+        });
 
-      resolve(smart);
-    });
+        resolve(smart);
+      },
+      err => {
+        console.log(err);
+      }
+    );
   });
 };
