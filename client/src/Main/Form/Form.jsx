@@ -16,7 +16,7 @@ export default class Form extends Component {
   }
 
   componentDidMount() {
-    // this.getResults();
+    this.getResults();
   }
 
   getResults = () => {

@@ -6,14 +6,6 @@ import './styles/style.scss';
 
 export default class App extends Component {
   componentDidMount() {
-    if (window.FHIR) {
-      window.FHIR.oauth2.authorize({
-        client_id: '2e755f74-f105-4dbe-8709-6e37422117c6',
-        scope:
-          'patient/Condition.read patient/DiagnosticReport.read patient/DocumentReference.read patient/MedicationAdministration.read patient/MedicationOrder.read patient/MedicationStatement.read patient/Observation.read patient/Patient.read patient/Procedure.read launch profile openid online_access'
-      });
-    }
-
     this.props.setSmart().then(smart => {
       this.props.setPatient(smart);
     });

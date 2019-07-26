@@ -4,7 +4,7 @@ import Header from './Header';
 
 export default class Main extends Component {
   componentWillMount() {
-    this.props.setForm();
+    if (!this.props.app.form) this.props.setForm();
   }
 
   render() {
