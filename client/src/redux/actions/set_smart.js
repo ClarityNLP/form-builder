@@ -26,7 +26,7 @@ export const setSmart = () => dispatch => {
         resolve(smart);
       },
       err => {
-        console.log(err);
+        console.log('Error:', err);
       }
     );
   });
