@@ -4,7 +4,7 @@ export const setSmart = () => dispatch => {
   return new Promise((resolve, reject) => {
     //DEVELOPMENT CODE
     // const tmp_smart = window.FHIR.client({
-    //   serviceUrl: process.env.REACT_APP_DEFAULT_FHIR_URL,
+    //   serviceUrl: process.env.REACT_APP_GTRI_FHIR_URL,
     //   patientId: '23907'
     // });
 

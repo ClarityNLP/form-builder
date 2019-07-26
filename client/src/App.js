@@ -6,9 +6,11 @@ import './styles/style.scss';
 
 export default class App extends Component {
   componentDidMount() {
+    console.log(process.env.NODE_ENV);
+
     if (window.FHIR) {
       window.FHIR.oauth2.authorize({
-        client_id: '2e755f74-f105-4dbe-8709-6e37422117c6',
+        client_id: '5273a313-c7ea-480b-9dd0-9055e0dd61f5',
         scope:
           'patient/Condition.read patient/DiagnosticReport.read patient/DocumentReference.read patient/MedicationAdministration.read patient/MedicationOrder.read patient/MedicationStatement.read patient/Observation.read patient/Patient.read patient/Procedure.read launch profile openid online_access'
       });
