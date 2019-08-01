@@ -10,7 +10,8 @@ export const getEvidence = (patient, fhir, form) => dispatch => {
   };
 
   for (let query of form.evidence_bundles) {
-    const url = process.env.REACT_APP_CLARITY_NLPAAS_URL + query;
+    // const url = process.env.REACT_APP_CLARITY_NLPAAS_URL + query;
+    const url = process.env.REACT_APP_CLARITY_NLPAAS_URL_DEV + query;
 
     dispatch({
       type: ADD_EVIDENCE,
