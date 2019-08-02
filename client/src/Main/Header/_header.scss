@@ -1,12 +1,14 @@
 .header {
   height: $header_height;
-  padding: 2em 0;
   background-color: $color3;
+  background: linear-gradient(
+    180deg,
+    rgba(68, 187, 164, 1) 70%,
+    rgba(50, 142, 124, 1) 150%
+  );
   color: white;
 
-  p,
   .form-group,
-  h4,
   &.row {
     margin: 0;
   }

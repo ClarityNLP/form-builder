@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Row, Col } from 'reactstrap';
-import SideBar from './Sidebar';
 import Questions from './Questions';
 import Evidence from './Evidence';
 
@@ -10,8 +9,7 @@ export default class Form extends Component {
 
     this.state = {
       selectedGroup: null,
-      selectedQuestion: null,
-      displayQuestions: props.app.form.questions
+      selectedQuestion: null
     };
   }
 
@@ -27,25 +25,6 @@ export default class Form extends Component {
     }
   };
 
-  handleGroupChange = group => {
-    const { form } = this.props.app;
-    let tmpQuestions = [];
-
-    if (group) {
-      tmpQuestions = form.questions.filter(
-        question => group === question.group
-      );
-    } else {
-      tmpQuestions = form.questions;
-    }
-
-    this.setState({
-      selectedGroup: group,
-      displayQuestions: tmpQuestions,
-      selectedQuestion: tmpQuestions[0]
-    });
-  };
-
   handleQuestionChange = question => {
     this.setState({
       selectedQuestion: question
@@ -54,40 +33,28 @@ export default class Form extends Component {
 
   render() {
     const { form, evidence, loading_evidence, index_date } = this.props.app;
-    const { selectedGroup, selectedQuestion, displayQuestions } = this.state;
+    const { selectedQuestion } = this.state;
+    const { groups, questions } = form;
 
     return (
-      <Row className='no-gutters'>
-        <Col xs='2' className='p-0'>
-          <SideBar
-            groups={form.groups}
-            selectedGroup={selectedGroup}
-            handleGroupChange={this.handleGroupChange}
+      <Row className='main-contaier no-gutters'>
+        <Col xs='8'>
+          <Questions
+            groups={groups}
+            questions={questions}
+            selectedQuestion={selectedQuestion}
+            handleQuestionChange={this.handleQuestionChange}
           />
         </Col>
-        <Col>
-          <Row className='main-container no-gutters'>
-            <Col xs='6'>
-              <Questions
-                questions={displayQuestions}
-                group={selectedGroup}
-                selectedQuestion={
-                  selectedQuestion ? selectedQuestion : form.questions[0]
-                }
-                handleQuestionChange={this.handleQuestionChange}
-              />
-            </Col>
-            <Col xs='6'>
-              <Evidence
-                selectedQuestion={
-                  selectedQuestion ? selectedQuestion : form.questions[0]
-                }
-                evidence={evidence}
-                loading={loading_evidence}
-                index_date={index_date}
-              />
-            </Col>
-          </Row>
+        <Col xs='4'>
+          <Evidence
+            selectedQuestion={
+              selectedQuestion ? selectedQuestion : form.questions[0]
+            }
+            evidence={evidence}
+            loading={loading_evidence}
+            index_date={index_date}
+          />
         </Col>
       </Row>
     );

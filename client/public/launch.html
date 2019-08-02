@@ -7,10 +7,7 @@
   </head>
   Loading...
   <body>
-    <script src="/form-builder/fhir/fhir-client-v0.1.12.js"></script>
-    <!-- Prevent session bleed caused by single threaded embedded browser and sessionStorage API -->
-    <!-- https://github.com/cerner/fhir-client-cerner-additions -->
-    <script src="/form-builder/fhir/fhir-client-cerner-additions-1.0.0.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fhirclient/build/fhir-client.js"></script>
     <script>
       var client_id_dev = '5273a313-c7ea-480b-9dd0-9055e0dd61f5';
       var client_id_prod = '2e755f74-f105-4dbe-8709-6e37422117c6';
@@ -19,7 +16,9 @@
 
       FHIR.oauth2.authorize({
         client_id: client_id_prod,
-        scope: scopes
+        scope: scopes,
+        iss:
+          'https://fhir-myrecord.sandboxcerner.com/dstu2/0b8a0111-e8e6-4c26-a91c-5069cbc6b1ca'
       });
     </script>
   </body>

@@ -45,37 +45,34 @@ export default class Header extends Component {
   };
 
   render() {
-    const { form } = this.props.app;
+    const { patient, form } = this.props.app;
     const { start, end } = this.props.app.index_date;
 
-    // const today = new Date();
-
     return (
-      <Row className='header'>
-        <Col xs={2}>
-          <h4>{form.name}</h4>
+      <Row className='header align-content-center'>
+        <Col xs={7}>
+          <div>
+            <h5>{patient.data ? patient.data.name[0].text : null}</h5>
+          </div>
+          <div>{form ? form.name : null}</div>
         </Col>
-        <Col xs={5} />
+
         <Col xs={5}>
-          <FormGroup row>
+          <FormGroup row className='justify-content-end'>
             <Col xs={5}>
+              <Label>From:</Label>
               <Input
                 type='date'
-                // max={this.convertDateToString(today)}
                 value={this.convertDateToString(start)}
                 onChange={e => {
                   this.handleDateChange(e, 'start');
                 }}
               />
             </Col>
-            <Label xs={2} className='text-center'>
-              -
-            </Label>
             <Col xs={5}>
+              <Label>To:</Label>
               <Input
                 type='date'
-                // min={this.convertDateToString(start)}
-                // max={this.convertDateToString(today)}
                 value={this.convertDateToString(end)}
                 onChange={e => {
                   this.handleDateChange(e, 'end');
