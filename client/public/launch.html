@@ -16,7 +16,7 @@
         'patient/Condition.read patient/DiagnosticReport.read patient/DocumentReference.read patient/MedicationAdministration.read patient/MedicationOrder.read patient/MedicationStatement.read patient/Observation.read patient/Patient.read patient/Procedure.read launch/patient profile openid online_access';
 
       FHIR.oauth2.authorize({
-        client_id: client_id_dev,
+        client_id: client_id_prod,
         scope: scopes,
         iss:
           'https://fhir-myrecord.sandboxcerner.com/dstu2/0b8a0111-e8e6-4c26-a91c-5069cbc6b1ca'
