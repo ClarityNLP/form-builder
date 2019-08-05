@@ -6,7 +6,7 @@ export default class QuestionGroup extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { collapse: false };
+    this.state = { collapse: true };
   }
 
   toggle = () => {

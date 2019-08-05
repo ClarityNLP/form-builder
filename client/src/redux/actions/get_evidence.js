@@ -2,11 +2,10 @@ import axios from 'axios';
 
 import { ADD_EVIDENCE, ADD_EVIDENCE_SUCCESS, ADD_EVIDENCE_FAIL } from './types';
 
-export const getEvidence = (patient, fhir, form) => dispatch => {
+export const getEvidence = (patient, smart, form) => dispatch => {
   const postData = {
-    reports: patient.documents,
-    patient_id: patient.id,
-    fhir: fhir
+    reports: patient.docs,
+    fhir: smart
   };
 
   for (let query of form.evidence_bundles) {
