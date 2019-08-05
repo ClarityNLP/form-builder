@@ -17,11 +17,17 @@ export default class Form extends Component {
     this.getResults();
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.props.app.patient !== prevProps.app.patient) {
+      this.getResults();
+    }
+  }
+
   getResults = () => {
     const { patient, form, smart } = this.props.app;
 
-    if (patient.documents) {
-      this.props.getEvidence(patient, smart.server, form);
+    if (patient.docs) {
+      this.props.getEvidence(patient.docs, smart, form);
     }
   };
 
