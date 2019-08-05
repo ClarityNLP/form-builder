@@ -27,7 +27,7 @@ export default class Form extends Component {
     const { patient, form, smart } = this.props.app;
 
     if (patient.docs) {
-      this.props.getEvidence(patient.docs, smart, form);
+      this.props.getEvidence(patient, smart, form);
     }
   };
 
