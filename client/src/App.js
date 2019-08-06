@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Loader from './Loader';
 import Main from './Main';
+import Launch from './Launch';
 import './styles/style.scss';
 
 export default class App extends Component {
@@ -22,6 +23,7 @@ export default class App extends Component {
       <React.Fragment>
         <Router>
           <Switch>
+            <Route path='/launch' component={Launch} />
             <Route path='/' component={Main} />
           </Switch>
         </Router>
