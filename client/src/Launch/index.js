@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import FHIR from 'fhirclient';
+import Loader from '../Loader';
 
 export default class Launch extends Component {
   componentWillMount() {
@@ -11,6 +12,6 @@ export default class Launch extends Component {
   }
 
   render() {
-    return <div>Launching...</div>;
+    return <Loader />;
   }
 }
