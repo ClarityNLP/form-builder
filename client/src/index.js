@@ -7,7 +7,7 @@ import configureStore from './redux/store';
 import AppContainer from './AppContainer';
 
 const apiClient = axios.create({
-  baseURL: `https://${process.env.REACT_APP_CLARITY_NLPAAS_URL}`,
+  baseURL: `https://${window._env_.REACT_APP_CLARITY_NLPAAS_URL}`,
   responseType: 'json',
   withCredentials: true
 });
