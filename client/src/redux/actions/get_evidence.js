@@ -8,6 +8,8 @@ export const getEvidence = (patient, smart, form) => dispatch => {
     fhir: smart
   };
 
+  console.log(JSON.stringify(postData));
+
   for (let query of form.evidence_bundles) {
     const url = window._env_.REACT_APP_CLARITY_NLPAAS_URL + query;
     // const url = process.env.REACT_APP_CLARITY_NLPAAS_URL_DEV + query;
