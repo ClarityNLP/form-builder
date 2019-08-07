@@ -47,7 +47,7 @@ const makeCall = (url, token) => {
     .then(response => {
       calls.push(response.data);
 
-      if (calls.length === 10) return calls;
+      if (calls.length === 1) return calls;
 
       return makeCall(response.data.link[1].url, token);
     })
