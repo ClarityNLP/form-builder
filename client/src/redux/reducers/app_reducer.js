@@ -15,8 +15,8 @@ const initialState = {
   evidence: results,
   evidence_error: '',
   index_date: {
-    start: new Date('01/01/2155'),
-    end: new Date('03/01/2155')
+    start: null,
+    end: null
   }
 };
 
