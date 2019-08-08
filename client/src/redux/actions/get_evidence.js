@@ -8,7 +8,7 @@ export const getEvidence = (patient, smart, form) => dispatch => {
     fhir: smart
   };
 
-  console.log(JSON.stringify(postData));
+  console.log('ACCESS TOKEN: ', smart.state.tokenResponse.access_token);
 
   for (let query of form.evidence_bundles) {
     const url = window._env_.REACT_APP_CLARITY_NLPAAS_URL + query;

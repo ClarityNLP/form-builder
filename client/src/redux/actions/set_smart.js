@@ -1,20 +1,20 @@
 import { SET_SMART_SUCCESS } from '../actions/types';
+import FHIR from 'fhirclient';
 
 export const setSmart = () => dispatch => {
   return new Promise((resolve, reject) => {
-    window.FHIR.oauth2.ready(
-      smart => {
+    FHIR.oauth2
+      .ready()
+      .then(smart => {
         dispatch({
           type: SET_SMART_SUCCESS,
           data: smart
         });
 
-        window.smart = smart;
         resolve(smart);
-      },
-      err => {
+      })
+      .catch(err => {
         console.log('Error:', err);
-      }
-    );
+      });
   });
 };
