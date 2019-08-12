@@ -36,12 +36,12 @@ pipeline{
           }
         }
       }
-      // stage('Notify orchestrator'){
-      //   steps{
-      //     script{
-      //       rancher confirm: true, credentialId: 'gt-rancher-server', endpoint: "${GTRI_RANCHER_API_ENDPOINT}", environmentId: "${GTRI_HDAP_ENV_ID}", environments: '', image: "${GTRI_IMAGE_REGISTRY}/claritynlp/form-builder:latest", ports: '', service: 'ClarityNLP-Form/formbuilder', timeout: 120
-      //     }
-      //   }
-      // }
+      stage('Notify orchestrator'){
+        steps{
+          script{
+            rancher confirm: true, credentialId: 'gt-rancher-server', endpoint: "${GTRI_RANCHER_API_ENDPOINT}", environmentId: "${GTRI_HDAP_ENV_ID}", environments: '', image: "${GTRI_IMAGE_REGISTRY}/claritynlp/form-builder:latest", ports: '', service: 'ClarityNLP-Form/formbuilder', timeout: 120
+          }
+        }
+      }
     }
 }
