@@ -9,7 +9,9 @@ COPY package.json .
 COPY yarn.lock .
 RUN yarn
 COPY . .
-RUN yarn build
+
+ARG PUBLIC_URL
+RUN PUBLIC_URL=$PUBLIC_URL yarn build
 
 # => Run container
 FROM nginx:1.15.2-alpine
