@@ -1,23 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import axios from 'axios';
 import * as serviceWorker from './serviceWorker';
-import { Provider } from 'react-redux';
 import configureStore from './redux/store';
-import AppContainer from './AppContainer';
+import { createBrowserHistory } from 'history';
+import App from './App';
 
-const apiClient = axios.create({
-  baseURL: `https://${window._env_.REACT_APP_CLARITY_NLPAAS_URL}`,
-  responseType: 'json',
-  withCredentials: true
+const history = createBrowserHistory({
+  basename: process.env.PUBLIC_URL
 });
 
-const store = configureStore(apiClient);
+const store = configureStore(history);
 
 ReactDOM.render(
-  <Provider store={store}>
-    <AppContainer />
-  </Provider>,
+  <App store={store} history={history} />,
   document.getElementById('root')
 );
 
