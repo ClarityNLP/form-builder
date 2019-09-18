@@ -7,7 +7,7 @@ export default class Launch extends Component {
     FHIR.oauth2.authorize({
       client_id: window._env_.REACT_APP_CLIENT_ID,
       scope: window._env_.REACT_APP_SCOPES,
-      iss: window._env_.REACT_APP_ISS
+      iss: window._env_.REACT_APP_DEFAULT_FHIR_URL
     });
   }
 
