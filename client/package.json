@@ -27,7 +27,7 @@
   },
   "scripts": {
     "start": "chmod +x ./env.sh && ./env.sh && cp env-config.js ./public/ && npm run https",
-    "build": "react-scripts build",
+    "build": "NODE_ENV=development react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "https": "HTTPS=true react-scripts start"
