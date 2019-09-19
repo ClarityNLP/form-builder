@@ -8,21 +8,9 @@ const initialState = {};
 const logger = createLogger();
 
 export default function configureStore(history) {
-  let store;
-
-  if (process.env.NODE_ENV === 'development') {
-    store = createStore(
-      reducer(history),
-      initialState,
-      compose(applyMiddleware(routerMiddleware(history), thunk, logger))
-    );
-  } else {
-    store = createStore(
-      reducer(history),
-      initialState,
-      compose(applyMiddleware(routerMiddleware(history), thunk))
-    );
-  }
-
-  return store;
+  return createStore(
+    reducer(history),
+    initialState,
+    compose(applyMiddleware(routerMiddleware(history), thunk, logger))
+  );
 }
