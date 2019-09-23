@@ -10,10 +10,7 @@ export const getEvidence = (patient, smart, form) => dispatch => {
 
   console.log('ACCESS TOKEN: ', smart.state.tokenResponse.access_token);
 
-  for (let query of [
-    'wbc_hematologic_findings',
-    'platelets_hematologic_findings'
-  ]) {
+  for (let query of form.evidence_bundles) {
     const url = window._env_.REACT_APP_CLARITY_NLPAAS_URL + query;
     // const url = process.env.REACT_APP_CLARITY_NLPAAS_URL_DEV + query;
 
