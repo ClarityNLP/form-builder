@@ -32,16 +32,22 @@ export default class Entity extends Component {
 
     if (!text) return '';
 
-    if (text === '' || highlights.length <= 0) return text;
+    if (text === '' || highlights.length < 1) return text;
 
     let s = text;
     let foundText = /[0-9]:REPLACETEXT/g;
 
     for (let h in highlights) {
-      let highlight = highlights[h].toString();
+      let highlight = highlights[h]
+        .toString()
+        .replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
       if (highlight.trim() === '') break;
 
-      highlight = new RegExp(highlight, 'g');
+      try {
+        highlight = new RegExp(highlight, 'g');
+      } catch (e) {
+        console.log('Error:', e);
+      }
 
       s = s.replace(highlight, this.replacer(h));
     }
@@ -49,23 +55,23 @@ export default class Entity extends Component {
     const splitText = s.split(foundText);
     const matches = s.match(foundText);
 
-    if (!matches) return text;
-
-    const highlightedText = splitText.reduce(
-      (arr, element, index) =>
-        matches[index]
-          ? [
-              ...arr,
-              element,
-              <span key={'highlight' + index} className='highlight'>
-                {highlights[parseInt(matches[index], 10)]}
-              </span>
-            ]
-          : [...arr, element],
-      []
-    );
-
-    return highlightedText;
+    if (splitText.length > 1) {
+      return splitText.reduce(
+        (arr, element, index) =>
+          matches[index]
+            ? [
+                ...arr,
+                element,
+                <span key={'highlight' + index} className='full-highlighting'>
+                  {highlights[parseInt(matches[index], 10)]}
+                </span>
+              ]
+            : [...arr, element],
+        []
+      );
+    } else {
+      return text;
+    }
   }
 
   toggleReportText = e => {
@@ -124,7 +130,7 @@ export default class Entity extends Component {
                 <h6>{report_type}</h6>
               </Col>
               <Col className='text-right'>
-                <ButtonGroup className='pr-1'>
+                <ButtonGroup>
                   <Button
                     onClick={() => {
                       this.setFeedback(1);
@@ -137,6 +143,7 @@ export default class Entity extends Component {
                   >
                     <FaThumbsUp />
                   </Button>
+
                   <Button
                     onClick={() => {
                       this.setFeedback(2);
@@ -149,15 +156,16 @@ export default class Entity extends Component {
                   >
                     <FaThumbsDown />
                   </Button>
+
+                  <Button
+                    onClick={this.toggleComment}
+                    className='entity_icon'
+                    size='sm'
+                    outline
+                  >
+                    <FaTag />
+                  </Button>
                 </ButtonGroup>
-                <Button
-                  onClick={this.toggleComment}
-                  className='entity_icon'
-                  size='sm'
-                  outline
-                >
-                  <FaTag />
-                </Button>
               </Col>
             </Row>
           </Col>
