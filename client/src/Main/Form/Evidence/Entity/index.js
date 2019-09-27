@@ -40,7 +40,7 @@ export default class Entity extends Component {
     for (let h in highlights) {
       let highlight = highlights[h]
         .toString()
-        .replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+        .replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&');
       if (highlight.trim() === '') break;
 
       try {
@@ -62,7 +62,7 @@ export default class Entity extends Component {
             ? [
                 ...arr,
                 element,
-                <span key={'highlight' + index} className='full-highlighting'>
+                <span key={'highlight' + index} className='highlight'>
                   {highlights[parseInt(matches[index], 10)]}
                 </span>
               ]
