@@ -62,7 +62,7 @@ export const getEvidence = (patient, smart, form) => dispatch => {
                     });
 
             },
-            (500 * n++)
+            (5 * n++)
         )
 
     }
