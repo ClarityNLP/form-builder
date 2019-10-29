@@ -1,0 +1,19 @@
+@import "util/reset";
+@import "util/normalize";
+
+// Set your brand colors
+$purple: #79589F;
+
+$primary: $purple;
+$link: $purple;
+
+$menu-item-color: #6d6d6d;
+$progress-value-background-color: #fff;
+$progress-bar-background-color: #bcabcf;
+
+@import "../../node_modules/bulma/bulma.sass";
+
+//COMPONENTS
+@import "components/question-block";
+
+@import "main";
