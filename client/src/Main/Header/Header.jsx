@@ -49,9 +49,9 @@ export default class Header extends Component {
     const { start, end } = this.props.app.index_date;
 
     return (
-      <h1>TOKEN: {this.props.app.smart.state.tokenResponse.access_token}
       <Row className='header align-content-center'>
         <Col xs={7}>
+          <h1>{this.props.app.smart.state.tokenResponse.access_token}</h1>
           <div>
             <h5>{patient.data ? patient.data.name[0].text : null}</h5>
           </div>
