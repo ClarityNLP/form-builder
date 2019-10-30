@@ -2,7 +2,13 @@ import * as types from '../actions/types';
 
 const initialState = {
   loading_smart: false,
-  smart: {},
+  smart: {
+    state: {
+      tokenResponse: {
+        access_token: null
+      }
+    }
+  },
   smart_error: '',
   loading_patient: false,
   patient: {},
