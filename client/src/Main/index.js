@@ -1,5 +1,7 @@
 import { connect } from 'react-redux';
 import { setForm } from '../redux/actions/set_form';
+import { setSmart } from '../redux/actions/set_smart';
+import { setPatient } from '../redux/actions/set_patient';
 import Main from './Main';
 
 function mapStateToProps(state) {
@@ -10,7 +12,7 @@ function mapStateToProps(state) {
 
 const MainContainer = connect(
   mapStateToProps,
-  { setForm }
+  { setForm, setSmart, setPatient }
 )(Main);
 
 export default MainContainer;

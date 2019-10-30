@@ -1,33 +1,18 @@
-import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Loader from './Loader';
+import React from 'react';
+import { Route } from 'react-router-dom';
 import Main from './Main';
 import Launch from './Launch';
 import './styles/style.scss';
+import { Provider } from 'react-redux';
+import { ConnectedRouter } from 'connected-react-router';
 
-export default class App extends Component {
-  componentDidMount() {
-    this.props.setSmart().then(smart => {
-      this.props.setPatient(smart);
-    });
-  }
+const App = ({ store, history }) => (
+  <Provider store={store}>
+    <ConnectedRouter history={history}>
+      <Route path='/launch' component={Launch} />
+      <Route path='/' component={Main} />
+    </ConnectedRouter>
+  </Provider>
+);
 
-  render() {
-    const { loading_patient, loading_smart } = this.props.app;
-
-    const loading = loading_patient || loading_smart;
-
-    return loading ? (
-      <Loader />
-    ) : (
-      <React.Fragment>
-        <Router>
-          <Switch>
-            <Route path='/launch' component={Launch} />
-            <Route path='/' component={Main} />
-          </Switch>
-        </Router>
-      </React.Fragment>
-    );
-  }
-}
+export default App;
