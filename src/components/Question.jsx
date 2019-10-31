@@ -12,7 +12,7 @@ export default class Question extends Component {
         return (
           <div className="control">
             {question.answers.map((answer, index) =>
-              <label className="radio">
+              <label key={index} className="radio">
                 <input type="radio" name="answer"/>
                 {answer.text}
               </label>
@@ -24,7 +24,7 @@ export default class Question extends Component {
         return (
           <div className="control">
             {question.answers.map((answer, index) =>
-              <label className="radio">
+              <label key={index} className="radio">
                 <input type="radio" name="answer"/>
                 {answer.text}
               </label>

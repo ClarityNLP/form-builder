@@ -13,6 +13,26 @@
       }
     }
   }
+  &.is-loading {
+    .question-number {
+      .question-number-bubble {
+        .question-number-bubble-border {
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          border-width: 2px;
+          border-style: solid;
+          border-color: $primary transparent $primary transparent;
+          border-radius: 30px;
+          animation: spinner 1s linear infinite;
+        }
+        .question-number-bubble-content {
+        }
+      }
+    }
+  }
   .question-number {
     border-right: 1px solid #dbdbdb;
     flex: none;
@@ -20,7 +40,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    // padding-top: 12px;
     .question-number-bubble {
       width: 30px;
       height: 30px;
@@ -28,6 +47,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      position: relative;
       transition: background-color 0.5s, color 0.5s, box-shadow 0.5s, border-color 0.5s;
     }
   }
@@ -47,5 +67,14 @@
         }
       }
     }
+  }
+}
+
+@keyframes spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
   }
 }

@@ -58,10 +58,11 @@ body, html {
       flex-grow: 1;
       overflow-y: scroll;
     }
-    .decision-support-panel {
+    .evidence-panel {
+      padding: 10px;
       flex: none;
       width: 300px;
-      background-color: red;
+      background-color: #f1eef5;
       overflow-y: scroll;
     }
   }

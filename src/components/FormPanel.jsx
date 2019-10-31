@@ -60,15 +60,20 @@ export default class FormPanel extends Component {
 
   if (pathname !== prevProps.pathname) {
     const slug = pathname.substr(pathname.lastIndexOf('/') + 1);
-    console.log('slug: ',slug);
     const group = this.props.form.groups.find(group => slugify(group) === slug);
-    console.log('group: ',group);
     const filterQuestions = __this.filterQuestions(group);
     this.setState({
       group: group,
       filteredQuestions: filterQuestions,
       focusedQuestionNumber: filterQuestions[0].question_number
     });
+    return this.props.getEvidenceByGroup(group, this.props.evidenceByGroup[group], this.props.form.questions)
+    // .then(() => {
+    //   console.log('Done getting evidence by group.');
+    // })
+    // .catch(() => {
+    //   console.log('Problem getting evidence by group.');
+    // })
   }
 
 }
@@ -83,7 +88,10 @@ export default class FormPanel extends Component {
                     onClick={ () => this.focusQuestion(question.question_number) }
                   >
                     <div className="question-number">
-                      <span className="question-number-bubble">{question.question_number}</span>
+                      <div className="question-number-bubble">
+                        <div className="question-number-bubble-border"></div>
+                        <div className="question-number-bubble-content">{question.question_number}</div>
+                      </div>
                     </div>
                     <Question question={question}/>
                   </li>
