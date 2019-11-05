@@ -15,11 +15,11 @@ export const getEvidence = (patient, smart, form) => dispatch => {
     console.log('ACCESS TOKEN: ', smart.state.tokenResponse.access_token);
 
     let n = 0;
-    // for (let query of form.evidence_bundles) {
+    for (let query of form.evidence_bundles) {
 
-          for (let query of [
-            'wbc_hematologic_findings'
-          ]) {
+          // for (let query of [
+          //   'wbc_hematologic_findings'
+          // ]) {
 
         // const query = form.evidence_bundles[0];
 
