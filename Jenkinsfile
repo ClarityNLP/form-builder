@@ -15,8 +15,8 @@ pipeline{
       stage('Building image') {
         steps{
           script {
-            formImage = docker.build("claritynlp/form-builder:1.0", "--build-arg PUBLIC_URL=/form-v2 -f ./client/Dockerfile.prod ./client")
-            formImageVhost = docker.build("claritynlp/form-builder:1.0-vhost", "--build-arg PUBLIC_URL=/ -f ./client/Dockerfile.prod ./client")
+            formImage = docker.build("claritynlp/form-builder:1.0", "--build-arg PUBLIC_URL=/form-v2 -f ./Dockerfile.prod ./")
+            formImageVhost = docker.build("claritynlp/form-builder:1.0-vhost", "--build-arg PUBLIC_URL=/ -f ./Dockerfile.prod ./")
           }
         }
       }
