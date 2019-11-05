@@ -1,11 +1,22 @@
-import { takeEvery, select, put, call, all } from "redux-saga/effects";
+import { takeEvery, take, select, put, call, all, fork } from "redux-saga/effects";
+import { push } from 'connected-react-router'
 import axios from 'axios';
 
 const fetchEvidence = (evidence, payload) => {
   return axios.post(`${window._env_.NLPAAS_URL}/4100r4/${evidence}`, payload)
 }
 
-export function* lazyLoadEvidence() {
+export function* rootSaga() {
+  yield fork(redirectNoFhirClient)
+  yield fork(lazyLoadEvidence)
+}
+
+function* redirectNoFhirClient() {
+  yield take('GET_FHIR_CLIENT_REJECTED');
+  yield put(push('/'));
+}
+
+function* lazyLoadEvidence() {
     yield takeEvery('GET_EVIDENCE_BY_GROUP_FULFILLED', findNextGroup);
 }
 

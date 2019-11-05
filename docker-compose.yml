@@ -1,0 +1,39 @@
+version: "3.3"
+
+networks:
+  form-builder:
+    driver: bridge
+
+services:
+  form-builder:
+    container_name: FORM_BUILDER
+    build: .
+    volumes:
+      - .:/app
+      - /app/node_modules
+    ports:
+      - "3000:3000"
+      - "35729:35729"
+    environment:
+      - NLPAAS_URL=http://localhost:1337
+      - FORM_CMS_URL=http://localhost:1337
+      - FHIR_ISS=https://apps.hdap.gatech.edu/omoponfhir3/fhir
+      - FHIR_SCOPES='patient/Binary.read patient/Condition.read patient/DocumentReference.read patient/MedicationAdministration.read patient/MedicationOrder.read patient/MedicationStatement.read patient/Observation.read patient/Patient.read patient/Procedure.read profile openid online_access launch'
+      - FHIR_CLIENT_ID=50808ec0-d1f1-4531-bd1c-9cdfa8b60081
+    networks:
+      - form-builder
+
+  fake-nlpaas:
+    container_name: FAKE_NLPAAS
+    hostname: fake-nlpaas
+    build: ./demo/fake-nlpaas
+    volumes:
+      - /app/node_modules/ #empties container node_modules
+    ports:
+      - "1337:1337"
+    environment:
+      - NODE_ENV=development
+      - LATENCY=2000
+      - RES_STATUS_CODE=200
+    networks:
+      - form-builder

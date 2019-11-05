@@ -1,5 +1,6 @@
 import { connect } from 'react-redux'
 import FormPanel from '../components/FormPanel'
+import { push } from 'connected-react-router'
 
 import {
   getEvidenceByGroup
@@ -20,7 +21,8 @@ function mapStateToProps(state) {
 
 const formPanelContainer = connect(mapStateToProps, {
   getEvidenceByGroup,
-  focusQuestion
+  focusQuestion,
+  push
 })(FormPanel);
 
 export default formPanelContainer;

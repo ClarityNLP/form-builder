@@ -20,7 +20,7 @@ export default class FormBuilder extends Component {
   render() {
     const { patient } = this.props.patient.data;
 
-    return false ? (
+    return !patient ? (
       <Transient/>
     ) : (
       <div className="form-builder">

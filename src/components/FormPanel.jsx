@@ -91,7 +91,13 @@ export default class FormPanel extends Component {
     const __this = this;
     const { pathname } = this.props;
     const slug = pathname.substr(pathname.lastIndexOf('/') + 1);
+    if (!slug) { // if <basename>/app is navigated to you (edge case)
+      return __this.props.push(`/app/${slugify(this.props.form.groups[0])}`);
+    }
     const group = this.props.form.groups.find(group => slugify(group) === slug);
+    if (!group) { // if no groups match, select the first one automatically
+      return __this.props.push(`/app/${slugify(this.props.form.groups[0])}`);
+    }
     const filterQuestions = __this.filterQuestions(group);
     this.setState({
       group: group,
@@ -113,7 +119,13 @@ export default class FormPanel extends Component {
 
   if (pathname !== prevProps.pathname) {
     const slug = pathname.substr(pathname.lastIndexOf('/') + 1);
+    if (!slug) { // if <basename>/app is navigated to you (edge case)
+      return __this.props.push(`/app/${slugify(this.props.form.groups[0])}`);
+    }
     const group = this.props.form.groups.find(group => slugify(group) === slug);
+    if (!group) { // if no groups match, select the first one automatically
+      return __this.props.push(`/app/${slugify(this.props.form.groups[0])}`);
+    }
     const filterQuestions = __this.filterQuestions(group);
     this.setState({
       group: group,
