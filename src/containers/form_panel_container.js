@@ -3,18 +3,24 @@ import FormPanel from '../components/FormPanel'
 
 import {
   getEvidenceByGroup
-} from '../actions/evidence'
+} from '../actions/evidence';
+
+import {
+  focusQuestion
+} from '../actions/focus_question';
 
 function mapStateToProps(state) {
   return {
     pathname: state.router.location.pathname,
     form: state.form,
-    evidenceByGroup: state.evidenceByGroup
+    evidenceByGroup: state.evidenceByGroup,
+    evidence: state.evidence
   };
 }
 
 const formPanelContainer = connect(mapStateToProps, {
-  getEvidenceByGroup
+  getEvidenceByGroup,
+  focusQuestion
 })(FormPanel);
 
 export default formPanelContainer;

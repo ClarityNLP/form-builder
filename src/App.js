@@ -5,11 +5,14 @@ import configureStore from './store/store';
 import ApiClient from './helpers/ApiClient';
 import { createBrowserHistory } from 'history'
 import { ConnectedRouter } from 'connected-react-router';
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import FormBuilder from './components/FormBuilder';
+import FormBuilder from './containers/form_builder_container';
+import Launcher from './components/Launcher';
 
-const history = createBrowserHistory()
+const history = createBrowserHistory({
+  basename: process.env.PUBLIC_URL
+});
 const initialState = {}
 const apiClient = new ApiClient();
 const store = configureStore(initialState, apiClient, history);
@@ -18,7 +21,10 @@ function App() {
   return (
     <Provider store={store}>
       <ConnectedRouter history={history}>
-          <Route component={FormBuilder} />
+        <Switch>
+          <Route path="/app" component={FormBuilder} />
+          <Route path="/" component={Launcher} exact />
+        </Switch>
       </ConnectedRouter>
     </Provider>
   );

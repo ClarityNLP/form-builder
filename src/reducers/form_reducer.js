@@ -4,12 +4,13 @@ const initialState = {
   isLoading: false,
   isLoaded: true,
   isLoadError: false,
+  focusQuestion: null,
   ...form
 };
 
 export function formReducer(state = initialState, action = {}) {
   switch(action.type) {
-    // case 'GET_FORM_REQUESTED': {
+    // case 'GET_FORM_REQUESTED': { //TODO --> request form from api
     //   return {
     //     ...state,
     //     isLoading: true,
@@ -17,6 +18,12 @@ export function formReducer(state = initialState, action = {}) {
     //     isLoadError: false
     //   }
     // }
+    case 'FOCUS_QUESTION': { //TODO --> make this work
+      return {
+        ...state,
+        focusQuestion: action.data
+      }
+    }
     default:
       return state;
   }

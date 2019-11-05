@@ -5,7 +5,8 @@ import { push } from 'connected-react-router'
 function mapStateToProps(state) {
   return {
     pathname: state.router.location.pathname,
-    form: state.form
+    form: state.form,
+    evidenceByGroup: state.evidenceByGroup
   };
 }
 

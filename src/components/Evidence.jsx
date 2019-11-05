@@ -69,7 +69,6 @@ export default class Entity extends Component {
   }
 
   toggleReportTextIsActive = e => {
-    console.log('clicked...')
     this.setState(prevState => ({
       reportTextIsActive: !prevState.reportTextIsActive
     }));
@@ -120,43 +119,6 @@ export default class Entity extends Component {
                 <h6 className="evidence-report-type">{report_type}</h6>
                 <h6 className="evidence-date">@&nbsp;<Moment format='MMM DD, YYYY HH:MM'>{date}</Moment></h6>
               </Col>
-              {/*
-              <Col className='text-right'>
-                <ButtonGroup className='pr-1'>
-                  <Button
-                    onClick={() => {
-                      this.setFeedback(1);
-                    }}
-                    className={
-                      feedback === 1 ? 'entity_icon active' : 'entity_icon'
-                    }
-                    size='sm'
-                    outline
-                  >
-                    thumb_up
-                  </Button>
-                  <Button
-                    onClick={() => {
-                      this.setFeedback(2);
-                    }}
-                    className={
-                      feedback === 2 ? 'entity_icon active' : 'entity_icon'
-                    }
-                    size='sm'
-                    outline
-                  >
-                    thumb_down
-                  </Button>
-                </ButtonGroup>
-                <Button
-                  onClick={this.toggleComment}
-                  className='entity_icon'
-                  size='sm'
-                  outline
-                >
-                  tag
-                </Button>
-              </Col>*/}
             </Row>
           </Col>
           <div className="evidence-result-content">
@@ -167,19 +129,6 @@ export default class Entity extends Component {
               {this.getHighlightedText(sentence, highlights)}
             </div>
           ) : null}
-          {/*
-          <Col xs='12' className='text-center'>
-            {report_text.trim() !== '' ? (
-              <Button
-                color='link'
-                className='chevron'
-                onClick={this.toggleReportText}
-              >
-                chev_down
-              </Button>
-            ) : null}
-          </Col>
-          */}
           <div className="evidence-links">
             <span
               className="evidence-read-more"

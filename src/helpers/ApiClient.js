@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // TODO Move me elsewhere!
-const host = window.location.protocol + "//" + process.env.REACT_APP_API_HOST;
+const host = window.location.protocol + "//" + window._env_.NLPAAS_URL;
 
 export default class clientAPI {
   constructor() {
