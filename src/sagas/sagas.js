@@ -3,7 +3,7 @@ import { push } from 'connected-react-router'
 import axios from 'axios';
 
 const fetchEvidence = (evidence, payload) => {
-  return axios.post(`${window._env_.NLPAAS_URL}/4100r4/${evidence}`, payload)
+  return axios.post(`${window._env_.NLPAAS_URL}${evidence}`, payload)
 }
 
 export function* rootSaga() {

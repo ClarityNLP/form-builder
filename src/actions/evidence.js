@@ -34,7 +34,7 @@ export function getEvidenceByGroup(groupName, evidenceByGroup, questions, fhirCl
 
       const promiseArr = uniqueEvidArray.map(evid => {
         return axios
-        .post(`${window._env_.NLPAAS_URL}/4100r4/${evid}`, {
+        .post(`${window._env_.NLPAAS_URL}${evid}`, {
           fhir: fhirClient,
           reports: docRefs
         })
