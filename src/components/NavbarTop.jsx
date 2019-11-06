@@ -88,24 +88,24 @@ export default class NavbarTop extends Component {
               ></button>
             </header>
             <section className="modal-card-body">
-              <div class="columns">
-                <div class="column is-one-fifth">
+              <div className="columns">
+                <div className="column is-one-fifth">
                   <img src={`${process.env.PUBLIC_URL}/left_right_keys.svg`}/>
                 </div>
-                <div class="column is-four-fifths">
+                <div className="column is-four-fifths">
                   <span>Use the <strong>left and right arrow keys</strong> to navigate between question groups. The question groups are shown the menu on the left side of the screen.</span>
                 </div>
               </div>
-              <div class="columns">
-                <div class="column is-one-fifth">
+              <div className="columns">
+                <div className="column is-one-fifth">
                   <img src={`${process.env.PUBLIC_URL}/top_bottom_keys.svg`}/>
                 </div>
-                <div class="column is-four-fifths">
+                <div className="column is-four-fifths">
                   <span>Use the <strong>up and down arrow keys</strong> to navigate between questions within a group. The questions within a group are shown in the middle of the screen.</span>
                 </div>
               </div>
-              <div class="columns">
-                <div class="column is-one-fifth">
+              <div className="columns">
+                <div className="column is-one-fifth">
                   <div className="indicator is-focus">
                     <div className="question-number">
                       <div className="question-number-bubble">
@@ -115,12 +115,12 @@ export default class NavbarTop extends Component {
                     </div>
                   </div>
                 </div>
-                <div class="column is-four-fifths">
+                <div className="column is-four-fifths">
                   <span>This state means the question <strong>is focused</strong>. Evidence for the focused question will be shown on the right side of the screen.</span>
                 </div>
               </div>
-              <div class="columns">
-                <div class="column is-one-fifth">
+              <div className="columns">
+                <div className="column is-one-fifth">
                   <div className="indicator is-loading">
                     <div className="question-number">
                       <div className="question-number-bubble">
@@ -130,12 +130,12 @@ export default class NavbarTop extends Component {
                     </div>
                   </div>
                 </div>
-                <div class="column is-four-fifths">
+                <div className="column is-four-fifths">
                   <span>This state means the question <strong>is loading</strong>. Evidence for this question has not finished loading yet.</span>
                 </div>
               </div>
-              <div class="columns">
-                <div class="column is-one-fifth">
+              <div className="columns">
+                <div className="column is-one-fifth">
                   <div className="indicator is-loading is-focus">
                     <div className="question-number">
                       <div className="question-number-bubble">
@@ -145,12 +145,12 @@ export default class NavbarTop extends Component {
                     </div>
                   </div>
                 </div>
-                <div class="column is-four-fifths">
+                <div className="column is-four-fifths">
                   <span>This state means the question <strong>is focused and loading</strong>. Evidence for this question has not finished loading yet. When the evidence arrives, it will be on the right side of the screen.</span>
                 </div>
               </div>
-              <div class="columns">
-                <div class="column is-one-fifth">
+              <div className="columns">
+                <div className="column is-one-fifth">
                   <div className="indicator is-error">
                     <div className="question-number">
                       <div className="question-number-bubble">
@@ -160,12 +160,12 @@ export default class NavbarTop extends Component {
                     </div>
                   </div>
                 </div>
-                <div class="column is-four-fifths">
+                <div className="column is-four-fifths">
                   <span>This state means there was a <strong>problem getting the evidence for the question</strong>.</span>
                 </div>
               </div>
-              <div class="columns">
-                <div class="column is-one-fifth">
+              <div className="columns">
+                <div className="column is-one-fifth">
                   <div className="indicator is-error is-focus">
                     <div className="question-number">
                       <div className="question-number-bubble">
@@ -175,7 +175,7 @@ export default class NavbarTop extends Component {
                     </div>
                   </div>
                 </div>
-                <div class="column is-four-fifths">
+                <div className="column is-four-fifths">
                   <span>This state means there was a <strong>problem getting the evidence</strong> for the question and the <strong>question is focused</strong>.</span>
                 </div>
               </div>

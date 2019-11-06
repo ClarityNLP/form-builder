@@ -27,11 +27,13 @@ function* findNextGroup(action) {
     return {
       groups: state.form.groups,
       questions: state.form.questions,
-      evidenceByGroup: state.evidenceByGroup
+      evidenceByGroup: state.evidenceByGroup,
+      fhirClient: state.fhir.client,
+      docRefs: state.patient.data.docRefs
     }
   };
 
-  const { groups, questions, evidenceByGroup } = yield select(getState);
+  const { groups, questions, evidenceByGroup, fhirClient, docRefs } = yield select(getState);
   const currentGroupIndex = groups.findIndex(group => group === currentGroup);
   const offset = currentGroupIndex;
 
@@ -43,17 +45,19 @@ function* findNextGroup(action) {
         .filter(q => q.nlpql_grouping)
 
       if (!evidenceByGroup[group] && (evidArray.length > 0)) { //TODO add check for error and it can repeat!
-        yield fetchGroupEvidence(group, evidenceByGroup, questions);
+        yield fetchGroupEvidence(group, evidenceByGroup, questions, fhirClient, docRefs);
         break;
       }                                                     // || evidenceByGroup[group].isLoadError
   }
 }
 
-function* handleFetchEvidence(evidence) {
+function* handleFetchEvidence(evidence, fhirClient, docRefs) {
 
-  //TODO add payload, instead of {} -->
   try {
-    const json = yield call(fetchEvidence, evidence, {});
+    const json = yield call(fetchEvidence, evidence, {
+      fhir: fhirClient,
+      reports: docRefs
+    });
 
     yield put({
       type: 'GET_EVIDENCE_FULFILLED',
@@ -80,7 +84,7 @@ function* handleFetchEvidence(evidence) {
   }
 }
 
-function* fetchGroupEvidence(groupName, evidenceByGroup, questions) {
+function* fetchGroupEvidence(groupName, evidenceByGroup, questions, fhirClient, docRefs) {
 
   const __this = this;
 
@@ -105,7 +109,7 @@ function* fetchGroupEvidence(groupName, evidenceByGroup, questions) {
     return;
   }
 
-  yield all(uniqueEvidArray.map(evidence => call(handleFetchEvidence, evidence)));
+  yield all(uniqueEvidArray.map(evidence => call(handleFetchEvidence, evidence, fhirClient, docRefs)));
 
   yield put({
     type: 'GET_EVIDENCE_BY_GROUP_FULFILLED',

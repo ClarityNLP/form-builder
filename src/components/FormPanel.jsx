@@ -106,7 +106,13 @@ export default class FormPanel extends Component {
     });
     this.refs = this.getRefs(filterQuestions);
     return this.props.focusQuestion(filterQuestions[0].question_number)
-      .then(() => this.props.getEvidenceByGroup(group, __this.props.evidenceByGroup[group], __this.props.form.questions))
+      .then(() => this.props.getEvidenceByGroup(
+        group,
+        __this.props.evidenceByGroup[group],
+        __this.props.form.questions,
+        __this.props.fhirClient,
+        __this.props.docRefs
+      ))
   }
 
   componentWillUnmount(){
@@ -134,7 +140,13 @@ export default class FormPanel extends Component {
     });
     this.refs = this.getRefs(filterQuestions);
     return this.props.focusQuestion(filterQuestions[0].question_number)
-      .then(() => this.props.getEvidenceByGroup(group, __this.props.evidenceByGroup[group], __this.props.form.questions))
+      .then(() => this.props.getEvidenceByGroup(
+        group,
+        __this.props.evidenceByGroup[group],
+        __this.props.form.questions,
+        __this.props.fhirClient,
+        __this.props.docRefs
+      ))
   }
 
 }

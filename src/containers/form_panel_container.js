@@ -15,7 +15,9 @@ function mapStateToProps(state) {
     pathname: state.router.location.pathname,
     form: state.form,
     evidenceByGroup: state.evidenceByGroup,
-    evidence: state.evidence
+    evidence: state.evidence,
+    fhirClient: state.fhir.client,
+    docRefs: state.patient.data.docRefs
   };
 }
 

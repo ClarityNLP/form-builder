@@ -1,7 +1,7 @@
 import axios from 'axios';
 import idx from 'idx';
 
-export function getEvidenceByGroup(groupName, evidenceByGroup, questions) {
+export function getEvidenceByGroup(groupName, evidenceByGroup, questions, fhirClient, docRefs) {
   return (dispatch) => {
     return new Promise(function(resolve, reject) {
 
@@ -34,7 +34,10 @@ export function getEvidenceByGroup(groupName, evidenceByGroup, questions) {
 
       const promiseArr = uniqueEvidArray.map(evid => {
         return axios
-        .post(`http://localhost:1337/4100r4/${evid}`, {}) //TODO add data instead of {}
+        .post(`${window._env_.NLPAAS_URL}/4100r4/${evid}`, {
+          fhir: fhirClient,
+          reports: docRefs
+        })
         .then(res => {
           dispatch({
             type: 'GET_EVIDENCE_FULFILLED',
