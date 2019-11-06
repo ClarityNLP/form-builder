@@ -124,11 +124,11 @@ export default class Entity extends Component {
           <div className="evidence-result-content">
             {this.getHighlightedText(result_content, highlights)}
           </div>
-          {sentence !== '' ? (
+          {/*{sentence !== '' ? (
             <div className="evidence-sentence">
               {this.getHighlightedText(sentence, highlights)}
             </div>
-          ) : null}
+          ) : null}TODO ask about data structure and guarantees...*/}
           <div className="evidence-links">
             <span
               className="evidence-read-more"
