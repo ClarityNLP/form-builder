@@ -93,7 +93,7 @@ export default class NavbarTop extends Component {
                   <img src={`${process.env.PUBLIC_URL}/left_right_keys.svg`}/>
                 </div>
                 <div className="column is-four-fifths">
-                  <span>Use the <strong>left and right arrow keys</strong> to navigate between question groups. The question groups are shown the menu on the left side of the screen.</span>
+                  <span>Use the <strong>left and right arrow keys</strong> to navigate between question groups. The question groups are shown on the menu on the left side of the screen.</span>
                 </div>
               </div>
               <div className="columns">
