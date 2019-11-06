@@ -1,7 +1,8 @@
-.question-block {
-  list-style: none;
+.indicator {
   display: flex;
-  border-bottom: 1px solid #dbdbdb;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
   &.is-focus {
     .question-number {
       .question-number-bubble {
@@ -90,7 +91,6 @@
     }
   }
   .question-number {
-    border-right: 1px solid #dbdbdb;
     flex: none;
     width: 50px;
     display: flex;
@@ -106,35 +106,5 @@
       position: relative;
       transition: background-color 0.5s, color 0.5s, box-shadow 0.5s, border-color 0.5s;
     }
-  }
-  .question-content {
-    padding: 15px 10px;
-    flex: 1;
-    .question-name {
-      font-size: 20px;
-      line-height: 20px;
-      margin-bottom: 10px;
-      color: #543d6f;
-    }
-    .control {
-      label.radio {
-        color: #575757;
-        input[type=radio] {
-          margin-right: 5px;
-        }
-      }
-      input[type=text] {
-        width: inherit;
-      }
-    }
-  }
-}
-
-@keyframes spinner {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
   }
 }

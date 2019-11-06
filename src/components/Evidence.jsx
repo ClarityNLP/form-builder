@@ -140,11 +140,11 @@ export default class Entity extends Component {
           </div>
         </Row>
 
-        <div className={`modal ${reportTextIsActive ? 'is-active' : ''}`}>
+        <div className={`evidence-report-modal modal ${reportTextIsActive ? 'is-active' : ''}`}>
           <div className="modal-background"></div>
           <div className="modal-card">
             <header className="modal-card-head">
-              <p className="modal-card-title">Modal title</p>
+              <p className="modal-card-title">{report_type}</p>
               <button
                 className="delete"
                 aria-label="close"
@@ -157,8 +157,8 @@ export default class Entity extends Component {
             </pre>
             </section>
             <footer className="modal-card-foot">
-              <button className="button is-primary">Approve</button>
-              <button className="button is-primary">Dis</button>
+              <button className="button is-primary">Valid</button>
+              <button className="button is-primary is-outlined">Not valid</button>
               <button
                 className="button"
                 onClick={this.toggleReportTextIsActive}
