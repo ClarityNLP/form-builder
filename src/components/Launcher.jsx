@@ -5,7 +5,7 @@ import Transient from './Transient';
 export default class Launcher extends Component {
   componentDidMount() {
     SMART.authorize({
-      clientid: window._env_.FHIR_CLIENT_ID,
+      clientId: window._env_.FHIR_CLIENT_ID,
       scope: window._env_.FHIR_SCOPES,
       iss: window._env_.FHIR_ISS,
       // clientId: "my-client-id",
