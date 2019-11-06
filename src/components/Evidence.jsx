@@ -116,13 +116,19 @@ export default class Entity extends Component {
           <Col xs='12'>
             <Row>
               <Col>
-                <h6 className="evidence-report-type">{report_type}</h6>
+                <h6 className="evidence-report-type">{report_type ? report_type : '<NO-REPORT-TYPE>'}</h6>
                 <h6 className="evidence-date">@&nbsp;<Moment format='MMM DD, YYYY HH:MM'>{date}</Moment></h6>
               </Col>
             </Row>
           </Col>
           <div className="evidence-result-content">
-            {this.getHighlightedText(result_content, highlights)}
+            {result_content ? (
+              <React.Fragment>
+              {this.getHighlightedText(result_content, highlights)}
+              </React.Fragment>
+            ) : (
+              "<NO-RESULT-CONTENT>"
+            )}
           </div>
           {/*{sentence !== '' ? (
             <div className="evidence-sentence">
@@ -144,7 +150,7 @@ export default class Entity extends Component {
           <div className="modal-background"></div>
           <div className="modal-card">
             <header className="modal-card-head">
-              <p className="modal-card-title">{report_type}</p>
+              <p className="modal-card-title">{report_type ? report_type : '<NO-REPORT-TYPE>'}</p>
               <button
                 className="delete"
                 aria-label="close"
@@ -152,9 +158,13 @@ export default class Entity extends Component {
               ></button>
             </header>
             <section className="modal-card-body">
-              <pre className='report_text'>
+              {report_text ? (
+                <pre className='report_text'>
                 {this.getHighlightedText(report_text, highlights)}
-            </pre>
+                </pre>
+              ) : (
+                "<NO-RESULT-TEXT>"
+              )}
             </section>
             <footer className="modal-card-foot">
               <button className="button is-primary">Valid</button>

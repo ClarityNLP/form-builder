@@ -109,6 +109,7 @@ export default class FormPanel extends Component {
       .then(() => this.props.getEvidenceByGroup(
         group,
         __this.props.evidenceByGroup[group],
+        __this.props.evidence,
         __this.props.form.questions,
         __this.props.fhirClient,
         __this.props.docRefs
@@ -143,6 +144,7 @@ export default class FormPanel extends Component {
       .then(() => this.props.getEvidenceByGroup(
         group,
         __this.props.evidenceByGroup[group],
+        __this.props.evidence,
         __this.props.form.questions,
         __this.props.fhirClient,
         __this.props.docRefs

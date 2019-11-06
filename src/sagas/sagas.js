@@ -29,11 +29,12 @@ function* findNextGroup(action) {
       questions: state.form.questions,
       evidenceByGroup: state.evidenceByGroup,
       fhirClient: state.fhir.client,
-      docRefs: state.patient.data.docRefs
+      docRefs: state.patient.data.docRefs,
+      evidences: state.evidence
     }
   };
 
-  const { groups, questions, evidenceByGroup, fhirClient, docRefs } = yield select(getState);
+  const { groups, questions, evidences, evidenceByGroup, fhirClient, docRefs } = yield select(getState);
   const currentGroupIndex = groups.findIndex(group => group === currentGroup);
   const offset = currentGroupIndex;
 
@@ -45,7 +46,7 @@ function* findNextGroup(action) {
         .filter(q => q.nlpql_grouping)
 
       if (!evidenceByGroup[group] && (evidArray.length > 0)) { //TODO add check for error and it can repeat!
-        yield fetchGroupEvidence(group, evidenceByGroup, questions, fhirClient, docRefs);
+        yield fetchGroupEvidence(group, evidenceByGroup, evidences, questions, fhirClient, docRefs);
         break;
       }                                                     // || evidenceByGroup[group].isLoadError
   }
@@ -84,7 +85,7 @@ function* handleFetchEvidence(evidence, fhirClient, docRefs) {
   }
 }
 
-function* fetchGroupEvidence(groupName, evidenceByGroup, questions, fhirClient, docRefs) {
+function* fetchGroupEvidence(groupName, evidenceByGroup, evidences, questions, fhirClient, docRefs) {
 
   const __this = this;
 
@@ -100,8 +101,11 @@ function* fetchGroupEvidence(groupName, evidenceByGroup, questions, fhirClient, 
 
   const uniqueEvidSet = new Set(evidArray);
   const uniqueEvidArray = [...uniqueEvidSet];
+  const uniqueUnloadedEvidArray = uniqueEvidArray.reduce((acc, current) => {
+    return !evidences[current] ? [...acc, current] : acc;
+  }, []);
 
-  if (uniqueEvidArray.length === 0) {  //if no evidences, dispatch that this groupName is done.
+  if (uniqueUnloadedEvidArray.length === 0) {  //if no evidences, dispatch that this groupName is done.
     yield put({
       type: 'GET_EVIDENCE_BY_GROUP_FULFILLED',
       data: groupName
@@ -109,7 +113,7 @@ function* fetchGroupEvidence(groupName, evidenceByGroup, questions, fhirClient, 
     return;
   }
 
-  yield all(uniqueEvidArray.map(evidence => call(handleFetchEvidence, evidence, fhirClient, docRefs)));
+  yield all(uniqueUnloadedEvidArray.map(evidence => call(handleFetchEvidence, evidence, fhirClient, docRefs)));
 
   yield put({
     type: 'GET_EVIDENCE_BY_GROUP_FULFILLED',

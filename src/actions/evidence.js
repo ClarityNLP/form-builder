@@ -1,7 +1,7 @@
 import axios from 'axios';
 import idx from 'idx';
 
-export function getEvidenceByGroup(groupName, evidenceByGroup, questions, fhirClient, docRefs) {
+export function getEvidenceByGroup(groupName, evidenceByGroup, evidences, questions, fhirClient, docRefs) {
   return (dispatch) => {
     return new Promise(function(resolve, reject) {
 
@@ -23,8 +23,14 @@ export function getEvidenceByGroup(groupName, evidenceByGroup, questions, fhirCl
 
       const uniqueEvidSet = new Set(evidArray);
       const uniqueEvidArray = [...uniqueEvidSet];
+      // Important: w/i an unloaded evidence group, there is a chance that one of the
+      // evidence bundles has already been loaded in a previous evidence group.
+      // i.e. hematocrit_hematologic_findings in form 4100
+      const uniqueUnloadedEvidArray = uniqueEvidArray.reduce((acc, current) => {
+        return !evidences[current] ? [...acc, current] : acc;
+      }, []);
 
-      if (uniqueEvidArray.length === 0) {  //if no evidences, dispatch that this groupName is done.
+      if (uniqueUnloadedEvidArray.length === 0) {  //if no evidences, dispatch that this groupName is done.
         dispatch({
           type: 'GET_EVIDENCE_BY_GROUP_FULFILLED',
           data: groupName
@@ -32,7 +38,7 @@ export function getEvidenceByGroup(groupName, evidenceByGroup, questions, fhirCl
         return resolve();
       }
 
-      const promiseArr = uniqueEvidArray.map(evid => {
+      const promiseArr = uniqueUnloadedEvidArray.map(evid => {
         return axios
         .post(`${window._env_.NLPAAS_URL}${evid}`, {
           fhir: fhirClient,
