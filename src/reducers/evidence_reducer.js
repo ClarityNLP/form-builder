@@ -41,6 +41,9 @@ export function evidenceReducer(state = initialState, action = {}) {
         }
       }
     }
+    case 'GET_FORM_REQUESTED': {
+      return {};
+    }
     default:
       return state;
   }

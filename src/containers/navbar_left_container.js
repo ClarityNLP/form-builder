@@ -2,11 +2,12 @@ import { connect } from 'react-redux'
 import NavbarLeft from '../components/NavbarLeft'
 import { push } from 'connected-react-router'
 
-function mapStateToProps(state) {
+function mapStateToProps(state, ownProps) {
   return {
     pathname: state.router.location.pathname,
     form: state.form,
-    evidenceByGroup: state.evidenceByGroup
+    evidenceByGroup: state.evidenceByGroup,
+    ...ownProps.params
   };
 }
 

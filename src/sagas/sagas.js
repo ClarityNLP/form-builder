@@ -25,8 +25,8 @@ function* findNextGroup(action) {
 
   const getState = state => {
     return {
-      groups: state.form.groups,
-      questions: state.form.questions,
+      groups: state.form.content.groups,
+      questions: state.form.content.questions,
       evidenceByGroup: state.evidenceByGroup,
       fhirClient: state.fhir.client,
       docRefs: state.patient.data.docRefs,

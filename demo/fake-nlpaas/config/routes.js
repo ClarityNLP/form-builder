@@ -11,6 +11,7 @@
 module.exports.routes = {
 
   'get /4100r4/:nlpql': 'EvidenceController.getResults',
-  'post /4100r4/:nlpql': 'EvidenceController.getResultsPost'
-
+  'post /4100r4/:nlpql': 'EvidenceController.getResultsPost',
+  'get /forms/:slug': 'FormController.getForm',
+  'get /forms': 'FormController.getForms'
 };

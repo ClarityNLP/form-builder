@@ -1,18 +1,18 @@
-export default {
-    "name": "Sickle Cell",
+{
+    "name": "Atrial Fibrilation",
     "owner": "gatech",
     "allocated_users": [
         "admin"
     ],
     "groups": [
-        "SCDC"
+        "Case"
     ],
     "questions": [
         {
-            "question_name": "Sickle Cell",
+            "question_name": "Atrial Fibrilation?",
             "question_type": "MULTIPLE_CHOICE",
             "question_number": "1",
-            "group": "SCDC",
+            "group": "Case",
             "answers": [
                 {
                     "text": "Yes",
@@ -24,18 +24,18 @@ export default {
                 }
             ],
             "evidence_bundle": {
-                "sickle_cell": [
-                    "sickle_cell_structured",
-                    "sickle_cell_unstructured"
+                "case": [
+                    "case_keywords",
+                    "case_codes"
                 ]
             },
-            "nlpql_grouping": "sickle_cell"
+            "nlpql_grouping": "case"
         },
         {
-            "question_name": "Sickle Cell Trait",
+            "question_name": "Heart transplant?",
             "question_type": "MULTIPLE_CHOICE",
             "question_number": "2",
-            "group": "SCDC",
+            "group": "Case",
             "answers": [
                 {
                     "text": "Yes",
@@ -47,17 +47,17 @@ export default {
                 }
             ],
             "evidence_bundle": {
-                "sickle_cell_trait": [
-                    "sickle_cell_trt_structured"
+                "case": [
+                    "heart_transplant_codes"
                 ]
             },
-            "nlpql_grouping": "sickle_cell_trait"
+            "nlpql_grouping": "case"
         },
         {
-            "question_name": "Sickle Cell Trait",
+            "question_name": "Matches Case?",
             "question_type": "MULTIPLE_CHOICE",
-            "question_number": "2",
-            "group": "SCDC",
+            "question_number": "3",
+            "group": "Case",
             "answers": [
                 {
                     "text": "Yes",
@@ -69,17 +69,16 @@ export default {
                 }
             ],
             "evidence_bundle": {
-                "sickle_cell_trait": [
-                    "sickle_cell_trt_unstructured"
+                "case": [
+                    "matches_afib_case"
                 ]
             },
-            "nlpql_grouping": "sickle_cell_trait"
+            "nlpql_grouping": "case"
         }
     ],
     "evidence_bundles": [
-        "sickle_cell",
-        "sickle_cell_trait"
+        "case"
     ],
-    "version": "0.0.1",
+    "version": "0.1.3",
     "questions_with_evidence_count": 0
 }

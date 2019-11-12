@@ -22,7 +22,9 @@ function App() {
     <Provider store={store}>
       <ConnectedRouter history={history}>
         <Switch>
-          <Route path="/app" component={FormBuilder} />
+          <Route path="/app/:formSlug/:groupSlug" component={FormBuilder}/>
+          <Route path="/app/:formSlug" component={FormBuilder}/>
+          <Route path="/app" component={FormBuilder}/>
           <Route path="/" component={Launcher} exact />
           <Redirect to="/app"/>
         </Switch>

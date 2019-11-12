@@ -3,7 +3,6 @@ const initialState = {};
 export function evidenceByGroupReducer(state = initialState, action = {}) {
   switch(action.type) {
     case 'GET_EVIDENCE_BY_GROUP_REQUESTED': {
-      console.log('action: ',action);
       return {
         ...state,
         [action.data]: {
@@ -37,6 +36,9 @@ export function evidenceByGroupReducer(state = initialState, action = {}) {
           errorMessage: null
         }
       }
+    }
+    case 'GET_FORM_REQUESTED': {
+      return {}
     }
     default:
       return state;

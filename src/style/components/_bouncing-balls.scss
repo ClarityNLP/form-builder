@@ -1,0 +1,30 @@
+.b-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 60px;
+  flex-direction: row;
+  .ball {
+    background-color: $primary;
+    border-radius: 50%;
+    display: block;
+    width: 15px;
+    height: 15px;
+    animation: jump 0.7s ease-in-out infinite;
+    &:nth-child(2) {
+      animation-delay: 0.15s;
+    }
+    &:nth-child(3) {
+      animation-delay: 0.3s;
+    }
+    @keyframes jump {
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-20px);
+      }
+    }
+  }
+}

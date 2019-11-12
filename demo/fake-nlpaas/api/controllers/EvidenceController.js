@@ -70,7 +70,7 @@ module.exports = {
 
     const wait = ms => new Promise((r, j)=>setTimeout(r, ms))
 
-    await wait(1000);
+    await wait(3000);
 
     // let results = JSON.parse(fs.readFileSync('data/results.json'));
 

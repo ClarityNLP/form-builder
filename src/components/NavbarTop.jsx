@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 export default class NavbarTop extends Component {
 
@@ -16,14 +17,20 @@ export default class NavbarTop extends Component {
     }));
   };
 
+  openCatalog = () => {
+    return this.props.openCatalog();
+  };
+
   render() {
+    const { content } = this.props.form;
+
     return (
       <React.Fragment>
         <div className="navbar-top">
           <nav className="navbar is-primary" role="navigation" aria-label="main navigation">
             <div className="navbar-brand">
               <a className="navbar-item" href="#">
-                <b>Form 4100 R4.0</b>
+                <b>Smart Chart</b>
               </a>
 
               <a role="button" className="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
@@ -33,41 +40,48 @@ export default class NavbarTop extends Component {
               </a>
             </div>
 
-            <div id="navbarBasicExample" className="navbar-menu">
+            <div className="navbar-menu">
               <div className="navbar-start">
+                <div className="form-dropdown navbar-item has-dropdown is-hoverable">
+                  <a className="navbar-link">
+                    <div className="form-dropdown-text">{content ? content.name : ''}</div>
+                  </a>
+
+                  <div className="navbar-dropdown">
+                    { content ? (
+                      <React.Fragment>
+                      {this.props.forms.map((form, index) => {
+                        return (
+                          <Link key={index} to={`/app/${form.slug}`} className={`navbar-item ${form.name === content.name ? 'is-current' : ''}`}>
+                            {form.name}
+                          </Link>
+                        )
+                      })}
+                      <hr className="navbar-divider"/>
+                      <a
+                        className="navbar-item"
+                        onClick={this.openCatalog}
+                      >
+                        View Catalog
+                      </a>
+                      </React.Fragment>
+                    ) : (
+                      <div className="navbar-item">Loading forms...</div>
+                    )}
+                  </div>
+                </div>
                 <a
                   className="navbar-item"
                   onClick={this.toggleHowToUseIsActive}
                 >
                   How to Use
                 </a>
-                <div className="navbar-item has-dropdown is-hoverable">
-                  <a className="navbar-link">
-                    Change Version
-                  </a>
-
-                  <div className="navbar-dropdown">
-                    <a className="navbar-item">
-                      Form 4100 R4.1
-                    </a>
-                    <a className="navbar-item">
-                      Form 4100 R4.2
-                    </a>
-                    <a className="navbar-item">
-                      Form 4100 R4.3
-                    </a>
-                    <hr className="navbar-divider"/>
-                    <a className="navbar-item">
-                      Report an issue
-                    </a>
-                  </div>
-                </div>
               </div>
 
               <div className="navbar-end">
                 <div className="navbar-item progress-bar">
                   <progress className="progress is-small" value="15" max="100">15></progress>
-                  <div className="progress-count">50/193</div>
+                  <div className="progress-count">{ this.props.form.isLoading ? 'Loading...' : '50/193' }</div>
                 </div>
                 <div className="navbar-item">
                   <div className="button is-light">Submit</div>

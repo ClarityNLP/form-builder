@@ -2,6 +2,41 @@
   list-style: none;
   display: flex;
   border-bottom: 1px solid #dbdbdb;
+  &.is-skeleton {
+    height: 80px; /* change height to see repeat-y behavior */
+
+    background-image:
+      radial-gradient( circle 15px at 15px 15px, #e4ddeb 99%, transparent 0 ),
+      linear-gradient( 100deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.5) 50%, rgba(255, 255, 255, 0) 80% ),
+      linear-gradient( #e4ddeb 20px, transparent 0 ),
+      linear-gradient( #e4ddeb 20px, transparent 0 );
+
+    background-repeat: repeat-y;
+
+    background-size:
+      100px 200px, /* circle */
+      50px 200px, /* highlight */
+      400px 200px,
+      200px 200px;
+
+    background-position:
+      9px 25px, /* circle */
+      0 0, /* highlight */
+      62px 15px,
+      62px 45px;
+
+    animation: shineQuestion 1s infinite;
+
+    @keyframes shineQuestion {
+      to {
+        background-position:
+          9px 25px,
+          100% 0, /* move highlight to right */
+          62px 15px,
+          62px 45px;
+      }
+    }
+  }
   &.is-focus {
     .question-number {
       .question-number-bubble {

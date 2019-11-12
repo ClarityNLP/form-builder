@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Evidence from './Evidence';
 import idx from 'idx';
+import BouncingBalls from './BouncingBalls';
 
 export default class EvidencePanel extends Component {
 
@@ -9,7 +10,15 @@ export default class EvidencePanel extends Component {
   }
 
   renderEvidenceContent = () => {
-    const { focusQuestion, evidence, questions } = this.props;
+    const { focusQuestion, evidence, content } = this.props;
+
+    if (!content) {
+      return (
+        <div className="is-loading">
+          <BouncingBalls/>
+        </div>
+      )
+    }
 
     if (!focusQuestion) {
       return (
@@ -17,7 +26,7 @@ export default class EvidencePanel extends Component {
       )
     }
 
-    const question = questions.find(q => q.question_number === focusQuestion);
+    const question = content.questions.find(q => q.question_number === focusQuestion);
 
     if (!question) {
       return (
@@ -37,16 +46,12 @@ export default class EvidencePanel extends Component {
       )
     }
 
-    const expandedEvidence = this.props.evidence[oneEvidence];
+    const expandedEvidence = evidence[oneEvidence];
 
     if (!expandedEvidence || expandedEvidence.isLoading) {
       return (
         <div className="is-loading">
-          <div className="b-container">
-          	<span className="ball"></span>
-          	<span className="ball"></span>
-          	<span className="ball"></span>
-          </div>
+          <BouncingBalls/>
         </div>
       )
     }

@@ -51,7 +51,7 @@ export default class FormPanel extends Component {
   }
 
   filterQuestions = (group) => {
-    const filteredQuestions = this.props.form.questions.filter((question) => {
+    const filteredQuestions = this.props.form.content.questions.filter((question) => {
       return question.group === group;
     });
     return filteredQuestions;
@@ -88,32 +88,36 @@ export default class FormPanel extends Component {
   componentDidMount(){
     document.addEventListener("keydown", this.keyPressed, false);
 
-    const __this = this;
-    const { pathname } = this.props;
-    const slug = pathname.substr(pathname.lastIndexOf('/') + 1);
-    if (!slug) { // if <basename>/app is navigated to you (edge case)
-      return __this.props.push(`/app/${slugify(this.props.form.groups[0])}`);
+    const { formSlug, groupSlug } = this.props;
+
+    if (formSlug) {
+      return this.props.getForm(formSlug)
+        .then(() => {
+          const group = this.props.form.content.groups.find(group => slugify(group) === groupSlug);
+          if (!group) {
+            return this.props.push(`/app/${formSlug}/${slugify(this.props.form.content.groups[0])}`);
+          }
+          const filterQuestions = this.filterQuestions(group);
+          this.setState({
+            group: group,
+            filteredQuestions: filterQuestions,
+            focusedQuestionNumber: filterQuestions[0].question_number
+          });
+          this.refs = this.getRefs(filterQuestions);
+          return this.props.focusQuestion(filterQuestions[0].question_number)
+            .then(() => this.props.getEvidenceByGroup(
+              group,
+              this.props.evidenceByGroup[group],
+              this.props.evidence,
+              this.props.form.content.questions,
+              this.props.fhirClient,
+              this.props.docRefs
+            ))
+        })
+        .catch(error => {
+          //TODO just handle catch in .getForm action and open Catalog via props
+        })
     }
-    const group = this.props.form.groups.find(group => slugify(group) === slug);
-    if (!group) { // if no groups match, select the first one automatically
-      return __this.props.push(`/app/${slugify(this.props.form.groups[0])}`);
-    }
-    const filterQuestions = __this.filterQuestions(group);
-    this.setState({
-      group: group,
-      filteredQuestions: filterQuestions,
-      focusedQuestionNumber: filterQuestions[0].question_number
-    });
-    this.refs = this.getRefs(filterQuestions);
-    return this.props.focusQuestion(filterQuestions[0].question_number)
-      .then(() => this.props.getEvidenceByGroup(
-        group,
-        __this.props.evidenceByGroup[group],
-        __this.props.evidence,
-        __this.props.form.questions,
-        __this.props.fhirClient,
-        __this.props.docRefs
-      ))
   }
 
   componentWillUnmount(){
@@ -121,59 +125,90 @@ export default class FormPanel extends Component {
   }
 
   componentDidUpdate(prevProps) {
-  const __this = this;
-  const { pathname } = this.props;
+    const { formSlug, groupSlug } = this.props;
 
-  if (pathname !== prevProps.pathname) {
-    const slug = pathname.substr(pathname.lastIndexOf('/') + 1);
-    if (!slug) { // if <basename>/app is navigated to you (edge case)
-      return __this.props.push(`/app/${slugify(this.props.form.groups[0])}`);
+    if (formSlug !== prevProps.formSlug) {
+      return this.props.resetForm()
+        .then(() => this.props.getForm(formSlug))
+        .then((form) => {
+          const group = this.props.form.content.groups.find(group => slugify(group) === groupSlug);
+          return !group ? (
+            this.props.push(`/app/${formSlug}/${slugify(this.props.form.content.groups[0])}`)
+          ) : (
+            this.props.push(`/app/${formSlug}/${groupSlug}`)
+          )
+        })
     }
-    const group = this.props.form.groups.find(group => slugify(group) === slug);
-    if (!group) { // if no groups match, select the first one automatically
-      return __this.props.push(`/app/${slugify(this.props.form.groups[0])}`);
-    }
-    const filterQuestions = __this.filterQuestions(group);
-    this.setState({
-      group: group,
-      filteredQuestions: filterQuestions,
-      focusedQuestionNumber: filterQuestions[0].question_number
-    });
-    this.refs = this.getRefs(filterQuestions);
-    return this.props.focusQuestion(filterQuestions[0].question_number)
-      .then(() => this.props.getEvidenceByGroup(
-        group,
-        __this.props.evidenceByGroup[group],
-        __this.props.evidence,
-        __this.props.form.questions,
-        __this.props.fhirClient,
-        __this.props.docRefs
-      ))
+
+    if (groupSlug !== prevProps.groupSlug) {
+      const group = this.props.form.content.groups.find(group => slugify(group) === groupSlug) //|| this.props.form.content.groups[0];
+      if (!group) {
+        return this.props.push(`/app/${formSlug}/${slugify(this.props.form.content.groups[0])}`);
+      }
+      const filterQuestions = this.filterQuestions(group);
+      this.setState({
+        group: group,
+        filteredQuestions: filterQuestions,
+        focusedQuestionNumber: filterQuestions[0].question_number
+      });
+      this.refs = this.getRefs(filterQuestions);
+      return this.props.focusQuestion(filterQuestions[0].question_number)
+        .then(() => this.props.closeCatalog())
+        .then(() => this.props.getEvidenceByGroup(
+          group,
+          this.props.evidenceByGroup[group],
+          this.props.evidence,
+          this.props.form.content.questions,
+          this.props.fhirClient,
+          this.props.docRefs
+        ))
+      }
   }
-
-}
 
   render() {
     return (
       <div className="form-panel">
-        {this.state.filteredQuestions.map((question) => {
-          return (
-            <li
-              key={question.question_number}
-              ref={this.refs[question.question_number]}
-              className={`question-block ${this.getQuestionBlockClasses(question)}`}
-              onClick={ () => this.focusQuestion(question.question_number) }
-            >
-              <div className="question-number">
-                <div className="question-number-bubble">
-                  <div className="question-number-bubble-border"></div>
-                  <div className="question-number-bubble-content">{question.question_number}</div>
-                </div>
+        { !this.props.form.content ? (
+          <React.Fragment>
+          <li className="question-block is-skeleton">
+            <div className="question-number">
+              <div className="question-number-bubble">
+                <div className="question-number-bubble-border"></div>
+                <div className="question-number-bubble-content"></div>
               </div>
-              <Question question={question}/>
-            </li>
-          )
-        })}
+            </div>
+          </li>
+          <li className="question-block is-skeleton">
+            <div className="question-number">
+              <div className="question-number-bubble">
+                <div className="question-number-bubble-border"></div>
+                <div className="question-number-bubble-content"></div>
+              </div>
+            </div>
+          </li>
+          </React.Fragment>
+        ) : (
+          <React.Fragment>
+          {this.state.filteredQuestions.map((question) => {
+            return (
+              <li
+                key={question.question_number}
+                ref={this.refs[question.question_number]}
+                className={`question-block ${this.getQuestionBlockClasses(question)}`}
+                onClick={ () => this.focusQuestion(question.question_number) }
+              >
+                <div className="question-number">
+                  <div className="question-number-bubble">
+                    <div className="question-number-bubble-border"></div>
+                    <div className="question-number-bubble-content">{question.question_number}</div>
+                  </div>
+                </div>
+                <Question question={question}/>
+              </li>
+            )
+          })}
+          </React.Fragment>
+        )}
       </div>
     )
   }
