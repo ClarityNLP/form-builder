@@ -18,6 +18,7 @@ module.exports = {
   getResultsPost: async function(req,res) {
 
     const nlpql = req.param('nlpql');
+    const formSlug = req.param('formSlug');
 
     function duplicateElements(array, times) {
       return array.reduce((res, current) => {

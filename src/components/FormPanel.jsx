@@ -106,6 +106,7 @@ export default class FormPanel extends Component {
           this.refs = this.getRefs(filterQuestions);
           return this.props.focusQuestion(filterQuestions[0].question_number)
             .then(() => this.props.getEvidenceByGroup(
+              formSlug,
               group,
               this.props.evidenceByGroup[group],
               this.props.evidence,
@@ -155,6 +156,7 @@ export default class FormPanel extends Component {
       return this.props.focusQuestion(filterQuestions[0].question_number)
         .then(() => this.props.closeCatalog())
         .then(() => this.props.getEvidenceByGroup(
+          formSlug,
           group,
           this.props.evidenceByGroup[group],
           this.props.evidence,

@@ -15,9 +15,7 @@ module.exports = {
 
   getForm: async function(req,res) {
 
-    const slug = req.param('slug');
-
-    console.log("SLUG: ",slug);
+    const slug = req.param('formSlug');
 
     const wait = ms => new Promise((r, j)=>setTimeout(r, ms))
 

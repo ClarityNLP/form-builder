@@ -35,11 +35,14 @@ export function getForm(slug) {
         type: 'GET_FORM_REQUESTED'
       });
 
-      axios.get(`${window._env_.FORM_CMS_URL}/forms/${slug}`)
+      axios.get(`${window._env_.FORM_CMS_URL}/form/NLPQL_form_content/${slug}/questions`)
       .then(res => {
         dispatch({
           type: 'GET_FORM_FULFILLED',
-          data: res.data
+          data: {
+            slug: slug,
+            ...res.data
+          }
         });
         resolve(`Finished retrieving form ${slug}`);
       })

@@ -2,8 +2,8 @@ import { takeEvery, take, select, put, call, all, fork } from "redux-saga/effect
 import { push } from 'connected-react-router'
 import axios from 'axios';
 
-const fetchEvidence = (evidence, payload) => {
-  return axios.post(`${window._env_.NLPAAS_URL}${evidence}`, payload)
+const fetchEvidence = (formSlug, evidence, payload) => {
+  return axios.post(`${window._env_.NLPAAS_URL}/job/NLPQL_form_content/${formSlug}/${evidence}`, payload)
 }
 
 export function* rootSaga() {
@@ -25,6 +25,7 @@ function* findNextGroup(action) {
 
   const getState = state => {
     return {
+      formSlug: state.form.content.slug,
       groups: state.form.content.groups,
       questions: state.form.content.questions,
       evidenceByGroup: state.evidenceByGroup,
@@ -34,7 +35,7 @@ function* findNextGroup(action) {
     }
   };
 
-  const { groups, questions, evidences, evidenceByGroup, fhirClient, docRefs } = yield select(getState);
+  const { formSlug, groups, questions, evidences, evidenceByGroup, fhirClient, docRefs } = yield select(getState);
   const currentGroupIndex = groups.findIndex(group => group === currentGroup);
   const offset = currentGroupIndex;
 
@@ -46,16 +47,16 @@ function* findNextGroup(action) {
         .filter(q => q.nlpql_grouping)
 
       if (!evidenceByGroup[group] && (evidArray.length > 0)) { //TODO add check for error and it can repeat!
-        yield fetchGroupEvidence(group, evidenceByGroup, evidences, questions, fhirClient, docRefs);
+        yield fetchGroupEvidence(formSlug, group, evidenceByGroup, evidences, questions, fhirClient, docRefs);
         break;
       }                                                     // || evidenceByGroup[group].isLoadError
   }
 }
 
-function* handleFetchEvidence(evidence, fhirClient, docRefs) {
+function* handleFetchEvidence(formSlug, evidence, fhirClient, docRefs) {
 
   try {
-    const json = yield call(fetchEvidence, evidence, {
+    const json = yield call(fetchEvidence, formSlug, evidence, {
       fhir: fhirClient,
       reports: docRefs
     });
@@ -85,7 +86,7 @@ function* handleFetchEvidence(evidence, fhirClient, docRefs) {
   }
 }
 
-function* fetchGroupEvidence(groupName, evidenceByGroup, evidences, questions, fhirClient, docRefs) {
+function* fetchGroupEvidence(formSlug, groupName, evidenceByGroup, evidences, questions, fhirClient, docRefs) {
 
   const __this = this;
 
@@ -113,7 +114,7 @@ function* fetchGroupEvidence(groupName, evidenceByGroup, evidences, questions, f
     return;
   }
 
-  yield all(uniqueUnloadedEvidArray.map(evidence => call(handleFetchEvidence, evidence, fhirClient, docRefs)));
+  yield all(uniqueUnloadedEvidArray.map(evidence => call(handleFetchEvidence, formSlug, evidence, fhirClient, docRefs)));
 
   yield put({
     type: 'GET_EVIDENCE_BY_GROUP_FULFILLED',
