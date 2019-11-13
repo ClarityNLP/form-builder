@@ -55,10 +55,31 @@
           justify-content: center;
           align-items: center;
           border-radius: 100%;
+          transition: background-color 0.25s, color 0.25s, box-shadow 0.25s, border-color 0.25s;
         }
       }
     }
   }
+  // &.is-loaded { //TODO ask Jon if he wants...
+  //   .question-number {
+  //     .question-number-bubble {
+  //       .question-number-bubble-border {
+  //         position: absolute;
+  //         top: 0;
+  //         bottom: 0;
+  //         left: 0;
+  //         right: 0;
+  //         border-width: 2px;
+  //         border-style: solid;
+  //         border-color: $primary;
+  //         border-radius: 34px;
+  //       }
+  //       .question-number-bubble-content {
+  //
+  //       }
+  //     }
+  //   }
+  // }
   &.is-loading {
     .question-number {
       .question-number-bubble {
@@ -71,7 +92,7 @@
           border-width: 2px;
           border-style: solid;
           border-color: $primary transparent $primary transparent;
-          border-radius: 30px;
+          border-radius: 34px;
           animation: spinner 1s linear infinite;
         }
         .question-number-bubble-content {
@@ -91,7 +112,7 @@
           border-width: 2px;
           border-style: solid;
           border-color: $danger;
-          border-radius: 30px;
+          border-radius: 34px;
         }
         .question-number-bubble-content {
         }
@@ -106,7 +127,7 @@
           bottom: -4px;
           left: -4px;
           right: -4px;
-          border-radius: 32px;
+          border-radius: 38px;
         }
       }
     }
@@ -119,11 +140,24 @@
           bottom: -4px;
           left: -4px;
           right: -4px;
-          border-radius: 32px;
+          border-radius: 38px;
         }
       }
     }
   }
+  // &.is-focus.is-loaded { //TODO ask Jon if wants...
+  //   .question-number {
+  //     .question-number-bubble {
+  //       .question-number-bubble-border {
+  //         top: -4px;
+  //         bottom: -4px;
+  //         left: -4px;
+  //         right: -4px;
+  //         border-radius: 38px;
+  //       }
+  //     }
+  //   }
+  // }
   .question-number {
     border-right: 1px solid #dbdbdb;
     flex: none;
@@ -132,14 +166,13 @@
     justify-content: center;
     align-items: center;
     .question-number-bubble {
-      width: 30px;
-      height: 30px;
-      border-radius: 30px;
+      width: 34px;
+      height: 34px;
+      border-radius: 34px;
       display: flex;
       justify-content: center;
       align-items: center;
       position: relative;
-      transition: background-color 0.5s, color 0.5s, box-shadow 0.5s, border-color 0.5s;
     }
   }
   .question-content {

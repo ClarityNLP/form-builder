@@ -3,6 +3,7 @@ const initialState = {
   isLoaded: false,
   isLoadError: false,
   focusQuestion: null,
+  errorMessage: null,
   content: null
 };
 
@@ -13,7 +14,8 @@ export function formReducer(state = initialState, action = {}) {
         ...state,
         isLoading: true,
         isLoaded: false,
-        isLoadError: false
+        isLoadError: false,
+        errorMessage: null
       }
     }
     case 'GET_FORM_FULFILLED': {
@@ -31,7 +33,8 @@ export function formReducer(state = initialState, action = {}) {
         isLoading: false,
         isLoaded: false,
         isLoadError: true,
-        content: null
+        content: null,
+        errorMessage: action.error
       }
     }
     case 'FOCUS_QUESTION': {

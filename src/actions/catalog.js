@@ -1,4 +1,27 @@
 import axios from 'axios';
+import * as yup from 'yup';
+import groupBy from 'lodash/groupBy';
+import isEqual from 'lodash/isEqual';
+
+yup.addMethod(yup.array, 'unique', function (message, mapper= a=>a) {
+    return this.test('unique', message, function (list) {
+        return list.length  === new Set(list.map(mapper)).size;
+    });
+});
+
+const schema = yup
+  .array()
+  .of(
+    yup.object().shape({
+      answers: yup.array(),
+      evidence_bundle: yup.object(),
+      nlpql_grouping: yup.string(),
+      question_name: yup.string(),
+      question_number: yup.string(),
+      question_type: yup.string()
+    })
+  )
+  .unique('Duplicate question number.', a => a.question_number)
 
 export function getCatalogContent() {
   return (dispatch) => {
@@ -35,21 +58,38 @@ export function getForm(slug) {
         type: 'GET_FORM_REQUESTED'
       });
 
+      let form;
+
       axios.get(`${window._env_.FORM_CMS_URL}/form/NLPQL_form_content/${slug}/questions`)
       .then(res => {
+        form = res.data;
+        return schema.validate(form.questions);
+      })
+      .then(() => {
+        return new Promise(function(resolve, reject) {
+          const groups = Object.keys(groupBy(form.questions, function(q) {
+            return q.group;
+          }));
+          return isEqual(form.groups.sort(), groups.sort()) ?
+            resolve() :
+            reject('Mismatch between the top-level groups and the groups found in the questions themselves.');
+        });
+      })
+      .then(() => {
         dispatch({
           type: 'GET_FORM_FULFILLED',
           data: {
             slug: slug,
-            ...res.data
+            ...form
           }
         });
         resolve(`Finished retrieving form ${slug}`);
       })
       .catch(error => {
+        console.log('error: ',error);
         dispatch({
           type: 'GET_FORM_REJECTED',
-          error: error.message
+          error: error.message || error
         })
         reject(error.message);
       })

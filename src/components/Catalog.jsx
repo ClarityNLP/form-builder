@@ -42,9 +42,7 @@ export default class Catalog extends Component {
               <React.Fragment>
                 { this.props.form.isLoadError &&
                   <div className="message is-danger">
-                    <div className="message-body">
-                      Problem loading form.
-                    </div>
+                    <div className="message-body">{`Problem loading form. ${this.props.form.errorMessage}`}</div>
                   </div>
                 }
                 <div className="columns is-multiline">

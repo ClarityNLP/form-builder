@@ -40,6 +40,10 @@ export default class FormPanel extends Component {
       return `${classes} is-error`;
     }
 
+    if (expandedEvidence.isLoaded) {
+      return `${classes} is-loaded`
+    }
+
     return classes;
   }
 
