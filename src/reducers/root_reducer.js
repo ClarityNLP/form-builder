@@ -6,6 +6,7 @@ import { evidenceReducer } from './evidence_reducer'
 import { patientReducer } from './patient_reducer'
 import { fhirReducer } from './fhir_reducer'
 import { catalogReducer } from './catalog_reducer'
+import { sourceReducer } from './source_reducer'
 
 export default (history) => combineReducers({
   router: connectRouter(history),
@@ -14,5 +15,6 @@ export default (history) => combineReducers({
   evidence: evidenceReducer,
   patient: patientReducer,
   fhir: fhirReducer,
-  catalog: catalogReducer
+  catalog: catalogReducer,
+  source: sourceReducer
 })

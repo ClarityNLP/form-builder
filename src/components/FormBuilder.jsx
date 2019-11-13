@@ -15,14 +15,14 @@ export default class FormBuilder extends Component {
 
   componentDidMount() {
     return this.props.getFhirClient(SMART)
-      .then(client => this.props.getDocumentReferences(client));
-      //TODO add call to nlpaas to retrieve document(s) id
+      .then(client => this.props.getDocumentReferences(client))
+      .then((docs) => this.props.getSourceId(docs));
   }
 
   render() {
-    const { patient } = this.props.patient.data;
+    const { isLoaded : sourceIsFulfilled } = this.props.source;
 
-    return !patient ? (
+    return !sourceIsFulfilled ? (
       <Transient/>
     ) : (
       <div className="form-builder">

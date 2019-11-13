@@ -116,7 +116,7 @@ export default class FormPanel extends Component {
               this.props.evidence,
               this.props.form.content.questions,
               this.props.fhirClient,
-              this.props.docRefs
+              this.props.sourceId
             ))
         })
         .catch(error => {
@@ -166,7 +166,7 @@ export default class FormPanel extends Component {
           this.props.evidence,
           this.props.form.content.questions,
           this.props.fhirClient,
-          this.props.docRefs
+          this.props.sourceId
         ))
       }
   }

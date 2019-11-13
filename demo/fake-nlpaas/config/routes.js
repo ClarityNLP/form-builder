@@ -15,5 +15,6 @@ module.exports.routes = {
   'post /job/NLPQL_form_content/:formSlug/:nlpql': 'EvidenceController.getResultsPost',
   // 'get /forms/:slug': 'FormController.getForm',
   'get /form/NLPQL_form_content/:formSlug/questions': 'FormController.getForm',
-  'get /forms': 'FormController.getForms'
+  'get /forms': 'FormController.getForms',
+  'post /report/upload': 'EvidenceController.getSourceId'
 };

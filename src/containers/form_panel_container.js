@@ -23,7 +23,7 @@ function mapStateToProps(state, ownProps) {
     evidenceByGroup: state.evidenceByGroup,
     evidence: state.evidence,
     fhirClient: state.fhir.client,
-    docRefs: state.patient.data.docRefs,
+    sourceId: state.source.id,
     ...ownProps.params
   };
 }

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import idx from 'idx';
 
-export function getEvidenceByGroup(formSlug, groupName, evidenceByGroup, evidences, questions, fhirClient, docRefs) {
+export function getEvidenceByGroup(formSlug, groupName, evidenceByGroup, evidences, questions, fhirClient, sourceId) {
   return (dispatch) => {
     return new Promise(function(resolve, reject) {
 
@@ -42,7 +42,7 @@ export function getEvidenceByGroup(formSlug, groupName, evidenceByGroup, evidenc
         return axios
         .post(`${window._env_.NLPAAS_URL}/job/NLPQL_form_content/${formSlug}/${evid}`, {
           fhir: fhirClient,
-          reports: docRefs
+          source_id: sourceId
         })
         .then(res => {
           dispatch({

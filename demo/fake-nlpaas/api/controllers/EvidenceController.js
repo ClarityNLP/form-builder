@@ -3,6 +3,19 @@ const LoremIpsum = require("lorem-ipsum").LoremIpsum;
 
 module.exports = {
 
+  getSourceId: async function(req,res) {
+
+    // doing nothing with *docs* key in payload...
+
+    const wait = ms => new Promise((r, j)=>setTimeout(r, ms))
+
+    await wait(1000);
+
+    return res.send({
+      source_id: 5
+    });
+  },
+
   getResults: async function(req,res) {
 
     const wait = ms => new Promise((r, j)=>setTimeout(r, ms))

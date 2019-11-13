@@ -49,7 +49,7 @@ export function getDocumentReferences(client) {
             docRefs: values[1]
           }
         });
-        resolve();
+        resolve(values[1]);
       })
       .catch(error => {
         dispatch({
