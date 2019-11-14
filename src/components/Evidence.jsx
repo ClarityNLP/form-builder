@@ -121,7 +121,10 @@ export default class Entity extends Component {
               </Col>
             </Row>
           </Col>
-          <div className="evidence-result-content">
+          <div
+            className="evidence-result-content"
+            onClick={this.toggleReportTextIsActive}
+          >
             {result_content ? (
               <React.Fragment>
               {this.getHighlightedText(result_content, highlights)}

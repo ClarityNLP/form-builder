@@ -17,6 +17,9 @@
   }
   .evidence-result-content {
     color: #414141;
+    &:hover {
+      cursor: pointer;
+    }
   }
   .evidence-date {
     color: #414141;

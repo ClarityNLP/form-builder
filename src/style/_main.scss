@@ -11,6 +11,13 @@ body, html {
   flex-direction: column;
   .navbar-top {
     nav.navbar {
+      .navbar-brand {
+        a {
+          img {
+            width: 106px;
+          }
+        }
+      }
       .navbar-menu {
         .navbar-start {
           width: 100%;

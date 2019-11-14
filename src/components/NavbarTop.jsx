@@ -30,7 +30,7 @@ export default class NavbarTop extends Component {
           <nav className="navbar is-primary" role="navigation" aria-label="main navigation">
             <div className="navbar-brand">
               <a className="navbar-item" href="#">
-                <b>Smart Chart</b>
+                <img src={`${process.env.PUBLIC_URL}/smartchart_white_v3.svg`}/>
               </a>
 
               <a role="button" className="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
