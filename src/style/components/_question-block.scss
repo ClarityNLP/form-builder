@@ -60,26 +60,26 @@
       }
     }
   }
-  // &.is-loaded { //TODO ask Jon if he wants...
-  //   .question-number {
-  //     .question-number-bubble {
-  //       .question-number-bubble-border {
-  //         position: absolute;
-  //         top: 0;
-  //         bottom: 0;
-  //         left: 0;
-  //         right: 0;
-  //         border-width: 2px;
-  //         border-style: solid;
-  //         border-color: $primary;
-  //         border-radius: 34px;
-  //       }
-  //       .question-number-bubble-content {
-  //
-  //       }
-  //     }
-  //   }
-  // }
+  &.is-loaded {
+    .question-number {
+      .question-number-bubble {
+        .question-number-bubble-border {
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          border-width: 2px;
+          border-style: solid;
+          border-color: lighten($primary, 40%);
+          border-radius: 34px;
+        }
+        .question-number-bubble-content {
+
+        }
+      }
+    }
+  }
   &.is-loading {
     .question-number {
       .question-number-bubble {
@@ -119,6 +119,23 @@
       }
     }
   }
+  &.is-focus.is-loaded {
+    .question-number {
+      .question-number-bubble {
+        .question-number-bubble-border {
+          top: -4px;
+          bottom: -4px;
+          left: -4px;
+          right: -4px;
+          border-radius: 38px;
+          border-color: lighten($primary, 0%);
+        }
+        .question-number-bubble-content {
+          box-shadow: none;
+        }
+      }
+    }
+  }
   &.is-focus.is-loading {
     .question-number {
       .question-number-bubble {
@@ -145,19 +162,6 @@
       }
     }
   }
-  // &.is-focus.is-loaded { //TODO ask Jon if wants...
-  //   .question-number {
-  //     .question-number-bubble {
-  //       .question-number-bubble-border {
-  //         top: -4px;
-  //         bottom: -4px;
-  //         left: -4px;
-  //         right: -4px;
-  //         border-radius: 38px;
-  //       }
-  //     }
-  //   }
-  // }
   .question-number {
     border-right: 1px solid #dbdbdb;
     flex: none;

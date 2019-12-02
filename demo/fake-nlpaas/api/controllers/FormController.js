@@ -6,7 +6,7 @@ module.exports = {
 
     const wait = ms => new Promise((r, j)=>setTimeout(r, ms))
 
-    await wait(1000);
+    await wait(10);
 
     let forms = JSON.parse(fs.readFileSync('data/forms.json'));
 
@@ -19,7 +19,7 @@ module.exports = {
 
     const wait = ms => new Promise((r, j)=>setTimeout(r, ms))
 
-    await wait(1000);
+    await wait(10);
 
     try {
       let form = JSON.parse(fs.readFileSync(`data/form_${slug}.json`));

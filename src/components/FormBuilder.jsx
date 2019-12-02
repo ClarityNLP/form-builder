@@ -6,6 +6,7 @@ import EvidencePanel from '../containers/evidence_panel_container';
 import Catalog from '../containers/catalog_container';
 import Transient from './Transient';
 import { oauth2 as SMART } from 'fhirclient';
+import queryString from 'query-string'
 
 export default class FormBuilder extends Component {
 
@@ -29,7 +30,7 @@ export default class FormBuilder extends Component {
         <NavbarTop/>
         <div className="workspace">
           <NavbarLeft params={this.props.match.params}/>
-          <FormPanel params={this.props.match.params}/>{/* TODO -- look into doing fetch for form here instead of in FormPanel comp. */}
+          <FormPanel params={this.props.match.params} search={queryString.parse(this.props.location.search)}/>{/* TODO -- look into doing fetch for form here instead of in FormPanel comp. */}
           <EvidencePanel/>
           <Catalog/>
         </div>

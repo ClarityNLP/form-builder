@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import slugify from 'slugify';
 import Question from './Question';
 import idx from 'idx';
+import isEqual from 'lodash/isEqual';
 
 export default class FormPanel extends Component {
 
@@ -61,38 +62,54 @@ export default class FormPanel extends Component {
     return filteredQuestions;
   }
 
-  focusQuestion = (question_number) => {
+  scrollToQuestion = (question_number, behavior) => {
     this.setState({
       focusedQuestionNumber: question_number
     });
+
     this.refs[question_number].current.scrollIntoView({
-      behavior: 'smooth',
-      block: 'start',
+      behavior: behavior || 'auto',
+      block: 'center',
     });
-    return this.props.focusQuestion(question_number);
   }
 
   keyPressed = (event) => {
     if (event.keyCode === 38) { // up arrow
       event.preventDefault();
       const focusedQuestionIndex = this.state.filteredQuestions.findIndex(question => question.question_number === this.state.focusedQuestionNumber);
-      if (focusedQuestionIndex > 0) {
-        return this.focusQuestion(this.state.filteredQuestions[focusedQuestionIndex - 1].question_number);
+      if (focusedQuestionIndex > 0) { // Go to previous question
+        const focusedQuestionNumber = this.state.filteredQuestions[focusedQuestionIndex - 1].question_number;
+        this.scrollToQuestion(focusedQuestionNumber, 'smooth');
+        return this.props.focusQuestion(focusedQuestionNumber);
+      }
+      if (focusedQuestionIndex === 0){ // Go to last question in previous group
+        const totalGroups = this.props.form.content.groups.length;
+        const currentGroupIndex = this.props.form.content.groups.findIndex(group => group === this.state.group);
+        const prevGroup = this.props.form.content.groups[(currentGroupIndex+totalGroups-1)%totalGroups];
+        return this.props.push(`/app/${this.props.formSlug}/${slugify(prevGroup)}?pos=end`);
       }
     }
     if (event.keyCode === 40) { // down arrow
       event.preventDefault();
       const focusedQuestionIndex = this.state.filteredQuestions.findIndex(question => question.question_number === this.state.focusedQuestionNumber);
       if (focusedQuestionIndex < this.state.filteredQuestions.length - 1) {
-        return this.focusQuestion(this.state.filteredQuestions[focusedQuestionIndex + 1].question_number);
+        const focusedQuestionNumber = this.state.filteredQuestions[focusedQuestionIndex + 1].question_number;
+        this.scrollToQuestion(focusedQuestionNumber, 'smooth');
+        return this.props.focusQuestion(focusedQuestionNumber);
+      }
+      if (focusedQuestionIndex === this.state.filteredQuestions.length - 1) {
+        const totalGroups = this.props.form.content.groups.length;
+        const currentGroupIndex = this.props.form.content.groups.findIndex(group => group === this.state.group);
+        const nextGroup = this.props.form.content.groups[(currentGroupIndex+totalGroups+1)%totalGroups];
+        return this.props.push(`/app/${this.props.formSlug}/${slugify(nextGroup)}`);
       }
     }
   }
 
   componentDidMount(){
-    document.addEventListener("keydown", this.keyPressed, false);
+    document.addEventListener("keydown", this.keyPressed, false); //Need form to exist before keyPressed can be called.
 
-    const { formSlug, groupSlug } = this.props;
+    const { formSlug, groupSlug, pos } = this.props;
 
     if (formSlug) {
       return this.props.getForm(formSlug)
@@ -102,22 +119,14 @@ export default class FormPanel extends Component {
             return this.props.push(`/app/${formSlug}/${slugify(this.props.form.content.groups[0])}`);
           }
           const filterQuestions = this.filterQuestions(group);
-          this.setState({
+
+          this.refs = this.getRefs(filterQuestions);
+
+          return this.setState({
             group: group,
             filteredQuestions: filterQuestions,
-            focusedQuestionNumber: filterQuestions[0].question_number
+            focusedQuestionNumber: pos === 'end' ? filterQuestions[filterQuestions.length - 1].question_number : filterQuestions[0].question_number
           });
-          this.refs = this.getRefs(filterQuestions);
-          return this.props.focusQuestion(filterQuestions[0].question_number)
-            .then(() => this.props.getEvidenceByGroup(
-              formSlug,
-              group,
-              this.props.evidenceByGroup[group],
-              this.props.evidence,
-              this.props.form.content.questions,
-              this.props.fhirClient,
-              this.props.sourceId
-            ))
         })
         .catch(error => {
           //TODO just handle catch in .getForm action and open Catalog via props
@@ -129,8 +138,9 @@ export default class FormPanel extends Component {
     document.removeEventListener("keydown", this.keyPressed, false);
   }
 
-  componentDidUpdate(prevProps) {
-    const { formSlug, groupSlug } = this.props;
+  componentDidUpdate(prevProps, prevState) {
+    const { formSlug, groupSlug, pos } = this.props;
+    const { filteredQuestions, group } = this.state;
 
     if (formSlug !== prevProps.formSlug) {
       return this.props.resetForm()
@@ -151,13 +161,19 @@ export default class FormPanel extends Component {
         return this.props.push(`/app/${formSlug}/${slugify(this.props.form.content.groups[0])}`);
       }
       const filterQuestions = this.filterQuestions(group);
-      this.setState({
+
+      this.refs = this.getRefs(filterQuestions);
+
+      return this.setState({
         group: group,
         filteredQuestions: filterQuestions,
-        focusedQuestionNumber: filterQuestions[0].question_number
+        focusedQuestionNumber: pos === 'end' ? filterQuestions[filterQuestions.length - 1].question_number : filterQuestions[0].question_number
       });
-      this.refs = this.getRefs(filterQuestions);
-      return this.props.focusQuestion(filterQuestions[0].question_number)
+    }
+
+    if (!isEqual(filteredQuestions, prevState.filteredQuestions)) {
+      this.scrollToQuestion(pos === 'end' ? filteredQuestions[filteredQuestions.length - 1].question_number : filteredQuestions[0].question_number, 'auto');
+      return this.props.focusQuestion(pos === 'end' ? filteredQuestions[filteredQuestions.length - 1].question_number : filteredQuestions[0].question_number)
         .then(() => this.props.closeCatalog())
         .then(() => this.props.getEvidenceByGroup(
           formSlug,
@@ -168,7 +184,8 @@ export default class FormPanel extends Component {
           this.props.fhirClient,
           this.props.sourceId
         ))
-      }
+    }
+
   }
 
   render() {
@@ -201,7 +218,7 @@ export default class FormPanel extends Component {
                 key={question.question_number}
                 ref={this.refs[question.question_number]}
                 className={`question-block ${this.getQuestionBlockClasses(question)}`}
-                onClick={ () => this.focusQuestion(question.question_number) }
+                onClick={ () => this.scrollToQuestion(question.question_number) }
               >
                 <div className="question-number">
                   <div className="question-number-bubble">

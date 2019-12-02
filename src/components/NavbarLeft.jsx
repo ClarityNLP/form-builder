@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import slugify from 'slugify';
 import idx from 'idx';
+import isEqual from 'lodash/isEqual';
 
 export default class NavbarLeft extends Component {
 
@@ -16,6 +17,13 @@ export default class NavbarLeft extends Component {
       acc[g] = React.createRef();
       return acc;
     }, {});
+  }
+
+  scrollToGroup = (groupIndex, behavior) => {
+    this.refs[groupIndex].current.scrollIntoView({
+      behavior: behavior || 'auto',
+      block: 'center',
+    });
   }
 
   keyPressed = (event) => {
@@ -55,10 +63,22 @@ export default class NavbarLeft extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.form.content !== prevProps.form.content) {
+    const { formSlug, groupSlug, form } = this.props;
+
+    if (this.props.form.content !== prevProps.form.content) { //TODO maybe change...
       if (idx(this.props, _ => _.form.content.groups)) {
         return this.refs = this.getRefs(this.props.form.content.groups);
       }
+    }
+
+    if (formSlug !== prevProps.formSlug) {
+      return;
+    }
+
+    if (groupSlug !== prevProps.groupSlug) {
+      return this.refs = this.getRefs(this.props.form.content.groups);
+      const currentGroup = form.content.groups.find(group => slugify(group) === groupSlug);
+      return this.scrollToGroup(currentGroup, 'auto');
     }
   }
 

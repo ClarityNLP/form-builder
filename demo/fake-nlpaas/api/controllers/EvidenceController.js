@@ -9,7 +9,7 @@ module.exports = {
 
     const wait = ms => new Promise((r, j)=>setTimeout(r, ms))
 
-    await wait(1000);
+    await wait(10);
 
     return res.send({
       source_id: 5
@@ -20,7 +20,7 @@ module.exports = {
 
     const wait = ms => new Promise((r, j)=>setTimeout(r, ms))
 
-    await wait(2000);
+    await wait(10);
 
     let results = JSON.parse(fs.readFileSync('data/results.json'));
 
@@ -84,7 +84,7 @@ module.exports = {
 
     const wait = ms => new Promise((r, j)=>setTimeout(r, ms))
 
-    await wait(3000);
+    await wait(10);
 
     // let results = JSON.parse(fs.readFileSync('data/results.json'));
 

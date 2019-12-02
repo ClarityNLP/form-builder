@@ -24,7 +24,8 @@ function mapStateToProps(state, ownProps) {
     evidence: state.evidence,
     fhirClient: state.fhir.client,
     sourceId: state.source.id,
-    ...ownProps.params
+    ...ownProps.params,
+    ...ownProps.search
   };
 }
 

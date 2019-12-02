@@ -80,8 +80,8 @@ export default class NavbarTop extends Component {
 
               <div className="navbar-end">
                 <div className="navbar-item progress-bar">
-                  <progress className="progress is-small" value="15" max="100">15></progress>
-                  <div className="progress-count">{ this.props.form.isLoading ? 'Loading...' : '50/193' }</div>
+                  <progress className="progress is-small" value="0" max="100">0></progress>
+                  <div className="progress-count">{ !this.props.form.content ? 'Loading...' : `0/${this.props.form.content.questions.length}` }</div>
                 </div>
                 <div className="navbar-item">
                   <div className="button is-light">Submit</div>
