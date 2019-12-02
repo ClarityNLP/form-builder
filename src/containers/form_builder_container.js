@@ -3,6 +3,7 @@ import FormBuilder from '../components/FormBuilder'
 
 import {
   getFhirClient,
+  getFhirRelease,
   getDocumentReferences
 } from '../actions/fhir';
 
@@ -18,6 +19,7 @@ function mapStateToProps(state) {
 
 const formBuilderContainer = connect(mapStateToProps, {
   getFhirClient,
+  getFhirRelease,
   getDocumentReferences,
   getSourceId
 })(FormBuilder);

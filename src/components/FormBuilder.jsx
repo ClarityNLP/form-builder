@@ -16,6 +16,7 @@ export default class FormBuilder extends Component {
 
   componentDidMount() {
     return this.props.getFhirClient(SMART)
+      .then(client => this.props.getFhirRelease(client))
       .then(client => this.props.getDocumentReferences(client))
       .then((docs) => this.props.getSourceId(docs));
   }

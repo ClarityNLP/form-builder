@@ -2,7 +2,8 @@ const initialState = {
   isLoading: false,
   isLoaded: false,
   isLoadError: false,
-  client: null
+  client: null,
+  release: null
 };
 
 export function fhirReducer(state = initialState, action = {}) {
@@ -31,6 +32,23 @@ export function fhirReducer(state = initialState, action = {}) {
         isLoading: false,
         isLoaded: false,
         isLoadError: true,
+      }
+    }
+    case 'GET_FHIR_RELEASE_REQUESTED': {
+      return {
+        ...state
+      }
+    }
+    case 'GET_FHIR_RELEASE_FULFILLED': {
+      return {
+        ...state,
+        release: action.data
+      }
+    }
+    case 'GET_FHIR_RELEASE_FULFILLED': {
+      return {
+        ...state,
+        release: null
       }
     }
     default:

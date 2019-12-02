@@ -63,14 +63,22 @@ export default class FormPanel extends Component {
   }
 
   scrollToQuestion = (question_number, behavior) => {
-    this.setState({
-      focusedQuestionNumber: question_number
-    });
-
     this.refs[question_number].current.scrollIntoView({
       behavior: behavior || 'auto',
       block: 'center',
     });
+  }
+
+  focusQuestion = (questionNumber) => {
+    this.setState({
+      focusedQuestionNumber: questionNumber
+    });
+    return this.props.focusQuestion(questionNumber);
+  }
+
+  handleQuestionClick = (questionNumber, behavior) => {
+    this.scrollToQuestion(questionNumber, behavior);
+    return this.focusQuestion(questionNumber);
   }
 
   keyPressed = (event) => {
@@ -79,8 +87,8 @@ export default class FormPanel extends Component {
       const focusedQuestionIndex = this.state.filteredQuestions.findIndex(question => question.question_number === this.state.focusedQuestionNumber);
       if (focusedQuestionIndex > 0) { // Go to previous question
         const focusedQuestionNumber = this.state.filteredQuestions[focusedQuestionIndex - 1].question_number;
-        this.scrollToQuestion(focusedQuestionNumber, 'smooth');
-        return this.props.focusQuestion(focusedQuestionNumber);
+        this.focusQuestion(focusedQuestionNumber);
+        return this.scrollToQuestion(focusedQuestionNumber, 'smooth');
       }
       if (focusedQuestionIndex === 0){ // Go to last question in previous group
         const totalGroups = this.props.form.content.groups.length;
@@ -94,8 +102,8 @@ export default class FormPanel extends Component {
       const focusedQuestionIndex = this.state.filteredQuestions.findIndex(question => question.question_number === this.state.focusedQuestionNumber);
       if (focusedQuestionIndex < this.state.filteredQuestions.length - 1) {
         const focusedQuestionNumber = this.state.filteredQuestions[focusedQuestionIndex + 1].question_number;
-        this.scrollToQuestion(focusedQuestionNumber, 'smooth');
-        return this.props.focusQuestion(focusedQuestionNumber);
+        this.focusQuestion(focusedQuestionNumber);
+        return this.scrollToQuestion(focusedQuestionNumber, 'smooth');
       }
       if (focusedQuestionIndex === this.state.filteredQuestions.length - 1) {
         const totalGroups = this.props.form.content.groups.length;
@@ -218,7 +226,7 @@ export default class FormPanel extends Component {
                 key={question.question_number}
                 ref={this.refs[question.question_number]}
                 className={`question-block ${this.getQuestionBlockClasses(question)}`}
-                onClick={ () => this.scrollToQuestion(question.question_number) }
+                onClick={ () => this.handleQuestionClick(question.question_number, 'smooth') }
               >
                 <div className="question-number">
                   <div className="question-number-bubble">

@@ -61,3 +61,32 @@ export function getDocumentReferences(client) {
     });
   }
 }
+
+export function getFhirRelease(client) {
+  return (dispatch) => {
+    return new Promise(function(resolve, reject) {
+
+      dispatch({
+        type: 'GET_FHIR_RELEASE_REQUESTED',
+        message: 'Getting FHIR release version.'
+      });
+
+      client.getFhirRelease()
+        .then(release => {
+          dispatch({
+            type: 'GET_FHIR_RELEASE_FULFILLED',
+            message: 'Successful retrieved FHIR release version.',
+            data: release
+          });
+          resolve(client);
+        })
+        .catch(error => {
+          dispatch({
+            type: 'GET_FHIR_RELEASE_REJECTED',
+            message: 'Problem getting FHIR release version.'
+          });
+          reject(error);
+        })
+    });
+  }
+}

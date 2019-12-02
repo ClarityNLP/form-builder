@@ -31,11 +31,22 @@ function* findNextGroup(action) {
       evidenceByGroup: state.evidenceByGroup,
       fhirClient: state.fhir.client,
       sourceId: state.source.id,
-      evidences: state.evidence
+      evidences: state.evidence,
+      fhirVersion: state.fhir.release
     }
   };
 
-  const { formSlug, groups, questions, evidences, evidenceByGroup, fhirClient, sourceId } = yield select(getState);
+  const {
+    formSlug,
+    groups,
+    questions,
+    evidences,
+    evidenceByGroup,
+    fhirClient,
+    sourceId,
+    fhirVersion
+  } = yield select(getState);
+
   const currentGroupIndex = groups.findIndex(group => group === currentGroup);
   const offset = currentGroupIndex;
 
@@ -47,17 +58,18 @@ function* findNextGroup(action) {
         .filter(q => q.nlpql_grouping)
 
       if (!evidenceByGroup[group] && (evidArray.length > 0)) { //TODO add check for error and it can repeat!
-        yield fetchGroupEvidence(formSlug, group, evidenceByGroup, evidences, questions, fhirClient, sourceId);
+        yield fetchGroupEvidence(formSlug, group, evidenceByGroup, evidences, questions, fhirClient, sourceId, fhirVersion);
         break;
       }                                                     // || evidenceByGroup[group].isLoadError
   }
 }
 
-function* handleFetchEvidence(formSlug, evidence, fhirClient, sourceId) {
+function* handleFetchEvidence(formSlug, evidence, fhirClient, sourceId, fhirVersion) {
 
   try {
     const json = yield call(fetchEvidence, formSlug, evidence, {
       fhir: fhirClient,
+      fhirVersion: fhirVersion,
       source_id: sourceId
     });
 
@@ -86,7 +98,7 @@ function* handleFetchEvidence(formSlug, evidence, fhirClient, sourceId) {
   }
 }
 
-function* fetchGroupEvidence(formSlug, groupName, evidenceByGroup, evidences, questions, fhirClient, sourceId) {
+function* fetchGroupEvidence(formSlug, groupName, evidenceByGroup, evidences, questions, fhirClient, sourceId, fhirVersion) {
 
   const __this = this;
 
@@ -114,7 +126,7 @@ function* fetchGroupEvidence(formSlug, groupName, evidenceByGroup, evidences, qu
     return;
   }
 
-  yield all(uniqueUnloadedEvidArray.map(evidence => call(handleFetchEvidence, formSlug, evidence, fhirClient, sourceId)));
+  yield all(uniqueUnloadedEvidArray.map(evidence => call(handleFetchEvidence, formSlug, evidence, fhirClient, sourceId, fhirVersion)));
 
   yield put({
     type: 'GET_EVIDENCE_BY_GROUP_FULFILLED',

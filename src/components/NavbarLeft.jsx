@@ -71,12 +71,7 @@ export default class NavbarLeft extends Component {
       }
     }
 
-    if (formSlug !== prevProps.formSlug) {
-      return;
-    }
-
-    if (groupSlug !== prevProps.groupSlug) {
-      return this.refs = this.getRefs(this.props.form.content.groups);
+    if ((groupSlug !== prevProps.groupSlug) && groupSlug) {
       const currentGroup = form.content.groups.find(group => slugify(group) === groupSlug);
       return this.scrollToGroup(currentGroup, 'auto');
     }
