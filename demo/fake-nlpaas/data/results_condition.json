@@ -1,0 +1,46 @@
+[
+    {
+        "_id": "5dec7a8bbd0a6847b5a27079",
+        "batch": 0,
+        "category_0_coding_0_code": "problem-list-item",
+        "category_0_coding_0_system": "http://hl7.org/fhir/condition-category",
+        "code_coding_0_code": "234646005",
+        "code_coding_0_display": "Graft versus host disease",
+        "code_coding_0_system": "http://snomed.info/sct",
+        "concept_code": "",
+        "concept_code_system": "",
+        "date_time": "2194-01-14 16:12:00",
+        "display_name": "acute_gvhd_develop_last_report_structured",
+        "id": "654685",
+        "inserted_date": "2019-12-08 04:22:35.780000",
+        "job_id": 10041,
+        "len_category": 1,
+        "len_category_0_coding": 1,
+        "len_code_coding": 1,
+        "nlpql_feature": "acute_gvhd_develop_last_report_structured",
+        "onsetDateTime": "2194-01-14 16:12:00",
+        "owner": "claritynlp",
+        "phenotype_final": true,
+        "pipeline_id": 20163,
+        "pipeline_type": "CQLExecutionTask",
+        "report_date": "",
+        "report_id": "",
+        "report_text": "",
+        "report_type": "Condition",
+        "resourceType": "Condition",
+        "result_display": {
+            "date": "2194-01-14 16:12:00",
+            "highlights": [
+                "Graft versus host disease"
+            ],
+            "result_content": "Graft versus host disease\nSNOMED: 234646005",
+            "sentence": ""
+        },
+        "solr_id": "",
+        "source": "",
+        "subject": "",
+        "subject_display": "MARK DERTINGER",
+        "subject_reference": "Patient/38587",
+        "value_name": "Graft versus host disease"
+    }
+]

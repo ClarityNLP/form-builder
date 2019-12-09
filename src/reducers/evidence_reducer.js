@@ -23,12 +23,14 @@ export function evidenceReducer(state = initialState, action = {}) {
           isLoading: false,
           isLoaded: false,
           isLoadError: true,
+          isEvidence: false,
           errorMessage: error
         }
       }
     }
     case 'GET_EVIDENCE_FULFILLED': {
       const { evidence, results } = action.data;
+      const isEvidence = results.length > 0 ? true : false;
 
       return {
         ...state,
@@ -37,6 +39,7 @@ export function evidenceReducer(state = initialState, action = {}) {
           isLoading: false,
           isLoaded: true,
           isLoadError: false,
+          isEvidence: isEvidence,
           errorMessage: null
         }
       }

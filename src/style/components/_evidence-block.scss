@@ -4,6 +4,27 @@
   border: 1px solid #fbfbfb;
   background-color: #fff;
   margin-bottom: 10px;
+  table {
+    thead {
+      tr {
+        th {
+          color: #414141;
+          font-size: 13px;
+          font-weight: 600;
+        }
+      }
+    }
+    tbody {
+      tr {
+        td {
+          font-size: 13px;
+        }
+        &:hover {
+          cursor: pointer;
+        }
+      }
+    }
+  }
   .evidence-report-type {
     color: #543d6f;
     font-size: 15px;

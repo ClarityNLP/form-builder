@@ -60,7 +60,7 @@
       }
     }
   }
-  &.is-loaded {
+  &.is-evidence {
     .question-number {
       .question-number-bubble {
         .question-number-bubble-border {
@@ -71,7 +71,7 @@
           right: 0;
           border-width: 2px;
           border-style: solid;
-          border-color: lighten($primary, 40%);
+          border-color: lighten($primary, 0%);
           border-radius: 34px;
         }
         .question-number-bubble-content {
@@ -119,7 +119,7 @@
       }
     }
   }
-  &.is-focus.is-loaded {
+  &.is-focus.is-evidence {
     .question-number {
       .question-number-bubble {
         .question-number-bubble-border {

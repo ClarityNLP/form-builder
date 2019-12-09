@@ -24,6 +24,8 @@ module.exports = {
 
     let results = JSON.parse(fs.readFileSync('data/results.json'));
 
+    // let results = [];
+
     return res.send(results);
 
   },
@@ -80,13 +82,15 @@ module.exports = {
        "value": true
     };
 
-    const fakeResults = duplicateElements([fakeResult], 3);
+    // const fakeResults = duplicateElements([fakeResult], 3);
+
+    // const fakeResults = [];
 
     const wait = ms => new Promise((r, j)=>setTimeout(r, ms))
 
     await wait(10);
 
-    // let results = JSON.parse(fs.readFileSync('data/results.json'));
+    let fakeResults = JSON.parse(fs.readFileSync('data/results_mix.json'));
 
     return res.send(fakeResults);
     // return res.serverError();
