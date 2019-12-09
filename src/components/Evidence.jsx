@@ -68,6 +68,17 @@ export default class Entity extends Component {
     return highlightedText;
   }
 
+  titleize = (slug) => {
+    var words = slug.split('_');
+
+    for (var i = 0; i < words.length; i++) {
+      var word = words[i];
+      words[i] = word.charAt(0).toUpperCase() + word.slice(1);
+    }
+
+    return words.join(' ');
+  }
+
   toggleReportTextIsActive = e => {
     this.setState(prevState => ({
       reportTextIsActive: !prevState.reportTextIsActive
@@ -101,7 +112,7 @@ export default class Entity extends Component {
   };
 
   render() {
-    const { result_display, report_text, report_type } = this.props.evidence;
+    const { result_display, report_text, report_type, nlpql_feature } = this.props.evidence;
     const { date, result_content, highlights, sentence } = result_display;
     const {
       commentModalToggle,
@@ -116,7 +127,7 @@ export default class Entity extends Component {
           <Col xs='12'>
             <Row>
               <Col>
-                <h6 className="evidence-report-type">{report_type ? report_type : '<NO-REPORT-TYPE>'}</h6>
+                <h6 className="evidence-report-type">{nlpql_feature ? this.titleize(nlpql_feature) : '<NO-REPORT-TYPE>'}</h6>
                 <h6 className="evidence-date">@&nbsp;<Moment format='MMM DD, YYYY HH:MM'>{date}</Moment></h6>
               </Col>
             </Row>
@@ -125,9 +136,9 @@ export default class Entity extends Component {
             className="evidence-result-content"
             onClick={this.toggleReportTextIsActive}
           >
-            {result_content ? (
+            {(result_content || sentence) ? (
               <React.Fragment>
-              {this.getHighlightedText(result_content, highlights)}
+              {this.getHighlightedText(result_content || sentence, highlights)}
               </React.Fragment>
             ) : (
               "<NO-RESULT-CONTENT>"
@@ -153,7 +164,7 @@ export default class Entity extends Component {
           <div className="modal-background"></div>
           <div className="modal-card">
             <header className="modal-card-head">
-              <p className="modal-card-title">{report_type ? report_type : '<NO-REPORT-TYPE>'}</p>
+              <p className="modal-card-title">{nlpql_feature ? this.titleize(nlpql_feature) : '<NO-REPORT-TYPE>'}</p>
               <button
                 className="delete"
                 aria-label="close"
