@@ -105,26 +105,28 @@ export default class EvidencePanel extends Component {
                   <React.Fragment>
                     <div className="evidence">
                       <h6 className="evidence-report-type">Conditions</h6>
-                      <table className="table is-narrow is-striped is-hoverable">
-                        <thead>
-                          <tr>
-                            <th>Date</th>
-                            <th>Name</th>
-                            <th>Code</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {groups[groupName].map((result, index) => {
-                            return (
-                              <tr key={index} onClick={ () => this.toggleEvidenceModalActive(result) }>
-                                <td>{ result.result_display ? <Moment format='MM/DD/YY'>{result.result_display.date}</Moment> : 'No date'}</td>
-                                <td>{result.display_name ? this.titleize(result.display_name) : 'No nlpql feature'}</td>
-                                <td>{result.code_coding_0_code}</td>
-                              </tr>
-                            )
-                          })}
-                        </tbody>
-                      </table>
+                      <div className="table-container">
+                        <table className="table is-narrow is-striped is-hoverable is-fullwidth">
+                          <thead>
+                            <tr>
+                              <th>Date</th>
+                              <th>Name</th>
+                              <th>Code</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {groups[groupName].map((result, index) => {
+                              return (
+                                <tr key={index} onClick={ () => this.toggleEvidenceModalActive(result) }>
+                                  <td>{ result.result_display ? <Moment format='MM/DD/YY'>{result.result_display.date}</Moment> : 'No date'}</td>
+                                  <td>{result.display_name ? this.titleize(result.display_name) : 'No nlpql feature'}</td>
+                                  <td>{result.code_coding_0_code}</td>
+                                </tr>
+                              )
+                            })}
+                          </tbody>
+                        </table>
+                      </div>
                     </div>
                   </React.Fragment>
                 {/*)}*/}
@@ -138,26 +140,28 @@ export default class EvidencePanel extends Component {
                   <React.Fragment>
                     <div className="evidence">
                       <h6 className="evidence-report-type">Observations</h6>
-                      <table className="table is-narrow is-striped is-hoverable">
-                        <thead>
-                          <tr>
-                            <th>Date</th>
-                            <th>Name</th>
-                            <th>Val</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {groups[groupName].map((result, index) => {
-                            return (
-                              <tr key={index} onClick={ () => this.toggleEvidenceModalActive(result) }>
-                                <td>{ result.result_display ? <Moment format='MM/DD/YY'>{result.result_display.date}</Moment> : 'No date'}</td>
-                                <td>{result.display_name ? this.titleize(result.display_name) : 'No display name'}</td>
-                                <td>{result.value}</td>
-                              </tr>
-                            )
-                          })}
-                        </tbody>
-                      </table>
+                      <div className="table-container">
+                        <table className="table is-narrow is-striped is-hoverable is-fullwidth">
+                          <thead>
+                            <tr>
+                              <th>Date</th>
+                              <th>Name</th>
+                              <th>Val</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {groups[groupName].map((result, index) => {
+                              return (
+                                <tr key={index} onClick={ () => this.toggleEvidenceModalActive(result) }>
+                                  <td>{ result.result_display ? <Moment format='MM/DD/YY'>{result.result_display.date}</Moment> : 'No date'}</td>
+                                  <td>{result.display_name ? this.titleize(result.display_name) : 'No display name'}</td>
+                                  <td>{result.value}</td>
+                                </tr>
+                              )
+                            })}
+                          </tbody>
+                        </table>
+                      </div>
                     </div>
                   </React.Fragment>
                 {/*)}*/}
