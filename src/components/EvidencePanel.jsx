@@ -74,7 +74,7 @@ export default class EvidencePanel extends Component {
     }
     return this.setState({
       evidenceModalActive: true,
-      evidenceModalHeader: evidence.code_coding_0_display ? this.titleize(evidence.code_coding_0_display) : null,
+      evidenceModalHeader: evidence.display_name ? this.titleize(evidence.display_name) : null,
       reportText: evidence.result_display ? evidence.result_display.result_content : null,
       highlights: evidence.result_display ? evidence.result_display.highlights : null,
     })
