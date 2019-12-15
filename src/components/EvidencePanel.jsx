@@ -74,7 +74,7 @@ export default class EvidencePanel extends Component {
     }
     return this.setState({
       evidenceModalActive: true,
-      evidenceModalHeader: evidence.display_name ? this.titleize(evidence.display_name) : null,
+      evidenceModalHeader: evidence.code_coding_0_display ? this.titleize(evidence.code_coding_0_display) : null,
       reportText: evidence.result_display ? evidence.result_display.result_content : null,
       highlights: evidence.result_display ? evidence.result_display.highlights : null,
     })
@@ -119,7 +119,7 @@ export default class EvidencePanel extends Component {
                               return (
                                 <tr key={index} onClick={ () => this.toggleEvidenceModalActive(result) }>
                                   <td>{ result.result_display ? <Moment format='MM/DD/YY'>{result.result_display.date}</Moment> : 'No date'}</td>
-                                  <td>{result.display_name ? this.titleize(result.display_name) : 'No nlpql feature'}</td>
+                                  <td>{result.code_coding_0_display ? this.titleize(result.code_coding_0_display) : result.display_name}</td>
                                   <td>{result.code_coding_0_code}</td>
                                 </tr>
                               )
@@ -154,8 +154,8 @@ export default class EvidencePanel extends Component {
                               return (
                                 <tr key={index} onClick={ () => this.toggleEvidenceModalActive(result) }>
                                   <td>{ result.result_display ? <Moment format='MM/DD/YY'>{result.result_display.date}</Moment> : 'No date'}</td>
-                                  <td>{result.display_name ? this.titleize(result.display_name) : 'No display name'}</td>
-                                  <td>{result.value}</td>
+                                  <td>{result.code_coding_0_display ? this.titleize(result.code_coding_0_display) : result.display_name}</td>
+                                  <td>{result.value}&nbsp;{result.valueQuantity_code}</td>
                                 </tr>
                               )
                             })}
