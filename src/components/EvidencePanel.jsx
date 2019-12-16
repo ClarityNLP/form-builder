@@ -98,33 +98,35 @@ export default class EvidencePanel extends Component {
     const groups = groupBy(otherResults, 'report_type');
     return (
       <React.Fragment>
-        <React.Fragment>
-          <div className="evidence">
-            <h6 className="evidence-report-type">Value Extraction</h6>
-            <div className="table-container">
-              <table className="table is-narrow is-striped is-hoverable is-fullwidth">
-                <thead>
-                  <tr>
-                    <th>Date</th>
-                    <th>Name</th>
-                    <th>Val</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {valExtractionResults.map((result, index) => {
-                    return (
-                      <tr key={index} onClick={ () => this.toggleEvidenceModalActive(result) }>
-                        <td>{ result.result_display ? <Moment format='MM/DD/YY'>{result.result_display.date}</Moment> : 'No date'}</td>
-                        <td>{result.text ? this.titleize(result.text) : this.titleize(result.display_name)}</td>
-                        <td>{result.value}&nbsp;{result.valueQuantity_code}</td>
-                      </tr>
-                    )
-                  })}
-                </tbody>
-              </table>
+        { valExtractionResults.length > 0 &&
+          <React.Fragment>
+            <div className="evidence">
+              <h6 className="evidence-report-type">Value Extraction</h6>
+              <div className="table-container">
+                <table className="table is-narrow is-striped is-hoverable is-fullwidth">
+                  <thead>
+                    <tr>
+                      <th>Date</th>
+                      <th>Name</th>
+                      <th>Val</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {valExtractionResults.map((result, index) => {
+                      return (
+                        <tr key={index} onClick={ () => this.toggleEvidenceModalActive(result) }>
+                          <td>{ result.result_display ? <Moment format='MM/DD/YY'>{result.result_display.date}</Moment> : 'No date'}</td>
+                          <td>{result.text ? this.titleize(result.text) : this.titleize(result.display_name)}</td>
+                          <td>{result.value}&nbsp;{result.valueQuantity_code}</td>
+                        </tr>
+                      )
+                    })}
+                  </tbody>
+                </table>
+              </div>
             </div>
-          </div>
-        </React.Fragment>
+          </React.Fragment>
+        }
         {Object.keys(groups).map((groupName, index) => {
           return <React.Fragment key={index}>
             {groupName === 'Condition' &&
