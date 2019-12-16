@@ -74,7 +74,7 @@ export default class EvidencePanel extends Component {
     }
     return this.setState({
       evidenceModalActive: true,
-      evidenceModalHeader: evidence.code_coding_0_display ? this.titleize(evidence.code_coding_0_display) : null,
+      evidenceModalHeader: evidence.code_coding_0_display ? this.titleize(evidence.code_coding_0_display) : (evidence.display_name ? this.titleize(evidence.display_name) : null),
       reportText: evidence.result_display ? evidence.result_display.result_content : null,
       highlights: evidence.result_display ? evidence.result_display.highlights : null,
     })
@@ -92,9 +92,39 @@ export default class EvidencePanel extends Component {
   }
 
   groupEvidence = (results) => {
-    const groups = groupBy(results, 'report_type');
+    //TODO! make grouping of resource types and of pipeline === 'ValueExtractor' cleaner. Maybe revisit nlpql response.
+    const valExtractionResults = results.filter(r => r.pipeline_type === 'ValueExtractor');
+    const otherResults = results.filter(r => r.pipeline_type !== 'ValueExtractor');
+    const groups = groupBy(otherResults, 'report_type');
     return (
       <React.Fragment>
+        <React.Fragment>
+          <div className="evidence">
+            <h6 className="evidence-report-type">Value Extraction</h6>
+            <div className="table-container">
+              <table className="table is-narrow is-striped is-hoverable is-fullwidth">
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Name</th>
+                    <th>Val</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {valExtractionResults.map((result, index) => {
+                    return (
+                      <tr key={index} onClick={ () => this.toggleEvidenceModalActive(result) }>
+                        <td>{ result.result_display ? <Moment format='MM/DD/YY'>{result.result_display.date}</Moment> : 'No date'}</td>
+                        <td>{result.text ? this.titleize(result.text) : this.titleize(result.display_name)}</td>
+                        <td>{result.value}&nbsp;{result.valueQuantity_code}</td>
+                      </tr>
+                    )
+                  })}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </React.Fragment>
         {Object.keys(groups).map((groupName, index) => {
           return <React.Fragment key={index}>
             {groupName === 'Condition' &&
@@ -211,12 +241,18 @@ export default class EvidencePanel extends Component {
 
     if (!oneEvidence) {
       return (
+        <div></div>
+      )
+      /*TEMPORARY*/
+      /*
+      return (
         <div className="message is-primary">
           <div className="message-body">
             Question does not have an evidence bundle.
           </div>
         </div>
       )
+      */
     }
 
     const expandedEvidence = evidence[oneEvidence];
@@ -233,11 +269,14 @@ export default class EvidencePanel extends Component {
       return (
         <React.Fragment>
           {expandedEvidence.results.length === 0 &&
+            <div></div>
+            /*
             <div class="message is-primary">
               <div class="message-body">
                 No issues, but evidence bundle is empty.
               </div>
             </div>
+            */
           }
           {expandedEvidence.results.length > 0 &&
             <React.Fragment>
