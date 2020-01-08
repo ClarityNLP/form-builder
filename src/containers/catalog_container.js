@@ -4,7 +4,7 @@ import { push } from 'connected-react-router'
 
 import {
   getCatalogContent,
-  getForm,
+  // getForm,
   closeCatalog
 } from '../actions/catalog';
 
@@ -18,7 +18,7 @@ function mapStateToProps(state) {
 
 const catalogContainer = connect(mapStateToProps, {
   getCatalogContent,
-  getForm,
+  // getForm,
   closeCatalog,
   push
 })(Catalog);

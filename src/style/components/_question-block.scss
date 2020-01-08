@@ -37,13 +37,28 @@
       }
     }
   }
-  &.is-focus {
-    .question-number {
-      .question-number-bubble {
-        .question-number-bubble-border {
+  .question-indicator {
+    border-right: 1px solid #dbdbdb;
+    flex: none;
+    width: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .question-indicator-bubble {
+      width: 34px;
+      height: 34px;
+      border-radius: 34px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+    &.is-focus {
+      .question-indicator-bubble {
+        .question-indicator-bubble-border {
 
         }
-        .question-number-bubble-content {
+        .question-indicator-bubble-content {
           background-color: $primary;
           color: white;
           outline: none;
@@ -59,11 +74,9 @@
         }
       }
     }
-  }
-  &.is-evidence {
-    .question-number {
-      .question-number-bubble {
-        .question-number-bubble-border {
+    &.is-evidence {
+      .question-indicator-bubble {
+        .question-indicator-bubble-border {
           position: absolute;
           top: 0;
           bottom: 0;
@@ -74,16 +87,14 @@
           border-color: lighten($primary, 0%);
           border-radius: 34px;
         }
-        .question-number-bubble-content {
+        .question-indicator-bubble-content {
 
         }
       }
     }
-  }
-  &.is-loading {
-    .question-number {
-      .question-number-bubble {
-        .question-number-bubble-border {
+    &.is-loading {
+      .question-indicator-bubble {
+        .question-indicator-bubble-border {
           position: absolute;
           top: 0;
           bottom: 0;
@@ -95,15 +106,13 @@
           border-radius: 34px;
           animation: spinner 1s linear infinite;
         }
-        .question-number-bubble-content {
+        .question-indicator-bubble-content {
         }
       }
     }
-  }
-  &.is-error {
-    .question-number {
-      .question-number-bubble {
-        .question-number-bubble-border {
+    &.is-error {
+      .question-indicator-bubble {
+        .question-indicator-bubble-border {
           position: absolute;
           top: 0;
           bottom: 0;
@@ -114,15 +123,13 @@
           border-color: $danger;
           border-radius: 34px;
         }
-        .question-number-bubble-content {
+        .question-indicator-bubble-content {
         }
       }
     }
-  }
-  &.is-focus.is-evidence {
-    .question-number {
-      .question-number-bubble {
-        .question-number-bubble-border {
+    &.is-focus.is-evidence {
+      .question-indicator-bubble {
+        .question-indicator-bubble-border {
           top: -4px;
           bottom: -4px;
           left: -4px;
@@ -130,16 +137,14 @@
           border-radius: 38px;
           border-color: lighten($primary, 0%);
         }
-        .question-number-bubble-content {
+        .question-indicator-bubble-content {
           box-shadow: none;
         }
       }
     }
-  }
-  &.is-focus.is-loading {
-    .question-number {
-      .question-number-bubble {
-        .question-number-bubble-border {
+    &.is-focus.is-loading {
+      .question-indicator-bubble {
+        .question-indicator-bubble-border {
           top: -4px;
           bottom: -4px;
           left: -4px;
@@ -148,11 +153,9 @@
         }
       }
     }
-  }
-  &.is-focus.is-error {
-    .question-number {
-      .question-number-bubble {
-        .question-number-bubble-border {
+    &.is-focus.is-error {
+      .question-indicator-bubble {
+        .question-indicator-bubble-border {
           top: -4px;
           bottom: -4px;
           left: -4px;
@@ -160,23 +163,6 @@
           border-radius: 38px;
         }
       }
-    }
-  }
-  .question-number {
-    border-right: 1px solid #dbdbdb;
-    flex: none;
-    width: 50px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    .question-number-bubble {
-      width: 34px;
-      height: 34px;
-      border-radius: 34px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      position: relative;
     }
   }
   .question-content {

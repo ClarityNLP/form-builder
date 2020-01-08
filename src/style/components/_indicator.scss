@@ -4,12 +4,12 @@
   justify-content: center;
   align-items: center;
   &.is-focus {
-    .question-number {
-      .question-number-bubble {
-        .question-number-bubble-border {
+    .question-indicator {
+      .question-indicator-bubble {
+        .question-indicator-bubble-border {
 
         }
-        .question-number-bubble-content {
+        .question-indicator-bubble-content {
           background-color: $primary;
           color: white;
           outline: none;
@@ -26,9 +26,9 @@
     }
   }
   &.is-loading {
-    .question-number {
-      .question-number-bubble {
-        .question-number-bubble-border {
+    .question-indicator {
+      .question-indicator-bubble {
+        .question-indicator-bubble-border {
           position: absolute;
           top: 0;
           bottom: 0;
@@ -40,15 +40,15 @@
           border-radius: 30px;
           animation: spinner 1s linear infinite;
         }
-        .question-number-bubble-content {
+        .question-indicator-bubble-content {
         }
       }
     }
   }
   &.is-error {
-    .question-number {
-      .question-number-bubble {
-        .question-number-bubble-border {
+    .question-indicator {
+      .question-indicator-bubble {
+        .question-indicator-bubble-border {
           position: absolute;
           top: 0;
           bottom: 0;
@@ -59,15 +59,15 @@
           border-color: $danger;
           border-radius: 30px;
         }
-        .question-number-bubble-content {
+        .question-indicator-bubble-content {
         }
       }
     }
   }
   &.is-focus.is-loading {
-    .question-number {
-      .question-number-bubble {
-        .question-number-bubble-border {
+    .question-indicator {
+      .question-indicator-bubble {
+        .question-indicator-bubble-border {
           top: -4px;
           bottom: -4px;
           left: -4px;
@@ -78,9 +78,9 @@
     }
   }
   &.is-focus.is-error {
-    .question-number {
-      .question-number-bubble {
-        .question-number-bubble-border {
+    .question-indicator {
+      .question-indicator-bubble {
+        .question-indicator-bubble-border {
           top: -4px;
           bottom: -4px;
           left: -4px;
@@ -90,13 +90,13 @@
       }
     }
   }
-  .question-number {
+  .question-indicator {
     flex: none;
     width: 50px;
     display: flex;
     justify-content: center;
     align-items: center;
-    .question-number-bubble {
+    .question-indicator-bubble {
       width: 30px;
       height: 30px;
       border-radius: 30px;

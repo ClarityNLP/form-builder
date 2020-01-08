@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import slugify from 'slugify';
+import { Route, Link } from 'react-router-dom';
 import idx from 'idx';
 import isEqual from 'lodash/isEqual';
 
-export default class NavbarLeft extends Component {
+class NavbarLeft extends Component {
 
   constructor(props) {
     super(props);
@@ -27,12 +26,13 @@ export default class NavbarLeft extends Component {
   }
 
   keyPressed = (event) => {
+    const { form, groupSlug: groupSlugFromPath } = this.props;
     if (event.keyCode === 37) { // left arrow
       event.preventDefault();
-      const currentGroupIndex = this.props.form.content.groups.findIndex(group => slugify(group) === this.props.pathname.substr(this.props.pathname.lastIndexOf('/') + 1));
+      const currentGroupIndex = form.groups.allIds.findIndex(groupSlug => groupSlug === groupSlugFromPath);
       if (currentGroupIndex > 0) {
-        this.props.push(slugify(this.props.form.content.groups[currentGroupIndex - 1]));
-        this.refs[this.props.form.content.groups[currentGroupIndex - 1]].current.scrollIntoView({
+        this.props.push(form.groups.allIds[currentGroupIndex - 1]);
+        this.refs[form.groups.allIds[currentGroupIndex - 1]].current.scrollIntoView({
           behavior: 'smooth',
           block: 'center',
         });
@@ -40,10 +40,10 @@ export default class NavbarLeft extends Component {
     }
     if (event.keyCode === 39) { // right arrow
       event.preventDefault();
-      const currentGroupIndex = this.props.form.content.groups.findIndex(group => slugify(group) === this.props.pathname.substr(this.props.pathname.lastIndexOf('/') + 1));
-      if (currentGroupIndex < this.props.form.content.groups.length - 1) {
-        this.props.push(slugify(this.props.form.content.groups[currentGroupIndex + 1]));
-        this.refs[this.props.form.content.groups[currentGroupIndex + 1]].current.scrollIntoView({
+      const currentGroupIndex = form.groups.allIds.findIndex(groupSlug => groupSlug === groupSlugFromPath);
+      if (currentGroupIndex < form.groups.allIds.length - 1) {
+        this.props.push(form.groups.allIds[currentGroupIndex + 1]);
+        this.refs[form.groups.allIds[currentGroupIndex + 1]].current.scrollIntoView({
           behavior: 'smooth',
           block: 'center',
         });
@@ -52,61 +52,88 @@ export default class NavbarLeft extends Component {
   }
 
   componentDidMount(){
-    if (idx(this.props, _ => _.form.content.groups)) {
-      this.refs = this.getRefs(this.props.form.content.groups);
-    }
-    document.addEventListener("keydown", this.keyPressed, false);
+    // if (idx(this.props, _ => _.form.groups)) {
+    //
+    //   this.refs = this.getRefs(this.props.form.groups.allIds);
+    // }
+    // document.addEventListener("keydown", this.keyPressed, false);
   }
 
   componentWillUnmount(){
-    document.removeEventListener("keydown", this.keyPressed, false);
+    // document.removeEventListener("keydown", this.keyPressed, false);
   }
 
   componentDidUpdate(prevProps) {
     const { formSlug, groupSlug, form } = this.props;
 
-    if (this.props.form.content !== prevProps.form.content) { //TODO maybe change...
-      if (idx(this.props, _ => _.form.content.groups)) {
-        return this.refs = this.getRefs(this.props.form.content.groups);
-      }
-    }
+    // if (this.props.form.content !== prevProps.form.content) { //TODO maybe change...
+    //   if (idx(this.props, _ => _.form.content.groups)) {
+    //     return this.refs = this.getRefs(this.props.form.content.groups);
+    //   }
+    // }
 
-    if ((groupSlug !== prevProps.groupSlug) && groupSlug) {
-      const currentGroup = form.content.groups.find(group => slugify(group) === groupSlug);
-      return this.scrollToGroup(currentGroup, 'auto');
-    }
+    // if (prevProps.form.isLoading && !form.isLoading) { //TODO maybe change...
+    //   return this.refs = this.getRefs(form.groups.allIds);
+    // }
+
+    // if ((groupSlug !== prevProps.groupSlug) && groupSlug) {
+    //   if (!form.groups.allIds.includes(prevProps.groupSlug)) {
+    //     return;
+    //   }
+    //   return this.scrollToGroup(groupSlug, 'auto');
+    // }
   }
 
   render() {
-    const { pathname, formSlug } = this.props;
+    const {
+      formIsLoaded,
+      formSlug,
+      groups,
+    } = this.props;
 
-    function isGroupLoading(groups, group) {
-      return idx(groups, _ => _[group].isLoading);
+    // function isGroupLoading(groups, group) {
+    //   return idx(groups, _ => _[group].isLoading);
+    // }
+
+    function GroupItemLink({to, ref, name}) {
+      return (
+        <Route
+          path={to}
+          children={({ match }) => (
+            <li
+              ref={ref}
+            >
+              <Link
+                to={to}
+                className={`group-link ${match ? "is-active" : ""}`}
+              >
+                {/* TODO add isGroupLoading back in (use clsx)... --> className={`group-link ${isGroupLoading(this.props.evidenceByGroup, group) ? 'is-loading' : ''} ${slugify(group) === pathname.substr(pathname.lastIndexOf('/') + 1) ? 'is-active' : ''}`}*/}
+                <div className="group-loader">
+                  <div className="group-loader-border"></div>
+                  <div className="group-loader-content"></div>
+                </div>
+                <div className="group-link-text">{name}</div>
+              </Link>
+            </li>
+          )}
+        />
+      );
     }
 
     return (
       <div className="navbar-left">
         <aside className="menu">
           <ul className="menu-list">
-            { this.props.form.content &&
+            { formIsLoaded &&
               <React.Fragment>
-              {this.props.form.content.groups.map((group, index) => {
+              {groups.allIds.map((groupSlug, index) => {
                 return (
-                  <li
+                  <GroupItemLink
                     key={index}
-                    ref={this.refs[group]}
-                  >
-                    <Link
-                      to={`/app/${formSlug}/${slugify(group)}`}
-                      className={`group-link ${isGroupLoading(this.props.evidenceByGroup, group) ? 'is-loading' : ''} ${slugify(group) === pathname.substr(pathname.lastIndexOf('/') + 1) ? 'is-active' : ''}`}
-                    >
-                      <div className="group-loader">
-                        <div className="group-loader-border"></div>
-                        <div className="group-loader-content"></div>
-                      </div>
-                      <div className="group-link-text">{group}</div>
-                    </Link>
-                  </li>
+                    ref={this.refs[groupSlug]}
+                    to={`/app/f/${formSlug}/g/${groupSlug}`}
+                    name={groups.byId[groupSlug].name}
+                  />
                 )
               })}
               </React.Fragment>
@@ -117,3 +144,5 @@ export default class NavbarLeft extends Component {
     )
   }
 }
+
+export default NavbarLeft

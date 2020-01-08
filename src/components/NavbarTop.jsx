@@ -82,7 +82,7 @@ export default class NavbarTop extends Component {
               <div className="navbar-end">
                 <div className="navbar-item progress-bar">
                   <progress className="progress is-small" value="0" max="100">0></progress>
-                  <div className="progress-count">{ !this.props.form.content ? 'Loading...' : `0/${this.props.form.content.questions.length}` }</div>
+                  {/*<div className="progress-count">{ !this.props.form.content ? 'Loading...' : `0/${this.props.form.content.questions.length}` }</div>*/}
                 </div>
                 <div className="navbar-item">
                   <div className="button is-light">Submit</div>
@@ -122,10 +122,10 @@ export default class NavbarTop extends Component {
               <div className="columns">
                 <div className="column is-one-fifth">
                   <div className="indicator is-focus">
-                    <div className="question-number">
-                      <div className="question-number-bubble">
-                        <div className="question-number-bubble-border"></div>
-                        <div className="question-number-bubble-content">12</div>
+                    <div className="question-indicator">
+                      <div className="question-indicator-bubble">
+                        <div className="question-indicator-bubble-border"></div>
+                        <div className="question-indicator-bubble-content">12</div>
                       </div>
                     </div>
                   </div>
@@ -137,10 +137,10 @@ export default class NavbarTop extends Component {
               <div className="columns">
                 <div className="column is-one-fifth">
                   <div className="indicator is-loading">
-                    <div className="question-number">
-                      <div className="question-number-bubble">
-                        <div className="question-number-bubble-border"></div>
-                        <div className="question-number-bubble-content">12</div>
+                    <div className="question-indicator">
+                      <div className="question-indicator-bubble">
+                        <div className="question-indicator-bubble-border"></div>
+                        <div className="question-indicator-bubble-content">12</div>
                       </div>
                     </div>
                   </div>
@@ -152,10 +152,10 @@ export default class NavbarTop extends Component {
               <div className="columns">
                 <div className="column is-one-fifth">
                   <div className="indicator is-loading is-focus">
-                    <div className="question-number">
-                      <div className="question-number-bubble">
-                        <div className="question-number-bubble-border"></div>
-                        <div className="question-number-bubble-content">12</div>
+                    <div className="question-indicator">
+                      <div className="question-indicator-bubble">
+                        <div className="question-indicator-bubble-border"></div>
+                        <div className="question-indicator-bubble-content">12</div>
                       </div>
                     </div>
                   </div>
@@ -167,10 +167,10 @@ export default class NavbarTop extends Component {
               <div className="columns">
                 <div className="column is-one-fifth">
                   <div className="indicator is-error">
-                    <div className="question-number">
-                      <div className="question-number-bubble">
-                        <div className="question-number-bubble-border"></div>
-                        <div className="question-number-bubble-content">12</div>
+                    <div className="question-indicator">
+                      <div className="question-indicator-bubble">
+                        <div className="question-indicator-bubble-border"></div>
+                        <div className="question-indicator-bubble-content">12</div>
                       </div>
                     </div>
                   </div>
@@ -182,10 +182,10 @@ export default class NavbarTop extends Component {
               <div className="columns">
                 <div className="column is-one-fifth">
                   <div className="indicator is-error is-focus">
-                    <div className="question-number">
-                      <div className="question-number-bubble">
-                        <div className="question-number-bubble-border"></div>
-                        <div className="question-number-bubble-content">12</div>
+                    <div className="question-indicator">
+                      <div className="question-indicator-bubble">
+                        <div className="question-indicator-bubble-border"></div>
+                        <div className="question-indicator-bubble-content">12</div>
                       </div>
                     </div>
                   </div>

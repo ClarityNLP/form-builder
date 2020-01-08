@@ -10,7 +10,7 @@ export default class Launcher extends Component {
       iss: window._env_.FHIR_ISS,
       // clientId: "my-client-id",
       // scope: "launch launch/patient patient/read offline_access",
-      redirectUri: `${process.env.PUBLIC_URL}/app/`,
+      redirectUri: `${process.env.PUBLIC_URL}/app/catalog`,
       // iss:
       //   "https://launch.smarthealthit.org/v/r3/sim/" +
       //   "eyJoIjoiMSIsImIiOiJmMDQ2MjkzNi1lYjRiLTRkYT" +

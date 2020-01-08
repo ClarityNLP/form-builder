@@ -7,7 +7,8 @@ import { createBrowserHistory } from 'history'
 import { ConnectedRouter } from 'connected-react-router';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import FormBuilder from './containers/form_builder_container';
+import SmartChart from './containers/smart_chart_container';
+// import FormBuilder from './containers/form_builder_container';
 import Launcher from './components/Launcher';
 
 const history = createBrowserHistory({
@@ -22,11 +23,10 @@ function App() {
     <Provider store={store}>
       <ConnectedRouter history={history}>
         <Switch>
-          <Route path="/app/:formSlug/:groupSlug" component={FormBuilder}/>
-          <Route path="/app/:formSlug" component={FormBuilder}/>
-          <Route path="/app" component={FormBuilder}/>
-          <Route path="/" component={Launcher} exact />
-          <Redirect to="/app"/>
+          <Route exact path="/" component={Launcher}/>
+          <Route path="/app/f/:formSlug" component={SmartChart}/>
+          <Route path="/app/catalog" component={SmartChart}/>
+          <Redirect to="/app/catalog"/>
         </Switch>
       </ConnectedRouter>
     </Provider>

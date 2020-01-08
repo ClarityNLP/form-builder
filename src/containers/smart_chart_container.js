@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import FormBuilder from '../components/FormBuilder'
+import SmartChart from '../components/SmartChart'
 
 import {
   getFhirClient,
@@ -17,11 +17,11 @@ function mapStateToProps(state) {
   };
 }
 
-const formBuilderContainer = connect(mapStateToProps, {
+const smartChartContainer = connect(mapStateToProps, {
   getFhirClient,
   getFhirRelease,
   getDocumentReferences,
   getSourceId
-})(FormBuilder);
+})(SmartChart);
 
-export default formBuilderContainer;
+export default smartChartContainer;

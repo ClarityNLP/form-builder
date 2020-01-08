@@ -1,10 +1,9 @@
 const initialState = {
-  isLoading: false,
+  isLoading: true,
   isLoaded: false,
   isLoadError: false,
   focusQuestion: null,
-  errorMessage: null,
-  content: null
+  errorMessage: null
 };
 
 export function formReducer(state = initialState, action = {}) {
@@ -24,7 +23,7 @@ export function formReducer(state = initialState, action = {}) {
         isLoading: false,
         isLoaded: true,
         isLoadError: false,
-        content: action.data
+        ...action.data
       }
     }
     case 'GET_FORM_REJECTED': {
@@ -33,7 +32,6 @@ export function formReducer(state = initialState, action = {}) {
         isLoading: false,
         isLoaded: false,
         isLoadError: true,
-        content: null,
         errorMessage: action.error
       }
     }
@@ -47,6 +45,31 @@ export function formReducer(state = initialState, action = {}) {
       return {
         ...state,
         content: null
+      }
+    }
+    //TODO REMOVE...
+    case 'TEST_UPDATE_VALUE': {
+      return {
+        ...state,
+        groups: {
+          ...state.groups,
+          byId: {
+            ...state.groups.byId,
+            group1: {
+              ...state.groups.byId.group1,
+              questions: {
+                ...state.groups.byId.group1.questions,
+                byId: {
+                  ...state.groups.byId.group1.questions.byId,
+                  question1: {
+                    ...state.groups.byId.group1.questions.byId.question1,
+                    value: 'yes'
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     }
     default:

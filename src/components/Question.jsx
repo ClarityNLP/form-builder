@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import QuestionIndicator from '../containers/question_indicator_container';
+import QuestionContent from '../containers/question_content_container';
 
 export default class Question extends Component {
 
@@ -6,63 +8,24 @@ export default class Question extends Component {
     super(props);
   }
 
-  renderQuestion = (question) => {
-    switch (question.question_type) {
-      case 'MULTIPLE_CHOICE': {
-        return (
-          <div className="control">
-            {question.answers.map((answer, index) =>
-              <label key={index} className="radio">
-                <input type="radio" name={`answer-q${question.question_number}-a${index}`}/>
-                {answer.text}
-              </label>
-            )}
-          </div>
-        );
-      }
-      case 'MC': {
-        return (
-          <div className="control">
-            {question.answers.map((answer, index) =>
-              <label key={index} className="radio">
-                <input type="radio" name={`answer-q${question.question_number}-a${index}`}/>
-                {answer.text}
-              </label>
-            )}
-          </div>
-        );
-      }
-      case 'DATE': {
-        return (
-          <div className="field">
-            <div className="control">
-              <input className="input" type="text" placeholder="Enter date."/>
-            </div>
-          </div>
-        );
-      }
-      case 'TEXT': {
-        return (
-          <div className="field">
-            <div className="control">
-              <input className="input" type="text" placeholder="Enter text."/>
-            </div>
-          </div>
-        );
-      }
-      default: {
-        return (
-          <span>Unknown Question Type: {question.question_type}</span>
-        )
-      }
-    }
-  }
-
   render() {
+    const {
+      groupSlug,
+      questionSlug,
+      isFocused
+    } = this.props;
+
     return (
-      <div className="question-content">
-        <h1 className="question-name">{this.props.question.question_name}</h1>
-        {this.renderQuestion(this.props.question)}
+      <div className="question-block" onClick={this.props.onQuestionClick}>
+        <QuestionIndicator
+          isFocused={isFocused}
+          groupSlug={groupSlug}
+          questionSlug={questionSlug}
+        />
+        <QuestionContent
+          groupSlug={groupSlug}
+          questionSlug={questionSlug}
+        />
       </div>
     )
   }
