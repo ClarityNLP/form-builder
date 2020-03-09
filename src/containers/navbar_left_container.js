@@ -3,9 +3,9 @@ import NavbarLeft from '../components/NavbarLeft'
 
 function mapStateToProps(state, ownProps) {
   return {
-    groups: state.form.groups,
-    formIsLoaded: state.form.isLoaded,
-    formSlug: state.form.slug
+    groups: state.activity.groups,
+    activityIsLoaded: state.activity.isLoaded,
+    activityId: state.activity.id
   };
 }
 

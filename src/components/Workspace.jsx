@@ -2,166 +2,102 @@ import React, { Component } from 'react';
 import Catalog from '../containers/catalog_container';
 import NavbarLeft from '../containers/navbar_left_container';
 import NavbarTop from '../containers/navbar_top_container';
-import FormPanel from '../containers/form_panel_container';
-import Wizard from '../containers/wizard_container';
 import HotKeys from '../containers/hot_keys_container';
 import EvidenceSidebar from '../containers/evidence_sidebar_container';
-import { Route, withRouter, Switch } from 'react-router-dom';
+import FetchGroupEvidenceAndAutofill from '../containers/fetch_group_evidence_and_autofill_container';
+import StartActivity from '../containers/start_activity_container';
+import { Route, Switch, Redirect } from 'react-router-dom';
+import isEqual from 'lodash/isEqual';
+import { Formik, Form } from "formik";
+import { createYupSchema } from "../helpers/yupSchemaCreator";
+import * as Yup from "yup";
+import FormPage from '../containers/form_page_container';
 
-class Workspace extends Component {
+class RealTimeFormik extends Component {
+  render() {
+    if (!this.props.initialValues) {
+      return null
+    }
 
+    return (
+      <FormikWithStickyValues
+        {...this.props}
+        render={props =>
+          <KeepDirty streamingData={this.props.initialValues} {...props}>
+            {this.props.render(props)}
+          </KeepDirty>
+        }
+      />
+    )
+  }
+}
+
+class FormikWithStickyValues extends Component {
   constructor(props) {
-    super(props);
-
-    this.state = {
-      focusedQuestionSlug: null,
-    };
-
-    this.refs = {};
+    super(props)
+    // stamp data on mount
+    this.initialValues = Object.assign({}, props.initialValues)
   }
 
-  // getQuestionBlockClasses = (questionSlug, question) => {
-  //   let classes = '';
-  //
-  //   if (this.state.focusedQuestionSlug == questionSlug) {
-  //     classes = `${classes} is-focus`;
-  //   }
-  //
-  //   const oneEvidence = idx(question, _ => _.evidence);
-  //
-  //   if (!oneEvidence) {
-  //     return classes;
-  //   }
-  //
-  //   const expandedEvidence = this.props.evidences[oneEvidence];
-  //
-  //   if (!expandedEvidence || expandedEvidence.isLoading) {
-  //     return `${classes} is-loading`;
-  //   }
-  //
-  //   if (expandedEvidence.isLoadError) {
-  //     return `${classes} is-error`;
-  //   }
-  //
-  //   if (expandedEvidence.isEvidence) {
-  //     return `${classes} is-evidence`
-  //   }
-  //
-  //   return classes;
-  // }
-  //
-  // getRefs = (questions) => {
-  //   return questions.reduce((acc, questionSlug) => {
-  //     acc[questionSlug] = React.createRef();
-  //     return acc;
-  //   }, {});
-  // }
-  //
-  // scrollToQuestion = (questionSlug, behavior) => {
-  //   this.refs[questionSlug].current.scrollIntoView({
-  //     behavior: behavior || 'auto',
-  //     block: 'center',
-  //   });
-  // }
-  //
-  // focusQuestion = (questionSlug) => {
-  //   this.setState({
-  //     focusedQuestionSlug: questionSlug
-  //   });
-  //   return this.props.focusQuestion(questionSlug);
-  // }
-  //
-  // handleQuestionClick = (questionSlug, behavior) => {
-  //   this.scrollToQuestion(questionSlug, behavior);
-  //   return this.focusQuestion(questionSlug);
-  // }
-  //
-  // getInitialValues = (questions) => {
-  //   const initialValues = questions.allIds.reduce((acc, q) => {
-  //     acc[q] = questions.byId[q].value;
-  //     return acc;
-  //   }, {});
-  //   console.log('initialValues: ',initialValues);
-  //   return initialValues;
-  // }
-  //
-  // keyPressed = (event) => {
-  //   const { questions, groups, formSlug, groupSlug } = this.props;
-  //
-  //   if (event.keyCode === 38) { // up arrow
-  //     event.preventDefault();
-  //     const focusedQuestionIndex = questions.allIds.findIndex(questionSlug => questionSlug === this.state.focusedQuestionSlug);
-  //     if (focusedQuestionIndex > 0) { // Go to previous question
-  //       const focusedQuestionSlug = questions.allIds[focusedQuestionIndex - 1];
-  //       this.focusQuestion(focusedQuestionSlug);
-  //       return this.scrollToQuestion(focusedQuestionSlug, 'smooth');
-  //     }
-  //     if (focusedQuestionIndex === 0){ // Go to last question in previous group
-  //       const totalGroups = groups.length;
-  //       const currentGroupIndex = groups.findIndex(group => group === groupSlug);
-  //       const prevGroup = groups[(currentGroupIndex+totalGroups-1)%totalGroups];
-  //       return this.props.push(`/app/${formSlug}/${prevGroup}?pos=end`);
-  //     }
-  //   }
-  //   if (event.keyCode === 40) { // down arrow
-  //     event.preventDefault();
-  //     const focusedQuestionIndex = questions.allIds.findIndex(questionSlug => questionSlug === this.state.focusedQuestionSlug);
-  //     if (focusedQuestionIndex < questions.allIds.length - 1) {
-  //       const focusedQuestionSlug = questions.allIds[focusedQuestionIndex + 1];
-  //       this.focusQuestion(focusedQuestionSlug);
-  //       return this.scrollToQuestion(focusedQuestionSlug, 'smooth');
-  //     }
-  //     if (focusedQuestionIndex === questions.allIds.length - 1) {
-  //       const totalGroups = groups.length;
-  //       const currentGroupIndex = groups.findIndex(group => group === groupSlug);
-  //       const nextGroup = groups[(currentGroupIndex+totalGroups+1)%totalGroups];
-  //       return this.props.push(`/app/${formSlug}/${nextGroup}`);
-  //     }
-  //   }
-  // }
+ render() {
+   // exclude initialValues from pass thru
+  const { initialValues, ...props} = this.props
+
+  return  (
+    <Formik
+       initialValues={this.initialValues}
+       {...props}
+    />
+   )
+ }
+}
+
+class KeepDirty extends Component {
+  componentWillReceiveProps(nextProps) {
+    // whenever data arrives...
+    if (this.props.streamingData !== nextProps.streamingData) {
+      const nextValues = Object.keys(nextProps.streamingData).reduce((values, questionSlug) => {
+        values[questionSlug] = (
+          !this.props.values[questionSlug] &&
+          // !this.props.touched[questionSlug] && Don't really want this since onSubmit sets touched=true
+          // on all fields, making future autofill responses not update the ui even though the user
+          // didn't physically touch those unvisted questions
+          // !this.props.dirty[questionSlug] &&
+          !isEqual(this.props.values[questionSlug], nextProps.streamingData[questionSlug])
+        ) ? (
+          nextProps.streamingData[questionSlug]
+        ) : (
+          this.props.values[questionSlug]
+        )
+        return values;
+      }, {});
+     // decide how to update Formik on your own
+     //  const nextErrors = figureOutWhatErrorsToKeep(
+     //   this.props.errors,
+     //   this.props.touched,
+     //   nextProps.streamingData
+     // )
+      this.props.setValues(nextValues)
+      // this.props.setErrors(nextErrors)
+    }
+  }
+
+  render() {
+   return this.props.children
+  }
+}
+
+class Workspace extends Component {
+  constructor(props) {
+    super(props);
+  }
 
   componentDidMount(){
-    // document.addEventListener("keydown", this.keyPressed, false); //Need form to exist before keyPressed can be called.
+    const { activityId } = this.props;
 
-    // const {
-    //   formSlug,
-    //   groupSlug: groupSlugFromPath,
-    //   pos,
-    // } = this.props;
-
-    const { formSlug } = this.props.match.params;
-
-    console.log("FORM SLUG...",formSlug);
-    console.log('this.props!!: ',this.props);
-
-    // console.log('groupSlugFromPath: ',groupSlugFromPath);
-
-    // console.log('groups: ',groups);
-
-    if (formSlug) {
-      return this.props.getForm(formSlug)
+    if (activityId) {
+      return this.props.getActivity(activityId)
         .then(() => {
-          // console.log("FORM: ",form);
-          // const groups = [];
-          // const questions = {};
-          // if (!groups.includes(groupSlugFromPath)) {
-          //   // EXPLAIN: if groupSlug in path doesn't match with possible groupSlugs,
-          //   // default to the first groupSlug in groups
-          //   return this.props.push(`/app/${formSlug}/${groups[0]}`);
-          // }
-          // this.refs = this.getRefs(questions.allIds);
-          //
-          // console.log('this.refs: ',this.refs);
-          //
-          // return this.setState({
-          //   focusedQuestionSlug: (
-          //     pos === 'end'
-          //     ?
-          //     questions.allIds[questions.allIds.length - 1]
-          //     :
-          //     questions.allIds[0]
-          //   )
-          // });
         })
         .catch(error => {
           //TODO just handle catch in .getForm action and open Catalog via props
@@ -170,84 +106,159 @@ class Workspace extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    const { formSlug } = this.props.match.params;
-    const { formSlug : prevFormSlug } = prevProps.match.params;
+    const { activityId } = this.props
+    const { activityId : prevActivityId } = prevProps;
 
-    // const {
-    //   formSlug,
-    //   groupSlug : groupSlugFromPath,
-    //   pos,
-    //   questions,
-    //   groups,
-    //   isLoading
-    // } = this.props;
-
-    if (formSlug !== prevFormSlug) {
-      if (formSlug) {
-        return this.props.getForm(formSlug)
-        // return this.props.resetForm()
-          // .then(() => this.props.getForm(formSlug))
-          // .then((form) => {
-          //   return !groups.includes(groupSlugFromPath) ? (
-          //     this.props.push(`/app/${formSlug}/${groups[0]}`)
-          //   ) : (
-          //     this.props.push(`/app/${formSlug}/${groupSlugFromPath}`)
-          //   )
-          // })
+    if (activityId !== prevActivityId) {
+      if (activityId) {
+        return this.props.getActivity(activityId);
       }
     }
   }
 
-  // componentWillUnmount(){
-  //   document.removeEventListener("keydown", this.keyPressed, false);
-  // }
+  handleSubmit = (values, { setSubmitting, setStatus }) => {
+    const {
+      activityId,
+      groups
+    } = this.props;
 
-  updateValues = () => {
-    console.log('clicked...');
-    this.props.testUpdateValue();
+    return this.props.saveActivityValues(activityId, values)
+      .then(() => this.props.saveActivityGroupLoadingState(activityId, groups))
+      .then((res) => {
+        //TODO do something after saving?
+      })
+      .catch((err) => {
+        //TODO do something if something went wrong saving?
+      });
+  };
+
+  transformGroupsToValues = (groups) => {
+    const values = groups.allIds.reduce((values, groupSlug) => {
+      const groupValues = groups.byId[groupSlug].questions.allIds.reduce((values, questionSlug) => {
+        values[questionSlug] = groups.byId[groupSlug].questions.byId[questionSlug].value;
+        return values;
+      }, {});
+
+      values = {
+        ...values,
+        ...groupValues
+      };
+
+      return values;
+    }, {});
+    return values;
+  }
+
+  transformGroupsToQuestions = (groups) => {
+    const questions = groups.allIds.reduce((questions, groupSlug) => {
+      const groupQuestions = groups.byId[groupSlug].questions.allIds.map((questionSlug) => {
+        return {
+          ...groups.byId[groupSlug].questions.byId[questionSlug],
+          slug: questionSlug
+        }
+      })
+
+      questions = [
+        ...questions,
+        ...groupQuestions
+      ];
+
+      return questions;
+    }, []);
+
+    return questions;
   }
 
   render() {
-    const { formIsLoaded } = this.props;
+    const { activityId, activityIsLoaded, groups } = this.props;
 
-    // const initialValues = questions.allIds.reduce((acc, q) => {
-    //   acc[q] = questions.byId[q].value;
-    //   return acc;
-    // }, {});
+    let formData;
+    let validationSchema;
 
-    // const initialValues = {};
-
-    // const validationSchema = Yup.object().shape({
-    //   question1: Yup.string()
-    //     .required('Required'),
-    //   question2: Yup.string()
-    //     .required('Required')
-    // });
+    if (activityIsLoaded) {
+      formData = this.transformGroupsToValues(groups);
+      const yupSchema = this.transformGroupsToQuestions(groups).reduce(createYupSchema, {});
+      validationSchema = Yup.object().shape(yupSchema);
+    }
 
     return (
       <div className="form-builder">
-        <NavbarTop/>
-        <div>
-          <button onClick={this.updateValues}>Update Value...</button>
-        </div>
-        <div className="workspace">
-          <NavbarLeft/>
-          <Wizard/>
-          <EvidenceSidebar/>
-          <Switch> {/* NOTE: switch here because we want to *disable* hotkeys if catalog is open */}
-            <Route exact path="/app/catalog">
-              <Catalog/>
-            </Route>
-            { formIsLoaded &&
-              <Route path={`/app/f/:formSlug/g/:groupSlug/q/:questionSlug`}>
-                <HotKeys/>
-              </Route>
-            }
-          </Switch>
-        </div>
+        {/* TODO: do we need "formData || {}" */}
+        <RealTimeFormik
+          initialValues={formData || {}}
+          validationSchema={validationSchema}
+          onSubmit={this.handleSubmit}
+          render={props =>
+            <Form>
+              <NavbarTop/>
+              <div className="workspace">
+                <Route path={`/app/:a?/:activityId?/:g?/:groupSlug?`} component={NavbarLeft}/>
+                <div className="form-panel">
+                  { !activityIsLoaded ? (
+                    <>
+                      <li className="question-block is-skeleton">
+                        <div className="question-indicator">
+                          <div className="question-indicator-bubble">
+                            <div className="question-indicator-bubble-border"></div>
+                            <div className="question-indicator-bubble-content"></div>
+                          </div>
+                        </div>
+                      </li>
+                      <li className="question-block is-skeleton">
+                        <div className="question-indicator">
+                          <div className="question-indicator-bubble">
+                            <div className="question-indicator-bubble-border"></div>
+                            <div className="question-indicator-bubble-content"></div>
+                          </div>
+                        </div>
+                      </li>
+                    </>
+                  ) : (
+                    <Switch>
+                      {groups.allIds.map((groupSlug, index) => {
+                        return (
+                          <Route
+                            key={index}
+                            path={`/app/a/${activityId}/g/${groupSlug}`}
+                            render={(props) =>
+                              <FormPage
+                                {...props}
+                                activity={activityId}
+                                group={groupSlug}
+                              />
+                            }
+                          />
+                        )
+                      })}
+                      <Redirect to={`/app/a/${activityId}/g/${groups.allIds[0]}`}/>
+                    </Switch>
+                  )}
+                </div>
+                <EvidenceSidebar/>
+                <Route
+                  exact
+                  path={[
+                    "/app/catalog",
+                    "/app/a/:activityId/g/:groupSlug/q/:questionSlug"
+                  ]}
+                  children={(props) => <Catalog {...props}/>}
+                />
+                <Route path={`/app/f/:formSlug`} component={StartActivity}/>
+                { activityIsLoaded &&
+                  <>
+                    <Route exact path={`/app/a/:activityId/g/:groupSlug/q/:questionSlug`}>
+                      <HotKeys/>
+                    </Route>
+                    <Route path={`/app/a/:activityId/g/:groupSlug`} component={FetchGroupEvidenceAndAutofill}/>
+                  </>
+                }
+              </div>
+            </Form>
+          }
+        />
       </div>
     )
   }
 }
 
-export default withRouter(Workspace)
+export default Workspace

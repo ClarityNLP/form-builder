@@ -24,6 +24,7 @@ function App() {
       <ConnectedRouter history={history}>
         <Switch>
           <Route exact path="/" component={Launcher}/>
+          <Route path="/app/a/:activityId" component={SmartChart}/>
           <Route path="/app/f/:formSlug" component={SmartChart}/>
           <Route path="/app/catalog" component={SmartChart}/>
           <Redirect to="/app/catalog"/>

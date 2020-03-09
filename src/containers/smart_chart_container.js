@@ -11,9 +11,10 @@ import {
   getSourceId
 } from '../actions/source_id'
 
-function mapStateToProps(state) {
+function mapStateToProps(state, ownProps) {
   return {
-    source: state.source
+    source: state.source,
+    activityId: ownProps.match.params.activityId
   };
 }
 

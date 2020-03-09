@@ -3,7 +3,7 @@ import EvidenceSidebar from '../components/EvidenceSidebar'
 
 function mapStateToProps(state) {
   return {
-    formIsLoaded: state.form.isLoaded
+    activityIsLoaded: state.activity.isLoaded
   };
 }
 

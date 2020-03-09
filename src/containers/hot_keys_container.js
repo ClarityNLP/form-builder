@@ -6,8 +6,8 @@ import { withRouter } from 'react-router-dom';
 function mapStateToProps(state, ownProps) {
 
   return {
-    groupsAllIds: state.form.groups.allIds,
-    questionsAllIds: state.form.groups.byId[ownProps.match.params.groupSlug].questions.allIds,
+    groupsAllIds: state.activity.groups.allIds,
+    questionsAllIds: state.activity.groups.byId[ownProps.match.params.groupSlug].questions.allIds,
     ...ownProps.match.params
   };
 }

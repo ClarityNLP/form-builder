@@ -10,7 +10,7 @@ function mapStateToProps(state, ownProps) {
   return {
     question: {
       slug: questionSlug,
-      ...state.form.groups.byId[groupSlug].questions.byId[questionSlug],
+      ...state.activity.groups.byId[groupSlug].questions.byId[questionSlug],
     }
   }
 }

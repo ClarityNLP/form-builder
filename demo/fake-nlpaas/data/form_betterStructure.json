@@ -134,11 +134,62 @@
           ]
         },
         "allIds": ["yescarta_terms", "yescarta_codes", "kymriah_terms", "kymriah_codes"]
-      },
+      },      
       "hematocrit_hematologic_findings": {
         "byId": {
           "hematocrit_hematologic_findings_value_extraction": [
-            {},{},{}
+            {
+              "_id": "5e15f635933b3ee485a616ed",
+              "batch": 0,
+              "concept_code": "",
+              "concept_code_system": "",
+              "condition": "EQUAL",
+              "dimension_X": 132000.0,
+              "dimension_Y": null,
+              "dimension_Z": "",
+              "display_name": "hematocrit_hematologic_findings_value_extraction",
+              "end": 73,
+              "inserted_date": "2020-01-08 15:33:09.907000",
+              "job_id": 15787,
+              "location": "",
+              "nlpql_feature": "hematocrit_hematologic_findings_value_extraction",
+              "owner": "claritynlp",
+              "phenotype_final": true,
+              "pipeline_id": 32367,
+              "pipeline_type": "ValueExtractor",
+              "report_date": "2094-02-03T00:01:00Z",
+              "report_id": "16e329e2-322c-11ea-878f-0242c0a8e013_9",
+              "report_text": "LABORATORY DATA: White count 4.4, hemoglobin 10.1, platelet count 132,000, sodium 135, potassium 3.9, chloride 105, bicarbonate 24, BUN 15, and creatinine 0.9.",
+              "report_type": "Radiology Note",
+              "result_display": {
+                "date": "2094-02-03T00:01:00Z",
+                "end": [
+                  73
+                ],
+                "highlights": [
+                  "platelet",
+                  132000.0,
+                  ""
+                ],
+                "result_content": "platelet 132000.0 ",
+                "sentence": "LABORATORY DATA: White count 4.4, hemoglobin 10.1, platelet count 132,000, sodium 135, potassium 3.9, chloride 105, bicarbonate 24, BUN 15, and creatinine 0.9.",
+                "start": [
+                  51
+                ]
+              },
+              "sentence": "LABORATORY DATA: White count 4.4, hemoglobin 10.1, platelet count 132,000, sodium 135, potassium 3.9, chloride 105, bicarbonate 24, BUN 15, and creatinine 0.9.",
+              "solr_id": "16e329e2-322c-11ea-878f-0242c0a8e013_9",
+              "source": "16e329e2-322c-11ea-878f-0242c0a8e013",
+              "start": 51,
+              "subject": "38587",
+              "temporality": "",
+              "term": "",
+              "text": "platelet",
+              "units": "",
+              "value": 132000.0,
+              "value1": "",
+              "value2": ""
+            }
           ],
           "hematocrit_hematologic_findings_structured": [
             {},{},{}

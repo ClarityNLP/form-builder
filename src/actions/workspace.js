@@ -4,7 +4,7 @@ import groupBy from 'lodash/groupBy';
 import isEqual from 'lodash/isEqual';
 import clone from 'lodash/clone';
 
-export function getForm(slug) {
+export function createOrFindActivity(subId, slug) { //is already exists, SmartHub will return the activity
   return (dispatch) => {
     return new Promise(function(resolve, reject) {
 
@@ -12,9 +12,8 @@ export function getForm(slug) {
         type: 'GET_FORM_REQUESTED'
       });
 
-      // let form;
-
-      axios.get(`${window._env_.FORM_CMS_URL}/form/NLPQL_form_content/${slug}/questions`)
+      axios.get(`${window._env_.SMARTHUB_URL}/subjects/${subId}/forms/${slug}`)
+      // axios.get(`${window._env_.SMARTHUB_URL}/form/NLPQL_form_content/${slug}/questions`)
       // TODO -- here we are temporarily turning off validation of old form while
       //contructing new from structure
       // .then(res => {
@@ -43,7 +42,6 @@ export function getForm(slug) {
         resolve(`Finished retrieving form ${slug}`);
       })
       .catch(error => {
-        console.log('error: ',error);
         dispatch({
           type: 'GET_FORM_REJECTED',
           error: error.message || error
@@ -51,16 +49,5 @@ export function getForm(slug) {
         reject(error.message);
       })
     })
-  }
-}
-
-export function testUpdateValue() {
-  return (dispatch) => {
-    return new Promise(function(resolve, reject) {
-      dispatch({
-        type: 'TEST_UPDATE_VALUE'
-      })
-      resolve();
-    });
   }
 }

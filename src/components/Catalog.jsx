@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import BouncingBalls from './BouncingBalls';
 import idx from 'idx';
-import { withRouter, Link } from "react-router-dom";
-import queryString from 'query-string'
+import { Link } from "react-router-dom";
+import queryString from 'query-string';
+import isEqual from 'lodash/isEqual';
 
 class Catalog extends Component {
 
@@ -10,73 +11,91 @@ class Catalog extends Component {
     super(props);
 
     this.state = {
-      catelogIsVisible: false
+      catalogIsVisible: false,
+      showCloseButton: true
     };
   }
 
-  componentDidMount() {
-    return this.props.getCatalogContent()
-  }
-
-  // componentDidMount() {
-  //   const { location } = this.props;
-  //   const { cat } = queryString.parse(location.search, {parseBooleans: true});
-  //
-  //   if (location.pathname === '/app/catelog' || cat) {
-  //     this.setState({
-  //       catelogIsVisible: true
-  //     });
-  //     return this.props.getCatalogContent()
-  //   }
-  // }
-
-  // componentDidUpdate(prevProps, prevState) {
-  //   const { location } = this.props;
-  //   const prevPathname = idx(prevProps.location, _ => _.pathname);
-  //   const { cat } = queryString.parse(location.search, {parseBooleans: true});
-  //   const prevCat = queryString.parse(idx(prevProps.location, _ => _.search), {parseBooleans: true});
-  //
-  //   if (
-  //     ((location.pathname === '/app/catelog') && (location.pathname !== prevPathname))
-  //     ||
-  //     (cat && (cat !== prevCat))
-  //   ) {
-  //     this.setState({
-  //       catelogIsVisible: true
-  //     });
-  //     return this.props.getCatalogContent()
-  //   }
-  //
-  //   if (
-  //     ((location.pathname !== '/app/catelog') && (location.pathname !== prevPathname))
-  //     ||
-  //     (!cat && (cat !== prevCat))
-  //   ) {
-  //     this.setState({
-  //       catelogIsVisible: false
-  //     });
-  //   }
-  // }
-
-  handleCloseCatalog = () => {
-    return this.props.closeCatalog();
+  match({match, location}) {
+    if (match) {
+      switch(match.path) {
+        case "/app/catalog": {
+          return {
+            catalogIsVisible: true,
+            showCloseButton: false
+          };
+        }
+        case "/app/a/:activityId/g/:groupSlug/q/:questionSlug": {
+          const { showCatalog } = queryString.parse(
+            location.search,
+            { parseBooleans: true }
+          );
+          return {
+            catalogIsVisible: showCatalog,
+            showCloseButton: true
+          };
+        }
+        default: {
+          return {
+            catalogIsVisible: false,
+            showCloseButton: false
+          }
+        }
+      }
+    }
+    return {
+      catalogIsVisible: false,
+      showCloseButton: false
+    };
   };
 
+
+
+  componentDidMount() {
+    this.props.getCatalogContent();
+    const { catalogIsVisible, showCloseButton } = this.match(this.props);
+    if (catalogIsVisible) {
+      this.setState({
+        catalogIsVisible: true,
+        showCloseButton: showCloseButton
+      });
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    const { catalogIsVisible, showCloseButton } = this.match(this.props);
+    const { catalogIsVisible: prevCatalogIsVisible } = this.match(prevProps);
+    if (catalogIsVisible && !prevCatalogIsVisible) {
+      return this.setState({
+        catalogIsVisible: true,
+        showCloseButton: showCloseButton
+      });
+    }
+    if (!catalogIsVisible && prevCatalogIsVisible) {
+      return this.setState({
+        catalogIsVisible: false
+      });
+    }
+  }
+
   render() {
-    const { catelogIsVisible } = this.state;
+    const { catalogIsVisible, showCloseButton } = this.state;
+    const activityId = idx(this.props, _ => _.match.params.activityId);
+    const groupSlug = idx(this.props, _ => _.match.params.groupSlug);
+    const questionSlug = idx(this.props, _ => _.match.params.questionSlug);
 
     return (
-      <div className={`catalog modal ${true ? 'is-active' : ''}`}>
+      <div className={`catalog modal ${catalogIsVisible ? 'is-active' : ''}`}>
         <div className="modal-background"></div>
         <div className="modal-card">
           <header className="modal-card-head">
             <p className="modal-card-title">Catalog</p>
-            { this.props.form.content &&
-              <button
+            { showCloseButton &&
+              <Link
+                to={`/app/a/${activityId}/g/${groupSlug}/q/${questionSlug}`}
                 className="delete"
                 aria-label="close"
-                onClick={this.handleCloseCatalog}
-              ></button>
+              ></Link>
             }
           </header>
           <section className={`modal-card-body ${this.props.catalog.isLoading ? 'is-loading' : ''}`}>
@@ -84,9 +103,9 @@ class Catalog extends Component {
               <BouncingBalls/>
             ) : (
               <React.Fragment>
-                { this.props.form.isLoadError &&
+                { this.props.activity.isLoadError &&
                   <div className="message is-danger">
-                    <div className="message-body">{`Problem loading form. ${this.props.form.errorMessage}`}</div>
+                    <div className="message-body">{`Problem loading form. ${this.props.activity.errorMessage}`}</div>
                   </div>
                 }
                 <div className="columns is-multiline">
@@ -95,7 +114,7 @@ class Catalog extends Component {
                       <div className="column is-one-third" key={index}>
                         <Link
                           to={`/app/f/${form.slug}`}
-                          className={`catalog-item ${form.name === idx(this.props, _ => _.form.content.name) ? 'is-current' : ''}`}
+                          className={`catalog-item ${form.name === idx(this.props, _ => _.activity.name) ? 'is-current' : ''}`}
                         >
                           <div className="catalog-item-header">
                             <div className="catalog-item-title">{form.name}</div>
@@ -104,7 +123,7 @@ class Catalog extends Component {
                           <div className="catalog-footer">
                             <div className="catalog-footer-owner">{form.description || 'This is a short description about the form.'}</div>
                           </div>
-                          { form.name === idx(this.props, _ => _.form.content.name) &&
+                          { form.name === idx(this.props, _ => _.activity.name) &&
                             <div className="catalog-current-label">Current</div>
                           }
                         </Link>
@@ -122,4 +141,4 @@ class Catalog extends Component {
   }
 }
 
-export default withRouter(Catalog)
+export default Catalog

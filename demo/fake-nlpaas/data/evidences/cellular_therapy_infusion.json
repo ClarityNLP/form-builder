@@ -1,0 +1,49 @@
+[
+    {
+        "_id": "5e1d47bdb72203b71da61925",
+        "batch": 0,
+        "concept_code": "",
+        "concept_code_system": "",
+        "display_name": "Kymriah",
+        "dosage_0_doseQuantity_code": "428672001",
+        "dosage_0_doseQuantity_system": "http://snomed.info/sct",
+        "dosage_0_doseQuantity_unit": "bag",
+        "dosage_0_doseQuantity_value": 1.0,
+        "effectivePeriod_end": "2094-02-16 00:00:00",
+        "effectivePeriod_start": "2094-01-10 00:00:00",
+        "id": "4300081",
+        "inserted_date": "2020-01-14 04:46:53.278000",
+        "job_id": 16175,
+        "len_dosage": 1,
+        "len_medicationCodeableConcept_coding": 1,
+        "medicationCodeableConcept_coding_0_code": "1986443",
+        "medicationCodeableConcept_coding_0_display": "Kymriah",
+        "medicationCodeableConcept_coding_0_system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "nlpql_feature": "Kymriah",
+        "owner": "claritynlp",
+        "phenotype_final": true,
+        "pipeline_id": 33279,
+        "pipeline_type": "CQLExecutionTask",
+        "report_date": "",
+        "report_id": "",
+        "report_text": "",
+        "report_type": "MedicationStatement",
+        "resourceType": "MedicationStatement",
+        "result_display": {
+            "date": "2094-01-10 00:00:00+00:00",
+            "highlights": [
+                "Kymriah"
+            ],
+            "result_content": "Kymriah",
+            "sentence": ""
+        },
+        "solr_id": "",
+        "source": "",
+        "status": "active",
+        "subject": "",
+        "subject_display": "DERTINGER, MARK",
+        "subject_reference": "Patient/38587",
+        "taken": "y",
+        "value_name": "Kymriah"
+    }
+]

@@ -24,7 +24,7 @@ export default class QuestionContent extends Component {
                       type="radio"
                       checked={option.value === field.value}
                       {...field}
-                      value={option.value}
+                      value={option.value || ''}
                     />
                     {option.label}
                   </label>
@@ -48,6 +48,7 @@ export default class QuestionContent extends Component {
                     className={`input ${errors[field.name] && touched[field.name] && 'is-danger'}`}
                     type="text"
                     {...field}
+                    value={field.value || ''}
                   />
                   {touched[field.name] &&
                     errors[field.name] && <div className="help is-danger">{errors[field.name]}</div>}
@@ -69,17 +70,42 @@ export default class QuestionContent extends Component {
           </div>
         );
       }
-      case 'MC': {
+      // case 'MC': {
+      //   return (
+      //     <div className="control">
+      //       {question.answers.map((answer, index) =>
+      //         <label key={index} className="radio">
+      //           <input type="radio" name={`answer-q${question.question_number}-a${index}`}/>
+      //           {answer.text}
+      //         </label>
+      //       )}
+      //     </div>
+      //   );
+      // }
+      case 'MC': { //TODO is this just radio now?
         return (
-          <div className="control">
-            {question.answers.map((answer, index) =>
-              <label key={index} className="radio">
-                <input type="radio" name={`answer-q${question.question_number}-a${index}`}/>
-                {answer.text}
-              </label>
+          <Field name={question.slug}>
+            {({
+              field, // { name, value, onChange, onBlur }
+              form: { touched, errors }, // also values, setXXXX, handleXXXX, dirty, isValid, status, etc.
+              meta,
+            }) => (
+              <div className="control">
+                {question.options.map((option, index) =>
+                  <label key={index} className="radio">
+                    <input
+                      type="radio"
+                      checked={option.value === field.value}
+                      {...field}
+                      value={option.value || ''}
+                    />
+                    {option.label}
+                  </label>
+                )}
+              </div>
             )}
-          </div>
-        );
+          </Field>
+        )
       }
       case 'DATE': {
         return (
@@ -100,8 +126,6 @@ export default class QuestionContent extends Component {
 
   render() {
     const { question } = this.props;
-
-    console.log('RE QUESTION: ',this.props);
 
     return (
       <div className="question-content">

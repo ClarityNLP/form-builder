@@ -4,11 +4,16 @@ import EvidenceList from '../components/EvidenceList';
 function mapStateToProps(state, ownProps) {
   const { groupSlug, questionSlug } = ownProps.match.params;
 
-  console.log("A groupSlug: ",groupSlug);
-  console.log("A questionSlug: ",questionSlug);
+  const {
+    autofillLoadError,
+    isAutofillLoadError
+  } = state.activity.groups.byId[groupSlug].questions.byId[questionSlug];
 
   return {
-    evidence: state.form.evidences[state.form.groups.byId[groupSlug].questions.byId[questionSlug].evidence]
+    evidence: state.activity.evidences[state.activity.groups.byId[groupSlug].questions.byId[questionSlug].evidence],
+    groupIsLoaded: state.activity.groups.byId[groupSlug].isLoaded,
+    isAutofillLoadError,
+    autofillLoadError
   };
 }
 

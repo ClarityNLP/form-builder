@@ -1,0 +1,131 @@
+[
+    {
+        "_id": "5e1d47c318cdbe23c4acc886",
+        "batch": 0,
+        "concept_code": "",
+        "concept_code_system": "",
+        "display_name": "death_terms",
+        "end": 7,
+        "experiencer": "Patient",
+        "inserted_date": "2020-01-14 04:46:59.517000",
+        "job_id": 16176,
+        "negation": "Affirmed",
+        "nlpql_feature": "death_terms",
+        "owner": "claritynlp",
+        "phenotype_final": true,
+        "pipeline_id": 33285,
+        "pipeline_type": "ProviderAssertion",
+        "report_date": "2200-10-10T18:29:00Z",
+        "report_id": "de6616d6-3688-11ea-bdea-0242c0a8e013_26",
+        "report_text": "Expired",
+        "report_type": "Radiology Note",
+        "result_display": {
+            "date": "2200-10-10T18:29:00Z",
+            "end": [
+                7
+            ],
+            "highlights": [
+                "Expired"
+            ],
+            "result_content": "Expired",
+            "sentence": "Expired",
+            "start": [
+                0
+            ]
+        },
+        "section": "DISCHARGE_CONDITION",
+        "sentence": "Expired",
+        "solr_id": "de6616d6-3688-11ea-bdea-0242c0a8e013_26",
+        "source": "de6616d6-3688-11ea-bdea-0242c0a8e013",
+        "start": 0,
+        "subject": "38587",
+        "temporality": "Recent",
+        "term": "Expired"
+    },
+    {
+        "_id": "5e1d47c318cdbe23c4acc887",
+        "batch": 0,
+        "concept_code": "",
+        "concept_code_system": "",
+        "display_name": "death_terms",
+        "end": 5,
+        "experiencer": "Patient",
+        "inserted_date": "2020-01-14 04:46:59.599000",
+        "job_id": 16176,
+        "negation": "Affirmed",
+        "nlpql_feature": "death_terms",
+        "owner": "claritynlp",
+        "phenotype_final": true,
+        "pipeline_id": 33285,
+        "pipeline_type": "ProviderAssertion",
+        "report_date": "2200-10-10T18:29:00Z",
+        "report_id": "de6616d6-3688-11ea-bdea-0242c0a8e013_26",
+        "report_text": "Death.",
+        "report_type": "Radiology Note",
+        "result_display": {
+            "date": "2200-10-10T18:29:00Z",
+            "end": [
+                5
+            ],
+            "highlights": [
+                "Death"
+            ],
+            "result_content": "Death.",
+            "sentence": "Death.",
+            "start": [
+                0
+            ]
+        },
+        "section": "DISCHARGE_DIAGNOSIS",
+        "sentence": "Death.",
+        "solr_id": "de6616d6-3688-11ea-bdea-0242c0a8e013_26",
+        "source": "de6616d6-3688-11ea-bdea-0242c0a8e013",
+        "start": 0,
+        "subject": "38587",
+        "temporality": "Recent",
+        "term": "Death"
+    },
+    {
+        "_id": "5e1d47c318cdbe23c4acc888",
+        "batch": 0,
+        "concept_code": "",
+        "concept_code_system": "",
+        "display_name": "death_terms",
+        "end": 7,
+        "experiencer": "Patient",
+        "inserted_date": "2020-01-14 04:46:59.603000",
+        "job_id": 16176,
+        "negation": "Affirmed",
+        "nlpql_feature": "death_terms",
+        "owner": "claritynlp",
+        "phenotype_final": true,
+        "pipeline_id": 33285,
+        "pipeline_type": "ProviderAssertion",
+        "report_date": "2200-10-10T18:29:00Z",
+        "report_id": "de6616d6-3688-11ea-bdea-0242c0a8e013_26",
+        "report_text": "Expired.",
+        "report_type": "Radiology Note",
+        "result_display": {
+            "date": "2200-10-10T18:29:00Z",
+            "end": [
+                7
+            ],
+            "highlights": [
+                "Expired"
+            ],
+            "result_content": "Expired.",
+            "sentence": "Expired.",
+            "start": [
+                0
+            ]
+        },
+        "section": "DISCHARGE_CONDITION",
+        "sentence": "Expired.",
+        "solr_id": "de6616d6-3688-11ea-bdea-0242c0a8e013_26",
+        "source": "de6616d6-3688-11ea-bdea-0242c0a8e013",
+        "start": 0,
+        "subject": "38587",
+        "temporality": "Recent",
+        "term": "Expired"
+    }
+]

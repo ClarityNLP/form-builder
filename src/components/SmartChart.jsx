@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Transient from './Transient';
 import Workspace from '../containers/workspace_container';
 import { oauth2 as SMART } from 'fhirclient';
-import queryString from 'query-string'
 
 export default class SmartChart extends Component {
 
@@ -20,10 +19,10 @@ export default class SmartChart extends Component {
   render() {
     const { isLoaded : sourceIsFulfilled } = this.props.source;
 
-    return !sourceIsFulfilled ? (
+    return false ? (
       <Transient/>
     ) : (
-      <Workspace/>
+      <Workspace activityId={this.props.activityId}/>
     );
   }
 }

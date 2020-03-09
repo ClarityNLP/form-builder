@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import Feature from './Feature';
+import BouncingBalls from './BouncingBalls';
 
 export default class EvidenceList extends Component {
 
@@ -7,21 +9,51 @@ export default class EvidenceList extends Component {
   }
 
   render() {
-    const { evidence } = this.props;
+    const {
+      evidence,
+      groupIsLoaded,
+      isAutofillLoadError,
+      autofillLoadError
+    } = this.props;
 
     return (
       <div className="evidence-list">
-        { evidence ? (
-          <React.Fragment>
-          {evidence.allIds.map((feature, index) => {
-            return (
-              <div key={index}>FEATURE: {feature}</div>
-            )
-          })}
-          </React.Fragment>
-        ): (
-          <div>no evidence...</div>
-        )}
+        <>
+        { evidence &&
+          <>
+          {evidence.isLoading &&
+            <div className="is-loading">
+              <BouncingBalls/>
+            </div>
+          }
+          {evidence.isLoadError &&
+            <div className="message is-danger">
+              <div className="message-body">
+                Problem loading evidence bundle: {evidence.errorMessage}
+              </div>
+            </div>
+          }
+          {isAutofillLoadError && !evidence.isLoading &&
+            <div className="message is-warning">
+              <div className="message-body">
+                {`Issue autofilling question: ${autofillLoadError}`}
+              </div>
+            </div>
+          }
+          {(evidence.isLoaded || groupIsLoaded) &&
+            <>
+            {evidence.allIds.map((feature, index) => {
+              if (evidence.byId[feature].items) {
+                return (
+                  <Feature key={index} {...evidence.byId[feature]}/>
+                )
+              }
+            })}
+            </>
+          }
+          </>
+        }
+        </>
       </div>
     )
   }

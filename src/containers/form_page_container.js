@@ -4,9 +4,11 @@ import { push } from 'connected-react-router'
 
 function mapStateToProps(state, ownProps) {
   return {
-    questionsAllIds: state.form.groups.byId[ownProps.group].questions.allIds,
+    match: ownProps.match,
+    location: ownProps.location,
+    questionsAllIds: state.activity.groups.byId[ownProps.group].questions.allIds,
     groupSlug: ownProps.group,
-    formSlug: ownProps.form
+    activityId: ownProps.activity
   };
 }
 

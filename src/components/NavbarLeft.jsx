@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import { Route, Link } from 'react-router-dom';
-import idx from 'idx';
-import isEqual from 'lodash/isEqual';
+import clsx from 'clsx';
 
 class NavbarLeft extends Component {
-
   constructor(props) {
     super(props);
 
@@ -25,89 +23,47 @@ class NavbarLeft extends Component {
     });
   }
 
-  keyPressed = (event) => {
-    const { form, groupSlug: groupSlugFromPath } = this.props;
-    if (event.keyCode === 37) { // left arrow
-      event.preventDefault();
-      const currentGroupIndex = form.groups.allIds.findIndex(groupSlug => groupSlug === groupSlugFromPath);
-      if (currentGroupIndex > 0) {
-        this.props.push(form.groups.allIds[currentGroupIndex - 1]);
-        this.refs[form.groups.allIds[currentGroupIndex - 1]].current.scrollIntoView({
-          behavior: 'smooth',
-          block: 'center',
-        });
-      }
-    }
-    if (event.keyCode === 39) { // right arrow
-      event.preventDefault();
-      const currentGroupIndex = form.groups.allIds.findIndex(groupSlug => groupSlug === groupSlugFromPath);
-      if (currentGroupIndex < form.groups.allIds.length - 1) {
-        this.props.push(form.groups.allIds[currentGroupIndex + 1]);
-        this.refs[form.groups.allIds[currentGroupIndex + 1]].current.scrollIntoView({
-          behavior: 'smooth',
-          block: 'center',
-        });
-      }
-    }
-  }
-
   componentDidMount(){
-    // if (idx(this.props, _ => _.form.groups)) {
-    //
-    //   this.refs = this.getRefs(this.props.form.groups.allIds);
-    // }
-    // document.addEventListener("keydown", this.keyPressed, false);
-  }
-
-  componentWillUnmount(){
-    // document.removeEventListener("keydown", this.keyPressed, false);
+    if (this.props.activityIsLoaded) { //NOTE: basically will never be true...
+      // return this.refs = this.getRefs(this.props.groups.allIds);
+    }
   }
 
   componentDidUpdate(prevProps) {
-    const { formSlug, groupSlug, form } = this.props;
+    if (this.props.activityIsLoaded && !prevProps.activityIsLoaded) {
+      // this.refs = this.getRefs(this.props.groups.allIds);
+    }
 
-    // if (this.props.form.content !== prevProps.form.content) { //TODO maybe change...
-    //   if (idx(this.props, _ => _.form.content.groups)) {
-    //     return this.refs = this.getRefs(this.props.form.content.groups);
-    //   }
-    // }
-
-    // if (prevProps.form.isLoading && !form.isLoading) { //TODO maybe change...
-    //   return this.refs = this.getRefs(form.groups.allIds);
-    // }
-
-    // if ((groupSlug !== prevProps.groupSlug) && groupSlug) {
-    //   if (!form.groups.allIds.includes(prevProps.groupSlug)) {
-    //     return;
-    //   }
-    //   return this.scrollToGroup(groupSlug, 'auto');
-    // }
+    if (this.props.match.params.groupSlug !== prevProps.match.params.groupSlug) {
+      // this.scrollToGroup(this.props.match.params.groupSlug, 'auto');
+    }
   }
 
   render() {
     const {
-      formIsLoaded,
-      formSlug,
+      activityIsLoaded,
+      activityId,
       groups,
     } = this.props;
 
-    // function isGroupLoading(groups, group) {
-    //   return idx(groups, _ => _[group].isLoading);
-    // }
-
-    function GroupItemLink({to, ref, name}) {
+    function GroupItemLink({to, forwardedRef, name, isLoading}) {
+      const classes = function createClasses(match) {
+        return clsx(
+          match && 'is-active',
+          isLoading && 'is-loading'
+        )
+      }
       return (
         <Route
           path={to}
           children={({ match }) => (
             <li
-              ref={ref}
+              ref={forwardedRef}
             >
               <Link
                 to={to}
-                className={`group-link ${match ? "is-active" : ""}`}
+                className={`group-link ${classes(match)}`}
               >
-                {/* TODO add isGroupLoading back in (use clsx)... --> className={`group-link ${isGroupLoading(this.props.evidenceByGroup, group) ? 'is-loading' : ''} ${slugify(group) === pathname.substr(pathname.lastIndexOf('/') + 1) ? 'is-active' : ''}`}*/}
                 <div className="group-loader">
                   <div className="group-loader-border"></div>
                   <div className="group-loader-content"></div>
@@ -124,15 +80,16 @@ class NavbarLeft extends Component {
       <div className="navbar-left">
         <aside className="menu">
           <ul className="menu-list">
-            { formIsLoaded &&
+            { activityIsLoaded &&
               <React.Fragment>
               {groups.allIds.map((groupSlug, index) => {
                 return (
                   <GroupItemLink
                     key={index}
-                    ref={this.refs[groupSlug]}
-                    to={`/app/f/${formSlug}/g/${groupSlug}`}
+                    forwardedRef={this.refs[groupSlug]}
+                    to={`/app/a/${activityId}/g/${groupSlug}`}
                     name={groups.byId[groupSlug].name}
+                    isLoading={groups.byId[groupSlug].isLoading}
                   />
                 )
               })}

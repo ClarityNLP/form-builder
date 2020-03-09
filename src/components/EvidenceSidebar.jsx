@@ -3,26 +3,26 @@ import EvidenceFilter from './EvidenceFilter';
 import EvidenceModal from './EvidenceModal';
 import EvidenceList from '../containers/evidence_list_container.js';
 import { Route } from 'react-router-dom';
+import BouncingBalls from './BouncingBalls';
 
 class EvidenceSidebar extends Component {
   constructor(props) {
     super(props);
   }
 
-  componentDidMount(){
-  }
-
   render() {
-    const { formIsLoaded } = this.props;
+    const { activityIsLoaded } = this.props;
 
     return (
       <div className="evidence-panel">
         <EvidenceFilter/>
-        { !formIsLoaded ? (
-          <div>SKELETON</div>
+        { !activityIsLoaded ? (
+          <div className="is-loading">{/* TODO: make a skeleton when have time... */}
+            <BouncingBalls/>
+          </div>
         ) : (
           <Route
-            path={`/app/f/:formSlug/g/:groupSlug/q/:questionSlug`}
+            path={`/app/a/:activityId/g/:groupSlug/q/:questionSlug`}
             component={EvidenceList}
           />
         )}

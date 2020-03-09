@@ -40,7 +40,7 @@
   .question-indicator {
     border-right: 1px solid #dbdbdb;
     flex: none;
-    width: 50px;
+    width: 64px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -52,6 +52,23 @@
       justify-content: center;
       align-items: center;
       position: relative;
+      .autofill-icon-container {
+        width: 22px;
+        height: 22px;
+        position: absolute;
+        right: -25px;
+        border-width: 1px;
+        border-style: solid;
+        border-radius: 22px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: white;
+        .autofill-icon {
+          width: 16px;
+          height: auto;
+        }
+      }
     }
     &.is-focus {
       .question-indicator-bubble {
@@ -127,6 +144,23 @@
         }
       }
     }
+    &.is-warning {
+      .question-indicator-bubble {
+        .question-indicator-bubble-border {
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          border-width: 2px;
+          border-style: solid;
+          border-color: $warning;
+          border-radius: 34px;
+        }
+        .question-indicator-bubble-content {
+        }
+      }
+    }
     &.is-focus.is-evidence {
       .question-indicator-bubble {
         .question-indicator-bubble-border {
@@ -164,9 +198,20 @@
         }
       }
     }
+    &.is-focus.is-warning {
+      .question-indicator-bubble {
+        .question-indicator-bubble-border {
+          top: -4px;
+          bottom: -4px;
+          left: -4px;
+          right: -4px;
+          border-radius: 38px;
+        }
+      }
+    }
   }
   .question-content {
-    padding: 15px 10px;
+    padding: 15px 15px;
     flex: 1;
     .question-name {
       font-size: 20px;

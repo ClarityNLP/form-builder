@@ -1,20 +1,20 @@
 import { connect } from 'react-redux'
 import NavbarTop from '../components/NavbarTop'
+import { push } from 'connected-react-router'
 
-import {
-  openCatalog
-} from '../actions/catalog';
-
-function mapStateToProps(state) {
+function mapStateToProps(state, ownProps) {
   return {
-    router: state.router,
-    form: state.form,
-    forms: state.catalog.forms.slice(0,3)
+    activityId: state.activity.id,
+    activityIsLoaded: state.activity.isLoaded,
+    formSlug: state.activity.slug,
+    formName: state.activity.name,
+    groupLookup: state.groupLookup,
+    catalog: state.catalog
   };
 }
 
 const navbarTopContainer = connect(mapStateToProps, {
-  openCatalog
+  push
 })(NavbarTop);
 
 export default navbarTopContainer;
