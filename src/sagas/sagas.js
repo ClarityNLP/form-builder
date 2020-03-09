@@ -1,11 +1,22 @@
-import { takeEvery, select, put, call, all } from "redux-saga/effects";
+import { takeEvery, take, select, put, call, all, fork } from "redux-saga/effects";
+import { push } from 'connected-react-router'
 import axios from 'axios';
 
-const fetchEvidence = (evidence, payload) => {
-  return axios.post(`${window._env_.NLPAAS_URL}/4100r4/${evidence}`, payload)
+const fetchEvidence = (formSlug, evidence, payload) => {
+  return axios.post(`${window._env_.NLPAAS_URL}/job/NLPQL_form_content/${formSlug}/${evidence}`, payload)
 }
 
-export function* lazyLoadEvidence() {
+export function* rootSaga() {
+  yield fork(redirectNoFhirClient)
+  yield fork(lazyLoadEvidence)
+}
+
+function* redirectNoFhirClient() {
+  yield take('GET_FHIR_CLIENT_REJECTED');
+  yield put(push('/'));
+}
+
+function* lazyLoadEvidence() {
     yield takeEvery('GET_EVIDENCE_BY_GROUP_FULFILLED', findNextGroup);
 }
 
@@ -14,13 +25,28 @@ function* findNextGroup(action) {
 
   const getState = state => {
     return {
-      groups: state.form.groups,
-      questions: state.form.questions,
-      evidenceByGroup: state.evidenceByGroup
+      formSlug: state.form.content.slug,
+      groups: state.form.content.groups,
+      questions: state.form.content.questions,
+      evidenceByGroup: state.evidenceByGroup,
+      fhirClient: state.fhir.client,
+      sourceId: state.source.id,
+      evidences: state.evidence,
+      fhirVersion: state.fhir.release
     }
   };
 
-  const { groups, questions, evidenceByGroup } = yield select(getState);
+  const {
+    formSlug,
+    groups,
+    questions,
+    evidences,
+    evidenceByGroup,
+    fhirClient,
+    sourceId,
+    fhirVersion
+  } = yield select(getState);
+
   const currentGroupIndex = groups.findIndex(group => group === currentGroup);
   const offset = currentGroupIndex;
 
@@ -32,17 +58,20 @@ function* findNextGroup(action) {
         .filter(q => q.nlpql_grouping)
 
       if (!evidenceByGroup[group] && (evidArray.length > 0)) { //TODO add check for error and it can repeat!
-        yield fetchGroupEvidence(group, evidenceByGroup, questions);
+        yield fetchGroupEvidence(formSlug, group, evidenceByGroup, evidences, questions, fhirClient, sourceId, fhirVersion);
         break;
       }                                                     // || evidenceByGroup[group].isLoadError
   }
 }
 
-function* handleFetchEvidence(evidence) {
+function* handleFetchEvidence(formSlug, evidence, fhirClient, sourceId, fhirVersion) {
 
-  //TODO add payload, instead of {} -->
   try {
-    const json = yield call(fetchEvidence, evidence, {});
+    const json = yield call(fetchEvidence, formSlug, evidence, {
+      fhir: fhirClient,
+      fhirVersion: fhirVersion,
+      source_id: sourceId
+    });
 
     yield put({
       type: 'GET_EVIDENCE_FULFILLED',
@@ -69,7 +98,7 @@ function* handleFetchEvidence(evidence) {
   }
 }
 
-function* fetchGroupEvidence(groupName, evidenceByGroup, questions) {
+function* fetchGroupEvidence(formSlug, groupName, evidenceByGroup, evidences, questions, fhirClient, sourceId, fhirVersion) {
 
   const __this = this;
 
@@ -85,8 +114,11 @@ function* fetchGroupEvidence(groupName, evidenceByGroup, questions) {
 
   const uniqueEvidSet = new Set(evidArray);
   const uniqueEvidArray = [...uniqueEvidSet];
+  const uniqueUnloadedEvidArray = uniqueEvidArray.reduce((acc, current) => {
+    return !evidences[current] ? [...acc, current] : acc;
+  }, []);
 
-  if (uniqueEvidArray.length === 0) {  //if no evidences, dispatch that this groupName is done.
+  if (uniqueUnloadedEvidArray.length === 0) {  //if no evidences, dispatch that this groupName is done.
     yield put({
       type: 'GET_EVIDENCE_BY_GROUP_FULFILLED',
       data: groupName
@@ -94,7 +126,7 @@ function* fetchGroupEvidence(groupName, evidenceByGroup, questions) {
     return;
   }
 
-  yield all(uniqueEvidArray.map(evidence => call(handleFetchEvidence, evidence)));
+  yield all(uniqueUnloadedEvidArray.map(evidence => call(handleFetchEvidence, formSlug, evidence, fhirClient, sourceId, fhirVersion)));
 
   yield put({
     type: 'GET_EVIDENCE_BY_GROUP_FULFILLED',

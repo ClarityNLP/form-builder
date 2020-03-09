@@ -3,7 +3,7 @@ import { routerMiddleware } from 'connected-react-router'
 import createRootReducer from '../reducers/root_reducer'
 import axios from 'axios';
 import axiosMiddleware from 'redux-axios-middleware';
-import { lazyLoadEvidence } from '../sagas/lazy_load_evidence';
+import { rootSaga } from '../sagas/sagas';
 
 // MIDDLEWARES
 import thunk from 'redux-thunk'
@@ -36,7 +36,7 @@ export default function configureStore(initialState, apiClient, history) {
     )
   );
 
-  sagaMiddleware.run(lazyLoadEvidence);
+  sagaMiddleware.run(rootSaga);
 
   return store;
 }

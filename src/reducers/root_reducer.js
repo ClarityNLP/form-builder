@@ -5,6 +5,8 @@ import { evidenceByGroupReducer } from './evidence_by_group_reducer'
 import { evidenceReducer } from './evidence_reducer'
 import { patientReducer } from './patient_reducer'
 import { fhirReducer } from './fhir_reducer'
+import { catalogReducer } from './catalog_reducer'
+import { sourceReducer } from './source_reducer'
 
 export default (history) => combineReducers({
   router: connectRouter(history),
@@ -12,5 +14,7 @@ export default (history) => combineReducers({
   evidenceByGroup: evidenceByGroupReducer,
   evidence: evidenceReducer,
   patient: patientReducer,
-  fhir: fhirReducer
+  fhir: fhirReducer,
+  catalog: catalogReducer,
+  source: sourceReducer
 })

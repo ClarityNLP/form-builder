@@ -1,0 +1,80 @@
+.catalog {
+  .modal-card {
+    height: calc(100vh - 40px);
+    .modal-card-head {
+
+    }
+    .modal-card-body {
+      border-bottom-left-radius: 6px;
+      border-bottom-right-radius: 6px;
+      &.is-loading {
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .columns {
+        .column {
+          .catalog-item {
+            border: #ecf0f1 solid 1px;
+            height: 184px;
+            transition: border-color 0.5s;
+            cursor: pointer;
+            position: relative;
+            .catalog-item-header {
+              height: 60px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              .catalog-item-title {
+                color: #543d6f;
+                font-size: 20px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                padding: 0px 10px;
+              }
+            }
+            .catalog-hr {
+              border-top: 1px solid #ecf0f1;
+              border-bottom: 1px solid #ecf0f1;
+              margin: 0px 20px;
+              height: 0px;
+              transition: border-color 0.5s;
+            }
+            .catalog-footer {
+              display: flex;
+              height: 122px;
+              justify-content: center;
+              .catalog-footer-owner {
+                margin-top: 20px;
+                padding: 0px 10px;
+                text-align: center;
+                font-size: 11px;
+                color: #575757;
+              }
+            }
+            .catalog-current-label {
+              position: absolute;
+              bottom: 5px;
+              right: 5px;
+              color: white;
+              font-size: 11px;
+              background-color: $primary;
+              padding: 2px 5px;
+              border-radius: 3px;
+            }
+            &:hover {
+              border-color: $primary;
+              .catalog-hr {
+              }
+            }
+            &.is-current {
+              border-color: $primary;
+            }
+          }
+        }
+      }
+    }
+  }
+}

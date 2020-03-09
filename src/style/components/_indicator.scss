@@ -1,0 +1,110 @@
+.indicator {
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  &.is-focus {
+    .question-number {
+      .question-number-bubble {
+        .question-number-bubble-border {
+
+        }
+        .question-number-bubble-content {
+          background-color: $primary;
+          color: white;
+          outline: none;
+          border-color: $primary;
+          box-shadow: 0 0 10px $primary;
+          width: 100%;
+          height: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          border-radius: 100%;
+        }
+      }
+    }
+  }
+  &.is-loading {
+    .question-number {
+      .question-number-bubble {
+        .question-number-bubble-border {
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          border-width: 2px;
+          border-style: solid;
+          border-color: $primary transparent $primary transparent;
+          border-radius: 30px;
+          animation: spinner 1s linear infinite;
+        }
+        .question-number-bubble-content {
+        }
+      }
+    }
+  }
+  &.is-error {
+    .question-number {
+      .question-number-bubble {
+        .question-number-bubble-border {
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          border-width: 2px;
+          border-style: solid;
+          border-color: $danger;
+          border-radius: 30px;
+        }
+        .question-number-bubble-content {
+        }
+      }
+    }
+  }
+  &.is-focus.is-loading {
+    .question-number {
+      .question-number-bubble {
+        .question-number-bubble-border {
+          top: -4px;
+          bottom: -4px;
+          left: -4px;
+          right: -4px;
+          border-radius: 32px;
+        }
+      }
+    }
+  }
+  &.is-focus.is-error {
+    .question-number {
+      .question-number-bubble {
+        .question-number-bubble-border {
+          top: -4px;
+          bottom: -4px;
+          left: -4px;
+          right: -4px;
+          border-radius: 32px;
+        }
+      }
+    }
+  }
+  .question-number {
+    flex: none;
+    width: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .question-number-bubble {
+      width: 30px;
+      height: 30px;
+      border-radius: 30px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      transition: background-color 0.5s, color 0.5s, box-shadow 0.5s, border-color 0.5s;
+    }
+  }
+}

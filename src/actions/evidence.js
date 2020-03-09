@@ -1,7 +1,7 @@
 import axios from 'axios';
 import idx from 'idx';
 
-export function getEvidenceByGroup(groupName, evidenceByGroup, questions) {
+export function getEvidenceByGroup(formSlug, groupName, evidenceByGroup, evidences, questions, fhirClient, sourceId, fhirVersion) {
   return (dispatch) => {
     return new Promise(function(resolve, reject) {
 
@@ -23,8 +23,14 @@ export function getEvidenceByGroup(groupName, evidenceByGroup, questions) {
 
       const uniqueEvidSet = new Set(evidArray);
       const uniqueEvidArray = [...uniqueEvidSet];
+      // Important: w/i an unloaded evidence group, there is a chance that one of the
+      // evidence bundles has already been loaded in a previous evidence group.
+      // i.e. hematocrit_hematologic_findings in form 4100
+      const uniqueUnloadedEvidArray = uniqueEvidArray.reduce((acc, current) => {
+        return !evidences[current] ? [...acc, current] : acc;
+      }, []);
 
-      if (uniqueEvidArray.length === 0) {  //if no evidences, dispatch that this groupName is done.
+      if (uniqueUnloadedEvidArray.length === 0) {  //if no evidences, dispatch that this groupName is done.
         dispatch({
           type: 'GET_EVIDENCE_BY_GROUP_FULFILLED',
           data: groupName
@@ -32,9 +38,13 @@ export function getEvidenceByGroup(groupName, evidenceByGroup, questions) {
         return resolve();
       }
 
-      const promiseArr = uniqueEvidArray.map(evid => {
+      const promiseArr = uniqueUnloadedEvidArray.map(evid => {
         return axios
-        .post(`http://localhost:1337/4100r4/${evid}`, {}) //TODO add data instead of {}
+        .post(`${window._env_.NLPAAS_URL}/job/NLPQL_form_content/${formSlug}/${evid}`, {
+          fhir: fhirClient,
+          fhirVersion: fhirVersion,
+          source_id: sourceId
+        })
         .then(res => {
           dispatch({
             type: 'GET_EVIDENCE_FULFILLED',

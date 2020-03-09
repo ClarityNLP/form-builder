@@ -68,6 +68,17 @@ export default class Entity extends Component {
     return highlightedText;
   }
 
+  titleize = (slug) => {
+    var words = slug.split('_');
+
+    for (var i = 0; i < words.length; i++) {
+      var word = words[i];
+      words[i] = word.charAt(0).toUpperCase() + word.slice(1);
+    }
+
+    return words.join(' ');
+  }
+
   toggleReportTextIsActive = e => {
     this.setState(prevState => ({
       reportTextIsActive: !prevState.reportTextIsActive
@@ -101,7 +112,7 @@ export default class Entity extends Component {
   };
 
   render() {
-    const { result_display, report_text, report_type } = this.props.evidence;
+    const { result_display, report_text, report_type, nlpql_feature } = this.props.evidence;
     const { date, result_content, highlights, sentence } = result_display;
     const {
       commentModalToggle,
@@ -116,19 +127,28 @@ export default class Entity extends Component {
           <Col xs='12'>
             <Row>
               <Col>
-                <h6 className="evidence-report-type">{report_type}</h6>
+                <h6 className="evidence-report-type">{nlpql_feature ? this.titleize(nlpql_feature) : '<NO-REPORT-TYPE>'}</h6>
                 <h6 className="evidence-date">@&nbsp;<Moment format='MMM DD, YYYY HH:MM'>{date}</Moment></h6>
               </Col>
             </Row>
           </Col>
-          <div className="evidence-result-content">
-            {this.getHighlightedText(result_content, highlights)}
+          <div
+            className="evidence-result-content"
+            onClick={this.toggleReportTextIsActive}
+          >
+            {(result_content || sentence) ? (
+              <React.Fragment>
+              {this.getHighlightedText(result_content || sentence, highlights)}
+              </React.Fragment>
+            ) : (
+              "<NO-RESULT-CONTENT>"
+            )}
           </div>
-          {sentence !== '' ? (
+          {/*{sentence !== '' ? (
             <div className="evidence-sentence">
               {this.getHighlightedText(sentence, highlights)}
             </div>
-          ) : null}
+          ) : null}TODO ask about data structure and guarantees...*/}
           <div className="evidence-links">
             <span
               className="evidence-read-more"
@@ -140,11 +160,11 @@ export default class Entity extends Component {
           </div>
         </Row>
 
-        <div className={`modal ${reportTextIsActive ? 'is-active' : ''}`}>
+        <div className={`evidence-report-modal modal ${reportTextIsActive ? 'is-active' : ''}`}>
           <div className="modal-background"></div>
           <div className="modal-card">
             <header className="modal-card-head">
-              <p className="modal-card-title">Modal title</p>
+              <p className="modal-card-title">{nlpql_feature ? this.titleize(nlpql_feature) : '<NO-REPORT-TYPE>'}</p>
               <button
                 className="delete"
                 aria-label="close"
@@ -152,13 +172,17 @@ export default class Entity extends Component {
               ></button>
             </header>
             <section className="modal-card-body">
-              <pre className='report_text'>
+              {report_text ? (
+                <pre className='report_text'>
                 {this.getHighlightedText(report_text, highlights)}
-            </pre>
+                </pre>
+              ) : (
+                "<NO-RESULT-TEXT>"
+              )}
             </section>
             <footer className="modal-card-foot">
-              <button className="button is-primary">Approve</button>
-              <button className="button is-primary">Dis</button>
+              <button className="button is-primary">Valid</button>
+              <button className="button is-primary is-outlined">Not valid</button>
               <button
                 className="button"
                 onClick={this.toggleReportTextIsActive}

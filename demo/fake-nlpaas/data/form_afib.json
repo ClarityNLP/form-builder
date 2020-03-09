@@ -1,0 +1,84 @@
+{
+    "name": "Atrial Fibrilation",
+    "owner": "gatech",
+    "allocated_users": [
+        "admin"
+    ],
+    "groups": [
+        "Case"
+    ],
+    "questions": [
+        {
+            "question_name": "Atrial Fibrilation?",
+            "question_type": "MULTIPLE_CHOICE",
+            "question_number": "1",
+            "group": "Case",
+            "answers": [
+                {
+                    "text": "Yes",
+                    "value": "yes"
+                },
+                {
+                    "text": "No",
+                    "value": "no"
+                }
+            ],
+            "evidence_bundle": {
+                "case": [
+                    "case_keywords",
+                    "case_codes"
+                ]
+            },
+            "nlpql_grouping": "case"
+        },
+        {
+            "question_name": "Heart transplant?",
+            "question_type": "MULTIPLE_CHOICE",
+            "question_number": "2",
+            "group": "Case",
+            "answers": [
+                {
+                    "text": "Yes",
+                    "value": "yes"
+                },
+                {
+                    "text": "No",
+                    "value": "no"
+                }
+            ],
+            "evidence_bundle": {
+                "case": [
+                    "heart_transplant_codes"
+                ]
+            },
+            "nlpql_grouping": "case"
+        },
+        {
+            "question_name": "Matches Case?",
+            "question_type": "MULTIPLE_CHOICE",
+            "question_number": "3",
+            "group": "Case",
+            "answers": [
+                {
+                    "text": "Yes",
+                    "value": "yes"
+                },
+                {
+                    "text": "No",
+                    "value": "no"
+                }
+            ],
+            "evidence_bundle": {
+                "case": [
+                    "matches_afib_case"
+                ]
+            },
+            "nlpql_grouping": "case"
+        }
+    ],
+    "evidence_bundles": [
+        "case"
+    ],
+    "version": "0.1.3",
+    "questions_with_evidence_count": 0
+}
