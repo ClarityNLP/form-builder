@@ -1,0 +1,201 @@
+{
+    "name": "New Structure",
+    "owner": "gatech",
+    "slug": "betterStructure",
+    "groups": {
+      "byId": {
+        "group1": {
+          "name": "Group 1",
+          "questions": {
+            "byId": {
+              "question1": {
+                "number": 1,
+                "name": "Test question 1",
+                "type": "RADIO",
+                "options": [
+                  {
+                    "label": "Yes",
+                    "value": "yes"
+                  }, {
+                    "label": "No",
+                    "value": "no"
+                  }
+                ],
+                "value": "",
+                "evidence": "cellular_therapy_infusion"
+              },
+              "question2": {
+                "number": 2,
+                "name": "Test question 2",
+                "type": "RADIO",
+                "options": [
+                  {
+                    "label": "Yes",
+                    "value": "yes"
+                  }, {
+                    "label": "No",
+                    "value": "no"
+                  }
+                ],
+                "value": "yes",
+                "evidence": "hematocrit_hematologic_findings"
+              },
+              "question3": {
+                "number": 3,
+                "name": "Test question 3",
+                "type": "TEXT",
+                "validationType": "string",
+                "validations": [
+                  {
+                    "type": "required",
+                    "params": ["this field is required"]
+                  },
+                  {
+                    "type": "min",
+                    "params": [2, "question3 cannot be less than 5 characters"]
+                  },
+                  {
+                    "type": "max",
+                    "params": [10, "question3 cannot be more than 10 characters"]
+                  }
+                ],
+                "value": "this is my text",
+                "evidence": "hematocrit_hematologic_findings"
+              }
+            },
+            "allIds": ["question1", "question2", "question3"]
+          },
+          "evidences": ["cellular_therapy_infusion", "hematocrit_hematologic_findings"]
+        },
+        "group2": {
+          "name": "Group 2",
+          "questions": {
+            "byId": {
+              "question4": {
+                "number": 4,
+                "name": "Test question 4",
+                "type": "RADIO",
+                "options": [
+                  {
+                    "label": "Yes",
+                    "value": "yes"
+                  }, {
+                    "label": "No",
+                    "value": "no"
+                  }, {
+                    "label": "Unknown",
+                    "value": "unknown"
+                  }
+                ],
+                "value": "yes",
+                "evidence": "cellular_therapy_infusion"
+              },
+              "question5": {
+                "number": 5,
+                "name": "Test question 5",
+                "type": "RADIO",
+                "options": [
+                  {
+                    "label": "Yes",
+                    "value": "yes"
+                  }, {
+                    "label": "No",
+                    "value": "no"
+                  }, {
+                    "label": "Unknown",
+                    "value": "unknown"
+                  }
+                ],
+                "value": "unknown",
+                "evidence": "hematocrit_hematologic_findings"
+              }
+            },
+            "allIds": ["question4", "question5"]
+          },
+          "evidences": ["cellular_therapy_infusion", "hematocrit_hematologic_findings"]
+        }
+      },
+      "allIds": ["group1", "group2"]
+    },
+    "evidences": {
+      "cellular_therapy_infusion": {
+        "byId": {
+          "yescarta_terms": [
+            {},{},{}
+          ],
+          "yescarta_codes": [
+            {},{},{}
+          ],
+          "kymriah_terms": [
+            {},{},{}
+          ],
+          "kymriah_codes": [
+            {},{},{}
+          ]
+        },
+        "allIds": ["yescarta_terms", "yescarta_codes", "kymriah_terms", "kymriah_codes"]
+      },      
+      "hematocrit_hematologic_findings": {
+        "byId": {
+          "hematocrit_hematologic_findings_value_extraction": [
+            {
+              "_id": "5e15f635933b3ee485a616ed",
+              "batch": 0,
+              "concept_code": "",
+              "concept_code_system": "",
+              "condition": "EQUAL",
+              "dimension_X": 132000.0,
+              "dimension_Y": null,
+              "dimension_Z": "",
+              "display_name": "hematocrit_hematologic_findings_value_extraction",
+              "end": 73,
+              "inserted_date": "2020-01-08 15:33:09.907000",
+              "job_id": 15787,
+              "location": "",
+              "nlpql_feature": "hematocrit_hematologic_findings_value_extraction",
+              "owner": "claritynlp",
+              "phenotype_final": true,
+              "pipeline_id": 32367,
+              "pipeline_type": "ValueExtractor",
+              "report_date": "2094-02-03T00:01:00Z",
+              "report_id": "16e329e2-322c-11ea-878f-0242c0a8e013_9",
+              "report_text": "LABORATORY DATA: White count 4.4, hemoglobin 10.1, platelet count 132,000, sodium 135, potassium 3.9, chloride 105, bicarbonate 24, BUN 15, and creatinine 0.9.",
+              "report_type": "Radiology Note",
+              "result_display": {
+                "date": "2094-02-03T00:01:00Z",
+                "end": [
+                  73
+                ],
+                "highlights": [
+                  "platelet",
+                  132000.0,
+                  ""
+                ],
+                "result_content": "platelet 132000.0 ",
+                "sentence": "LABORATORY DATA: White count 4.4, hemoglobin 10.1, platelet count 132,000, sodium 135, potassium 3.9, chloride 105, bicarbonate 24, BUN 15, and creatinine 0.9.",
+                "start": [
+                  51
+                ]
+              },
+              "sentence": "LABORATORY DATA: White count 4.4, hemoglobin 10.1, platelet count 132,000, sodium 135, potassium 3.9, chloride 105, bicarbonate 24, BUN 15, and creatinine 0.9.",
+              "solr_id": "16e329e2-322c-11ea-878f-0242c0a8e013_9",
+              "source": "16e329e2-322c-11ea-878f-0242c0a8e013",
+              "start": 51,
+              "subject": "38587",
+              "temporality": "",
+              "term": "",
+              "text": "platelet",
+              "units": "",
+              "value": 132000.0,
+              "value1": "",
+              "value2": ""
+            }
+          ],
+          "hematocrit_hematologic_findings_structured": [
+            {},{},{}
+          ]
+        },
+        "allIds": ["hematocrit_hematologic_findings_value_extraction", "hematocrit_hematologic_findings_structured"]
+      }
+    }
+}

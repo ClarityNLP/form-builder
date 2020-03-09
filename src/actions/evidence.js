@@ -1,91 +1,151 @@
 import axios from 'axios';
-import idx from 'idx';
 
-export function getEvidenceByGroup(formSlug, groupName, evidenceByGroup, evidences, questions, fhirClient, sourceId, fhirVersion) {
-  return (dispatch) => {
+export function fetchGroupEvidenceAndAutofill(groupSlug) {
+  return (dispatch, getState) => {
     return new Promise(function(resolve, reject) {
+      const {
+        fhir,
+        source,
+        activity
+      } = getState();
 
-      const isLoaded = idx(evidenceByGroup, _ => _.isLoaded);
+      const {
+        isLoaded: isGroupLoaded,
+        evidences: groupEvidences,
+        questions: groupQuestions
+      } = activity.groups.byId[groupSlug];
 
-      if (isLoaded) {
-        return resolve(`Evidence group already loaded.`);
+      const {
+        evidences: allEvidences,
+        slug: formSlug
+      } = activity;
+
+      const {
+        client : fhirClient,
+        release : fhirVersion
+      } = fhir;
+
+      const {
+        id : sourceId
+      } = source;
+
+      if (isGroupLoaded) {
+        return resolve('Group\'s evidence and autofilling is completed');
+        //TODO: consider add dispatch of 'GET_GROUP_EVIDENCE_AND_AUTOFILL_FULFILLED'
+        //to kick off lazy load for other groups...
       }
 
       dispatch({
-        type: 'GET_EVIDENCE_BY_GROUP_REQUESTED',
-        data: groupName
+        type: 'GET_GROUP_EVIDENCE_AND_AUTOFILL_REQUESTED',
+        groupSlug: groupSlug
       });
 
-      const evidArray = questions
-        .filter(q => q.group === groupName)
-        .filter(q => q.nlpql_grouping)
-        .map(q => q.nlpql_grouping)
-
-      const uniqueEvidSet = new Set(evidArray);
-      const uniqueEvidArray = [...uniqueEvidSet];
-      // Important: w/i an unloaded evidence group, there is a chance that one of the
-      // evidence bundles has already been loaded in a previous evidence group.
-      // i.e. hematocrit_hematologic_findings in form 4100
-      const uniqueUnloadedEvidArray = uniqueEvidArray.reduce((acc, current) => {
-        return !evidences[current] ? [...acc, current] : acc;
-      }, []);
-
-      if (uniqueUnloadedEvidArray.length === 0) {  //if no evidences, dispatch that this groupName is done.
-        dispatch({
-          type: 'GET_EVIDENCE_BY_GROUP_FULFILLED',
-          data: groupName
-        })
-        return resolve();
-      }
-
-      const promiseArr = uniqueUnloadedEvidArray.map(evid => {
-        return axios
-        .post(`${window._env_.NLPAAS_URL}/job/NLPQL_form_content/${formSlug}/${evid}`, {
-          fhir: fhirClient,
-          fhirVersion: fhirVersion,
-          source_id: sourceId
-        })
-        .then(res => {
+      Promise.all(groupEvidences.map(evid => {
+          return maybeGetEvidence(evid)
+          .then(() => {
+            return Promise.all(
+              groupQuestions.allIds
+              .filter(q => groupQuestions.byId[q].evidence === evid)
+              .map(q => maybeAutofill(groupSlug, { ...groupQuestions.byId[q], slug: q }))
+            );
+          })
+        }))
+        .then(() => {
           dispatch({
-            type: 'GET_EVIDENCE_FULFILLED',
-            data: {
-              evidence: evid,
-              results: res.data.filter(result => {
-                return (
-                  result.hasOwnProperty('nlpql_feature') && // NOTE: data is poorly formed,
-                  result.nlpql_feature !== 'null'           // sending strings of 'null'
-                );
-              })
-            }
+            type: 'GET_GROUP_EVIDENCE_AND_AUTOFILL_FULFILLED',
+            groupSlug: groupSlug
           });
-          return `Evidence *${evid}* finished retrieving.`;
+          return resolve('Group\'s evidence and autofilling is completed');
         })
         .catch(error => {
           dispatch({
-            type: 'GET_EVIDENCE_REJECTED',
-            data: {
-              evidence: evid,
-              error: error.message
+            type: 'GET_GROUP_EVIDENCE_AND_AUTOFILL_REJECTED',
+            groupSlug: groupSlug,
+            error: error
+          });
+          return reject(error);
+        });
+
+      function maybeGetEvidence(evid) {
+        return new Promise(function(resolve, reject) {
+          // if (allEvidences[evid].byId) { //TODO now it's harder to do this since data is nested under features, but need to do...
+          //   return resolve('Evidence already retrieved, no need to fire request.');
+          // }
+
+          dispatch({
+            type: 'GET_EVIDENCE_REQUESTED',
+            evidenceSlug: evid
+          });
+
+          return axios
+            .post(`${window._env_.SMARTHUB_URL}/activities/${activity.id}/evidences/${evid}`, {
+              fhirClient: fhirClient || {},
+              fhirVersion: fhirVersion || 2,
+              source_id: sourceId || 'FAKE_SOURCE_ID',
+              formSlug: formSlug
+            })
+            .then(res => {
+              dispatch({
+                type: 'GET_EVIDENCE_FULFILLED',
+                evidenceSlug: evid,
+                data: res.data
+              });
+              return resolve('Evidence bundle retieved.');
+            })
+            .catch(error => {
+              dispatch({
+                type: 'GET_EVIDENCE_REJECTED',
+                evidenceSlug: evid,
+                error: error.message
+              });
+              return reject(error);
+            });
+        });
+      }
+
+      function maybeAutofill(groupSlug, question) {
+        return new Promise(function(resolve, reject) {
+          if (question.value || !question.autofill) {
+            return resolve('Question has value already or question does not contain autofill operation.');
+          }
+
+          dispatch({
+            type: 'AUTOFILL_QUESTION_REQUESTED',
+            groupSlug: groupSlug,
+            questionSlug: question.slug
+          });
+
+          return axios
+          .post(`${window._env_.SMARTHUB_URL}/activities/${activity.id}/questions/${question.slug}/autofill`, {
+            autofill: {
+              ...question.autofill,
+              type: question.type
             }
           })
+          .then(res => {
+            const { value, id } = res.data;
+            dispatch({
+              type: 'AUTOFILL_QUESTION_FULFILLED',
+              groupSlug: groupSlug,
+              questionSlug: question.slug,
+              value: value,
+              id: id
+            });
+            return resolve('Question autofill fulfilled');
+          })
+          .catch(error => {
+            const { message, id } = error.response.data;
+            dispatch({
+              type: 'AUTOFILL_QUESTION_REJECTED',
+              groupSlug: groupSlug,
+              questionSlug: question.slug,
+              error: message,
+              id: id
+            });
+            return reject(error);
+          });
         })
-      });
-      Promise.all(promiseArr)
-      .then(values => {
-        dispatch({
-          type: 'GET_EVIDENCE_BY_GROUP_FULFILLED',
-          data: groupName
-        })
-      })
-      .catch(error => {
-        dispatch({
-          type: 'GET_EVIDENCE_BY_GROUP_REJECTED',
-          data: {
-            groupName: groupName,
-            error: error.message
-          }
-        })
-      });
-    });
+      }
+    })
   }
 }

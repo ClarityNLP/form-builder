@@ -1,18 +1,14 @@
 import { connect } from 'react-redux'
 import NavbarLeft from '../components/NavbarLeft'
-import { push } from 'connected-react-router'
 
 function mapStateToProps(state, ownProps) {
   return {
-    pathname: state.router.location.pathname,
-    form: state.form,
-    evidenceByGroup: state.evidenceByGroup,
-    ...ownProps.params
+    groups: state.activity.groups,
+    activityIsLoaded: state.activity.isLoaded,
+    activityId: state.activity.id
   };
 }
 
-const navbarLeftContainer = connect(mapStateToProps, {
-  push
-})(NavbarLeft);
+const navbarLeftContainer = connect(mapStateToProps, {})(NavbarLeft);
 
 export default navbarLeftContainer;

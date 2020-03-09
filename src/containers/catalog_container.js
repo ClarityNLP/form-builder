@@ -1,26 +1,19 @@
 import { connect } from 'react-redux'
 import Catalog from '../components/Catalog'
-import { push } from 'connected-react-router'
 
 import {
-  getCatalogContent,
-  getForm,
-  closeCatalog
+  getCatalogContent
 } from '../actions/catalog';
 
-function mapStateToProps(state) {
+function mapStateToProps(state, ownProps) {
   return {
-    router: state.router,
-    form: state.form,
+    activity: state.activity,
     catalog: state.catalog
   };
 }
 
 const catalogContainer = connect(mapStateToProps, {
-  getCatalogContent,
-  getForm,
-  closeCatalog,
-  push
+  getCatalogContent
 })(Catalog);
 
 export default catalogContainer;

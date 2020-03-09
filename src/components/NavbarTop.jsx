@@ -1,5 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useFormikContext } from 'formik';
+import Progress from './Progress';
+import Save from './Save';
 
 export default class NavbarTop extends Component {
 
@@ -17,12 +20,16 @@ export default class NavbarTop extends Component {
     }));
   };
 
-  openCatalog = () => {
-    return this.props.openCatalog();
-  };
-
   render() {
-    const { content } = this.props.form;
+    const {
+      activityId,
+      activityIsLoaded,
+      formSlug,
+      formName,
+      groupLookup,
+      push,
+      catalog
+    } = this.props;
 
     return (
       <React.Fragment>
@@ -30,8 +37,7 @@ export default class NavbarTop extends Component {
           <nav className="navbar is-primary" role="navigation" aria-label="main navigation">
             <div className="navbar-brand">
               <a className="navbar-item" href="#">
-                {/*<img src={`${process.env.PUBLIC_URL}/smartchart_white_v3.svg`}/> TODO put back after CELGENE demo*/}
-                CIBMTR
+                <img src={`${process.env.PUBLIC_URL}/smartchart_white_v3.svg`}/>
               </a>
 
               <a role="button" className="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
@@ -45,26 +51,26 @@ export default class NavbarTop extends Component {
               <div className="navbar-start">
                 <div className="form-dropdown navbar-item has-dropdown is-hoverable">
                   <a className="navbar-link">
-                    <div className="form-dropdown-text">{content ? content.name : ''}</div>
+                    <div className="form-dropdown-text">{activityIsLoaded ? formName : ''}</div>
                   </a>
 
                   <div className="navbar-dropdown">
-                    { content ? (
+                    { activityIsLoaded ? (
                       <React.Fragment>
-                      {this.props.forms.map((form, index) => {
+                      {catalog.forms.map((form, index) => {
                         return (
-                          <Link key={index} to={`/app/${form.slug}`} className={`navbar-item ${form.name === content.name ? 'is-current' : ''}`}>
+                          <Link key={index} to={`/app/f/${form.slug}`} className={`navbar-item ${form.name === formName ? 'is-current' : ''}`}>
                             {form.name}
                           </Link>
                         )
                       })}
                       <hr className="navbar-divider"/>
-                      <a
+                      <Link
                         className="navbar-item"
-                        onClick={this.openCatalog}
+                        to="?showCatalog=true"
                       >
                         View Catalog
-                      </a>
+                      </Link>
                       </React.Fragment>
                     ) : (
                       <div className="navbar-item">Loading forms...</div>
@@ -80,12 +86,16 @@ export default class NavbarTop extends Component {
               </div>
 
               <div className="navbar-end">
-                <div className="navbar-item progress-bar">
-                  <progress className="progress is-small" value="0" max="100">0></progress>
-                  <div className="progress-count">{ !this.props.form.content ? 'Loading...' : `0/${this.props.form.content.questions.length}` }</div>
+                <div className="navbar-item">
+                  <Progress
+                    activityId={activityId}
+                    activityIsLoaded={activityIsLoaded}
+                    groupLookup={groupLookup}
+                    push={push}
+                  />
                 </div>
                 <div className="navbar-item">
-                  <div className="button is-light">Submit</div>
+                  <Save/>
                 </div>
               </div>
             </div>
@@ -122,10 +132,10 @@ export default class NavbarTop extends Component {
               <div className="columns">
                 <div className="column is-one-fifth">
                   <div className="indicator is-focus">
-                    <div className="question-number">
-                      <div className="question-number-bubble">
-                        <div className="question-number-bubble-border"></div>
-                        <div className="question-number-bubble-content">12</div>
+                    <div className="question-indicator">
+                      <div className="question-indicator-bubble">
+                        <div className="question-indicator-bubble-border"></div>
+                        <div className="question-indicator-bubble-content">12</div>
                       </div>
                     </div>
                   </div>
@@ -137,10 +147,10 @@ export default class NavbarTop extends Component {
               <div className="columns">
                 <div className="column is-one-fifth">
                   <div className="indicator is-loading">
-                    <div className="question-number">
-                      <div className="question-number-bubble">
-                        <div className="question-number-bubble-border"></div>
-                        <div className="question-number-bubble-content">12</div>
+                    <div className="question-indicator">
+                      <div className="question-indicator-bubble">
+                        <div className="question-indicator-bubble-border"></div>
+                        <div className="question-indicator-bubble-content">12</div>
                       </div>
                     </div>
                   </div>
@@ -152,10 +162,10 @@ export default class NavbarTop extends Component {
               <div className="columns">
                 <div className="column is-one-fifth">
                   <div className="indicator is-loading is-focus">
-                    <div className="question-number">
-                      <div className="question-number-bubble">
-                        <div className="question-number-bubble-border"></div>
-                        <div className="question-number-bubble-content">12</div>
+                    <div className="question-indicator">
+                      <div className="question-indicator-bubble">
+                        <div className="question-indicator-bubble-border"></div>
+                        <div className="question-indicator-bubble-content">12</div>
                       </div>
                     </div>
                   </div>
@@ -167,10 +177,10 @@ export default class NavbarTop extends Component {
               <div className="columns">
                 <div className="column is-one-fifth">
                   <div className="indicator is-error">
-                    <div className="question-number">
-                      <div className="question-number-bubble">
-                        <div className="question-number-bubble-border"></div>
-                        <div className="question-number-bubble-content">12</div>
+                    <div className="question-indicator">
+                      <div className="question-indicator-bubble">
+                        <div className="question-indicator-bubble-border"></div>
+                        <div className="question-indicator-bubble-content">12</div>
                       </div>
                     </div>
                   </div>
@@ -182,10 +192,10 @@ export default class NavbarTop extends Component {
               <div className="columns">
                 <div className="column is-one-fifth">
                   <div className="indicator is-error is-focus">
-                    <div className="question-number">
-                      <div className="question-number-bubble">
-                        <div className="question-number-bubble-border"></div>
-                        <div className="question-number-bubble-content">12</div>
+                    <div className="question-indicator">
+                      <div className="question-indicator-bubble">
+                        <div className="question-indicator-bubble-border"></div>
+                        <div className="question-indicator-bubble-content">12</div>
                       </div>
                     </div>
                   </div>

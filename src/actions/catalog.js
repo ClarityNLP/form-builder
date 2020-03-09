@@ -32,7 +32,7 @@ export function getCatalogContent() {
         type: 'GET_CATALOG_CONTENT_REQUESTED'
       });
 
-      axios.get(`${window._env_.FORM_CMS_URL}/forms`)
+      axios.get(`${window._env_.SMARTHUB_URL}/forms`)
       .then(res => {
         dispatch({
           type: 'GET_CATALOG_CONTENT_FULFILLED',
@@ -59,24 +59,27 @@ export function getForm(slug) {
         type: 'GET_FORM_REQUESTED'
       });
 
-      let form;
+      // let form;
 
       axios.get(`${window._env_.FORM_CMS_URL}/form/NLPQL_form_content/${slug}/questions`)
+      // TODO -- here we are temporarily turning off validation of old form while
+      //contructing new from structure
+      // .then(res => {
+      //   form = res.data;
+      //   return schema.validate(form.questions);
+      // })
+      // .then(() => {
+      //   return new Promise(function(resolve, reject) {
+      //     const groups = Object.keys(groupBy(form.questions, function(q) {
+      //       return q.group;
+      //     }));
+      //     return isEqual(clone(form.groups).sort(), clone(groups).sort()) ?
+      //       resolve() :
+      //       reject('Mismatch between the top-level groups and the groups found in the questions themselves.');
+      //   });
+      // })
       .then(res => {
-        form = res.data;
-        return schema.validate(form.questions);
-      })
-      .then(() => {
-        return new Promise(function(resolve, reject) {
-          const groups = Object.keys(groupBy(form.questions, function(q) {
-            return q.group;
-          }));
-          return isEqual(clone(form.groups).sort(), clone(groups).sort()) ?
-            resolve() :
-            reject('Mismatch between the top-level groups and the groups found in the questions themselves.');
-        });
-      })
-      .then(() => {
+        const form = res.data;
         dispatch({
           type: 'GET_FORM_FULFILLED',
           data: {
@@ -87,7 +90,6 @@ export function getForm(slug) {
         resolve(`Finished retrieving form ${slug}`);
       })
       .catch(error => {
-        console.log('error: ',error);
         dispatch({
           type: 'GET_FORM_REJECTED',
           error: error.message || error
@@ -103,30 +105,6 @@ export function resetForm() {
     return new Promise(function(resolve, reject) {
       dispatch({
         type: 'RESET_FORM'
-      });
-
-      resolve();
-    });
-  }
-}
-
-export function openCatalog() {
-  return (dispatch) => {
-    return new Promise(function(resolve, reject) {
-      dispatch({
-        type: 'OPEN_CATALOG'
-      });
-
-      resolve();
-    });
-  }
-}
-
-export function closeCatalog() {
-  return (dispatch) => {
-    return new Promise(function(resolve, reject) {
-      dispatch({
-        type: 'CLOSE_CATALOG'
       });
 
       resolve();

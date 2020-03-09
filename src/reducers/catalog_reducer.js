@@ -2,7 +2,6 @@ const initialState = {
   isLoading: true,
   isLoaded: false,
   isLoadError: false,
-  isVisible: true,
   forms: []
 };
 
@@ -18,25 +17,9 @@ export function catalogReducer(state = initialState, action = {}) {
       }
     }
     case 'GET_CATALOG_CONTENT_FULFILLED': {
-      // let fakeCatalogData = []
-      //
-      // let i = 0;
-      //
-      // while (i < 11) {
-      //   fakeCatalogData.push({
-      //     url: "#",
-      //     slug: "#",
-      //     name: "Lorem ipsum",
-      //     owner: "gatech",
-      //     version: "0.1.3"
-      //   });
-      //   i++;
-      // }
-
       return {
         ...state,
         forms: action.data,
-        // forms: [...action.data, ...fakeCatalogData],
         isLoading: false,
         isLoaded: true,
         isLoadError: false,
@@ -60,18 +43,6 @@ export function catalogReducer(state = initialState, action = {}) {
       return {
         ...state,
         isVisible: true
-      }
-    }
-    case 'OPEN_CATALOG': {
-      return {
-        ...state,
-        isVisible: true
-      }
-    }
-    case 'CLOSE_CATALOG': {
-      return {
-        ...state,
-        isVisible: false
       }
     }
     default:
