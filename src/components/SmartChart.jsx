@@ -19,7 +19,7 @@ export default class SmartChart extends Component {
   render() {
     const { isLoaded : sourceIsFulfilled } = this.props.source;
 
-    return false ? (
+    return !sourceIsFulfilled ? (
       <Transient/>
     ) : (
       <Workspace activityId={this.props.activityId}/>
