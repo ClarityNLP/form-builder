@@ -68,6 +68,9 @@
           width: 16px;
           height: auto;
         }
+        &:hover {
+          cursor: pointer;
+        }
       }
     }
     &.is-focus {

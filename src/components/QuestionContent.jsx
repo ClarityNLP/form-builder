@@ -36,7 +36,9 @@ export default class QuestionContent extends Component {
       }
       case 'TEXT': {
         return (
-          <Field name={question.slug}>
+          <Field
+            name={question.slug}
+          >
             {({
               field, // { name, value, onChange, onBlur }
               form: { touched, errors }, // also values, setXXXX, handleXXXX, dirty, isValid, status, etc.

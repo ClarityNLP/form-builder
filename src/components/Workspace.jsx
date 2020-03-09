@@ -6,6 +6,7 @@ import HotKeys from '../containers/hot_keys_container';
 import EvidenceSidebar from '../containers/evidence_sidebar_container';
 import FetchGroupEvidenceAndAutofill from '../containers/fetch_group_evidence_and_autofill_container';
 import StartActivity from '../containers/start_activity_container';
+import AutofillModal from '../containers/autofill_modal_container';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import isEqual from 'lodash/isEqual';
 import { Formik, Form } from "formik";
@@ -246,6 +247,11 @@ class Workspace extends Component {
                 <Route path={`/app/f/:formSlug`} component={StartActivity}/>
                 { activityIsLoaded &&
                   <>
+                    <Route
+                      exact
+                      path="/app/a/:activityId/g/:groupSlug/q/:questionSlug/autofill"
+                      render={({match}) => <AutofillModal {...match}/>}
+                    />
                     <Route exact path={`/app/a/:activityId/g/:groupSlug/q/:questionSlug`}>
                       <HotKeys/>
                     </Route>

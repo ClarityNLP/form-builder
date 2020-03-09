@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import clsx from 'clsx';
 import AutofillIcon from "../assets/autofill-icon";
+import { Link } from 'react-router-dom';
 
 export default class QuestionIndicator extends Component {
 
@@ -19,7 +20,10 @@ export default class QuestionIndicator extends Component {
       isAutofillLoaded,
       isAutofillLoadError,
       autofillLoadError,
-      autofillId
+      autofillId,
+      activityId,
+      groupSlug,
+      questionSlug
     } = this.props;
 
     const classes = clsx(
@@ -49,6 +53,7 @@ export default class QuestionIndicator extends Component {
           {/* AutofillIcon positioned relative to question-indicator-bubble */}
           {autofillId &&
             <div
+              onClick={(e, p) => this.props.onSmartyClick(e, p)}
               style={{borderColor: `${autofillColorMap[autofillStatus]}`}}
               className="autofill-icon-container">
               <AutofillIcon

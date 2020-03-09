@@ -2,11 +2,16 @@ import React, { Component } from "react";
 import Question from './Question';
 import queryString from 'query-string';
 import { Route, Switch, Redirect } from 'react-router-dom';
+import isEqual from 'lodash/isEqual';
 
 class FormPage extends Component {
   constructor(props) {
     super(props);
   }
+
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   return !isEqual(this.props, nextProps) ? true : false;
+  // }
 
   render() {
     const {
@@ -37,7 +42,6 @@ class FormPage extends Component {
     return (
       <Switch>
         <Route
-         exact
          path="/app/a/:activityId/g/:groupSlug/q/:questionSlug"
         >
           {questionsAllIds.map((questionSlug, index) => {
