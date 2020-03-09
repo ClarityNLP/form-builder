@@ -15,7 +15,7 @@ pipeline{
       stage('Building image') {
         steps{
           script {
-            formImage = docker.build("claritynlp/form-builder:1.0", "--build-arg PUBLIC_URL=/form-v2 -f ./Dockerfile.prod ./")
+            formImage = docker.build("claritynlp/form-builder:1.0", "--build-arg PUBLIC_URL=/smartchart -f ./Dockerfile.prod ./")
             formImageVhost = docker.build("claritynlp/form-builder:1.0-vhost", "--build-arg PUBLIC_URL=/ -f ./Dockerfile.prod ./")
           }
         }
@@ -24,8 +24,8 @@ pipeline{
         steps{
           script{
             docker.withRegistry("https://${GTRI_IMAGE_REGISTRY}"){
-              formImage.push("v2.0")
-              formImageVhost.push("v2.0-vhost")
+              formImage.push("latest")
+              formImageVhost.push("latest-vhost")
             }
           }
         }
@@ -34,8 +34,8 @@ pipeline{
         steps{
           script{
             docker.withRegistry('', CLARITYNLP_DOCKERHUB_CREDS){
-              formImage.push("v2.0")
-              formImageVhost.push("v2.0-vhost")
+              formImage.push("latest")
+              formImageVhost.push("latest-vhost")
             }
           }
         }
@@ -43,7 +43,7 @@ pipeline{
       stage('Notify orchestrator'){
         steps{
           script{
-            rancher confirm: true, credentialId: 'gt-rancher-server', endpoint: "${GTRI_RANCHER_API_ENDPOINT}", environmentId: "${GTRI_HDAP_ENV_ID}", environments: '', image: "${GTRI_IMAGE_REGISTRY}/claritynlp/form-builder:v2.0-vhost", ports: '', service: 'ClarityNLP-Form/formbuilder', timeout: 120
+            rancher confirm: true, credentialId: 'gt-rancher-server', endpoint: "${GTRI_RANCHER_API_ENDPOINT}", environmentId: "${GTRI_HDAP_ENV_ID}", environments: '', image: "${GTRI_IMAGE_REGISTRY}/claritynlp/form-builder:latest-vhost", ports: '', service: 'ClarityNLP-Form/formbuilder', timeout: 120
           }
         }
       }
