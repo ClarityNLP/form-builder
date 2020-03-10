@@ -125,7 +125,7 @@ class Feature extends Component {
                   <Col xs='12'>
                     <Row>
                       <Col>
-                        <h6 className="evidence-report-type">{r.nlpql_feature ? this.titleize(r.nlpql_feature) : '<NO-REPORT-TYPE>'}</h6>
+                        <h6 className="evidence-report-type">{title || (r.nlpql_feature ? this.titleize(r.nlpql_feature) : '<NO-REPORT-TYPE>')}</h6>
                         { r.result_display && r.result_display.date &&
                           <h6 className="evidence-date">@&nbsp;<Moment format='MMM DD, YYYY HH:MM'>{r.result_display.date}</Moment></h6>
                         }
