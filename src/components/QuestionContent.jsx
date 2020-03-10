@@ -111,11 +111,28 @@ export default class QuestionContent extends Component {
       }
       case 'DATE': {
         return (
-          <div className="field">
-            <div className="control">
-              <input className="input" type="text" placeholder="Enter date."/>
-            </div>
-          </div>
+          <Field
+            name={question.slug}
+          >
+            {({
+              field, // { name, value, onChange, onBlur }
+              form: { touched, errors }, // also values, setXXXX, handleXXXX, dirty, isValid, status, etc.
+              meta,
+            }) => (
+              <div className="field">
+                <div className="control">
+                  <input
+                    className={`input ${errors[field.name] && touched[field.name] && 'is-danger'}`}
+                    type="text"
+                    {...field}
+                    value={field.value || ''}
+                  />
+                  {touched[field.name] &&
+                    errors[field.name] && <div className="help is-danger">{errors[field.name]}</div>}
+                </div>
+              </div>
+            )}
+          </Field>
         );
       }
       default: {
