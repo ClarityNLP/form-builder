@@ -107,6 +107,7 @@ export default class NavbarTop extends Component {
             <header className="modal-card-head">
               <p className="modal-card-title">How to Use</p>
               <button
+                type="button"
                 className="delete"
                 aria-label="close"
                 onClick={this.toggleHowToUseIsActive}
@@ -207,6 +208,7 @@ export default class NavbarTop extends Component {
             </section>
             <footer className="modal-card-foot">
               <button
+                type="button"
                 className="button"
                 onClick={this.toggleHowToUseIsActive}
               >Cancel</button>

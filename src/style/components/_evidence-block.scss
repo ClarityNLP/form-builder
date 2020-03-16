@@ -19,7 +19,7 @@
         td {
           font-size: 13px;
         }
-        &:hover {
+        &.is-pointer:hover {
           cursor: pointer;
         }
       }
@@ -42,7 +42,7 @@
   }
   .evidence-result-content {
     color: #414141;
-    &:hover {
+    &.is-pointer:hover {
       cursor: pointer;
     }
   }

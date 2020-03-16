@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
+import React, { Component, memo } from 'react';
 import { Route, Link } from 'react-router-dom';
 import clsx from 'clsx';
+import { diff } from 'deep-diff';
 
 class NavbarLeft extends Component {
   constructor(props) {
@@ -25,17 +26,17 @@ class NavbarLeft extends Component {
 
   componentDidMount(){
     if (this.props.activityIsLoaded) { //NOTE: basically will never be true...
-      // return this.refs = this.getRefs(this.props.groups.allIds);
+      return this.refs = this.getRefs(this.props.groups.allIds);
     }
   }
 
   componentDidUpdate(prevProps) {
     if (this.props.activityIsLoaded && !prevProps.activityIsLoaded) {
-      // this.refs = this.getRefs(this.props.groups.allIds);
+      this.refs = this.getRefs(this.props.groups.allIds);
     }
 
     if (this.props.match.params.groupSlug !== prevProps.match.params.groupSlug) {
-      // this.scrollToGroup(this.props.match.params.groupSlug, 'auto');
+      this.scrollToGroup(this.props.match.params.groupSlug, 'auto');
     }
   }
 
@@ -46,34 +47,11 @@ class NavbarLeft extends Component {
       groups,
     } = this.props;
 
-    function GroupItemLink({to, forwardedRef, name, isLoading}) {
-      const classes = function createClasses(match) {
-        return clsx(
-          match && 'is-active',
-          isLoading && 'is-loading'
-        )
-      }
-      return (
-        <Route
-          path={to}
-          children={({ match }) => (
-            <li
-              ref={forwardedRef}
-            >
-              <Link
-                to={to}
-                className={`group-link ${classes(match)}`}
-              >
-                <div className="group-loader">
-                  <div className="group-loader-border"></div>
-                  <div className="group-loader-content"></div>
-                </div>
-                <div className="group-link-text">{name}</div>
-              </Link>
-            </li>
-          )}
-        />
-      );
+    const classes = function createClasses(match, isLoading) {
+      return clsx(
+        match && 'is-active',
+        isLoading && 'is-loading'
+      )
     }
 
     return (
@@ -84,12 +62,25 @@ class NavbarLeft extends Component {
               <React.Fragment>
               {groups.allIds.map((groupSlug, index) => {
                 return (
-                  <GroupItemLink
+                  <Route
                     key={index}
-                    forwardedRef={this.refs[groupSlug]}
-                    to={`/app/a/${activityId}/g/${groupSlug}`}
-                    name={groups.byId[groupSlug].name}
-                    isLoading={groups.byId[groupSlug].isLoading}
+                    path={`/app/a/${activityId}/g/${groupSlug}`}
+                    children={({ match }) => (
+                      <li
+                        ref={this.refs[groupSlug]}
+                      >
+                        <Link
+                          to={`/app/a/${activityId}/g/${groupSlug}`}
+                          className={`group-link ${classes(match, groups.byId[groupSlug].isLoading)}`}
+                        >
+                          <div className="group-loader">
+                            <div className="group-loader-border"></div>
+                            <div className="group-loader-content"></div>
+                          </div>
+                          <div className="group-link-text">{groups.byId[groupSlug].name}</div>
+                        </Link>
+                      </li>
+                    )}
                   />
                 )
               })}

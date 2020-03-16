@@ -76,43 +76,49 @@ class Feature extends Component {
     switch(displayType) {
       case 'table': {
         return (
-          <div className="evidence">
-            <h6 className="evidence-report-type">{title}</h6>
-            <h6 className="feature-subtitle">{subtitle}</h6>
-            <div className="table-container">
-              <table className="table is-narrow is-striped is-hoverable is-fullwidth">
-                <thead>
-                  <tr>
-                    {cols.map((col, index) => {
+          <>
+            <div className="evidence">
+              <h6 className="evidence-report-type">{title}</h6>
+              <h6 className="feature-subtitle">{subtitle}</h6>
+              <div className="table-container">
+                <table className="table is-narrow is-striped is-hoverable is-fullwidth">
+                  <thead>
+                    <tr>
+                      {cols.map((col, index) => {
+                        return (
+                          <th key={index}>{col.label}</th>
+                        )
+                      })}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {items.map((r, index) => {
                       return (
-                        <th key={index}>{col.label}</th>
+                        <tr
+                          key={index}
+                          className={`${r.result_display && r.report_text ? 'is-pointer' : ''}`}
+                          onClick={() => this.props.onEvidenceClick(r)}
+                        >
+                          {cols.map((col, index) => {
+                            return (
+                              <React.Fragment key={index}>
+                                { index === 0 ? (
+                                  <td><Moment format='MM/DD/YY'>{eval(col.value)}</Moment></td>
+                                ) : (
+                                  <td>{eval(col.value)}</td>
+                                )
+                                }
+                              </React.Fragment>
+                            )
+                          })}
+                        </tr>
                       )
                     })}
-                  </tr>
-                </thead>
-                <tbody>
-                  {items.map((r, index) => {
-                    return (
-                      <tr key={index}>
-                        {cols.map((col, index) => {
-                          return (
-                            <React.Fragment key={index}>
-                              { index === 0 ? (
-                                <td><Moment format='MM/DD/YY'>{eval(col.value)}</Moment></td>
-                              ) : (
-                                <td>{eval(col.value)}</td>
-                              )
-                              }
-                            </React.Fragment>
-                          )
-                        })}
-                      </tr>
-                    )
-                  })}
-                </tbody>
-              </table>
+                  </tbody>
+                </table>
+              </div>
             </div>
-          </div>
+          </>
         )
       }
       case 'cards': {
@@ -120,7 +126,10 @@ class Feature extends Component {
           <>
           {items.map((r, index) => {
             return (
-              <div key={index} className="evidence">
+              <div
+                key={index}
+                className="evidence"
+              >
                 <Row>
                   <Col xs='12'>
                     <Row>
@@ -133,8 +142,8 @@ class Feature extends Component {
                     </Row>
                   </Col>
                   <div
-                    className="evidence-result-content"
-                    onClick={null}
+                    className={`evidence-result-content ${r.result_display && r.report_text ? 'is-pointer' : ''}`}
+                    onClick={() => this.props.onEvidenceClick(r)}
                   >
                     {(r.result_display.result_content || r.result_display.sentence) ? (
                       <React.Fragment>
@@ -150,13 +159,15 @@ class Feature extends Component {
                     </div>
                   ) : null}TODO ask about data structure and guarantees...*/}
                   <div className="evidence-links">
-                    <span
-                      className="evidence-read-more"
-                      onClick={null}
-                    >
-                      <u>read more</u>
-                    </span>
-                    <span className="evidence-comment"><u>comment</u></span>
+                    { r.result_display && r.report_text &&
+                      <span
+                        className="evidence-read-more"
+                        onClick={() => this.props.onEvidenceClick(r)}
+                      >
+                        <u>read more</u>
+                      </span>
+                    }
+                    {/*<span className="evidence-comment"><u>comment</u></span>*/}
                   </div>
                 </Row>
               </div>
