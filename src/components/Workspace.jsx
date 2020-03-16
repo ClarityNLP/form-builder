@@ -221,11 +221,13 @@ class Workspace extends Component {
                           <Route
                             key={index}
                             path={`/app/a/${activityId}/g/${groupSlug}`}
-                            render={(props) =>
+                            render={({match, location, history}) =>
                               <FormPage
-                                {...props}
                                 activity={activityId}
                                 group={groupSlug}
+                                location={location}
+                                history={history}
+                                match={match}
                               />
                             }
                           />

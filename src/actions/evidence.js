@@ -78,7 +78,7 @@ export function fetchGroupEvidenceAndAutofill(groupSlug) {
           });
 
           return axios
-            .post(`${window._env_.SMARTHUB_URL}/activities/${activity.id}/evidences/${evid}`, {
+            .post(`${window._env_.SMARTHUB_URL}/activities/${activity._id}/evidences/${evid}`, {
               fhirClient: fhirClient || {},
               fhirVersion: fhirVersion || 2,
               source_id: sourceId || 'FAKE_SOURCE_ID',
@@ -116,7 +116,7 @@ export function fetchGroupEvidenceAndAutofill(groupSlug) {
           });
 
           return axios
-          .post(`${window._env_.SMARTHUB_URL}/activities/${activity.id}/questions/${question.slug}/autofill`, {
+          .post(`${window._env_.SMARTHUB_URL}/activities/${activity._id}/questions/${question.slug}/autofill`, {
             autofill: {
               ...question.autofill,
               type: question.type

@@ -4,7 +4,7 @@ import { push } from 'connected-react-router'
 
 function mapStateToProps(state, ownProps) {
   return {
-    activityId: state.activity.id,
+    activityId: state.activity._id,
     activityIsLoaded: state.activity.isLoaded,
     formSlug: state.activity.slug,
     formName: state.activity.name,

@@ -1,11 +1,12 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import QuestionIndicator from '../containers/question_indicator_container';
 import QuestionContent from '../containers/question_content_container';
 import queryString from 'query-string';
 import SVGFile from "../assets/autofill-icon";
 import isEqual from 'lodash/isEqual';
+import deep_diff from 'deep-diff';
 
-export default class Question extends Component {
+export default class Question extends PureComponent {
 
   constructor(props) {
     super(props);
@@ -18,14 +19,7 @@ export default class Question extends Component {
     });
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    return !isEqual(this.props, nextProps) ? true : false;
-    // return this.props.groupSlug !== nextProps.groupSlug ? true : false;
-  }
-
   onQuestionClick = (e, {questionSlug, groupSlug, activityId}) => {
-    // e.stopPropagation();
-    // e.preventDefault();
     this.props.push(`/app/a/${activityId}/g/${groupSlug}/q/${questionSlug}?scrollBehavior=smooth`)
   }
 
@@ -35,7 +29,14 @@ export default class Question extends Component {
   }
 
   componentDidMount() {
-    const { scrollBehavior } = queryString.parse(this.props.location.search, {parseBooleans: true});
+    const { scrollBehavior } = queryString.parse(this.props.search, {parseBooleans: true});
+    if (this.props.isFocused) {
+      this.scrollTo(this.props.forwardedRef, scrollBehavior);
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    const { scrollBehavior } = queryString.parse(this.props.search, {parseBooleans: true});
     if (this.props.isFocused) {
       this.scrollTo(this.props.forwardedRef, scrollBehavior);
     }

@@ -4,16 +4,13 @@ import { push } from 'connected-react-router'
 
 function mapStateToProps(state, ownProps) {
   return {
-    match: ownProps.match,
-    location: ownProps.location,
     questionsAllIds: state.activity.groups.byId[ownProps.group].questions.allIds,
-    groupSlug: ownProps.group,
-    activityId: ownProps.activity
+    ...ownProps
   };
 }
 
 const formPageContainer = connect(mapStateToProps, {
-  push
+  // push
 })(FormPage);
 
 export default formPageContainer;

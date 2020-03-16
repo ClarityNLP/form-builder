@@ -5,7 +5,7 @@ function mapStateToProps(state, ownProps) {
   return {
     groups: state.activity.groups,
     activityIsLoaded: state.activity.isLoaded,
-    activityId: state.activity.id
+    activityId: state.activity._id
   };
 }
 
