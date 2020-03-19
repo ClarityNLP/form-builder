@@ -110,3 +110,39 @@ export function saveActivityGroupLoadingState(activityId, groups) { //NOTE: coul
     })
   }
 }
+
+export function saveActivityAutofillIds(activityId, groups) {
+  const autofillIds = groups.allIds.reduce((acc, groupSlug) => {
+    return {
+      ...acc,
+      ...groups.byId[groupSlug].questions.allIds.reduce((acc, questionSlug) => {
+        return {
+          ...acc,
+          [questionSlug]: groups.byId[groupSlug].questions.byId[questionSlug].autofillId
+        }
+      }, {})
+    }
+  }, {});
+  return (dispatch) => {
+    return new Promise(function(resolve, reject) {
+      dispatch({
+        type: 'SAVE_ACTIVITY_AUTOFILL_IDS_REQUESTED'
+      });
+
+      axios.put(`${window._env_.SMARTHUB_URL}/activities/${activityId}/autofillIds`, autofillIds)
+      .then(res => {
+        dispatch({
+          type: 'SAVE_ACTIVITY_AUTOFILL_IDS_FULFILLED'
+        });
+        resolve(`Finished saving activity autofill ids.`);
+      })
+      .catch(error => {
+        dispatch({
+          type: 'SAVE_ACTIVITY_AUTOFILL_IDS_REJECTED',
+          error: error.message || error
+        })
+        reject(error.message);
+      })
+    })
+  }
+}

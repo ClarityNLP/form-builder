@@ -124,6 +124,7 @@ class Workspace extends Component {
     } = this.props;
 
     return this.props.saveActivityValues(activityId, values)
+      .then(() => this.props.saveActivityAutofillIds(activityId, groups))
       .then(() => this.props.saveActivityGroupLoadingState(activityId, groups))
       .then((res) => {
         //TODO do something after saving?

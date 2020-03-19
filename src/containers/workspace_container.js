@@ -4,6 +4,7 @@ import Workspace from '../components/Workspace'
 import {
   getActivity,
   saveActivityValues,
+  saveActivityAutofillIds,
   saveActivityGroupLoadingState
 } from '../actions/activity';
 
@@ -18,6 +19,7 @@ function mapStateToProps(state, ownProps) {
 const workspaceContainer = connect(mapStateToProps, {
   getActivity,
   saveActivityValues,
+  saveActivityAutofillIds,
   saveActivityGroupLoadingState
 })(Workspace);
 
