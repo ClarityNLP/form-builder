@@ -10,7 +10,7 @@ COPY yarn.lock .
 RUN yarn
 COPY . .
 
-ARG PUBLIC_URL
+ARG PUBLIC_URL /smartchart
 RUN PUBLIC_URL=$PUBLIC_URL yarn build
 
 # => Run container
