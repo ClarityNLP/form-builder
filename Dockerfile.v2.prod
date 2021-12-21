@@ -10,7 +10,7 @@ COPY yarn.lock .
 RUN yarn
 COPY . .
 
-ARG PUBLIC_URL /form-v2
+ARG PUBLIC_URL=/form-v2
 RUN PUBLIC_URL=$PUBLIC_URL yarn build
 
 # => Run container
