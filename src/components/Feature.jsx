@@ -12,6 +12,11 @@ class Feature extends Component {
     return index + ':REPLACETEXT';
   };
 
+
+  escapeRegExp(text) {
+    return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
+  }
+
   getHighlightedText(text, highlights) {
     if (!highlights) return text;
 
@@ -25,6 +30,8 @@ class Feature extends Component {
     for (let h in highlights) {
       let highlight = highlights[h].toString();
       if (highlight.trim() === '') break;
+      
+      highlight = this.escapeRegExp(highlight);
 
       highlight = new RegExp(highlight, 'g');
 
