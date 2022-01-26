@@ -166,7 +166,7 @@ export function activityReducer(state = initialState, action = {}) {
                     isAutofillLoading: true,
                     isAutofillLoaded: false,
                     isAutofillLoadError: false,
-                    autofillLoadError: null
+                    autofillLoadError: ''
                   }
                 }
               }
@@ -194,7 +194,7 @@ export function activityReducer(state = initialState, action = {}) {
                     isAutofillLoading: false,
                     isAutofillLoaded: true,
                     isAutofillLoadError: false,
-                    autofillLoadError: null,
+                    autofillLoadError: '',
                     value: value,
                     autofillId: id
                   }
