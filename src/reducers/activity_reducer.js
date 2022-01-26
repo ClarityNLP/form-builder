@@ -224,7 +224,7 @@ export function activityReducer(state = initialState, action = {}) {
                     isAutofillLoading: false,
                     isAutofillLoaded: false,
                     isAutofillLoadError: true,
-                    autofillLoadError: error,
+                    autofillLoadError: 'error',
                     autofillId: id
                   }
                 }
