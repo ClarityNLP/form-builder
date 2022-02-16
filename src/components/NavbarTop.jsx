@@ -21,6 +21,11 @@ export default class NavbarTop extends Component {
     }));
   };
 
+  viewActivities = e => {
+    console.log(e);
+    console.log(this.props.activityId);
+  };
+
   render() {
     const {
       activityId,
@@ -97,7 +102,7 @@ export default class NavbarTop extends Component {
                 </div>
                 <div className="navbar-item">
                   <Save/>
-                  <SaveActivities/>
+                  <SaveActivities onClick={this.viewActivities}/>
                 </div>
               </div>
             </div>

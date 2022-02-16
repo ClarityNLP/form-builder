@@ -64,17 +64,18 @@ export function saveActivityValues(activityId, values) {
         type: 'SAVE_ACTIVITY_VALUES_REQUESTED'
       });
 
-      var jsonse = JSON.stringify(values);
-      var blob = new Blob([jsonse], {type: "application/json"});
-      var url  = URL.createObjectURL(blob);
+      const jsonse = JSON.stringify(values, null, 4);
+      const blob = new Blob([jsonse], {type: "application/json"});
+      const url  = URL.createObjectURL(blob);
 
-      var a = document.createElement('a');
+      const a = document.createElement('a');
       a.href        = url;
       a.download    = "values.json";
       a.textContent = "Download values.json";
+      a.style.visibility = "hidden";
 
       document.body.appendChild(a);
-      a.click()
+      a.click();
 
       // axios.put(`${window._env_.SMARTHUB_URL}/activities/${activityId}/values`, values)
       // .then(res => {

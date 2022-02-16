@@ -11,3 +11,12 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.nav-button-first {
+    margin-right: 4pt !important;
+}
+
+.nav-button {
+  padding: 4pt !important;
+  font-size: 10pt !important;
+}

@@ -20,7 +20,7 @@ function Save(props) {
     setNumErrors(numErrors);
   }, [values, errors, touched, submitForm]);
   return (
-    <div className="button is-light" disabled={numErrors} onClick={ () => submitForm() }>Save</div>
+    <div className="button is-light nav-button-first nav-button" disabled={numErrors} onClick={ () => submitForm() }>View Values</div>
   );
 };
 
