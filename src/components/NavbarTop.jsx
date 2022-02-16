@@ -121,7 +121,7 @@ export default class NavbarTop extends Component {
                 </div>
                 <div className="navbar-item">
                   <Save/>
-                  <div className="button is-light nav-button" onClick={this.viewActivities}>View Activities</div>
+                  <div className="button is-light nav-button" onClick={this.viewActivities}>Download All Data</div>
                 </div>
               </div>
             </div>
