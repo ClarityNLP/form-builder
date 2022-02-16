@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useFormikContext } from 'formik';
 import Progress from './Progress';
 import Save from './Save';
+import axios from 'axios';
 
 export default class NavbarTop extends Component {
 
@@ -21,7 +22,27 @@ export default class NavbarTop extends Component {
   };
 
   viewActivities = e => {
-   alert(this.props.activityId);
+    axios.get(`${window._env_.SMARTHUB_URL}/activities/${this.props.activityId}`)
+        .then(res => {
+          const { data: activity } = res;
+
+          const jsonse = JSON.stringify(activity, null, 4);
+          const blob = new Blob([jsonse], {type: "application/json"});
+          const url  = URL.createObjectURL(blob);
+
+          const a = document.createElement('a');
+          a.href        = url;
+          a.download    = "values.json";
+          a.textContent = "Download values.json";
+          a.style.visibility = "hidden";
+
+          document.body.appendChild(a);
+          a.click();
+
+        })
+        .catch(error => {
+          console.log(error.message);
+        })
   };
 
   render() {
