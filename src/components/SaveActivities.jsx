@@ -21,7 +21,7 @@ function SaveActivities(props) {
     setNumQues(numQues);
     setNumAnsQues(numAnsQues);
     setNumErrors(numErrors);
-  }, [values, errors, touched, submitForm]);
+  }, [values, errors, touched]);
   return (
     <div className="button is-light nav-button" disabled={numErrors}>View Activities</div>
   );
