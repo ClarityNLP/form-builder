@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useFormikContext } from 'formik';
 import Progress from './Progress';
 import Save from './Save';
+import SaveActivities from "./SaveActivities";
 
 export default class NavbarTop extends Component {
 
@@ -96,6 +97,7 @@ export default class NavbarTop extends Component {
                 </div>
                 <div className="navbar-item">
                   <Save/>
+                  <SaveActivities/>
                 </div>
               </div>
             </div>

@@ -64,20 +64,32 @@ export function saveActivityValues(activityId, values) {
         type: 'SAVE_ACTIVITY_VALUES_REQUESTED'
       });
 
-      axios.put(`${window._env_.SMARTHUB_URL}/activities/${activityId}/values`, values)
-      .then(res => {
-        dispatch({
-          type: 'SAVE_ACTIVITY_VALUES_FULFILLED'
-        });
-        resolve(`Finished saving activity values.`);
-      })
-      .catch(error => {
-        dispatch({
-          type: 'SAVE_ACTIVITY_VALUES_REJECTED',
-          error: error.message || error
-        })
-        reject(error.message);
-      })
+      var jsonse = JSON.stringify(values);
+      var blob = new Blob([jsonse], {type: "application/json"});
+      var url  = URL.createObjectURL(blob);
+
+      var a = document.createElement('a');
+      a.href        = url;
+      a.download    = "values.json";
+      a.textContent = "Download values.json";
+
+      document.body.appendChild(a);
+      a.click()
+
+      // axios.put(`${window._env_.SMARTHUB_URL}/activities/${activityId}/values`, values)
+      // .then(res => {
+      //   dispatch({
+      //     type: 'SAVE_ACTIVITY_VALUES_FULFILLED'
+      //   });
+      //   resolve(`Finished saving activity values.`);
+      // })
+      // .catch(error => {
+      //   dispatch({
+      //     type: 'SAVE_ACTIVITY_VALUES_REJECTED',
+      //     error: error.message || error
+      //   })
+      //   reject(error.message);
+      // })
     })
   }
 }
