@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { useFormikContext } from 'formik';
 import Progress from './Progress';
 import Save from './Save';
-import SaveActivities from "./SaveActivities";
 
 export default class NavbarTop extends Component {
 
@@ -22,8 +21,7 @@ export default class NavbarTop extends Component {
   };
 
   viewActivities = e => {
-    console.log(e);
-    console.log(this.props.activityId);
+   alert(this.props.activityId);
   };
 
   render() {
@@ -102,7 +100,7 @@ export default class NavbarTop extends Component {
                 </div>
                 <div className="navbar-item">
                   <Save/>
-                  <SaveActivities onClick={this.viewActivities}/>
+                  <div className="button is-light nav-button" onClick={this.viewActivities}>View Activities</div>
                 </div>
               </div>
             </div>
