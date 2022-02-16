@@ -32,8 +32,8 @@ export default class NavbarTop extends Component {
 
           const a = document.createElement('a');
           a.href        = url;
-          a.download    = "values.json";
-          a.textContent = "Download values.json";
+          a.download    = "activities.json";
+          a.textContent = "Download activities.json";
           a.style.visibility = "hidden";
 
           document.body.appendChild(a);
